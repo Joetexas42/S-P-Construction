@@ -24,3 +24,51 @@ id = "i4IIR4Pc7qRUQr9B2e_gu"
 uri = "file://artifacts/roofing-website/public/images/gallery-storm.png"
 type = "image"
 title = "Storm damage roof repair"
+
+[[generated]]
+id = "unoYL_63kSWAdvV1G968b"
+uri = "file://artifacts/roofing-website/public/images/testimonials/marcus-thompson.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "udiwXCIvuczC0VM9s1BNv"
+uri = "file://artifacts/roofing-website/public/images/testimonials/sarah-jimenez.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "zs_9VKYTQHYe_lHp48f5D"
+uri = "file://artifacts/roofing-website/public/images/testimonials/david-chen.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Gh-9xekiK9qw2nawmJIRC"
+uri = "file://artifacts/roofing-website/public/images/testimonials/rachel-okafor.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "YiE_dXUi31yXC-bvCpzU5"
+uri = "file://artifacts/roofing-website/public/images/testimonials/antonio-reyes.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "yQWOrAVh9AW-Q1tTwLu3l"
+uri = "file://artifacts/roofing-website/public/images/testimonials/linda-patel.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "8lLQj4E3yrzGm3S4LdsPx"
+uri = "file://artifacts/roofing-website/public/images/testimonials/james-whitfield.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "8r_iXycD2GiKEHsE3B6VU"
+uri = "file://artifacts/roofing-website/public/images/testimonials/monique-delacroix.png"
+type = "image"
+title = "generated_image"

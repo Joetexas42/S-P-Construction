@@ -7,6 +7,7 @@ export type Testimonial = {
   city: string;
   system: string;
   caseStudySlug?: string;
+  photo?: string;
 };
 
 export const testimonials: Testimonial[] = [
@@ -20,6 +21,7 @@ export const testimonials: Testimonial[] = [
     city: "Frisco, TX",
     system: "60-mil Carlisle TPO",
     caseStudySlug: "frisco-retail-tpo-replacement",
+    photo: "/images/testimonials/marcus-thompson.png",
   },
   {
     id: "sarah-fort-worth-industrial",
@@ -31,6 +33,7 @@ export const testimonials: Testimonial[] = [
     city: "Fort Worth, TX",
     system: "24-Gauge Standing Seam Metal",
     caseStudySlug: "fort-worth-industrial-standing-seam",
+    photo: "/images/testimonials/sarah-jimenez.png",
   },
   {
     id: "david-dallas-medical",
@@ -41,6 +44,7 @@ export const testimonials: Testimonial[] = [
     company: "Preston Medical Plaza",
     city: "Dallas, TX",
     system: "Standing Seam Metal",
+    photo: "/images/testimonials/david-chen.png",
   },
   {
     id: "rachel-plano-office",
@@ -52,6 +56,7 @@ export const testimonials: Testimonial[] = [
     city: "Plano, TX",
     system: "GAF Modified Bitumen",
     caseStudySlug: "plano-office-hail-restoration",
+    photo: "/images/testimonials/rachel-okafor.png",
   },
   {
     id: "antonio-dallas-cold-storage",
@@ -63,6 +68,7 @@ export const testimonials: Testimonial[] = [
     city: "Dallas, TX",
     system: "60-mil Sika Sarnafil PVC",
     caseStudySlug: "dallas-warehouse-pvc-replacement",
+    photo: "/images/testimonials/antonio-reyes.png",
   },
   {
     id: "linda-mckinney-medical",
@@ -74,6 +80,7 @@ export const testimonials: Testimonial[] = [
     city: "McKinney, TX",
     system: "GAF EverGuard TPO Recover",
     caseStudySlug: "mckinney-medical-tpo-recover",
+    photo: "/images/testimonials/linda-patel.png",
   },
   {
     id: "james-arlington-school",
@@ -85,6 +92,7 @@ export const testimonials: Testimonial[] = [
     city: "Arlington, TX",
     system: "Johns Manville 50-mil PVC",
     caseStudySlug: "arlington-school-pvc-replacement",
+    photo: "/images/testimonials/james-whitfield.png",
   },
   {
     id: "monique-irving-hospitality",
@@ -95,6 +103,7 @@ export const testimonials: Testimonial[] = [
     company: "Vantage Hospitality Group",
     city: "Irving, TX",
     system: "TPO Leak Repair & Re-Flashing",
+    photo: "/images/testimonials/monique-delacroix.png",
   },
 ];
 

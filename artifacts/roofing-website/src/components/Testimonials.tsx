@@ -87,7 +87,9 @@ export function Testimonials({
               <p className={`italic mb-6 leading-relaxed flex-1 ${quoteColor}`}>
                 &ldquo;{t.quote}&rdquo;
               </p>
-              <div className="border-t border-white/10 dark:border-border pt-4">
+              <div className="border-t border-white/10 dark:border-border pt-4 flex items-start gap-3">
+                <TestimonialAvatar testimonial={t} isDark={isDark} />
+                <div className="min-w-0 flex-1">
                 <p
                   className={`font-bold font-heading uppercase tracking-wide ${nameColor}`}
                 >
@@ -115,12 +117,55 @@ export function Testimonials({
                     See the case study <span aria-hidden>&rarr;</span>
                   </Link>
                 )}
+                </div>
               </div>
             </article>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function TestimonialAvatar({
+  testimonial,
+  isDark,
+}: {
+  testimonial: Testimonial;
+  isDark: boolean;
+}) {
+  const ringClass = isDark ? "ring-white/20" : "ring-border";
+  if (testimonial.photo) {
+    return (
+      <img
+        src={testimonial.photo}
+        alt={`${testimonial.name} headshot`}
+        loading="lazy"
+        width={48}
+        height={48}
+        data-testid={`testimonial-avatar-${testimonial.id}`}
+        className={`h-12 w-12 shrink-0 rounded-full object-cover ring-1 ${ringClass}`}
+      />
+    );
+  }
+  const fallbackBg = isDark
+    ? "bg-white/15 text-white"
+    : "bg-primary/10 text-primary";
+  return (
+    <div
+      aria-hidden="true"
+      data-testid={`testimonial-avatar-${testimonial.id}`}
+      className={`h-12 w-12 shrink-0 rounded-full flex items-center justify-center font-heading font-bold text-sm ring-1 ${ringClass} ${fallbackBg}`}
+    >
+      {getInitials(testimonial.name)}
+    </div>
   );
 }
 
