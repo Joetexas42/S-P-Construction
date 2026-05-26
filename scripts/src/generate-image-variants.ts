@@ -7,13 +7,18 @@ const QUALITY = 82;
 const MAX_BASE_WIDTH = 1600;
 
 const projectRoot = new URL("../../", import.meta.url).pathname;
-const imagesRoot = join(
-  projectRoot,
-  "artifacts/roofing-website/public/images",
-);
+const roofingRoot = join(projectRoot, "artifacts/roofing-website");
+const imagesRoot = join(roofingRoot, "public/images");
 
 type Target =
-  | { kind: "dir"; path: string; sourceExt: ".webp" | ".png" }
+  | {
+      kind: "dir";
+      path: string;
+      sourceExt: ".webp" | ".png";
+      outputPath?: string;
+      widths?: readonly number[];
+      emitBaseWebp?: boolean;
+    }
   | { kind: "file"; path: string };
 
 const TARGETS: Target[] = [
@@ -22,6 +27,14 @@ const TARGETS: Target[] = [
   { kind: "file", path: join(imagesRoot, "gallery-tpo.png") },
   { kind: "file", path: join(imagesRoot, "gallery-metal.png") },
   { kind: "file", path: join(imagesRoot, "gallery-storm.png") },
+  {
+    kind: "dir",
+    path: join(roofingRoot, "image-sources/testimonials"),
+    sourceExt: ".png",
+    outputPath: join(imagesRoot, "testimonials"),
+    widths: [96, 192],
+    emitBaseWebp: false,
+  },
 ];
 
 function isOriginalVariant(file: string, ext: string): boolean {
@@ -54,12 +67,20 @@ function emitVariant(input: string, output: string, targetWidth: number) {
   );
 }
 
-function processSource(input: string, opts: { emitBaseWebp: boolean }) {
+function processSource(
+  input: string,
+  opts: {
+    emitBaseWebp: boolean;
+    widths?: readonly number[];
+    outputDir?: string;
+  },
+) {
   const ext = extname(input).toLowerCase();
   const stemPath = input.slice(0, -ext.length);
   const stem = basename(stemPath);
-  const dir = stemPath.slice(0, -stem.length);
+  const dir = opts.outputDir ?? stemPath.slice(0, -stem.length);
   const srcWidth = srcWidthOf(input);
+  const widths = opts.widths ?? WIDTHS;
 
   console.log(stem + ext);
 
@@ -69,7 +90,7 @@ function processSource(input: string, opts: { emitBaseWebp: boolean }) {
     emitVariant(input, baseOut, baseWidth);
   }
 
-  for (const w of WIDTHS) {
+  for (const w of widths) {
     const targetWidth = Math.min(w, srcWidth);
     const output = join(dir, `${stem}-${w}w.webp`);
     emitVariant(input, output, targetWidth);
@@ -90,9 +111,13 @@ function main() {
         console.log(`No source ${target.sourceExt} files in ${target.path}`);
         continue;
       }
+      const emitBaseWebp =
+        target.emitBaseWebp ?? target.sourceExt !== ".webp";
       for (const file of files) {
         processSource(join(target.path, file), {
-          emitBaseWebp: target.sourceExt !== ".webp",
+          emitBaseWebp,
+          widths: target.widths,
+          outputDir: target.outputPath,
         });
       }
     } else {

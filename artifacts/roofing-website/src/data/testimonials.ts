@@ -21,7 +21,7 @@ export const testimonials: Testimonial[] = [
     city: "Frisco, TX",
     system: "60-mil Carlisle TPO",
     caseStudySlug: "frisco-retail-tpo-replacement",
-    photo: "/images/testimonials/marcus-thompson.png",
+    photo: "/images/testimonials/marcus-thompson",
   },
   {
     id: "sarah-fort-worth-industrial",
@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     city: "Fort Worth, TX",
     system: "24-Gauge Standing Seam Metal",
     caseStudySlug: "fort-worth-industrial-standing-seam",
-    photo: "/images/testimonials/sarah-jimenez.png",
+    photo: "/images/testimonials/sarah-jimenez",
   },
   {
     id: "david-dallas-medical",
@@ -44,7 +44,7 @@ export const testimonials: Testimonial[] = [
     company: "Preston Medical Plaza",
     city: "Dallas, TX",
     system: "Standing Seam Metal",
-    photo: "/images/testimonials/david-chen.png",
+    photo: "/images/testimonials/david-chen",
   },
   {
     id: "rachel-plano-office",
@@ -56,7 +56,7 @@ export const testimonials: Testimonial[] = [
     city: "Plano, TX",
     system: "GAF Modified Bitumen",
     caseStudySlug: "plano-office-hail-restoration",
-    photo: "/images/testimonials/rachel-okafor.png",
+    photo: "/images/testimonials/rachel-okafor",
   },
   {
     id: "antonio-dallas-cold-storage",
@@ -68,7 +68,7 @@ export const testimonials: Testimonial[] = [
     city: "Dallas, TX",
     system: "60-mil Sika Sarnafil PVC",
     caseStudySlug: "dallas-warehouse-pvc-replacement",
-    photo: "/images/testimonials/antonio-reyes.png",
+    photo: "/images/testimonials/antonio-reyes",
   },
   {
     id: "linda-mckinney-medical",
@@ -80,7 +80,7 @@ export const testimonials: Testimonial[] = [
     city: "McKinney, TX",
     system: "GAF EverGuard TPO Recover",
     caseStudySlug: "mckinney-medical-tpo-recover",
-    photo: "/images/testimonials/linda-patel.png",
+    photo: "/images/testimonials/linda-patel",
   },
   {
     id: "james-arlington-school",
@@ -92,7 +92,7 @@ export const testimonials: Testimonial[] = [
     city: "Arlington, TX",
     system: "Johns Manville 50-mil PVC",
     caseStudySlug: "arlington-school-pvc-replacement",
-    photo: "/images/testimonials/james-whitfield.png",
+    photo: "/images/testimonials/james-whitfield",
   },
   {
     id: "monique-irving-hospitality",
@@ -103,7 +103,7 @@ export const testimonials: Testimonial[] = [
     company: "Vantage Hospitality Group",
     city: "Irving, TX",
     system: "TPO Leak Repair & Re-Flashing",
-    photo: "/images/testimonials/monique-delacroix.png",
+    photo: "/images/testimonials/monique-delacroix",
   },
 ];
 

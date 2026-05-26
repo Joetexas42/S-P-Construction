@@ -143,9 +143,11 @@ function TestimonialAvatar({
 }) {
   const ringClass = isDark ? "ring-white/20" : "ring-border";
   if (testimonial.photo) {
+    const base = testimonial.photo;
     return (
       <img
-        src={testimonial.photo}
+        src={`${base}-96w.webp`}
+        srcSet={`${base}-96w.webp 1x, ${base}-192w.webp 2x`}
         alt={`${testimonial.name} headshot`}
         loading="lazy"
         decoding="async"
