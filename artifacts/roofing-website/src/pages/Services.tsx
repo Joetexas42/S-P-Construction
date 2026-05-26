@@ -271,6 +271,7 @@ export default function Services() {
     {
       name: "Firestone (Elevate)",
       tag: "TPO & EPDM Systems",
+      logo: "/images/manufacturers/firestone-elevate.svg",
       lede:
         "The benchmark for single-ply performance in North America. Now branded Elevate, Firestone's UltraPly TPO and RubberGard EPDM lines are engineered for high wind uplift, hail resistance, and decades of reliable service.",
       highlights: [
@@ -284,6 +285,7 @@ export default function Services() {
     {
       name: "Mule-Hide",
       tag: "TPO, EPDM & Coatings",
+      logo: "/images/manufacturers/mule-hide.svg",
       lede:
         "A contractor-favorite brand owned by ABC Supply. Mule-Hide's TPO and EPDM systems pair excellent membrane quality with strong dealer support, fast material availability across North Texas, and competitive warranty terms.",
       highlights: [
@@ -297,6 +299,7 @@ export default function Services() {
     {
       name: "Duro-Last",
       tag: "Custom Prefabricated PVC",
+      logo: "/images/manufacturers/duro-last.svg",
       lede:
         '"The World\'s Best Roof" tagline isn\'t marketing fluff — Duro-Last\'s factory-fabricated PVC membranes are custom-built to your roof\'s exact dimensions, including all penetrations and corners. That eliminates 80–85% of field seams, which is where commercial roofs almost always fail.',
       highlights: [
@@ -574,6 +577,27 @@ export default function Services() {
                 className="bg-card border border-border rounded-xl p-8 flex flex-col hover:border-secondary transition-colors"
                 data-testid={`mfr-card-${mfr.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
               >
+                <div className="mb-5 bg-white border border-border rounded-lg h-20 flex items-center justify-center px-4">
+                  <img
+                    src={mfr.logo}
+                    alt={`${mfr.name} logo`}
+                    className="max-h-14 w-auto object-contain"
+                    loading="lazy"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      const parent = img.parentElement;
+                      if (!parent) return;
+                      img.style.display = "none";
+                      if (!parent.querySelector("[data-fallback]")) {
+                        const fb = document.createElement("span");
+                        fb.setAttribute("data-fallback", "true");
+                        fb.className = "font-heading font-black text-xl uppercase tracking-tight text-foreground";
+                        fb.textContent = mfr.name;
+                        parent.appendChild(fb);
+                      }
+                    }}
+                  />
+                </div>
                 <div className="flex items-center gap-3 mb-4">
                   <HardHat className="h-6 w-6 text-secondary" />
                   <p className="text-xs font-bold uppercase tracking-widest text-secondary">{mfr.tag}</p>

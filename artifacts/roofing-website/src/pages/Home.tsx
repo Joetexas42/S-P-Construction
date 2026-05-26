@@ -119,17 +119,34 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
             {[
-              { name: "Firestone", sub: "Building Products" },
-              { name: "Mule-Hide", sub: "Products Co." },
-              { name: "Duro-Last", sub: "PVC Roofing Systems" },
-              { name: "TPO Systems", sub: "Single-Ply Membranes" },
+              { name: "Firestone", sub: "Elevate (Building Products)", logo: "/images/manufacturers/firestone-elevate.svg" },
+              { name: "Mule-Hide", sub: "Products Co.", logo: "/images/manufacturers/mule-hide.svg" },
+              { name: "Duro-Last", sub: "PVC Roofing Systems", logo: "/images/manufacturers/duro-last.svg" },
             ].map((brand) => (
               <div
                 key={brand.name}
-                className="flex flex-col items-center justify-center border border-border rounded-lg px-8 py-5 min-w-[150px] bg-card hover:border-secondary transition-colors"
+                className="flex items-center justify-center border border-border rounded-lg px-6 py-4 min-w-[180px] h-[88px] bg-card hover:border-secondary transition-colors"
+                data-testid={`partner-logo-${brand.name.toLowerCase()}`}
               >
-                <span className="font-heading font-black text-lg uppercase tracking-tight text-foreground">{brand.name}</span>
-                <span className="text-xs text-muted-foreground font-semibold tracking-wide">{brand.sub}</span>
+                <img
+                  src={brand.logo}
+                  alt={`${brand.name} — ${brand.sub}`}
+                  className="max-h-12 w-auto object-contain"
+                  loading="lazy"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    const parent = img.parentElement;
+                    if (!parent) return;
+                    img.style.display = "none";
+                    if (!parent.querySelector("[data-fallback]")) {
+                      const fb = document.createElement("div");
+                      fb.setAttribute("data-fallback", "true");
+                      fb.className = "flex flex-col items-center justify-center text-center";
+                      fb.innerHTML = `<span class="font-heading font-black text-lg uppercase tracking-tight text-foreground">${brand.name}</span><span class="text-xs text-muted-foreground font-semibold tracking-wide">${brand.sub}</span>`;
+                      parent.appendChild(fb);
+                    }
+                  }}
+                />
               </div>
             ))}
           </div>
