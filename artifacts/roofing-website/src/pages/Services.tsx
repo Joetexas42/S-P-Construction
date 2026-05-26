@@ -1,4 +1,5 @@
 import { SEO } from "@/components/SEO";
+import { cities } from "@/data/cities";
 import {
   Wrench,
   LayoutGrid,
@@ -312,11 +313,89 @@ export default function Services() {
     },
   ];
 
+  const providerId = "https://lonestarroofing.com/#organization";
+  const countySet = new Set<string>();
+  for (const c of cities) {
+    for (const part of c.county.split(/\s*&\s*/)) {
+      countySet.add(part.trim());
+    }
+  }
+  const areaServed = [
+    ...cities.map((c) => ({
+      "@type": "City",
+      "name": c.name,
+      "containedInPlace": {
+        "@type": "AdministrativeArea",
+        "name": c.county,
+        "addressRegion": "TX",
+        "addressCountry": "US",
+      },
+    })),
+    ...Array.from(countySet).map((county) => ({
+      "@type": "AdministrativeArea",
+      "name": county,
+      "addressRegion": "TX",
+      "addressCountry": "US",
+    })),
+  ];
+
+  const serviceEntries: {
+    id: string;
+    name: string;
+    serviceType: string;
+    description: string;
+  }[] = [
+    ...leadServices.map((s) => ({
+      id: s.id,
+      name: s.title,
+      serviceType: s.title,
+      description: s.problem,
+    })),
+    ...servicesList.map((s) => ({
+      id: s.id,
+      name: s.title,
+      serviceType: s.title,
+      description: s.description,
+    })),
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "RoofingContractor",
+        "@id": providerId,
+        "name": "Lone Star Commercial Roofing",
+        "image": "https://lonestarroofing.com/images/hero-bg.png",
+        "telephone": "(972) 555-0100",
+        "email": "info@lonestarroofing.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dallas",
+          "addressRegion": "TX",
+          "addressCountry": "US",
+        },
+        "areaServed": areaServed,
+      },
+      ...serviceEntries.map((s) => ({
+        "@type": "Service",
+        "@id": `https://lonestarroofing.com/services#${s.id}`,
+        "name": s.name,
+        "serviceType": s.serviceType,
+        "description": s.description,
+        "category": "Commercial Roofing",
+        "provider": { "@id": providerId },
+        "areaServed": areaServed,
+      })),
+    ],
+  };
+
   return (
     <>
       <SEO
         title="Commercial Roofing Services | TPO, PVC & Metal | North Texas"
         description="Commercial flat roof specialists serving the DFW Metroplex: TPO, PVC, and EPDM single-ply membranes, metal roofing, inspections, repairs, and 24/7 emergency leak response. Authorized Firestone (Elevate), Mule-Hide, and Duro-Last installer."
+        jsonLd={jsonLd}
       />
 
       {/* Page Header */}
