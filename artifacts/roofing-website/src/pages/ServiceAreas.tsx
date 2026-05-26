@@ -1,14 +1,14 @@
 import { SEO } from "@/components/SEO";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { cities } from "@/data/cities";
 
 export default function ServiceAreas() {
-  const areas = [
-    "Dallas", "Fort Worth", "Frisco", "Plano", 
-    "McKinney", "Allen", "Garland", "Irving", 
-    "Arlington", "Denton", "Lewisville", "Richardson",
-    "Mesquite", "Carrollton", "Grand Prairie"
+  const featuredSlugs = new Set(cities.map((c) => c.slug));
+  const otherAreas = [
+    "Allen", "Garland", "Irving", "Denton", "Lewisville",
+    "Richardson", "Mesquite", "Carrollton", "Grand Prairie",
   ];
 
   return (
@@ -40,16 +40,34 @@ export default function ServiceAreas() {
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 When a severe storm hits or an emergency leak threatens your inventory, response time is critical. We strategically position our crews to ensure rapid deployment across the entire Dallas-Fort Worth region.
               </p>
-              
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {areas.map((area, i) => (
-                  <div key={i} className="flex items-center gap-2 text-foreground font-medium p-3 bg-muted rounded-md border border-border">
+
+              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Featured Cities</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                {cities.map((city) => (
+                  <Link
+                    key={city.slug}
+                    href={`/service-areas/${city.slug}`}
+                    className="group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted rounded-md border border-border transition-colors"
+                  >
+                    <span className="flex items-center gap-2 text-foreground font-bold">
+                      <MapPin className="h-4 w-4 text-secondary shrink-0" />
+                      {city.name}
+                    </span>
+                    <ArrowRight className="h-4 w-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                ))}
+              </div>
+
+              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Also Serving</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {otherAreas.filter((a) => !featuredSlugs.has(a.toLowerCase().replace(/\s+/g, "-"))).map((area) => (
+                  <div key={area} className="flex items-center gap-2 text-foreground font-medium p-3 bg-muted rounded-md border border-border">
                     <MapPin className="h-4 w-4 text-secondary shrink-0" />
                     <span>{area}</span>
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-8 p-6 bg-secondary/5 border border-secondary/20 rounded-lg">
                 <p className="text-sm text-foreground font-medium italic">
                   * Don't see your city listed? If you have a commercial property in North Texas, chances are we cover it. Contact us to confirm.
