@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Phone, Mail, MapPin, Facebook, Linkedin, Instagram, HardHat } from "lucide-react";
+import { Phone, Mail, MapPin, HardHat } from "lucide-react";
 
 export function Footer() {
   return (
@@ -18,17 +18,6 @@ export function Footer() {
             <p className="text-primary-foreground/80 leading-relaxed text-sm">
               Battle-hardened commercial roofing contractors serving North Texas since 2003. We protect the businesses that keep the DFW metroplex running.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="h-10 w-10 rounded bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary transition-colors" aria-label="Facebook">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="h-10 w-10 rounded bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary transition-colors" aria-label="LinkedIn">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="h-10 w-10 rounded bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary transition-colors" aria-label="Instagram">
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
           </div>
 
           <div className="space-y-6">
