@@ -11,6 +11,10 @@ import {
   testimonialAggregateRatingJsonLd,
 } from "@/data/testimonials";
 import { cities } from "@/data/cities";
+import {
+  buildImageSrcSet,
+  SIZES_FULL_VIEWPORT,
+} from "@/lib/responsiveImage";
 
 export default function Home() {
   const countySet = new Set<string>();
@@ -24,7 +28,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
     "name": "Lone Star Commercial Roofing",
-    "image": "https://lonestarroofing.com/images/hero-bg.png",
+    "image": "https://lonestarroofing.com/images/hero-bg.webp",
     "telephone": "(972) 555-0100",
     "email": "info@lonestarroofing.com",
     "address": {
@@ -77,8 +81,10 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-primary/80 mix-blend-multiply z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-20" />
-          <img 
-            src="/images/hero-bg.png" 
+          <img
+            src="/images/hero-bg.webp"
+            srcSet={buildImageSrcSet("/images/hero-bg.webp")}
+            sizes={SIZES_FULL_VIEWPORT}
             alt="Massive commercial flat roof on a warehouse in North Texas during sunset"
             width={1920}
             height={1080}

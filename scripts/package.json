@@ -6,6 +6,7 @@
   "scripts": {
     "hello": "tsx ./src/hello.ts",
     "generate-project-image-variants": "tsx ./src/generate-project-image-variants.ts",
+    "generate-image-variants": "tsx ./src/generate-image-variants.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {

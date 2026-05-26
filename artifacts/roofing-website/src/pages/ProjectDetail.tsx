@@ -20,6 +20,11 @@ import {
 } from "@/data/caseStudies";
 import { getTestimonialBySlug } from "@/data/testimonials";
 import NotFound from "@/pages/not-found";
+import {
+  buildImageSrcSet,
+  SIZES_CONTENT_MAX_1280,
+  SIZES_HALF_COLUMN_GRID,
+} from "@/lib/responsiveImage";
 
 export default function ProjectDetail({
   params,
@@ -129,6 +134,8 @@ export default function ProjectDetail({
           <div className="aspect-[16/9] overflow-hidden bg-muted rounded-lg border border-border shadow-lg">
             <img
               src={study.image}
+              srcSet={buildImageSrcSet(study.image)}
+              sizes={SIZES_CONTENT_MAX_1280}
               alt={study.title}
               width={1600}
               height={900}
@@ -311,6 +318,8 @@ function RelatedCard({ study }: { study: CaseStudy }) {
       <div className="aspect-[16/10] overflow-hidden bg-muted">
         <img
           src={study.image}
+          srcSet={buildImageSrcSet(study.image)}
+          sizes={SIZES_HALF_COLUMN_GRID}
           alt={study.title}
           width={800}
           height={500}

@@ -38,7 +38,7 @@ export const caseStudies: CaseStudy[] = [
       "Zero tenant disruption during business hours",
       "Phased work across 8 occupied storefronts",
     ],
-    image: "/images/gallery-tpo.png",
+    image: "/images/gallery-tpo.webp",
     seoTitle:
       "Frisco Commercial Roof Replacement — 40,000 Sq Ft TPO Case Study | Lone Star",
     seoDescription:
@@ -65,7 +65,7 @@ export const caseStudies: CaseStudy[] = [
       "25-year MBCI weathertight warranty",
       "24/7 warehouse operations never paused",
     ],
-    image: "/images/gallery-metal.png",
+    image: "/images/gallery-metal.webp",
     seoTitle:
       "Fort Worth Standing Seam Metal Roof — 85,000 Sq Ft Warehouse Case Study | Lone Star",
     seoDescription:
@@ -92,7 +92,7 @@ export const caseStudies: CaseStudy[] = [
       "15-year GAF Diamond Pledge NDL warranty",
       "100% replacement-cost claim approval",
     ],
-    image: "/images/gallery-storm.png",
+    image: "/images/gallery-storm.webp",
     seoTitle:
       "Plano Hail Damage Roof Restoration — Office Campus Case Study | Lone Star",
     seoDescription:
@@ -119,7 +119,7 @@ export const caseStudies: CaseStudy[] = [
       "Cold-chain integrity preserved during install",
       "25-year Sika Sarnafil system warranty",
     ],
-    image: "/images/hero-bg.png",
+    image: "/images/hero-bg.webp",
     seoTitle:
       "Dallas PVC Roof Replacement — 120,000 Sq Ft Cold Storage Case Study | Lone Star",
     seoDescription:
@@ -146,7 +146,7 @@ export const caseStudies: CaseStudy[] = [
       "20-year GAF Golden Pledge warranty",
       "Energy Star reflective white membrane",
     ],
-    image: "/images/gallery-tpo.png",
+    image: "/images/gallery-tpo.webp",
     seoTitle:
       "McKinney Medical Office TPO Recover Roof — Case Study | Lone Star",
     seoDescription:
@@ -173,7 +173,7 @@ export const caseStudies: CaseStudy[] = [
       "Class A fire rating, code-compliant insulation",
       "20-year Johns Manville system warranty",
     ],
-    image: "/images/gallery-metal.png",
+    image: "/images/gallery-metal.webp",
     seoTitle:
       "Arlington School District PVC Roof Replacement — Case Study | Lone Star",
     seoDescription:

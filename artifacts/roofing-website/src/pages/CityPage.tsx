@@ -4,6 +4,10 @@ import { Link } from "wouter";
 import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { caseStudies } from "@/data/caseStudies";
+import {
+  buildImageSrcSet as buildProjectImageSrcSet,
+  SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
+} from "@/lib/responsiveImage";
 
 export interface CityTestimonial {
   quote: string;
@@ -37,16 +41,6 @@ export interface CityData {
 
 function formatSqFt(n: number) {
   return n.toLocaleString("en-US");
-}
-
-const PROJECT_IMAGE_WIDTHS = [480, 800, 1280] as const;
-const PROJECT_IMAGE_SIZES =
-  "(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw";
-
-function buildProjectImageSrcSet(src: string): string | undefined {
-  if (!src.endsWith(".webp")) return undefined;
-  const stem = src.slice(0, -".webp".length);
-  return PROJECT_IMAGE_WIDTHS.map((w) => `${stem}-${w}w.webp ${w}w`).join(", ");
 }
 
 function initialsOf(name: string) {

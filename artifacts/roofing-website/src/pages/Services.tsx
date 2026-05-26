@@ -410,7 +410,7 @@ export default function Services() {
         "@type": "RoofingContractor",
         "@id": providerId,
         "name": "Lone Star Commercial Roofing",
-        "image": "https://lonestarroofing.com/images/hero-bg.png",
+        "image": "https://lonestarroofing.com/images/hero-bg.webp",
         "telephone": "(972) 555-0100",
         "email": "info@lonestarroofing.com",
         "address": {

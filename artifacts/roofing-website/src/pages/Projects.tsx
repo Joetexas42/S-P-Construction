@@ -27,6 +27,10 @@ import {
   type CaseStudy,
 } from "@/data/caseStudies";
 import { cn } from "@/lib/utils";
+import {
+  buildImageSrcSet,
+  SIZES_HALF_COLUMN_GRID,
+} from "@/lib/responsiveImage";
 
 type FilterOption = { value: string; label: string; count: number };
 
@@ -420,6 +424,8 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
       >
         <img
           src={study.image}
+          srcSet={buildImageSrcSet(study.image)}
+          sizes={SIZES_HALF_COLUMN_GRID}
           alt={study.title}
           width={800}
           height={500}

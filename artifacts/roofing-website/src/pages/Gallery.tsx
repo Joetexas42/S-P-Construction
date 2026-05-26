@@ -1,29 +1,33 @@
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import {
+  buildImageSrcSet,
+  SIZES_HALF_COLUMN_GRID,
+} from "@/lib/responsiveImage";
 
 export default function Gallery() {
   const projects = [
     {
-      src: "/images/gallery-tpo.png",
+      src: "/images/gallery-tpo.webp",
       title: "TPO Membrane Installation",
       location: "Frisco Retail Center",
       desc: "40,000 sq ft single-ply TPO membrane system over rigid insulation."
     },
     {
-      src: "/images/gallery-metal.png",
+      src: "/images/gallery-metal.webp",
       title: "Standing Seam Metal Roof",
       location: "Fort Worth Industrial Park",
       desc: "Architectural standing seam panels custom-fabricated on site."
     },
     {
-      src: "/images/hero-bg.png",
+      src: "/images/hero-bg.webp",
       title: "Flat Roof Restoration",
       location: "Dallas Warehouse District",
       desc: "Massive commercial flat roof assessment and total system replacement."
     },
     {
-      src: "/images/gallery-storm.png",
+      src: "/images/gallery-storm.webp",
       title: "Storm Damage Repair",
       location: "Plano Office Complex",
       desc: "Emergency recovery and repair following severe spring hail storms."
@@ -56,8 +60,10 @@ export default function Gallery() {
             {projects.map((project, i) => (
               <div key={i} className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm">
                 <div className="aspect-[4/3] overflow-hidden bg-muted">
-                  <img 
-                    src={project.src} 
+                  <img
+                    src={project.src}
+                    srcSet={buildImageSrcSet(project.src)}
+                    sizes={SIZES_HALF_COLUMN_GRID}
                     alt={project.title}
                     width={800}
                     height={600}
