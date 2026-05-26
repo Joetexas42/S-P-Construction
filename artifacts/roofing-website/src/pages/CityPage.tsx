@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar } from "lucide-react";
+import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2 } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
+import { ProjectLightbox } from "@/components/ProjectLightbox";
 import { caseStudies } from "@/data/caseStudies";
 import {
   buildImageSrcSet as buildProjectImageSrcSet,
@@ -61,6 +63,8 @@ export default function CityPage({ city }: CityPageProps) {
   const cityCaseStudies = caseStudies.filter(
     (cs) => cs.city.split(",")[0].trim().toLowerCase() === city.name.toLowerCase(),
   );
+
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
 
   const siteUrl = "https://lonestarroofing.com";
@@ -326,12 +330,18 @@ export default function CityPage({ city }: CityPageProps) {
                 A look at flat roof systems we've recently completed for {city.name} building owners.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {city.recentProjects.map((p) => (
+                {city.recentProjects.map((p, idx) => (
                   <article
                     key={p.title}
                     className="flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
                   >
-                    <div className="aspect-[16/10] overflow-hidden bg-muted relative">
+                    <button
+                      type="button"
+                      onClick={() => setLightboxIndex(idx)}
+                      aria-label={`View full-size photo and details for ${p.title}`}
+                      data-testid={`recent-project-trigger-${idx}`}
+                      className="group aspect-[16/10] overflow-hidden bg-muted relative block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 cursor-zoom-in"
+                    >
                       <img
                         src={p.image}
                         srcSet={buildProjectImageSrcSet(p.image)}
@@ -341,12 +351,15 @@ export default function CityPage({ city }: CityPageProps) {
                         height={500}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
                       />
                       <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
                         {p.system}
                       </span>
-                    </div>
+                      <span className="absolute top-3 right-3 h-9 w-9 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
+                        <Maximize2 className="h-4 w-4" />
+                      </span>
+                    </button>
                     <div className="p-5 flex flex-col flex-1">
                       <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-3 leading-tight">
                         {p.title}
@@ -384,6 +397,13 @@ export default function CityPage({ city }: CityPageProps) {
                   </article>
                 ))}
               </div>
+              <ProjectLightbox
+                projects={city.recentProjects}
+                index={lightboxIndex}
+                cityName={city.name}
+                onClose={() => setLightboxIndex(null)}
+                onNavigate={(next) => setLightboxIndex(next)}
+              />
             </div>
           )}
 
