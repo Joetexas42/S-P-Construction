@@ -59,7 +59,34 @@ export default function CityPage({ city }: CityPageProps) {
   );
 
 
-  const jsonLd = {
+  const siteUrl = "https://lonestarroofing.com";
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${siteUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Service Areas",
+        "item": `${siteUrl}/service-areas`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `${city.name}, TX`,
+        "item": `${siteUrl}/service-areas/${city.slug}`,
+      },
+    ],
+  };
+
+  const contractorLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
     "name": `Lone Star Commercial Roofing — ${city.name}`,
@@ -128,7 +155,7 @@ export default function CityPage({ city }: CityPageProps) {
       <SEO
         title={city.seoTitle}
         description={city.seoDescription}
-        jsonLd={jsonLd}
+        jsonLd={[contractorLd, breadcrumbLd]}
       />
 
       {/* Hero */}

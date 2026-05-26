@@ -11,11 +11,32 @@ export default function ServiceAreas() {
     "Richardson", "Mesquite", "Carrollton", "Grand Prairie",
   ];
 
+  const siteUrl = "https://lonestarroofing.com";
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${siteUrl}/`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Service Areas",
+        "item": `${siteUrl}/service-areas`,
+      },
+    ],
+  };
+
   return (
     <>
       <SEO 
         title="DFW Service Areas | North Texas Commercial Roofing Contractor"
         description="Commercial flat roof, TPO, and PVC roofing services across the entire Dallas-Fort Worth Metroplex: Dallas, Fort Worth, Frisco, Plano, McKinney, Allen, Arlington, Denton, Lewisville, and all of North Texas."
+        jsonLd={breadcrumbLd}
       />
       
       {/* Page Header */}

@@ -8,10 +8,12 @@ interface SEOProps {
   jsonLd?: JsonLd | JsonLd[];
 }
 
+const JSON_LD_ATTR = "data-seo-jsonld";
+
 export function SEO({ title, description, jsonLd }: SEOProps) {
   useEffect(() => {
     document.title = title;
-    
+
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement("meta");
@@ -20,25 +22,20 @@ export function SEO({ title, description, jsonLd }: SEOProps) {
     }
     metaDescription.setAttribute("content", description);
 
-    const existing = document.querySelectorAll(
-      'script[type="application/ld+json"][data-seo="true"]',
-    );
-    existing.forEach((el) => el.remove());
+    document
+      .querySelectorAll(`script[type="application/ld+json"][${JSON_LD_ATTR}]`)
+      .forEach((el) => el.remove());
 
     if (jsonLd) {
-      const items = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
-      for (const item of items) {
-        const scriptTag = document.createElement("script");
-        scriptTag.setAttribute("type", "application/ld+json");
-        scriptTag.setAttribute("data-seo", "true");
-        scriptTag.textContent = JSON.stringify(item);
-        document.head.appendChild(scriptTag);
+      const entries = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      for (const entry of entries) {
+        const script = document.createElement("script");
+        script.setAttribute("type", "application/ld+json");
+        script.setAttribute(JSON_LD_ATTR, "true");
+        script.textContent = JSON.stringify(entry);
+        document.head.appendChild(script);
       }
     }
-
-    return () => {
-      // Optional: cleanup, but usually we just overwrite
-    };
   }, [title, description, jsonLd]);
 
   return null;
