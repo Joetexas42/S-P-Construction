@@ -27,12 +27,34 @@ import {
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
+type Pricing = {
+  display: string;
+  starting: number;
+  min: number;
+  max: number;
+  unit?: "sqft";
+};
+
 export default function Services() {
-  const leadServices = [
+  const leadServices: {
+    id: string;
+    title: string;
+    icon: typeof Search;
+    problem: string;
+    included: string[];
+    why: string;
+    pricing: Pricing;
+  }[] = [
     {
       id: "inspection",
       title: "Free Commercial Roof Inspections",
       icon: Search,
+      pricing: {
+        display: "Free — $0 inspection, written report included",
+        starting: 0,
+        min: 0,
+        max: 0,
+      },
       problem:
         "Most commercial roof failures in North Texas start as small, invisible issues — hail bruising, loose flashing, clogged drains, or hairline membrane splits. By the time water reaches the ceiling tiles, damage is already widespread.",
       included: [
@@ -49,6 +71,12 @@ export default function Services() {
       id: "repair",
       title: "Commercial Roof Repair & Emergency Leak Response",
       icon: Wrench,
+      pricing: {
+        display: "Starting at $750 · Typical range $750 – $15,000",
+        starting: 750,
+        min: 750,
+        max: 15000,
+      },
       problem:
         "A persistent leak doesn't just damage the roof — it ruins inventory, shuts down operations, and creates liability for slip-and-fall claims. Patch jobs from the wrong contractor often make the problem worse and void your warranty.",
       included: [
@@ -65,6 +93,13 @@ export default function Services() {
       id: "installation",
       title: "New Roof Installation & Full Replacement",
       icon: LayoutGrid,
+      pricing: {
+        display: "Starting at $7 / sq ft · Typical range $7 – $14 / sq ft installed",
+        starting: 7,
+        min: 7,
+        max: 14,
+        unit: "sqft",
+      },
       problem:
         "A commercial reroof is a six- and seven-figure capital decision. The wrong system, wrong installer, or wrong attachment method can cost you decades of performance — and the failure usually doesn't show up until the warranty has lapsed.",
       included: [
@@ -79,11 +114,25 @@ export default function Services() {
     },
   ];
 
-  const servicesList = [
+  const servicesList: {
+    id: string;
+    title: string;
+    icon: typeof LayoutGrid;
+    description: string;
+    features: string[];
+    pricing: Pricing;
+  }[] = [
     {
       id: "replacement",
       title: "Full Roof Replacement",
       icon: LayoutGrid,
+      pricing: {
+        display: "Starting at $7 / sq ft · Typical range $7 – $14 / sq ft installed",
+        starting: 7,
+        min: 7,
+        max: 14,
+        unit: "sqft",
+      },
       description:
         "Complete tear-offs and replacements engineered for longevity and minimal disruption to your daily operations.",
       features: [
@@ -97,6 +146,13 @@ export default function Services() {
       id: "maintenance",
       title: "Maintenance Programs",
       icon: Activity,
+      pricing: {
+        display: "Starting at $0.08 / sq ft annually · Typical range $0.08 – $0.25 / sq ft per year",
+        starting: 0.08,
+        min: 0.08,
+        max: 0.25,
+        unit: "sqft",
+      },
       description:
         "Proactive care that extends the life of your roof and prevents catastrophic failures before they happen.",
       features: [
@@ -110,6 +166,12 @@ export default function Services() {
       id: "storm-damage",
       title: "Storm Damage & Hail Repair",
       icon: Zap,
+      pricing: {
+        display: "Starting at $1,500 · Typical range $1,500 – $50,000+ (most insurance-covered)",
+        starting: 1500,
+        min: 1500,
+        max: 50000,
+      },
       description:
         "Emergency weather recovery and complete insurance claims assistance to get your business back online.",
       features: [
@@ -123,6 +185,12 @@ export default function Services() {
       id: "emergency",
       title: "Emergency Leak Repair",
       icon: Droplets,
+      pricing: {
+        display: "Starting at $750 · Typical range $750 – $5,000 per dispatch",
+        starting: 750,
+        min: 750,
+        max: 5000,
+      },
       description:
         "24/7 rapid response teams ready to deploy across the DFW Metroplex to mitigate water intrusion.",
       features: [
@@ -136,6 +204,13 @@ export default function Services() {
       id: "coatings",
       title: "Roof Coatings & Restoration",
       icon: ArrowUpToLine,
+      pricing: {
+        display: "Starting at $2.50 / sq ft · Typical range $2.50 – $5.50 / sq ft installed",
+        starting: 2.5,
+        min: 2.5,
+        max: 5.5,
+        unit: "sqft",
+      },
       description:
         "Cost-effective fluid-applied systems that restore your roof's performance and improve energy efficiency.",
       features: [
@@ -149,6 +224,13 @@ export default function Services() {
       id: "flat-roofing",
       title: "Flat / Low-Slope Roofing",
       icon: AlignHorizontalJustifyCenter,
+      pricing: {
+        display: "Starting at $6 / sq ft · Typical range $6 – $12 / sq ft installed",
+        starting: 6,
+        min: 6,
+        max: 12,
+        unit: "sqft",
+      },
       description:
         "Specialized solutions for industrial and commercial flat roofs designed to handle heavy rooftop equipment. We work with Firestone, Mule-Hide, and Duro-Last PVC systems engineered for North Texas heat loads.",
       features: [
@@ -162,6 +244,13 @@ export default function Services() {
       id: "metal-roofing",
       title: "Metal Roofing Systems",
       icon: Layers,
+      pricing: {
+        display: "Starting at $9 / sq ft · Typical range $9 – $18 / sq ft installed",
+        starting: 9,
+        min: 9,
+        max: 18,
+        unit: "sqft",
+      },
       description:
         "Extremely durable standing seam and corrugated metal systems built to outlast traditional materials — backed by manufacturer warranties from leading brands.",
       features: [
@@ -175,6 +264,13 @@ export default function Services() {
       id: "tpo-epdm",
       title: "TPO, EPDM & PVC Membrane Systems",
       icon: Box,
+      pricing: {
+        display: "Starting at $6 / sq ft · Typical range $6 – $12 / sq ft installed",
+        starting: 6,
+        min: 6,
+        max: 12,
+        unit: "sqft",
+      },
       description:
         "High-performance single-ply membrane installation using Firestone, Mule-Hide, and Duro-Last PVC systems. We service, install, and maintain all major membrane brands to keep your manufacturer warranty intact.",
       features: [
@@ -419,20 +515,75 @@ export default function Services() {
     name: string;
     serviceType: string;
     description: string;
+    pricing: Pricing;
   }[] = [
     ...leadServices.map((s) => ({
       id: s.id,
       name: s.title,
       serviceType: s.title,
       description: s.problem,
+      pricing: s.pricing,
     })),
     ...servicesList.map((s) => ({
       id: s.id,
       name: s.title,
       serviceType: s.title,
       description: s.description,
+      pricing: s.pricing,
     })),
   ];
+
+  const buildOffer = (id: string, p: Pricing) => {
+    const url = `https://lonestarroofing.com/services#${id}`;
+    if (p.starting === 0 && p.max === 0) {
+      return {
+        "@type": "Offer",
+        "url": url,
+        "price": "0",
+        "priceCurrency": "USD",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": 0,
+          "priceCurrency": "USD",
+          "description": "Free commercial roof inspection with written report — no obligation.",
+        },
+        "availability": "https://schema.org/InStock",
+        "areaServed": areaServed,
+      };
+    }
+    const isUnit = p.unit === "sqft";
+    return {
+      "@type": "Offer",
+      "url": url,
+      "price": p.starting,
+      "priceCurrency": "USD",
+      "priceSpecification": isUnit
+        ? {
+            "@type": "UnitPriceSpecification",
+            "priceCurrency": "USD",
+            "price": p.starting,
+            "minPrice": p.min,
+            "maxPrice": p.max,
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1,
+              "unitCode": "FTK",
+              "unitText": "square foot",
+            },
+            "description": p.display,
+          }
+        : {
+            "@type": "PriceSpecification",
+            "priceCurrency": "USD",
+            "price": p.starting,
+            "minPrice": p.min,
+            "maxPrice": p.max,
+            "description": p.display,
+          },
+      "availability": "https://schema.org/InStock",
+      "areaServed": areaServed,
+    };
+  };
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -461,6 +612,7 @@ export default function Services() {
         "category": "Commercial Roofing",
         "provider": { "@id": providerId },
         "areaServed": areaServed,
+        "offers": buildOffer(s.id, s.pricing),
       })),
       {
         "@type": "HowTo",
@@ -578,6 +730,15 @@ export default function Services() {
                   </div>
 
                   <div className="lg:col-span-3 flex flex-col">
+                    <div
+                      className="bg-secondary/5 rounded-lg p-5 border border-secondary/30 mb-4"
+                      data-testid={`pricing-${svc.id}`}
+                    >
+                      <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 flex items-center gap-2">
+                        <DollarSign className="h-3.5 w-3.5" /> Pricing
+                      </p>
+                      <p className="text-sm font-semibold text-foreground leading-snug">{svc.pricing.display}</p>
+                    </div>
                     <div className="bg-muted rounded-lg p-5 border border-border mb-5">
                       <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Lone Star</p>
                       <p className="text-sm text-foreground leading-relaxed">{svc.why}</p>
@@ -686,6 +847,16 @@ export default function Services() {
                     </h3>
                     <p className="text-muted-foreground leading-relaxed">{service.description}</p>
                   </div>
+                </div>
+
+                <div
+                  className="mb-5 rounded-lg bg-secondary/5 border border-secondary/30 p-4"
+                  data-testid={`pricing-${service.id}`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-1 flex items-center gap-2">
+                    <DollarSign className="h-3.5 w-3.5" /> Pricing
+                  </p>
+                  <p className="text-sm font-semibold text-foreground leading-snug">{service.pricing.display}</p>
                 </div>
 
                 <div className="mt-auto pt-6 border-t border-border">
