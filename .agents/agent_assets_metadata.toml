@@ -72,3 +72,75 @@ id = "8r_iXycD2GiKEHsE3B6VU"
 uri = "file://artifacts/roofing-website/public/images/testimonials/monique-delacroix.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "UaZRjg9rMtfCZjLSZlI_R"
+uri = "file://artifacts/roofing-website/public/images/projects/dallas-pvc-warehouse.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2E-bCKDRi7cbG46ZaAzS0"
+uri = "file://artifacts/roofing-website/public/images/projects/dallas-metal-medical.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "iNNX4TvNZJqVARFDbdgQD"
+uri = "file://artifacts/roofing-website/public/images/projects/fortworth-metal-alliance.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Cp95uDDiBTpppBgzveFKm"
+uri = "file://artifacts/roofing-website/public/images/projects/fortworth-tpo-stockyards.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "79OVUupudfWWcxgsRhmYs"
+uri = "file://artifacts/roofing-website/public/images/projects/frisco-tpo-retail.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "jKVWCZx9K32QUulzDJ2Q3"
+uri = "file://artifacts/roofing-website/public/images/projects/frisco-tpo-office.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "fAV3IngWreIzu3cUQRr02"
+uri = "file://artifacts/roofing-website/public/images/projects/plano-storm-office.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "N12FBGaKjTL45Izj7OFlE"
+uri = "file://artifacts/roofing-website/public/images/projects/plano-tpo-legacy.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Gfucxj4vuBn_IKvXUcJIS"
+uri = "file://artifacts/roofing-website/public/images/projects/mckinney-tpo-medical.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "IoW8WSCSTwAmZA0OfUmC6"
+uri = "file://artifacts/roofing-website/public/images/projects/mckinney-historic-parapet.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "IE2RLIuzylo2C-eoyjk0i"
+uri = "file://artifacts/roofing-website/public/images/projects/arlington-pvc-school.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xRlqa5PbMUQHxjuC0KQ2b"
+uri = "file://artifacts/roofing-website/public/images/projects/arlington-storm-warehouse.png"
+type = "image"
+title = "generated_image"
