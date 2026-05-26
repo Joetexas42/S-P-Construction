@@ -4,6 +4,8 @@ import { Link } from "wouter";
 import { Shield, Wrench, Search, Zap, Droplets, Droplet, Layers, Maximize, Activity, LayoutGrid } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
+import { Testimonials } from "@/components/Testimonials";
+import { testimonials } from "@/data/testimonials";
 
 export default function Home() {
   const jsonLd = {
@@ -191,50 +193,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-heading font-black uppercase tracking-tight mb-4 text-white">Trusted by DFW Property Managers</h2>
-            <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">Don't just take our word for it. Here's what the people managing millions of square feet have to say.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/10 p-8 rounded-lg backdrop-blur-sm border border-white/10">
-              <div className="flex gap-1 text-secondary mb-6">
-                {[...Array(5)].map((_, i) => <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-              </div>
-              <p className="text-white/90 italic mb-6 leading-relaxed">"After the massive hail storm in Frisco, Lone Star was on site within hours. They handled the entire 40,000 sq ft TPO replacement and dealt with the insurance adjusters directly. Utterly professional."</p>
-              <div>
-                <p className="font-bold text-white font-heading uppercase tracking-wide">Marcus T.</p>
-                <p className="text-sm text-white/60">Property Manager, Frisco Retail Center</p>
-              </div>
-            </div>
-            
-            <div className="bg-white/10 p-8 rounded-lg backdrop-blur-sm border border-white/10">
-              <div className="flex gap-1 text-secondary mb-6">
-                {[...Array(5)].map((_, i) => <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-              </div>
-              <p className="text-white/90 italic mb-6 leading-relaxed">"We had a persistent leak over our manufacturing floor that three other companies failed to fix. Lone Star found the source in 20 minutes and sealed it permanently. They are our go-to contractor now."</p>
-              <div>
-                <p className="font-bold text-white font-heading uppercase tracking-wide">Sarah J.</p>
-                <p className="text-sm text-white/60">Operations Director, Fort Worth Industrial</p>
-              </div>
-            </div>
-
-            <div className="bg-white/10 p-8 rounded-lg backdrop-blur-sm border border-white/10">
-              <div className="flex gap-1 text-secondary mb-6">
-                {[...Array(5)].map((_, i) => <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>)}
-              </div>
-              <p className="text-white/90 italic mb-6 leading-relaxed">"The communication is what sets them apart. Daily updates, drone photos of the progress, and zero surprises on the final invoice for our standing seam metal roof installation. Outstanding work."</p>
-              <div>
-                <p className="font-bold text-white font-heading uppercase tracking-wide">David C.</p>
-                <p className="text-sm text-white/60">Owner, Dallas Medical Plaza</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Testimonials + Google reviews */}
+      <Testimonials
+        variant="dark"
+        heading="Trusted by DFW Property Managers"
+        subheading="Don't just take our word for it. Here's what the people managing millions of square feet across the metroplex have to say."
+        items={testimonials.slice(0, 6)}
+        showGoogleSummary
+      />
 
       {/* CTA / Contact Section */}
       <section className="py-24 bg-muted relative overflow-hidden">

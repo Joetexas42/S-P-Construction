@@ -2,6 +2,7 @@ import { SEO } from "@/components/SEO";
 import { ContactForm } from "@/components/ContactForm";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { GoogleReviewsSummary } from "@/components/Testimonials";
 
 export default function Contact() {
   return (
@@ -77,6 +78,11 @@ export default function Contact() {
                 </div>
               </div>
               
+              <div>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3">Reviewed by DFW Building Owners</h3>
+                <GoogleReviewsSummary variant="light" />
+              </div>
+
               <div className="bg-muted p-8 rounded-lg border border-border">
                 <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">What happens next?</h3>
                 <ul className="space-y-4">

@@ -3,6 +3,12 @@ import { Link } from "wouter";
 import { Building2, MapPin, Ruler, Calendar, CheckCircle2, ArrowRight, X } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { Testimonials } from "@/components/Testimonials";
+import {
+  testimonials,
+  getTestimonialBySlug,
+} from "@/data/testimonials";
+import { Quote, Star } from "lucide-react";
 
 type CaseStudy = {
   slug: string;
@@ -292,7 +298,22 @@ export default function Projects() {
             ))}
           </div>
 
-          <div className="mt-16 text-center bg-muted p-12 rounded-lg border border-border">
+        </div>
+      </section>
+
+      {/* What clients say */}
+      <Testimonials
+        variant="light"
+        heading="In Their Own Words"
+        subheading="Named feedback from the owners, operators, and asset managers behind the projects above."
+        items={testimonials}
+        showGoogleSummary
+        className="border-t border-border"
+      />
+
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center bg-muted p-12 rounded-lg border border-border">
             <h3 className="text-2xl md:text-3xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
               Your facility could be our next case study
             </h3>
@@ -327,7 +348,10 @@ function CaseStudyCard({
   onOpen: () => void;
 }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-lg transition-shadow">
+    <article
+      id={study.slug}
+      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-lg transition-shadow scroll-mt-24"
+    >
       <div className="aspect-[16/10] overflow-hidden bg-muted relative">
         <img
           src={study.image}
@@ -371,9 +395,32 @@ function CaseStudyCard({
             </div>
           </div>
         </div>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
           {study.scope}
         </p>
+        {(() => {
+          const t = getTestimonialBySlug(study.slug);
+          if (!t) return null;
+          return (
+            <figure
+              data-testid={`case-study-testimonial-${study.slug}`}
+              className="mb-5 rounded-md border-l-4 border-secondary bg-muted/60 px-4 py-3"
+            >
+              <div className="flex gap-0.5 text-secondary mb-1.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-3 h-3 fill-current" />
+                ))}
+              </div>
+              <blockquote className="text-sm italic text-foreground/90 leading-snug line-clamp-3">
+                <Quote className="h-3.5 w-3.5 inline -mt-1 mr-1 text-secondary" />
+                {t.quote}
+              </blockquote>
+              <figcaption className="mt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {t.name} — {t.role}, {t.company}
+              </figcaption>
+            </figure>
+          );
+        })()}
         <button
           onClick={onOpen}
           className="inline-flex items-center gap-2 text-secondary font-bold uppercase tracking-wide text-sm hover:gap-3 transition-all self-start"
