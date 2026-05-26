@@ -1,8 +1,23 @@
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers } from "lucide-react";
+import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
+
+export interface CityTestimonial {
+  quote: string;
+  name: string;
+  businessType: string;
+}
+
+export interface CityRecentProject {
+  title: string;
+  buildingType: string;
+  sqFt: number;
+  system: string;
+  image: string;
+  completed: string;
+}
 
 export interface CityData {
   slug: string;
@@ -15,6 +30,22 @@ export interface CityData {
   weatherNote: string;
   seoTitle: string;
   seoDescription: string;
+  testimonials: CityTestimonial[];
+  recentProjects: CityRecentProject[];
+}
+
+function formatSqFt(n: number) {
+  return n.toLocaleString("en-US");
+}
+
+function initialsOf(name: string) {
+  return name
+    .split(/\s+/)
+    .map((p) => p[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
 }
 
 interface CityPageProps {
@@ -38,6 +69,21 @@ export default function CityPage({ city }: CityPageProps) {
       "@type": "City",
       "name": city.name,
     },
+    ...(city.testimonials.length > 0 && {
+      "review": city.testimonials.map((t) => ({
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5",
+        },
+        "author": {
+          "@type": "Person",
+          "name": t.name,
+        },
+        "reviewBody": t.quote,
+      })),
+    }),
   };
 
   const services = [
@@ -132,6 +178,112 @@ export default function CityPage({ city }: CityPageProps) {
               {city.weatherNote}
             </p>
           </div>
+
+          {/* Recent Projects */}
+          {city.recentProjects.length > 0 && (
+            <div className="mb-16" data-testid={`city-recent-projects-${city.slug}`}>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+                Recent {city.name} Projects
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                A look at flat roof systems we've recently completed for {city.name} building owners.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {city.recentProjects.map((p) => (
+                  <article
+                    key={p.title}
+                    className="flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+                  >
+                    <div className="aspect-[16/10] overflow-hidden bg-muted relative">
+                      <img
+                        src={p.image}
+                        alt={p.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
+                        {p.system}
+                      </span>
+                    </div>
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-3 leading-tight">
+                        {p.title}
+                      </h3>
+                      <div className="grid grid-cols-2 gap-3 text-sm mt-auto">
+                        <div className="flex items-start gap-2">
+                          <Building2 className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                              Building
+                            </div>
+                            <div className="text-foreground">{p.buildingType}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Ruler className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                              Size
+                            </div>
+                            <div className="text-foreground">{formatSqFt(p.sqFt)} sq ft</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2 col-span-2">
+                          <Calendar className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                              Completed
+                            </div>
+                            <div className="text-foreground">{p.completed}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Testimonials */}
+          {city.testimonials.length > 0 && (
+            <div className="mb-16" data-testid={`city-testimonials-${city.slug}`}>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+                What {city.name} Building Owners Say
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Named feedback from local property managers, facility directors, and business owners.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {city.testimonials.map((t) => (
+                  <figure
+                    key={t.name}
+                    className="flex flex-col bg-card border border-border rounded-lg p-6 shadow-sm"
+                  >
+                    <div className="flex gap-0.5 text-secondary mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-current" />
+                      ))}
+                    </div>
+                    <blockquote className="text-foreground/90 leading-relaxed italic mb-5 flex-1">
+                      <Quote className="h-4 w-4 inline -mt-1 mr-1 text-secondary" />
+                      {t.quote}
+                    </blockquote>
+                    <figcaption className="flex items-center gap-3 border-t border-border pt-4">
+                      <div className="h-11 w-11 rounded-full bg-secondary/15 text-secondary font-bold flex items-center justify-center text-sm shrink-0">
+                        {initialsOf(t.name)}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="font-bold text-foreground text-sm">{t.name}</div>
+                        <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                          {t.businessType} — {city.name}, TX
+                        </div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Services */}
           <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
