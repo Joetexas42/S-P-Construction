@@ -58,22 +58,22 @@ export default function Services() {
       id: "flat-roofing",
       title: "Flat / Low-Slope Roofing",
       icon: AlignHorizontalJustifyCenter,
-      description: "Specialized solutions for industrial and commercial flat roofs designed to handle heavy rooftop equipment.",
-      features: ["Built-up roofing (BUR)", "Modified bitumen", "Proper slope engineering", "Drainage optimization"]
+      description: "Specialized solutions for industrial and commercial flat roofs designed to handle heavy rooftop equipment. We work with Firestone, Mule-Hide, and Duro-Last PVC systems engineered for North Texas heat loads.",
+      features: ["Built-up roofing (BUR)", "Modified bitumen", "Duro-Last PVC systems", "Drainage optimization"]
     },
     {
       id: "metal-roofing",
       title: "Metal Roofing Systems",
       icon: Layers,
-      description: "Extremely durable standing seam and corrugated metal systems built to outlast traditional materials.",
+      description: "Extremely durable standing seam and corrugated metal systems built to outlast traditional materials — backed by manufacturer warranties from leading brands.",
       features: ["Standing seam", "R-panel", "Retrofit framing", "Custom fabrication"]
     },
     {
       id: "tpo-epdm",
-      title: "TPO & EPDM Membrane Systems",
+      title: "TPO, EPDM & PVC Membrane Systems",
       icon: Box,
-      description: "High-performance, energy-efficient single-ply membrane installation for maximum weather resistance.",
-      features: ["Heat-welded seams", "Fully adhered systems", "Mechanically attached", "High reflectivity"]
+      description: "High-performance, energy-efficient single-ply membrane installation using Firestone, Mule-Hide, and Duro-Last PVC systems. We service, install, and maintain all major membrane brands to keep your manufacturer warranty intact.",
+      features: ["Firestone TPO & EPDM", "Mule-Hide membrane systems", "Duro-Last PVC roofing", "Heat-welded seams", "Fully adhered & mechanically attached", "High-reflectivity roofing"]
     }
   ];
 
@@ -90,7 +90,7 @@ export default function Services() {
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">Commercial Roofing Solutions</h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
-              We engineer, install, and maintain high-performance roofing systems designed to withstand the brutal North Texas climate. No compromises.
+              We engineer, install, and maintain high-performance roofing systems designed to withstand the brutal North Texas climate. Authorized installer and service partner for Firestone, Mule-Hide, Duro-Last PVC, and leading TPO membrane systems. No compromises.
             </p>
           </div>
         </div>

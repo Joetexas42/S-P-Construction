@@ -106,6 +106,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Manufacturer Partners */}
+      <section className="py-14 bg-background border-b border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8">
+            Authorized Installer &amp; Service Partner — Leading Roofing Manufacturers
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+            {[
+              { name: "Firestone", sub: "Building Products" },
+              { name: "Mule-Hide", sub: "Products Co." },
+              { name: "Duro-Last", sub: "PVC Roofing Systems" },
+              { name: "TPO Systems", sub: "Single-Ply Membranes" },
+            ].map((brand) => (
+              <div
+                key={brand.name}
+                className="flex flex-col items-center justify-center border border-border rounded-lg px-8 py-5 min-w-[150px] bg-card hover:border-secondary transition-colors"
+              >
+                <span className="font-heading font-black text-lg uppercase tracking-tight text-foreground">{brand.name}</span>
+                <span className="text-xs text-muted-foreground font-semibold tracking-wide">{brand.sub}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-sm text-muted-foreground mt-8 max-w-2xl mx-auto">
+            We install, repair, and maintain roofing systems from the industry's most trusted manufacturers — so your warranty stays intact and your building stays protected.
+          </p>
+        </div>
+      </section>
+
       {/* Key Services */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">

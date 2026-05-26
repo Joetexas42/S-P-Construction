@@ -82,10 +82,19 @@ export function Footer() {
 
         </div>
         
-        <div className="mt-16 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/60">
-          <p>&copy; {new Date().getFullYear()} Lone Star Commercial Roofing. All rights reserved.</p>
-          <div className="flex gap-4">
-            <span className="flex items-center gap-1"><HardHat className="h-3 w-3" /> Licensed & Insured in Texas</span>
+        <div className="mt-12 pt-8 border-t border-primary-foreground/10">
+          <div className="flex flex-wrap justify-center gap-3 mb-6">
+            {["Firestone Building Products", "Mule-Hide Products Co.", "Duro-Last PVC Systems", "TPO Membrane Systems"].map((brand) => (
+              <span key={brand} className="px-3 py-1 rounded border border-primary-foreground/20 text-xs text-primary-foreground/60 font-semibold uppercase tracking-wide">
+                {brand}
+              </span>
+            ))}
+          </div>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/60">
+            <p>&copy; {new Date().getFullYear()} Lone Star Commercial Roofing. All rights reserved.</p>
+            <div className="flex gap-4">
+              <span className="flex items-center gap-1"><HardHat className="h-3 w-3" /> Licensed & Insured in Texas</span>
+            </div>
           </div>
         </div>
       </div>
