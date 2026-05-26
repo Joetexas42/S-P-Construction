@@ -52,8 +52,11 @@ export function CertificationsStrip() {
                 <img
                   src={c.logo}
                   alt={`${c.name} — ${c.sub}`}
+                  width={200}
+                  height={64}
                   className="max-h-16 w-auto object-contain"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const img = e.currentTarget;
                     const parent = img.parentElement;

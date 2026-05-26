@@ -80,6 +80,10 @@ export default function Home() {
           <img 
             src="/images/hero-bg.png" 
             alt="Massive commercial flat roof on a warehouse in North Texas during sunset"
+            width={1920}
+            height={1080}
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>
@@ -165,8 +169,11 @@ export default function Home() {
                 <img
                   src={brand.logo}
                   alt={`${brand.name} — ${brand.sub}`}
+                  width={180}
+                  height={48}
                   className="max-h-12 w-auto object-contain"
                   loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const img = e.currentTarget;
                     const parent = img.parentElement;

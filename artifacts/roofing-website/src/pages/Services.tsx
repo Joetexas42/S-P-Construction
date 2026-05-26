@@ -716,8 +716,11 @@ export default function Services() {
                   <img
                     src={mfr.logo}
                     alt={`${mfr.name} logo`}
+                    width={220}
+                    height={56}
                     className="max-h-14 w-auto object-contain"
                     loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                       const img = e.currentTarget;
                       const parent = img.parentElement;

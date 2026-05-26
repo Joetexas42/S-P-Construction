@@ -421,6 +421,10 @@ function CaseStudyCard({ study }: { study: CaseStudy }) {
         <img
           src={study.image}
           alt={study.title}
+          width={800}
+          height={500}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <span className="absolute top-4 left-4 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-3 py-1.5 rounded shadow">

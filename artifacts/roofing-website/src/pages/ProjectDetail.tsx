@@ -128,6 +128,10 @@ export default function ProjectDetail({
             <img
               src={study.image}
               alt={study.title}
+              width={1600}
+              height={900}
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>
@@ -237,6 +241,10 @@ function RelatedCard({ study }: { study: CaseStudy }) {
         <img
           src={study.image}
           alt={study.title}
+          width={800}
+          height={500}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       </div>

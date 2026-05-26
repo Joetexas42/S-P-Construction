@@ -148,6 +148,7 @@ function TestimonialAvatar({
         src={testimonial.photo}
         alt={`${testimonial.name} headshot`}
         loading="lazy"
+        decoding="async"
         width={48}
         height={48}
         data-testid={`testimonial-avatar-${testimonial.id}`}
