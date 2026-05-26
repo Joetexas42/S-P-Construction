@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
+import { caseStudies } from "@/data/caseStudies";
 
 export interface CityTestimonial {
   quote: string;
@@ -53,6 +54,11 @@ interface CityPageProps {
 }
 
 export default function CityPage({ city }: CityPageProps) {
+  const cityCaseStudies = caseStudies.filter(
+    (cs) => cs.city.split(",")[0].trim().toLowerCase() === city.name.toLowerCase(),
+  );
+
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
@@ -178,6 +184,76 @@ export default function CityPage({ city }: CityPageProps) {
               {city.weatherNote}
             </p>
           </div>
+
+          {/* Featured Case Studies for this city */}
+          {cityCaseStudies.length > 0 && (
+            <div className="mb-16" data-testid={`city-case-studies-${city.slug}`}>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+                Recent Projects in {city.name}
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                In-depth case studies from commercial roofs we've completed in {city.name}.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {cityCaseStudies.map((cs) => (
+                  <Link
+                    key={cs.slug}
+                    href={`/projects/${cs.slug}`}
+                    data-testid={`city-case-study-link-${cs.slug}`}
+                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="aspect-[16/10] overflow-hidden bg-muted relative">
+                      <img
+                        src={cs.image}
+                        alt={cs.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                      />
+                      <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
+                        {cs.system}
+                      </span>
+                    </div>
+                    <div className="p-5 flex flex-col flex-1">
+                      <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-3 leading-tight group-hover:text-secondary transition-colors">
+                        {cs.title}
+                      </h3>
+                      <div className="grid grid-cols-2 gap-3 text-sm mt-auto">
+                        <div className="flex items-start gap-2">
+                          <Building2 className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                              Building
+                            </div>
+                            <div className="text-foreground">{cs.buildingType}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2">
+                          <Ruler className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                              Size
+                            </div>
+                            <div className="text-foreground">{formatSqFt(cs.sizeSqFt)} sq ft</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-2 col-span-2">
+                          <Calendar className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                          <div>
+                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                              Completed
+                            </div>
+                            <div className="text-foreground">{cs.completed}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <span className="mt-4 text-sm font-bold uppercase tracking-wider text-secondary">
+                        Read Case Study →
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Recent Projects */}
           {city.recentProjects.length > 0 && (
