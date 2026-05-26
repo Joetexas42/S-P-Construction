@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import {
   caseStudyBySlug,
   caseStudies,
+  getRelatedCaseStudies,
   formatSqFt,
   type CaseStudy,
 } from "@/data/caseStudies";
@@ -46,6 +47,7 @@ export default function ProjectDetail({
   const cityShort = study.city.split(",")[0];
   const idx = caseStudies.findIndex((c) => c.slug === study.slug);
   const next = caseStudies[(idx + 1) % caseStudies.length];
+  const related = getRelatedCaseStudies(study, 3);
 
   return (
     <>
@@ -147,6 +149,27 @@ export default function ProjectDetail({
         </div>
       </section>
 
+      {/* Related case studies */}
+      {related.length > 0 && (
+        <section className="py-16 bg-background border-t border-border">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-2">
+                Related Projects
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Similar commercial roofing work across DFW.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {related.map((r) => (
+                  <RelatedCard key={r.slug} study={r} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Footer nav */}
       <section className="py-12 bg-muted border-t border-border">
         <div className="container mx-auto px-4 md:px-6">
@@ -165,6 +188,40 @@ export default function ProjectDetail({
         </div>
       </section>
     </>
+  );
+}
+
+function RelatedCard({ study }: { study: CaseStudy }) {
+  return (
+    <Link
+      href={`/projects/${study.slug}`}
+      className="group block bg-card border border-border rounded-lg overflow-hidden hover:border-secondary hover:shadow-lg transition-all"
+    >
+      <div className="aspect-[16/10] overflow-hidden bg-muted">
+        <img
+          src={study.image}
+          alt={study.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <div className="p-5">
+        <div className="flex flex-wrap items-center gap-2 text-[0.65rem] font-bold uppercase tracking-widest text-muted-foreground mb-3">
+          <span className="text-secondary bg-secondary/15 px-2 py-0.5 rounded">
+            {study.system}
+          </span>
+          <span className="flex items-center gap-1">
+            <MapPin className="h-3 w-3 text-secondary" />
+            {study.city.split(",")[0]}
+          </span>
+        </div>
+        <h3 className="text-base font-heading font-bold uppercase tracking-tight text-foreground leading-snug group-hover:text-secondary mb-2">
+          {study.title}
+        </h3>
+        <div className="text-xs text-muted-foreground font-semibold">
+          {formatSqFt(study.sizeSqFt)} sq ft
+        </div>
+      </div>
+    </Link>
   );
 }
 

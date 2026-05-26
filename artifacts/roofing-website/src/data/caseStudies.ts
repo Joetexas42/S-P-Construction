@@ -188,3 +188,41 @@ export const caseStudyBySlug: Record<string, CaseStudy> = Object.fromEntries(
 export function formatSqFt(n: number) {
   return n.toLocaleString("en-US");
 }
+
+export function getRelatedCaseStudies(
+  study: CaseStudy,
+  limit = 3,
+): CaseStudy[] {
+  const systemFamily = (s: string) => {
+    const lower = s.toLowerCase();
+    if (lower.includes("tpo")) return "tpo";
+    if (lower.includes("pvc")) return "pvc";
+    if (lower.includes("metal") || lower.includes("standing seam"))
+      return "metal";
+    if (lower.includes("bitumen") || lower.includes("bur") || lower.includes("modified"))
+      return "bitumen";
+    if (lower.includes("epdm")) return "epdm";
+    return lower;
+  };
+
+  const targetFamily = systemFamily(study.system);
+  const targetCity = study.city;
+  const targetBuilding = study.buildingType.toLowerCase();
+
+  const scored = caseStudies
+    .filter((c) => c.slug !== study.slug)
+    .map((c) => {
+      let score = 0;
+      if (c.city === targetCity) score += 3;
+      if (systemFamily(c.system) === targetFamily) score += 2;
+      const building = c.buildingType.toLowerCase();
+      const sharedWords = building
+        .split(/\s+/)
+        .filter((w) => w.length > 3 && targetBuilding.includes(w));
+      if (sharedWords.length > 0) score += 1;
+      return { study: c, score };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, limit).map((s) => s.study);
+}
