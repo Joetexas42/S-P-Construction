@@ -257,6 +257,10 @@ export default function CityPage({ city }: CityPageProps) {
                       <img
                         src={cs.image}
                         alt={cs.title}
+                        width={800}
+                        height={500}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                       />
                       <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
@@ -325,6 +329,10 @@ export default function CityPage({ city }: CityPageProps) {
                       <img
                         src={p.image}
                         alt={p.title}
+                        width={800}
+                        height={500}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                       <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
