@@ -6,8 +6,16 @@ import { ContactForm } from "@/components/ContactForm";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { Testimonials } from "@/components/Testimonials";
 import { testimonials } from "@/data/testimonials";
+import { cities } from "@/data/cities";
 
 export default function Home() {
+  const countySet = new Set<string>();
+  for (const c of cities) {
+    for (const part of c.county.split(/\s*&\s*/)) {
+      countySet.add(part.trim());
+    }
+  }
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
@@ -21,7 +29,24 @@ export default function Home() {
       "addressRegion": "TX",
       "addressCountry": "US"
     },
-    "areaServed": ["Dallas", "Fort Worth", "Frisco", "Plano", "McKinney", "Allen", "Garland", "Irving", "Arlington", "Denton", "Lewisville"]
+    "areaServed": [
+      ...cities.map((c) => ({
+        "@type": "City",
+        "name": c.name,
+        "containedInPlace": {
+          "@type": "AdministrativeArea",
+          "name": c.county,
+          "addressRegion": "TX",
+          "addressCountry": "US",
+        },
+      })),
+      ...Array.from(countySet).map((county) => ({
+        "@type": "AdministrativeArea",
+        "name": county,
+        "addressRegion": "TX",
+        "addressCountry": "US",
+      })),
+    ],
   };
 
   const services = [

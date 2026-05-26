@@ -71,10 +71,34 @@ export default function CityPage({ city }: CityPageProps) {
       "addressRegion": "TX",
       "addressCountry": "US",
     },
-    "areaServed": {
-      "@type": "City",
-      "name": city.name,
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": city.name,
+        "containedInPlace": {
+          "@type": "AdministrativeArea",
+          "name": city.county,
+          "addressRegion": "TX",
+          "addressCountry": "US",
+        },
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": city.county,
+        "addressRegion": "TX",
+        "addressCountry": "US",
+      },
+      ...city.neighborhoods.map((n) => ({
+        "@type": "Place",
+        "name": n,
+        "containedInPlace": {
+          "@type": "City",
+          "name": city.name,
+          "addressRegion": "TX",
+          "addressCountry": "US",
+        },
+      })),
+    ],
     ...(city.testimonials.length > 0 && {
       "review": city.testimonials.map((t) => ({
         "@type": "Review",
