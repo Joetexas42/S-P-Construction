@@ -30,6 +30,11 @@ export interface ServicePricing {
   unit?: "sqft";
 }
 
+export interface ServiceHeroImage {
+  base: string;
+  alt: string;
+}
+
 export interface ServiceDetail {
   slug: string;
   title: string;
@@ -47,6 +52,7 @@ export interface ServiceDetail {
   sections: ServiceSection[];
   faqs: ServiceFAQ[];
   ctaPrimary: string;
+  heroImage: ServiceHeroImage;
 }
 
 export const services: ServiceDetail[] = [
@@ -115,6 +121,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Request Free Inspection",
+    heroImage: {
+      base: "/images/services/inspection",
+      alt: "Senior roof inspector documenting a North Texas commercial rooftop with a drone",
+    },
   },
   {
     slug: "repair",
@@ -176,6 +186,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Request Repair Quote",
+    heroImage: {
+      base: "/images/services/repair",
+      alt: "Roofer heat-welding a membrane patch on a commercial flat roof repair",
+    },
   },
   {
     slug: "installation",
@@ -238,6 +252,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Request Install Quote",
+    heroImage: {
+      base: "/images/services/installation",
+      alt: "Crew installing a new TPO single-ply membrane on a large commercial building roof",
+    },
   },
   {
     slug: "replacement",
@@ -295,6 +313,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Get a Replacement Quote",
+    heroImage: {
+      base: "/images/services/replacement",
+      alt: "Commercial roof tear-off in progress with workers removing old insulation",
+    },
   },
   {
     slug: "maintenance",
@@ -352,6 +374,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Start a Maintenance Plan",
+    heroImage: {
+      base: "/images/services/maintenance",
+      alt: "Maintenance technician clearing a roof drain on a commercial flat roof",
+    },
   },
   {
     slug: "storm-damage",
@@ -413,6 +439,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Start Storm Claim Help",
+    heroImage: {
+      base: "/images/services/storm-damage",
+      alt: "Hail damage on a commercial roof membrane after a North Texas storm",
+    },
   },
   {
     slug: "emergency-leak-repair",
@@ -469,6 +499,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Call Emergency Line",
+    heroImage: {
+      base: "/images/services/emergency-leak-repair",
+      alt: "Emergency tarping and leak mitigation on a commercial roof at night",
+    },
   },
   {
     slug: "coatings-restoration",
@@ -526,6 +560,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Assess My Roof for Coating",
+    heroImage: {
+      base: "/images/services/coatings-restoration",
+      alt: "Applying a white reflective fluid-applied coating on a commercial flat roof",
+    },
   },
   {
     slug: "flat-roofing",
@@ -583,6 +621,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Get a Flat Roof Assessment",
+    heroImage: {
+      base: "/images/services/flat-roofing",
+      alt: "Aerial view of a large commercial flat warehouse roof in North Texas",
+    },
   },
   {
     slug: "metal-roofing",
@@ -640,6 +682,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Get a Metal Roof Quote",
+    heroImage: {
+      base: "/images/services/metal-roofing",
+      alt: "Standing seam metal roofing system on a commercial building",
+    },
   },
   {
     slug: "tpo-epdm-pvc",
@@ -709,6 +755,10 @@ export const services: ServiceDetail[] = [
       },
     ],
     ctaPrimary: "Get a Membrane System Quote",
+    heroImage: {
+      base: "/images/services/tpo-epdm-pvc",
+      alt: "Heat-welded seam on a white TPO single-ply membrane commercial roof",
+    },
   },
 ];
 

@@ -134,7 +134,8 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {/* Header */}
       <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
             <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <span className="mx-2">/</span>
@@ -184,6 +185,24 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   <Phone className="h-4 w-4" /> (972) 555-0100
                 </Button>
               </a>
+            </div>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/20 aspect-[4/3]">
+                <img
+                  src={`${service.heroImage.base}-800w.webp`}
+                  srcSet={`${service.heroImage.base}-480w.webp 480w, ${service.heroImage.base}-800w.webp 800w, ${service.heroImage.base}-1280w.webp 1280w`}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  alt={service.heroImage.alt}
+                  width={1280}
+                  height={960}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="w-full h-full object-cover"
+                  data-testid={`service-hero-image-${service.slug}`}
+                />
+              </div>
             </div>
           </div>
         </div>

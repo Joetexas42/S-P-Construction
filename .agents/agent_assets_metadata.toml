@@ -1,5 +1,4 @@
 uploads = []
-outputs = []
 
 [[generated]]
 id = "m-6AdKeUYx-kAe8NmiEL3"
@@ -144,3 +143,117 @@ id = "xRlqa5PbMUQHxjuC0KQ2b"
 uri = "file://artifacts/roofing-website/public/images/projects/arlington-storm-warehouse.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "AxrLtCP8SvsuKG9NuyPSe"
+uri = "file://attached_assets/generated_images/service-inspection.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "lAgrDKtZTct_wUfUrYucU"
+uri = "file://attached_assets/generated_images/service-repair.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "AKOk1s6CJmVRJwCN0hA80"
+uri = "file://attached_assets/generated_images/service-installation.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "LYkp4wKNl2irKj1iDv9T_"
+uri = "file://attached_assets/generated_images/service-emergency-leak-repair.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "sdYvVQ1edPnq0lXSz8i2v"
+uri = "file://attached_assets/generated_images/service-replacement.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "akhENgx-ZQKpHXl0Y5u7P"
+uri = "file://attached_assets/generated_images/service-flat-roofing.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "AVv_MaAW_PdPD3-g5alCy"
+uri = "file://attached_assets/generated_images/service-storm-damage.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Ki_85bhVjBL5r9MpnAYDG"
+uri = "file://attached_assets/generated_images/service-tpo-epdm-pvc.png"
+type = "image"
+title = "generated_image"
+
+[[outputs]]
+id = "ps6I91K20mnwCeqf3cTt5"
+uri = "file://attached_assets/stock_images/service-inspection.jpg"
+type = "image"
+title = "commercial roof inspector with drone on flat commercial rooftop"
+
+[[outputs]]
+id = "oYRMxleaEKne-3NWcLJ1O"
+uri = "file://attached_assets/stock_images/service-repair.jpg"
+type = "image"
+title = "roofer repairing flat commercial roof membrane patch"
+
+[[outputs]]
+id = "MdDrkKiOSeC07ncKyKbP1"
+uri = "file://attached_assets/stock_images/service-installation.jpg"
+type = "image"
+title = "crew installing new TPO membrane on large commercial building roof"
+
+[[outputs]]
+id = "QXmgQ0pL0NFzXbIo7dA_C"
+uri = "file://attached_assets/stock_images/service-replacement.jpg"
+type = "image"
+title = "commercial roof tear-off in progress with workers and insulation"
+
+[[outputs]]
+id = "fEuLGBXEcvha5RgC1yEDg"
+uri = "file://attached_assets/stock_images/service-maintenance.jpg"
+type = "image"
+title = "worker performing maintenance on commercial flat roof clearing drain"
+
+[[outputs]]
+id = "29pN3BTV0-26tjsVCriAB"
+uri = "file://attached_assets/stock_images/service-coatings-restoration.jpg"
+type = "image"
+title = "applying white reflective elastomeric roof coating commercial flat roof"
+
+[[outputs]]
+id = "DqWGvm0FDxHyBiL2KkUsF"
+uri = "file://attached_assets/stock_images/service-storm-damage.jpg"
+type = "image"
+title = "hail damage on commercial roof close-up after storm"
+
+[[outputs]]
+id = "IPtZtb5sgE0SiuKhxt3GP"
+uri = "file://attached_assets/stock_images/service-emergency-leak-repair.jpg"
+type = "image"
+title = "emergency tarping water leak commercial roof rain"
+
+[[outputs]]
+id = "_6BFM72Uius5z4UWWBTXP"
+uri = "file://attached_assets/stock_images/service-flat-roofing.jpg"
+type = "image"
+title = "large commercial flat roof aerial view warehouse"
+
+[[outputs]]
+id = "9jh9y7Oi9KnqsNlrWBzDH"
+uri = "file://attached_assets/stock_images/service-metal-roofing.jpg"
+type = "image"
+title = "standing seam metal roof commercial building"
+
+[[outputs]]
+id = "lRWvHrvFeKZMQDialMk4O"
+uri = "file://attached_assets/stock_images/service-tpo-epdm-pvc.jpg"
+type = "image"
+title = "white TPO single-ply membrane commercial roof seam welding"
