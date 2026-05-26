@@ -19,6 +19,7 @@ export function Navbar() {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
+    { name: "TPO & PVC", path: "/services#single-ply" },
     { name: "Gallery", path: "/gallery" },
     { name: "Service Areas", path: "/service-areas" },
     { name: "Contact", path: "/contact" },

@@ -33,8 +33,8 @@ export default function Home() {
   return (
     <>
       <SEO 
-        title="Lone Star Commercial Roofing | North Texas & DFW Contractors"
-        description="Battle-hardened commercial roofing contractors serving North Texas since 2003. We protect the businesses that keep the DFW metroplex running. Call (972) 555-0100."
+        title="North Texas Commercial Roofing | TPO, PVC & Flat Roof Specialists | DFW"
+        description="Commercial flat roof specialists serving Dallas, Fort Worth, Frisco, Plano & all of North Texas. TPO, PVC, and single-ply membrane installation, repair, and 24/7 emergency leak response. Authorized Firestone (Elevate), Mule-Hide & Duro-Last installer since 2003. Call (972) 555-0100."
         jsonLd={jsonLd}
       />
       
@@ -57,10 +57,10 @@ export default function Home() {
               <span className="text-sm font-bold uppercase tracking-wider text-white">Serving North Texas Since 2003</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight">
-              We Protect the Businesses <br className="hidden md:block"/>That Keep <span className="text-secondary">DFW Running.</span>
+              North Texas Commercial <br className="hidden md:block"/><span className="text-secondary">Flat Roof Specialists.</span>
             </h1>
             <p className="text-xl md:text-2xl text-primary-foreground/90 font-medium mb-10 max-w-2xl leading-relaxed">
-              Battle-hardened commercial roofing that weathers every hailstorm, tornado season, and scorching summer the Metroplex throws at it.
+              TPO, PVC, and single-ply membrane systems engineered for the DFW Metroplex — installed and serviced by an authorized Firestone (Elevate), Mule-Hide, and Duro-Last contractor. Hail-tough, energy-efficient, warranty-backed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/contact">
@@ -73,6 +73,11 @@ export default function Home() {
                   Call (972) 555-0100
                 </Button>
               </a>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80 font-semibold">
+              <Link href="/services#tpo-vs-pvc" className="hover:text-secondary transition-colors">TPO vs. PVC →</Link>
+              <Link href="/services#tpo-benefits" className="hover:text-secondary transition-colors">10 Benefits of TPO →</Link>
+              <Link href="/services#manufacturers" className="hover:text-secondary transition-colors">Firestone · Mule-Hide · Duro-Last →</Link>
             </div>
           </div>
         </div>
