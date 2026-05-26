@@ -189,21 +189,47 @@ export function formatSqFt(n: number) {
   return n.toLocaleString("en-US");
 }
 
+export function getSystemFamily(s: string): string {
+  const lower = s.toLowerCase();
+  if (lower.includes("tpo")) return "tpo";
+  if (lower.includes("pvc")) return "pvc";
+  if (lower.includes("metal") || lower.includes("standing seam"))
+    return "metal";
+  if (
+    lower.includes("bitumen") ||
+    lower.includes("bur") ||
+    lower.includes("modified")
+  )
+    return "bitumen";
+  if (lower.includes("epdm")) return "epdm";
+  return lower;
+}
+
+export const SYSTEM_FAMILY_LABELS: Record<string, string> = {
+  tpo: "TPO",
+  pvc: "PVC",
+  metal: "Metal",
+  bitumen: "Modified Bitumen",
+  epdm: "EPDM",
+};
+
+export function getCitySlug(city: string): string {
+  return city
+    .replace(/,.*$/, "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-");
+}
+
+export function getCityLabel(city: string): string {
+  return city.replace(/,.*$/, "").trim();
+}
+
 export function getRelatedCaseStudies(
   study: CaseStudy,
   limit = 3,
 ): CaseStudy[] {
-  const systemFamily = (s: string) => {
-    const lower = s.toLowerCase();
-    if (lower.includes("tpo")) return "tpo";
-    if (lower.includes("pvc")) return "pvc";
-    if (lower.includes("metal") || lower.includes("standing seam"))
-      return "metal";
-    if (lower.includes("bitumen") || lower.includes("bur") || lower.includes("modified"))
-      return "bitumen";
-    if (lower.includes("epdm")) return "epdm";
-    return lower;
-  };
+  const systemFamily = getSystemFamily;
 
   const targetFamily = systemFamily(study.system);
   const targetCity = study.city;

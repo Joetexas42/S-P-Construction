@@ -1,4 +1,5 @@
-import { Link } from "wouter";
+import { useMemo } from "react";
+import { Link, useSearch, useLocation } from "wouter";
 import {
   Building2,
   MapPin,
@@ -16,14 +17,133 @@ import {
   getTestimonialBySlug,
   testimonialReviewsJsonLd,
 } from "@/data/testimonials";
-import { caseStudies, formatSqFt, type CaseStudy } from "@/data/caseStudies";
+import {
+  caseStudies,
+  formatSqFt,
+  getSystemFamily,
+  getCitySlug,
+  getCityLabel,
+  SYSTEM_FAMILY_LABELS,
+  type CaseStudy,
+} from "@/data/caseStudies";
+import { cn } from "@/lib/utils";
+
+type FilterOption = { value: string; label: string; count: number };
+
+function useFilterState() {
+  const search = useSearch();
+  const [location, setLocation] = useLocation();
+  const params = useMemo(() => new URLSearchParams(search), [search]);
+  const city = (params.get("city") ?? "all").toLowerCase();
+  const system = (params.get("system") ?? "all").toLowerCase();
+
+  const setFilters = (updates: Partial<Record<"city" | "system", string>>) => {
+    const next = new URLSearchParams(params);
+    for (const [key, value] of Object.entries(updates)) {
+      if (!value || value === "all") {
+        next.delete(key);
+      } else {
+        next.set(key, value);
+      }
+    }
+    const qs = next.toString();
+    setLocation(qs ? `${location}?${qs}` : location);
+  };
+
+  const setFilter = (key: "city" | "system", value: string) =>
+    setFilters({ [key]: value });
+
+  const clearFilters = () => setFilters({ city: "all", system: "all" });
+
+  return { city, system, setFilter, clearFilters };
+}
+
+function FilterChip({
+  active,
+  onClick,
+  children,
+  testId,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+  testId: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      data-testid={testId}
+      data-active={active}
+      aria-pressed={active}
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors",
+        active
+          ? "bg-secondary text-white border-secondary shadow-sm"
+          : "bg-card text-muted-foreground border-border hover:border-secondary hover:text-foreground",
+      )}
+    >
+      {children}
+    </button>
+  );
+}
 
 export default function Projects() {
+  const { city, system, setFilter, clearFilters } = useFilterState();
+
+  const cityOptions = useMemo<FilterOption[]>(() => {
+    const counts = new Map<string, { label: string; count: number }>();
+    for (const c of caseStudies) {
+      const slug = getCitySlug(c.city);
+      const existing = counts.get(slug);
+      counts.set(slug, {
+        label: getCityLabel(c.city),
+        count: (existing?.count ?? 0) + 1,
+      });
+    }
+    return [...counts.entries()]
+      .map(([value, { label, count }]) => ({ value, label, count }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, []);
+
+  const systemOptions = useMemo<FilterOption[]>(() => {
+    const counts = new Map<string, number>();
+    for (const c of caseStudies) {
+      const fam = getSystemFamily(c.system);
+      counts.set(fam, (counts.get(fam) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([value, count]) => ({
+        value,
+        label: SYSTEM_FAMILY_LABELS[value] ?? value.toUpperCase(),
+        count,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, []);
+
+  const filtered = useMemo(() => {
+    return caseStudies.filter((c) => {
+      const cityMatch = city === "all" || getCitySlug(c.city) === city;
+      const systemMatch =
+        system === "all" || getSystemFamily(c.system) === system;
+      return cityMatch && systemMatch;
+    });
+  }, [city, system]);
+
+  const activeCityLabel =
+    city === "all"
+      ? null
+      : cityOptions.find((o) => o.value === city)?.label ?? city;
+  const activeSystemLabel =
+    system === "all"
+      ? null
+      : systemOptions.find((o) => o.value === system)?.label ?? system;
+
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Commercial Roofing Case Studies — DFW Metroplex",
-    itemListElement: caseStudies.map((c, i) => ({
+    itemListElement: filtered.map((c, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: c.title,
@@ -111,15 +231,144 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* Case studies grid */}
-      <section className="py-24 bg-background">
+      {/* Filters + Case studies grid */}
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((c) => (
-              <CaseStudyCard key={c.slug} study={c} />
-            ))}
+          <div
+            className="mb-10 rounded-lg border border-border bg-muted/40 p-5 md:p-6"
+            data-testid="projects-filters"
+          >
+            <div className="flex flex-col gap-5">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <MapPin className="h-4 w-4 text-secondary" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-foreground">
+                    Filter by city
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <FilterChip
+                    active={city === "all"}
+                    onClick={() => setFilter("city", "all")}
+                    testId="filter-city-all"
+                  >
+                    All cities
+                    <span className="opacity-70">({caseStudies.length})</span>
+                  </FilterChip>
+                  {cityOptions.map((opt) => (
+                    <FilterChip
+                      key={opt.value}
+                      active={city === opt.value}
+                      onClick={() => setFilter("city", opt.value)}
+                      testId={`filter-city-${opt.value}`}
+                    >
+                      {opt.label}
+                      <span className="opacity-70">({opt.count})</span>
+                    </FilterChip>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Building2 className="h-4 w-4 text-secondary" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-foreground">
+                    Filter by roof system
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <FilterChip
+                    active={system === "all"}
+                    onClick={() => setFilter("system", "all")}
+                    testId="filter-system-all"
+                  >
+                    All systems
+                    <span className="opacity-70">({caseStudies.length})</span>
+                  </FilterChip>
+                  {systemOptions.map((opt) => (
+                    <FilterChip
+                      key={opt.value}
+                      active={system === opt.value}
+                      onClick={() => setFilter("system", opt.value)}
+                      testId={`filter-system-${opt.value}`}
+                    >
+                      {opt.label}
+                      <span className="opacity-70">({opt.count})</span>
+                    </FilterChip>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
+          <div
+            className="flex flex-wrap items-center justify-between gap-3 mb-6"
+            data-testid="projects-filter-summary"
+          >
+            <p className="text-sm text-muted-foreground">
+              Showing{" "}
+              <span className="font-bold text-foreground">
+                {filtered.length}
+              </span>{" "}
+              of {caseStudies.length} projects
+              {activeCityLabel && (
+                <>
+                  {" "}
+                  in{" "}
+                  <span className="font-bold text-foreground">
+                    {activeCityLabel}
+                  </span>
+                </>
+              )}
+              {activeSystemLabel && (
+                <>
+                  {" "}
+                  ·{" "}
+                  <span className="font-bold text-foreground">
+                    {activeSystemLabel}
+                  </span>{" "}
+                  system
+                </>
+              )}
+            </p>
+            {(city !== "all" || system !== "all") && (
+              <button
+                type="button"
+                onClick={clearFilters}
+                data-testid="filter-clear"
+                className="text-xs font-bold uppercase tracking-wider text-secondary hover:underline"
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
+
+          {filtered.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {filtered.map((c) => (
+                <CaseStudyCard key={c.slug} study={c} />
+              ))}
+            </div>
+          ) : (
+            <div
+              className="text-center py-16 rounded-lg border border-dashed border-border bg-muted/40"
+              data-testid="filter-empty-state"
+            >
+              <p className="text-foreground font-semibold mb-2">
+                No projects match these filters yet.
+              </p>
+              <p className="text-sm text-muted-foreground mb-5">
+                Try a different city or roof system, or clear the filters to
+                see every project.
+              </p>
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="inline-flex items-center gap-2 text-secondary font-bold uppercase tracking-wide text-sm hover:underline"
+              >
+                Clear filters <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
