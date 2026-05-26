@@ -7,12 +7,13 @@ const STATIC_ROUTES = [
   { path: "/services", changefreq: "monthly", priority: "0.9" },
   { path: "/service-areas", changefreq: "monthly", priority: "0.9" },
   { path: "/projects", changefreq: "monthly", priority: "0.8" },
+  { path: "/case-studies", changefreq: "monthly", priority: "0.8" },
   { path: "/gallery", changefreq: "monthly", priority: "0.7" },
   { path: "/contact", changefreq: "monthly", priority: "0.7" },
 ];
 
-function readCitySlugs(citiesFile: string): string[] {
-  const src = fs.readFileSync(citiesFile, "utf8");
+function readSlugs(file: string): string[] {
+  const src = fs.readFileSync(file, "utf8");
   const slugs: string[] = [];
   const re = /slug:\s*"([^"]+)"/g;
   let m: RegExpExecArray | null;
@@ -22,10 +23,42 @@ function readCitySlugs(citiesFile: string): string[] {
   return slugs;
 }
 
-function buildSitemap(siteUrl: string, citiesFile: string): string {
+const MONTHS: Record<string, string> = {
+  january: "01", february: "02", march: "03", april: "04",
+  may: "05", june: "06", july: "07", august: "08",
+  september: "09", october: "10", november: "11", december: "12",
+};
+
+function parseCompletedDate(s: string): string | null {
+  const m = s.trim().toLowerCase().match(/^([a-z]+)\s+(\d{4})$/);
+  if (!m) return null;
+  const mm = MONTHS[m[1]];
+  if (!mm) return null;
+  return `${m[2]}-${mm}-01`;
+}
+
+function readCaseStudies(
+  file: string,
+): { slug: string; lastmod: string | null }[] {
+  const src = fs.readFileSync(file, "utf8");
+  const out: { slug: string; lastmod: string | null }[] = [];
+  const re = /slug:\s*"([^"]+)"[\s\S]*?completed:\s*"([^"]+)"/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(src)) !== null) {
+    out.push({ slug: m[1], lastmod: parseCompletedDate(m[2]) });
+  }
+  return out;
+}
+
+function buildSitemap(
+  siteUrl: string,
+  citiesFile: string,
+  caseStudiesFile: string,
+): string {
   const base = siteUrl.replace(/\/$/, "");
   const today = new Date().toISOString().slice(0, 10);
-  const slugs = readCitySlugs(citiesFile);
+  const citySlugs = readSlugs(citiesFile);
+  const studies = readCaseStudies(caseStudiesFile);
 
   const urls: string[] = [];
   for (const route of STATIC_ROUTES) {
@@ -33,9 +66,15 @@ function buildSitemap(siteUrl: string, citiesFile: string): string {
       `  <url>\n    <loc>${base}${route.path}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${route.changefreq}</changefreq>\n    <priority>${route.priority}</priority>\n  </url>`,
     );
   }
-  for (const slug of slugs) {
+  for (const slug of citySlugs) {
     urls.push(
       `  <url>\n    <loc>${base}/service-areas/${slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
+    );
+  }
+  for (const s of studies) {
+    const lastmod = s.lastmod ?? today;
+    urls.push(
+      `  <url>\n    <loc>${base}/case-studies/${s.slug}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>yearly</changefreq>\n    <priority>0.7</priority>\n  </url>`,
     );
   }
 
@@ -47,6 +86,10 @@ export function sitemapPlugin(options: { siteUrl: string }): Plugin {
     import.meta.dirname,
     "src/data/cities.ts",
   );
+  const caseStudiesFile = path.resolve(
+    import.meta.dirname,
+    "src/data/caseStudies.ts",
+  );
 
   return {
     name: "roofing-sitemap",
@@ -56,7 +99,7 @@ export function sitemapPlugin(options: { siteUrl: string }): Plugin {
         const url = req.url.split("?")[0];
         if (url.endsWith("/sitemap.xml")) {
           res.setHeader("Content-Type", "application/xml; charset=utf-8");
-          res.end(buildSitemap(options.siteUrl, citiesFile));
+          res.end(buildSitemap(options.siteUrl, citiesFile, caseStudiesFile));
           return;
         }
         next();
@@ -66,7 +109,7 @@ export function sitemapPlugin(options: { siteUrl: string }): Plugin {
       this.emitFile({
         type: "asset",
         fileName: "sitemap.xml",
-        source: buildSitemap(options.siteUrl, citiesFile),
+        source: buildSitemap(options.siteUrl, citiesFile, caseStudiesFile),
       });
     },
   };
