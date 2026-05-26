@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout/Layout";
 import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import Gallery from "@/pages/Gallery";
+import Projects from "@/pages/Projects";
 import ServiceAreas from "@/pages/ServiceAreas";
 import CityPage from "@/pages/CityPage";
 import { cityBySlug } from "@/data/cities";
@@ -27,6 +28,8 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
         <Route path="/gallery" component={Gallery} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/case-studies" component={Projects} />
         <Route path="/service-areas" component={ServiceAreas} />
         <Route path="/service-areas/:slug" component={CityRoute} />
         <Route path="/contact" component={Contact} />

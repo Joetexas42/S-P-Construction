@@ -20,6 +20,7 @@ export function Navbar() {
     { name: "Home", path: "/" },
     { name: "Services", path: "/services" },
     { name: "TPO & PVC", path: "/services#single-ply" },
+    { name: "Projects", path: "/projects" },
     { name: "Gallery", path: "/gallery" },
     { name: "Service Areas", path: "/service-areas" },
     { name: "Contact", path: "/contact" },
