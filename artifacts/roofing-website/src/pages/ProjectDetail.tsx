@@ -16,6 +16,7 @@ import {
   formatSqFt,
   type CaseStudy,
 } from "@/data/caseStudies";
+import { getTestimonialBySlug } from "@/data/testimonials";
 import NotFound from "@/pages/not-found";
 
 export default function ProjectDetail({
@@ -31,8 +32,9 @@ export default function ProjectDetail({
 
   if (!study) return <NotFound />;
 
-  const detailJsonLd = {
-    "@context": "https://schema.org",
+  const testimonial = getTestimonialBySlug(study.slug);
+
+  const articleJsonLd = {
     "@type": "Article",
     headline: study.title,
     description: study.seoDescription,
@@ -42,6 +44,40 @@ export default function ProjectDetail({
       name: study.city,
     },
     image: study.image,
+  };
+
+  const reviewJsonLd = testimonial
+    ? {
+        "@type": "Review",
+        name: `Client review — ${study.title}`,
+        author: {
+          "@type": "Person",
+          name: testimonial.name,
+          jobTitle: testimonial.role,
+          worksFor: {
+            "@type": "Organization",
+            name: testimonial.company,
+          },
+        },
+        reviewBody: testimonial.quote,
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: "5",
+          bestRating: "5",
+          worstRating: "1",
+        },
+        itemReviewed: {
+          "@type": "RoofingContractor",
+          name: "Lone Star Commercial Roofing",
+          description: `${study.system} project in ${study.city}: ${study.title}`,
+          areaServed: study.city,
+        },
+      }
+    : null;
+
+  const detailJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": reviewJsonLd ? [articleJsonLd, reviewJsonLd] : [articleJsonLd],
   };
 
   const cityShort = study.city.split(",")[0];
