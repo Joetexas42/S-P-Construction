@@ -235,7 +235,14 @@ export default function Services() {
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
               North Texas commercial flat-roof specialists. We engineer, install, and maintain high-performance TPO, PVC, EPDM, and metal roofing systems built for the DFW climate. Authorized installer and service partner for Firestone (Elevate), Mule-Hide, and Duro-Last PVC.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3 text-sm">
+            <div className="mt-6">
+              <Link href="/estimate">
+                <Button size="lg" className="font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white" data-testid="services-cta-estimate">
+                  Get Instant Satellite Estimate
+                </Button>
+              </Link>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-3 text-sm">
               <a href="#core-services" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">Inspections · Repairs · Installs</a>
               <a href="#all-services" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">All Services</a>
               <a href="#tpo-vs-pvc" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">TPO vs. PVC</a>

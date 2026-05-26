@@ -12,6 +12,8 @@ tags:
     description: Health operations
   - name: contact
     description: Contact form submissions
+  - name: estimator
+    description: Instant satellite roof estimator
 paths:
   /healthz:
     get:
@@ -65,6 +67,73 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ContactSubmission"
+  /estimator/roof-area:
+    get:
+      operationId: getRoofArea
+      tags: [estimator]
+      summary: Look up roof area from Google Solar API
+      parameters:
+        - in: query
+          name: lat
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: lng
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Roof area lookup result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoofAreaResult"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /estimator:
+    post:
+      operationId: submitEstimator
+      tags: [estimator]
+      summary: Submit instant satellite roof estimate lead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EstimatorInput"
+      responses:
+        "201":
+          description: Submission received
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EstimatorSubmission"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /estimator/submissions:
+    get:
+      operationId: listEstimatorSubmissions
+      tags: [estimator]
+      summary: List all estimator submissions
+      responses:
+        "200":
+          description: List of submissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EstimatorSubmission"
 components:
   schemas:
     HealthStatus:
@@ -147,6 +216,123 @@ components:
         createdAt:
           type: string
           format: date-time
+    EstimatorInput:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+        - address
+        - latitude
+        - longitude
+        - roofSqft
+        - sqftSource
+        - serviceType
+      properties:
+        name:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+          minLength: 1
+        company:
+          type: ["string", "null"]
+        message:
+          type: ["string", "null"]
+        address:
+          type: string
+          minLength: 1
+        latitude:
+          type: number
+        longitude:
+          type: number
+        roofSqft:
+          type: integer
+          minimum: 1
+        sqftSource:
+          type: string
+          enum:
+            - solar
+            - manual
+        serviceType:
+          type: string
+    EstimatorSubmission:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - phone
+        - address
+        - latitude
+        - longitude
+        - roofSqft
+        - sqftSource
+        - serviceType
+        - estimatedCostUsd
+        - pricePerSqft
+        - createdAt
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        company:
+          type: ["string", "null"]
+        message:
+          type: ["string", "null"]
+        address:
+          type: string
+        latitude:
+          type: number
+        longitude:
+          type: number
+        roofSqft:
+          type: integer
+        sqftSource:
+          type: string
+        serviceType:
+          type: string
+        estimatedCostUsd:
+          type: integer
+        pricePerSqft:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+    RoofAreaResult:
+      type: object
+      required:
+        - found
+        - roofSegments
+      properties:
+        found:
+          type: boolean
+        roofAreaSqMeters:
+          type: ["number", "null"]
+        roofAreaSqft:
+          type: ["number", "null"]
+        roofSegments:
+          type: array
+          description: >-
+            Bounding boxes of each detected roof segment from the Solar API,
+            used to draw a real (non-fabricated) outline on the satellite
+            image. Empty if no segment geometry was returned.
+          items:
+            type: object
+            required: [swLat, swLng, neLat, neLng]
+            properties:
+              swLat: { type: number }
+              swLng: { type: number }
+              neLat: { type: number }
+              neLng: { type: number }
     ErrorResponse:
       type: object
       properties:

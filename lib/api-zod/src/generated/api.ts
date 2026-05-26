@@ -55,3 +55,71 @@ export const ListContactSubmissionsResponseItem = zod.object({
 export const ListContactSubmissionsResponse = zod.array(ListContactSubmissionsResponseItem)
 
 
+/**
+ * @summary Look up roof area from Google Solar API
+ */
+export const GetRoofAreaQueryParams = zod.object({
+  "lat": zod.coerce.number(),
+  "lng": zod.coerce.number()
+})
+
+export const GetRoofAreaResponse = zod.object({
+  "found": zod.boolean(),
+  "roofAreaSqMeters": zod.number().nullish(),
+  "roofAreaSqft": zod.number().nullish(),
+  "roofSegments": zod.array(zod.object({
+  "swLat": zod.number(),
+  "swLng": zod.number(),
+  "neLat": zod.number(),
+  "neLng": zod.number()
+})).describe('Bounding boxes of each detected roof segment from the Solar API, used to draw a real (non-fabricated) outline on the satellite image. Empty if no segment geometry was returned.')
+})
+
+
+/**
+ * @summary Submit instant satellite roof estimate lead
+ */
+
+
+
+
+
+
+export const SubmitEstimatorBody = zod.object({
+  "name": zod.string().min(1),
+  "email": zod.string().email(),
+  "phone": zod.string().min(1),
+  "company": zod.string().nullish(),
+  "message": zod.string().nullish(),
+  "address": zod.string().min(1),
+  "latitude": zod.number(),
+  "longitude": zod.number(),
+  "roofSqft": zod.number().min(1),
+  "sqftSource": zod.enum(['solar', 'manual']),
+  "serviceType": zod.string()
+})
+
+
+/**
+ * @summary List all estimator submissions
+ */
+export const ListEstimatorSubmissionsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string(),
+  "company": zod.string().nullish(),
+  "message": zod.string().nullish(),
+  "address": zod.string(),
+  "latitude": zod.number(),
+  "longitude": zod.number(),
+  "roofSqft": zod.number(),
+  "sqftSource": zod.string(),
+  "serviceType": zod.string(),
+  "estimatedCostUsd": zod.number(),
+  "pricePerSqft": zod.number(),
+  "createdAt": zod.coerce.date()
+})
+export const ListEstimatorSubmissionsResponse = zod.array(ListEstimatorSubmissionsResponseItem)
+
+

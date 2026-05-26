@@ -23,7 +23,11 @@ import type {
   ContactInput,
   ContactSubmission,
   ErrorResponse,
-  HealthStatus
+  EstimatorInput,
+  EstimatorSubmission,
+  GetRoofAreaParams,
+  HealthStatus,
+  RoofAreaResult
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -253,6 +257,238 @@ export function useListContactSubmissions<TData = Awaited<ReturnType<typeof list
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getListContactSubmissionsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetRoofAreaUrl = (params: GetRoofAreaParams,) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0 ? `/api/estimator/roof-area?${stringifiedParams}` : `/api/estimator/roof-area`
+}
+
+/**
+ * @summary Look up roof area from Google Solar API
+ */
+export const getRoofArea = async (params: GetRoofAreaParams, options?: RequestInit): Promise<RoofAreaResult> => {
+
+  return customFetch<RoofAreaResult>(getGetRoofAreaUrl(params),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetRoofAreaQueryKey = (params?: GetRoofAreaParams,) => {
+    return [
+    `/api/estimator/roof-area`, ...(params ? [params] : [])
+    ] as const;
+    }
+
+
+export const getGetRoofAreaQueryOptions = <TData = Awaited<ReturnType<typeof getRoofArea>>, TError = ErrorType<ErrorResponse>>(params: GetRoofAreaParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getRoofArea>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetRoofAreaQueryKey(params);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getRoofArea>>> = ({ signal }) => getRoofArea(params, { signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getRoofArea>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetRoofAreaQueryResult = NonNullable<Awaited<ReturnType<typeof getRoofArea>>>
+export type GetRoofAreaQueryError = ErrorType<ErrorResponse>
+
+
+/**
+ * @summary Look up roof area from Google Solar API
+ */
+
+export function useGetRoofArea<TData = Awaited<ReturnType<typeof getRoofArea>>, TError = ErrorType<ErrorResponse>>(
+ params: GetRoofAreaParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getRoofArea>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetRoofAreaQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getSubmitEstimatorUrl = () => {
+
+
+
+
+  return `/api/estimator`
+}
+
+/**
+ * @summary Submit instant satellite roof estimate lead
+ */
+export const submitEstimator = async (estimatorInput: EstimatorInput, options?: RequestInit): Promise<EstimatorSubmission> => {
+
+  return customFetch<EstimatorSubmission>(getSubmitEstimatorUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      estimatorInput,)
+  }
+);}
+
+
+
+
+export const getSubmitEstimatorMutationOptions = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitEstimator>>, TError,{data: BodyType<EstimatorInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof submitEstimator>>, TError,{data: BodyType<EstimatorInput>}, TContext> => {
+
+const mutationKey = ['submitEstimator'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof submitEstimator>>, {data: BodyType<EstimatorInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  submitEstimator(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SubmitEstimatorMutationResult = NonNullable<Awaited<ReturnType<typeof submitEstimator>>>
+    export type SubmitEstimatorMutationBody = BodyType<EstimatorInput>
+    export type SubmitEstimatorMutationError = ErrorType<ErrorResponse>
+
+    /**
+ * @summary Submit instant satellite roof estimate lead
+ */
+export const useSubmitEstimator = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitEstimator>>, TError,{data: BodyType<EstimatorInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof submitEstimator>>,
+        TError,
+        {data: BodyType<EstimatorInput>},
+        TContext
+      > => {
+      return useMutation(getSubmitEstimatorMutationOptions(options));
+    }
+
+export const getListEstimatorSubmissionsUrl = () => {
+
+
+
+
+  return `/api/estimator/submissions`
+}
+
+/**
+ * @summary List all estimator submissions
+ */
+export const listEstimatorSubmissions = async ( options?: RequestInit): Promise<EstimatorSubmission[]> => {
+
+  return customFetch<EstimatorSubmission[]>(getListEstimatorSubmissionsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListEstimatorSubmissionsQueryKey = () => {
+    return [
+    `/api/estimator/submissions`
+    ] as const;
+    }
+
+
+export const getListEstimatorSubmissionsQueryOptions = <TData = Awaited<ReturnType<typeof listEstimatorSubmissions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listEstimatorSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListEstimatorSubmissionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listEstimatorSubmissions>>> = ({ signal }) => listEstimatorSubmissions({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listEstimatorSubmissions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListEstimatorSubmissionsQueryResult = NonNullable<Awaited<ReturnType<typeof listEstimatorSubmissions>>>
+export type ListEstimatorSubmissionsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all estimator submissions
+ */
+
+export function useListEstimatorSubmissions<TData = Awaited<ReturnType<typeof listEstimatorSubmissions>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listEstimatorSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListEstimatorSubmissionsQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

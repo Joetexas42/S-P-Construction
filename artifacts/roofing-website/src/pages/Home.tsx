@@ -107,8 +107,13 @@ export default function Home() {
               TPO, PVC, and single-ply membrane systems engineered for the DFW Metroplex — installed and serviced by an authorized Firestone (Elevate), Mule-Hide, and Duro-Last contractor. Hail-tough, energy-efficient, warranty-backed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/estimate">
+                <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto" data-testid="hero-cta-estimate">
+                  Get Instant Estimate
+                </Button>
+              </Link>
               <Link href="/contact">
-                <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto">
+                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto backdrop-blur-sm">
                   Request Free Inspection
                 </Button>
               </Link>

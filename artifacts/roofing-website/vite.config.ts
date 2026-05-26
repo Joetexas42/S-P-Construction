@@ -29,8 +29,13 @@ if (!basePath) {
   );
 }
 
+const browserMapsKey = process.env.GOOGLE_MAPS_BROWSER_API_KEY ?? "";
+
 export default defineConfig({
   base: basePath,
+  define: {
+    "import.meta.env.VITE_GOOGLE_MAPS_BROWSER_API_KEY": JSON.stringify(browserMapsKey),
+  },
   plugins: [
     react(),
     tailwindcss(),

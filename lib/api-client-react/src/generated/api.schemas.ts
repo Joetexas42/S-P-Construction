@@ -69,7 +69,77 @@ export interface ContactSubmission {
   createdAt: string;
 }
 
+export type EstimatorInputSqftSource = typeof EstimatorInputSqftSource[keyof typeof EstimatorInputSqftSource];
+
+
+export const EstimatorInputSqftSource = {
+  solar: 'solar',
+  manual: 'manual',
+} as const;
+
+export interface EstimatorInput {
+  /** @minLength 1 */
+  name: string;
+  email: string;
+  /** @minLength 1 */
+  phone: string;
+  /** @nullable */
+  company?: string | null;
+  /** @nullable */
+  message?: string | null;
+  /** @minLength 1 */
+  address: string;
+  latitude: number;
+  longitude: number;
+  /** @minimum 1 */
+  roofSqft: number;
+  sqftSource: EstimatorInputSqftSource;
+  serviceType: string;
+}
+
+export interface EstimatorSubmission {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  /** @nullable */
+  company?: string | null;
+  /** @nullable */
+  message?: string | null;
+  address: string;
+  latitude: number;
+  longitude: number;
+  roofSqft: number;
+  sqftSource: string;
+  serviceType: string;
+  estimatedCostUsd: number;
+  pricePerSqft: number;
+  createdAt: string;
+}
+
+export type RoofAreaResultRoofSegmentsItem = {
+  swLat: number;
+  swLng: number;
+  neLat: number;
+  neLng: number;
+};
+
+export interface RoofAreaResult {
+  found: boolean;
+  /** @nullable */
+  roofAreaSqMeters?: number | null;
+  /** @nullable */
+  roofAreaSqft?: number | null;
+  /** Bounding boxes of each detected roof segment from the Solar API, used to draw a real (non-fabricated) outline on the satellite image. Empty if no segment geometry was returned. */
+  roofSegments: RoofAreaResultRoofSegmentsItem[];
+}
+
 export interface ErrorResponse {
   error: string;
 }
+
+export type GetRoofAreaParams = {
+lat: number;
+lng: number;
+};
 

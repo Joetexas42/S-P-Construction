@@ -23,6 +23,7 @@ export function Navbar() {
     { name: "Projects", path: "/projects" },
     { name: "Gallery", path: "/gallery" },
     { name: "Service Areas", path: "/service-areas" },
+    { name: "Instant Estimate", path: "/estimate" },
     { name: "Contact", path: "/contact" },
   ];
 
