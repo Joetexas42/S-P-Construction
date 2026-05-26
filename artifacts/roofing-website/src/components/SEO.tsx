@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 
+type JsonLd = Record<string, any>;
+
 interface SEOProps {
   title: string;
   description: string;
-  jsonLd?: Record<string, any>;
+  jsonLd?: JsonLd | JsonLd[];
 }
 
 export function SEO({ title, description, jsonLd }: SEOProps) {
@@ -18,16 +20,20 @@ export function SEO({ title, description, jsonLd }: SEOProps) {
     }
     metaDescription.setAttribute("content", description);
 
-    let scriptTag = document.querySelector('script[type="application/ld+json"]');
+    const existing = document.querySelectorAll(
+      'script[type="application/ld+json"][data-seo="true"]',
+    );
+    existing.forEach((el) => el.remove());
+
     if (jsonLd) {
-      if (!scriptTag) {
-        scriptTag = document.createElement("script");
+      const items = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+      for (const item of items) {
+        const scriptTag = document.createElement("script");
         scriptTag.setAttribute("type", "application/ld+json");
+        scriptTag.setAttribute("data-seo", "true");
+        scriptTag.textContent = JSON.stringify(item);
         document.head.appendChild(scriptTag);
       }
-      scriptTag.textContent = JSON.stringify(jsonLd);
-    } else if (scriptTag) {
-      scriptTag.remove();
     }
 
     return () => {

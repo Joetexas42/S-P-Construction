@@ -11,7 +11,11 @@ import {
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Testimonials } from "@/components/Testimonials";
-import { testimonials, getTestimonialBySlug } from "@/data/testimonials";
+import {
+  testimonials,
+  getTestimonialBySlug,
+  testimonialReviewsJsonLd,
+} from "@/data/testimonials";
 import { caseStudies, formatSqFt, type CaseStudy } from "@/data/caseStudies";
 
 export default function Projects() {
@@ -28,12 +32,22 @@ export default function Projects() {
     })),
   };
 
+  const reviewsJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": testimonialReviewsJsonLd.map((r) => ({
+      "@context": "https://schema.org",
+      ...r,
+    })),
+  };
+
+  const seoJsonLd = [itemListJsonLd, reviewsJsonLd];
+
   return (
     <>
       <SEO
         title="Commercial Roofing Case Studies — DFW Projects | Lone Star Commercial Roofing"
         description="Real DFW commercial roofing case studies: TPO, PVC, and standing-seam metal replacements in Frisco, Fort Worth, Dallas, Plano, McKinney, and Arlington."
-        jsonLd={itemListJsonLd}
+        jsonLd={seoJsonLd}
       />
 
       {/* Page Header */}

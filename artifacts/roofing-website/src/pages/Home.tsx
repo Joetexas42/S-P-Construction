@@ -5,7 +5,11 @@ import { Shield, Wrench, Search, Zap, Droplets, Droplet, Layers, Maximize, Activ
 import { ContactForm } from "@/components/ContactForm";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { Testimonials } from "@/components/Testimonials";
-import { testimonials } from "@/data/testimonials";
+import {
+  testimonials,
+  testimonialReviewsJsonLd,
+  testimonialAggregateRatingJsonLd,
+} from "@/data/testimonials";
 import { cities } from "@/data/cities";
 
 export default function Home() {
@@ -47,6 +51,8 @@ export default function Home() {
         "addressCountry": "US",
       })),
     ],
+    "aggregateRating": testimonialAggregateRatingJsonLd,
+    "review": testimonialReviewsJsonLd,
   };
 
   const services = [

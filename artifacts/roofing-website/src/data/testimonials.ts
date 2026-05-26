@@ -111,6 +111,40 @@ export function getTestimonialBySlug(slug: string): Testimonial | undefined {
   return testimonials.find((t) => t.caseStudySlug === slug);
 }
 
+const BUSINESS_NAME = "Lone Star Commercial Roofing";
+
+export const testimonialReviewsJsonLd = testimonials.map((t) => ({
+  "@type": "Review",
+  "author": {
+    "@type": "Person",
+    "name": t.name,
+    "jobTitle": t.role,
+    "worksFor": {
+      "@type": "Organization",
+      "name": t.company,
+    },
+  },
+  "reviewBody": t.quote,
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "worstRating": "1",
+  },
+  "itemReviewed": {
+    "@type": "RoofingContractor",
+    "name": BUSINESS_NAME,
+  },
+}));
+
+export const testimonialAggregateRatingJsonLd = {
+  "@type": "AggregateRating",
+  "ratingValue": "5",
+  "reviewCount": testimonials.length,
+  "bestRating": "5",
+  "worstRating": "1",
+};
+
 export const googleReviewsSummary = {
   rating: 4.9,
   reviewCount: 187,
