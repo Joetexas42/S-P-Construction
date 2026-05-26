@@ -6,6 +6,8 @@ import {
   CheckCircle2,
   ArrowLeft,
   ArrowRight,
+  Quote,
+  Star,
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
@@ -189,6 +191,75 @@ export default function ProjectDetail({
         </div>
       </section>
 
+      {/* Client quote */}
+      {testimonial && (
+        <section
+          className="py-20 bg-primary text-primary-foreground border-t border-primary-foreground/10"
+          data-testid={`project-testimonial-${testimonial.id}`}
+        >
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-secondary mb-4 text-center">
+                What the Client Said
+              </h2>
+              <article className="relative p-8 md:p-10 rounded-lg border bg-white/10 border-white/10 backdrop-blur-sm flex flex-col">
+                <Quote
+                  className="h-8 w-8 mb-4 text-secondary"
+                  aria-hidden="true"
+                />
+                <div
+                  className="flex gap-1 text-secondary mb-4"
+                  aria-label="5 out of 5 stars"
+                >
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                <p className="italic mb-6 leading-relaxed text-white/90 text-lg">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <div className="border-t border-white/10 pt-4 flex items-start gap-3">
+                  {testimonial.photo ? (
+                    <img
+                      src={testimonial.photo}
+                      alt={`${testimonial.name} headshot`}
+                      loading="lazy"
+                      decoding="async"
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 shrink-0 rounded-full object-cover ring-1 ring-white/20"
+                    />
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className="h-12 w-12 shrink-0 rounded-full flex items-center justify-center font-heading font-bold text-sm ring-1 ring-white/20 bg-white/15 text-white"
+                    >
+                      {getInitials(testimonial.name)}
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <p className="font-bold font-heading uppercase tracking-wide text-white">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-white/60">
+                      {testimonial.role}, {testimonial.company}
+                    </p>
+                    <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold uppercase tracking-wider text-white/60">
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin className="h-3 w-3 text-secondary" />
+                        {testimonial.city}
+                      </span>
+                      <span className="opacity-50">|</span>
+                      <span>{testimonial.system}</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Related case studies */}
       {related.length > 0 && (
         <section className="py-16 bg-background border-t border-border">
@@ -286,6 +357,13 @@ function NextCaseLink({ study }: { study: CaseStudy }) {
       <ArrowRight className="h-4 w-4 text-secondary" />
     </Link>
   );
+}
+
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
 
 function DetailStat({ label, value }: { label: string; value: string }) {
