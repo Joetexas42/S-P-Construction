@@ -39,6 +39,16 @@ function formatSqFt(n: number) {
   return n.toLocaleString("en-US");
 }
 
+const PROJECT_IMAGE_WIDTHS = [480, 800, 1280] as const;
+const PROJECT_IMAGE_SIZES =
+  "(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw";
+
+function buildProjectImageSrcSet(src: string): string | undefined {
+  if (!src.endsWith(".webp")) return undefined;
+  const stem = src.slice(0, -".webp".length);
+  return PROJECT_IMAGE_WIDTHS.map((w) => `${stem}-${w}w.webp ${w}w`).join(", ");
+}
+
 function initialsOf(name: string) {
   return name
     .split(/\s+/)
@@ -256,6 +266,8 @@ export default function CityPage({ city }: CityPageProps) {
                     <div className="aspect-[16/10] overflow-hidden bg-muted relative">
                       <img
                         src={cs.image}
+                        srcSet={buildProjectImageSrcSet(cs.image)}
+                        sizes={PROJECT_IMAGE_SIZES}
                         alt={cs.title}
                         width={800}
                         height={500}
@@ -328,6 +340,8 @@ export default function CityPage({ city }: CityPageProps) {
                     <div className="aspect-[16/10] overflow-hidden bg-muted relative">
                       <img
                         src={p.image}
+                        srcSet={buildProjectImageSrcSet(p.image)}
+                        sizes={PROJECT_IMAGE_SIZES}
                         alt={p.title}
                         width={800}
                         height={500}
