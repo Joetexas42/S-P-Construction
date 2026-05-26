@@ -22,6 +22,7 @@ import {
   Phone,
   FileCheck,
   HardHat,
+  HelpCircle,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -313,6 +314,49 @@ export default function Services() {
     },
   ];
 
+  const faqs: { question: string; answer: string }[] = [
+    {
+      question: "What's the difference between TPO and PVC roofing, and which lasts longer?",
+      answer:
+        "TPO and PVC are both heat-welded single-ply membranes, but PVC typically lasts 25–30+ years while TPO lasts 20–25 years with quality installation and maintenance. PVC offers superior chemical, grease, and fire resistance — making it the right choice for restaurants, food processing plants, and buildings with heavy rooftop chemical exposure. TPO is more cost-effective per square foot and is the better fit for large warehouses, retail centers, and offices where energy efficiency and budget are the priorities.",
+    },
+    {
+      question: "What's included in a free commercial roof inspection?",
+      answer:
+        "Our free commercial roof inspections include an on-site walkthrough by a senior inspector (never a salesperson), drone imagery and high-resolution photo documentation, thermal imaging to locate trapped moisture, core sampling on aging systems where appropriate, and a written report with prioritized findings, photos, and transparent pricing. There is no obligation and no pressure — you receive an honest report on what's actually wrong and what can safely wait.",
+    },
+    {
+      question: "How long does a commercial hail damage insurance claim take in North Texas?",
+      answer:
+        "Most DFW commercial hail claims take 30 to 90 days from initial inspection to roof completion, depending on carrier responsiveness, adjuster availability, and the scope of approved work. We document hail damage with drone imagery and thermal scans, prepare detailed Xactimate-aligned scopes, meet your adjuster on the roof, and advocate through supplements until your scope reflects the actual damage. Emergency tarping happens immediately so secondary water damage doesn't compound the claim.",
+    },
+    {
+      question: "How long does a commercial TPO or PVC roof last in the DFW climate?",
+      answer:
+        "In the North Texas climate — 100°F+ summers, hail, high winds, and freeze-thaw cycles — a properly installed 60- or 80-mil TPO roof typically lasts 20 to 25 years, and a PVC system like Duro-Last typically lasts 25 to 30+ years. Lifespan depends heavily on membrane thickness, attachment method, insulation quality, drainage design, and a consistent maintenance program. Roofs without bi-annual inspections and drain clearing routinely fail 5–10 years early.",
+    },
+    {
+      question: "How much does a commercial roof replacement cost per square foot?",
+      answer:
+        "Commercial reroof pricing in North Texas generally ranges from about $7 to $14 per square foot installed, depending on the membrane system (TPO, PVC, EPDM, or metal), insulation R-value, tear-off complexity, deck condition, roof penetrations, and warranty term. A 30,000 sq ft warehouse TPO recover may price very differently from a 30,000 sq ft restaurant PVC tear-off. We provide line-item pricing in every proposal so you can see exactly what drives the number.",
+    },
+    {
+      question: "Do you offer 24/7 emergency leak repair across the DFW Metroplex?",
+      answer:
+        "Yes. We dispatch emergency leak response crews 24/7 across the entire DFW Metroplex, including Dallas, Fort Worth, Plano, Frisco, Arlington, Irving, McKinney, and surrounding cities. Initial response includes water mitigation, emergency tarping or temporary sealing, root-cause leak diagnosis, and documentation for your insurance carrier and warranty file. Permanent repairs use manufacturer-approved materials so your existing warranty stays intact.",
+    },
+    {
+      question: "Will a roof repair void my existing manufacturer warranty?",
+      answer:
+        "Only if it is done incorrectly. Most commercial roof warranties from Firestone (Elevate), Mule-Hide, and Duro-Last require repairs to be performed by an authorized installer using manufacturer-approved materials, methods, and accessories. We are an authorized installer for the brands we recommend, so repairs are completed to manufacturer spec, fully documented, and reported to the manufacturer when required — keeping every clause of your warranty intact.",
+    },
+    {
+      question: "Are you an authorized installer for Firestone, Mule-Hide, and Duro-Last?",
+      answer:
+        "Yes. We are an authorized installer and service partner for Firestone (Elevate) TPO and EPDM, Mule-Hide TPO/EPDM and coating systems, and Duro-Last custom-prefabricated PVC. Authorized status means we can issue full manufacturer NDL (No Dollar Limit) warranties — up to 30 years on Firestone Red Shield and edge-to-edge coverage on Duro-Last — and pull factory engineering support on complex assemblies.",
+    },
+  ];
+
   const providerId = "https://lonestarroofing.com/#organization";
   const countySet = new Set<string>();
   for (const c of cities) {
@@ -387,6 +431,18 @@ export default function Services() {
         "provider": { "@id": providerId },
         "areaServed": areaServed,
       })),
+      {
+        "@type": "FAQPage",
+        "@id": "https://lonestarroofing.com/services#faq",
+        "mainEntity": faqs.map((f) => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer,
+          },
+        })),
+      },
     ],
   };
 
@@ -756,6 +812,44 @@ export default function Services() {
                 </Button>
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="py-24 bg-background border-y border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Frequently Asked Questions</p>
+            <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
+              Commercial Roofing Questions, Answered
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Straight answers to the questions DFW property managers and building owners ask us most often — from TPO vs. PVC lifespan to hail claim timelines and warranty rules.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-5">
+            {faqs.map((faq, i) => (
+              <details
+                key={i}
+                className="group bg-card border border-border rounded-xl p-6 md:p-7 shadow-sm open:border-secondary transition-colors"
+                data-testid={`faq-item-${i}`}
+              >
+                <summary className="flex items-start gap-4 cursor-pointer list-none">
+                  <div className="shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-open:bg-secondary/20 transition-colors">
+                    <HelpCircle className="h-5 w-5 text-secondary" />
+                  </div>
+                  <h3 className="flex-1 text-lg md:text-xl font-heading font-bold text-foreground leading-snug">
+                    {faq.question}
+                  </h3>
+                  <span className="shrink-0 text-secondary font-heading font-black text-2xl leading-none mt-1 group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <div className="mt-5 pl-14">
+                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                </div>
+              </details>
+            ))}
           </div>
         </div>
       </section>
