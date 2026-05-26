@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-label="Roofing Contractors Association of Texas Member">
+  <rect width="240" height="80" fill="#ffffff"/>
+  <g transform="translate(10,10)">
+    <circle cx="30" cy="30" r="28" fill="#bf0a30"/>
+    <path d="M10 30 L30 14 L50 30 L46 30 L46 44 L34 44 L34 34 L26 34 L26 44 L14 44 L14 30 Z" fill="#ffffff"/>
+    <text x="30" y="56" font-family="Arial Black, Helvetica, sans-serif" font-size="7" font-weight="900" fill="#ffffff" text-anchor="middle">TEXAS</text>
+  </g>
+  <text x="78" y="32" font-family="Arial Black, Helvetica, sans-serif" font-size="16" font-weight="900" fill="#bf0a30" letter-spacing="0.3">RCAT</text>
+  <text x="78" y="48" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700" fill="#222222">Roofing Contractors</text>
+  <text x="78" y="60" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700" fill="#222222">Association of Texas</text>
+  <text x="78" y="72" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#444444" letter-spacing="1">MEMBER IN GOOD STANDING</text>
+</svg>

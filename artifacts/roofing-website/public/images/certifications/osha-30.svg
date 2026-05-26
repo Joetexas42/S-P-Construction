@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-label="OSHA 30-Hour Construction Safety Trained">
+  <rect width="240" height="80" fill="#ffffff"/>
+  <g transform="translate(10,10)">
+    <path d="M30 2 L56 12 L56 32 Q56 50 30 58 Q4 50 4 32 L4 12 Z" fill="#0b6b3a"/>
+    <text x="30" y="28" font-family="Arial Black, Helvetica, sans-serif" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle">OSHA</text>
+    <text x="30" y="46" font-family="Arial Black, Helvetica, sans-serif" font-size="16" font-weight="900" fill="#ffd200" text-anchor="middle">30</text>
+  </g>
+  <text x="78" y="34" font-family="Arial Black, Helvetica, sans-serif" font-size="15" font-weight="900" fill="#0b6b3a" letter-spacing="0.3">30-HOUR</text>
+  <text x="78" y="52" font-family="Arial Black, Helvetica, sans-serif" font-size="15" font-weight="900" fill="#0b6b3a" letter-spacing="0.3">CONSTRUCTION</text>
+  <text x="78" y="66" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#444444" letter-spacing="1">SAFETY TRAINED CREWS</text>
+</svg>

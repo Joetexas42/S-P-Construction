@@ -1,5 +1,6 @@
 import { SEO } from "@/components/SEO";
 import { ContactForm } from "@/components/ContactForm";
+import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Contact() {
@@ -102,6 +103,8 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      <CertificationsStrip />
     </>
   );
 }

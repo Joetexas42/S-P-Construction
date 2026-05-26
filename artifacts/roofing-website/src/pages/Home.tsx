@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Shield, Wrench, Search, Zap, Droplets, Droplet, Layers, Maximize, Activity, LayoutGrid } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
+import { CertificationsStrip } from "@/components/CertificationsStrip";
 
 export default function Home() {
   const jsonLd = {
@@ -155,6 +156,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Certifications & Credentials */}
+      <CertificationsStrip />
 
       {/* Key Services */}
       <section className="py-24 bg-background">
