@@ -1,0 +1,93 @@
+import { SEO } from "@/components/SEO";
+import { MapPin } from "lucide-react";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+
+export default function ServiceAreas() {
+  const areas = [
+    "Dallas", "Fort Worth", "Frisco", "Plano", 
+    "McKinney", "Allen", "Garland", "Irving", 
+    "Arlington", "Denton", "Lewisville", "Richardson",
+    "Mesquite", "Carrollton", "Grand Prairie"
+  ];
+
+  return (
+    <>
+      <SEO 
+        title="Service Areas | DFW Commercial Roofing Contractor"
+        description="Lone Star Commercial Roofing serves the entire Dallas-Fort Worth Metroplex including Frisco, Plano, McKinney, Arlington, and Denton."
+      />
+      
+      {/* Page Header */}
+      <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">Service Areas</h1>
+            <p className="text-xl text-primary-foreground/80 leading-relaxed">
+              Based in Dallas, we deploy our commercial roofing crews across the entire DFW Metroplex and surrounding North Texas communities.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Areas Content */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">Covering North Texas</h2>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                When a severe storm hits or an emergency leak threatens your inventory, response time is critical. We strategically position our crews to ensure rapid deployment across the entire Dallas-Fort Worth region.
+              </p>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {areas.map((area, i) => (
+                  <div key={i} className="flex items-center gap-2 text-foreground font-medium p-3 bg-muted rounded-md border border-border">
+                    <MapPin className="h-4 w-4 text-secondary shrink-0" />
+                    <span>{area}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-8 p-6 bg-secondary/5 border border-secondary/20 rounded-lg">
+                <p className="text-sm text-foreground font-medium italic">
+                  * Don't see your city listed? If you have a commercial property in North Texas, chances are we cover it. Contact us to confirm.
+                </p>
+              </div>
+            </div>
+            
+            <div className="bg-card border border-border p-8 rounded-lg shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-bl-full -mr-4 -mt-4" />
+              <h3 className="text-2xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">Need Immediate Dispatch?</h3>
+              <p className="text-muted-foreground mb-8">
+                Our emergency response teams are available 24/7 for catastrophic leaks and severe storm damage across DFW.
+              </p>
+              
+              <div className="space-y-6">
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">24/7 Emergency Line</p>
+                  <a href="tel:972-555-0100" className="text-4xl font-heading font-black text-secondary hover:text-secondary/80 transition-colors">
+                    (972) 555-0100
+                  </a>
+                </div>
+                
+                <hr className="border-border" />
+                
+                <div>
+                  <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-4">Non-Emergency Inquiries</p>
+                  <Link href="/contact">
+                    <Button size="lg" className="w-full text-lg h-14 font-bold uppercase tracking-wide">
+                      Schedule Inspection
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

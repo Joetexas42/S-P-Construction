@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "m-6AdKeUYx-kAe8NmiEL3"
+uri = "file://artifacts/roofing-website/public/images/hero-bg.png"
+type = "image"
+title = "Commercial flat roof sunset"
+
+[[generated]]
+id = "K9vazX7gA0i2pJ5ZcV_t8"
+uri = "file://artifacts/roofing-website/public/images/gallery-metal.png"
+type = "image"
+title = "Metal roof installation"
+
+[[generated]]
+id = "BOl367rksz1zAf_idPUda"
+uri = "file://artifacts/roofing-website/public/images/gallery-tpo.png"
+type = "image"
+title = "TPO membrane roof"
+
+[[generated]]
+id = "i4IIR4Pc7qRUQr9B2e_gu"
+uri = "file://artifacts/roofing-website/public/images/gallery-storm.png"
+type = "image"
+title = "Storm damage roof repair"
