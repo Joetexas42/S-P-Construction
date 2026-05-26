@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/layout/Layout";
 import Home from "@/pages/Home";
 import Services from "@/pages/Services";
+import ServiceDetail from "@/pages/ServiceDetail";
+import { serviceBySlug } from "@/data/services";
 import Gallery from "@/pages/Gallery";
 import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
@@ -20,6 +22,12 @@ function CityRoute({ params }: { params: { slug: string } }) {
   return <CityPage city={city} />;
 }
 
+function ServiceRoute({ params }: { params: { slug: string } }) {
+  const service = serviceBySlug[params.slug];
+  if (!service) return <NotFound />;
+  return <ServiceDetail service={service} />;
+}
+
 const queryClient = new QueryClient();
 
 function Router() {
@@ -28,6 +36,7 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
+        <Route path="/services/:slug" component={ServiceRoute} />
         <Route path="/gallery" component={Gallery} />
         <Route path="/projects" component={Projects} />
         <Route path="/projects/:slug" component={ProjectDetail} />

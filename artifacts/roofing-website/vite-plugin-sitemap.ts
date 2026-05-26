@@ -53,11 +53,13 @@ function readCaseStudies(
 function buildSitemap(
   siteUrl: string,
   citiesFile: string,
+  servicesFile: string,
   caseStudiesFile: string,
 ): string {
   const base = siteUrl.replace(/\/$/, "");
   const today = new Date().toISOString().slice(0, 10);
   const citySlugs = readSlugs(citiesFile);
+  const serviceSlugs = readSlugs(servicesFile);
   const studies = readCaseStudies(caseStudiesFile);
 
   const urls: string[] = [];
@@ -69,6 +71,11 @@ function buildSitemap(
   for (const slug of citySlugs) {
     urls.push(
       `  <url>\n    <loc>${base}/service-areas/${slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
+    );
+  }
+  for (const slug of serviceSlugs) {
+    urls.push(
+      `  <url>\n    <loc>${base}/services/${slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
     );
   }
   for (const s of studies) {
@@ -86,6 +93,10 @@ export function sitemapPlugin(options: { siteUrl: string }): Plugin {
     import.meta.dirname,
     "src/data/cities.ts",
   );
+  const servicesFile = path.resolve(
+    import.meta.dirname,
+    "src/data/services.ts",
+  );
   const caseStudiesFile = path.resolve(
     import.meta.dirname,
     "src/data/caseStudies.ts",
@@ -99,7 +110,14 @@ export function sitemapPlugin(options: { siteUrl: string }): Plugin {
         const url = req.url.split("?")[0];
         if (url.endsWith("/sitemap.xml")) {
           res.setHeader("Content-Type", "application/xml; charset=utf-8");
-          res.end(buildSitemap(options.siteUrl, citiesFile, caseStudiesFile));
+          res.end(
+            buildSitemap(
+              options.siteUrl,
+              citiesFile,
+              servicesFile,
+              caseStudiesFile,
+            ),
+          );
           return;
         }
         next();
@@ -109,7 +127,12 @@ export function sitemapPlugin(options: { siteUrl: string }): Plugin {
       this.emitFile({
         type: "asset",
         fileName: "sitemap.xml",
-        source: buildSitemap(options.siteUrl, citiesFile, caseStudiesFile),
+        source: buildSitemap(
+          options.siteUrl,
+          citiesFile,
+          servicesFile,
+          caseStudiesFile,
+        ),
       });
     },
   };

@@ -41,12 +41,13 @@ export function Footer() {
           <div className="space-y-6">
             <h4 className="font-heading font-bold text-lg uppercase tracking-wider text-white">Services</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/80">
-              <li><Link href="/services" className="hover:text-white transition-colors">Commercial Roof Repair</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Full Roof Replacement</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Storm Damage & Hail Repair</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">TPO & EPDM Systems</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Metal Roofing Systems</Link></li>
-              <li><Link href="/services" className="hover:text-white transition-colors">Emergency Leak Repair</Link></li>
+              <li><Link href="/services/repair" className="hover:text-white transition-colors">Commercial Roof Repair</Link></li>
+              <li><Link href="/services/replacement" className="hover:text-white transition-colors">Full Roof Replacement</Link></li>
+              <li><Link href="/services/storm-damage" className="hover:text-white transition-colors">Storm Damage &amp; Hail Repair</Link></li>
+              <li><Link href="/services/tpo-epdm-pvc" className="hover:text-white transition-colors">TPO, EPDM &amp; PVC Systems</Link></li>
+              <li><Link href="/services/metal-roofing" className="hover:text-white transition-colors">Metal Roofing Systems</Link></li>
+              <li><Link href="/services/emergency-leak-repair" className="hover:text-white transition-colors">Emergency Leak Repair</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors font-semibold">All Services &rarr;</Link></li>
             </ul>
           </div>
 

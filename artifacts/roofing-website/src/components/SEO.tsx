@@ -5,12 +5,14 @@ type JsonLd = Record<string, any>;
 interface SEOProps {
   title: string;
   description: string;
+  canonical?: string;
   jsonLd?: JsonLd | JsonLd[];
 }
 
 const JSON_LD_ATTR = "data-seo-jsonld";
+const CANONICAL_ATTR = "data-seo-canonical";
 
-export function SEO({ title, description, jsonLd }: SEOProps) {
+export function SEO({ title, description, canonical, jsonLd }: SEOProps) {
   useEffect(() => {
     document.title = title;
 
@@ -21,6 +23,17 @@ export function SEO({ title, description, jsonLd }: SEOProps) {
       document.head.appendChild(metaDescription);
     }
     metaDescription.setAttribute("content", description);
+
+    document
+      .querySelectorAll(`link[rel="canonical"][${CANONICAL_ATTR}]`)
+      .forEach((el) => el.remove());
+    if (canonical) {
+      const link = document.createElement("link");
+      link.setAttribute("rel", "canonical");
+      link.setAttribute(CANONICAL_ATTR, "true");
+      link.setAttribute("href", canonical);
+      document.head.appendChild(link);
+    }
 
     document
       .querySelectorAll(`script[type="application/ld+json"][${JSON_LD_ATTR}]`)
@@ -36,7 +49,7 @@ export function SEO({ title, description, jsonLd }: SEOProps) {
         document.head.appendChild(script);
       }
     }
-  }, [title, description, jsonLd]);
+  }, [title, description, canonical, jsonLd]);
 
   return null;
 }

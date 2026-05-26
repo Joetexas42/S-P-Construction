@@ -1,288 +1,24 @@
-import { SEO } from "@/components/SEO";
-import { cities } from "@/data/cities";
+import { Link } from "wouter";
 import {
-  Wrench,
-  LayoutGrid,
-  Search,
-  Zap,
-  Activity,
-  Droplets,
-  ArrowUpToLine,
-  AlignHorizontalJustifyCenter,
-  Layers,
-  Box,
   CheckCircle2,
   Thermometer,
-  DollarSign,
   Shield,
-  Droplet,
-  Wind,
-  Settings,
-  Award,
   Phone,
-  FileCheck,
   HardHat,
   HelpCircle,
+  ArrowRight,
 } from "lucide-react";
-import { Link } from "wouter";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { cities } from "@/data/cities";
+import { services } from "@/data/services";
 
-type Pricing = {
-  display: string;
-  starting: number;
-  min: number;
-  max: number;
-  unit?: "sqft";
-};
+const SITE_ORIGIN = "https://lonestarroofing.com";
+const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
 
 export default function Services() {
-  const leadServices: {
-    id: string;
-    title: string;
-    icon: typeof Search;
-    problem: string;
-    included: string[];
-    why: string;
-    pricing: Pricing;
-  }[] = [
-    {
-      id: "inspection",
-      title: "Free Commercial Roof Inspections",
-      icon: Search,
-      pricing: {
-        display: "Free — $0 inspection, written report included",
-        starting: 0,
-        min: 0,
-        max: 0,
-      },
-      problem:
-        "Most commercial roof failures in North Texas start as small, invisible issues — hail bruising, loose flashing, clogged drains, or hairline membrane splits. By the time water reaches the ceiling tiles, damage is already widespread.",
-      included: [
-        "On-site walkthrough by a senior inspector (no salespeople)",
-        "Drone imagery & high-resolution photo documentation",
-        "Thermal imaging to locate trapped moisture",
-        "Core sampling on aging systems where appropriate",
-        "Written report with prioritized findings, photos, and transparent pricing",
-      ],
-      why:
-        "Inspections are 100% free, no pressure, no obligation. We tell you what's actually wrong — and what can wait.",
-    },
-    {
-      id: "repair",
-      title: "Commercial Roof Repair & Emergency Leak Response",
-      icon: Wrench,
-      pricing: {
-        display: "Starting at $750 · Typical range $750 – $15,000",
-        starting: 750,
-        min: 750,
-        max: 15000,
-      },
-      problem:
-        "A persistent leak doesn't just damage the roof — it ruins inventory, shuts down operations, and creates liability for slip-and-fall claims. Patch jobs from the wrong contractor often make the problem worse and void your warranty.",
-      included: [
-        "24/7 emergency dispatch across the DFW Metroplex",
-        "Root-cause leak diagnosis (not just sealing the symptom)",
-        "Manufacturer-approved repair materials for TPO, PVC, EPDM, and metal",
-        "Heat-welded membrane patches and proper flashing replacement",
-        "Documentation for your insurance carrier and warranty file",
-      ],
-      why:
-        "We diagnose what three other companies missed. Repairs are completed to manufacturer spec so your existing warranty stays intact.",
-    },
-    {
-      id: "installation",
-      title: "New Roof Installation & Full Replacement",
-      icon: LayoutGrid,
-      pricing: {
-        display: "Starting at $7 / sq ft · Typical range $7 – $14 / sq ft installed",
-        starting: 7,
-        min: 7,
-        max: 14,
-        unit: "sqft",
-      },
-      problem:
-        "A commercial reroof is a six- and seven-figure capital decision. The wrong system, wrong installer, or wrong attachment method can cost you decades of performance — and the failure usually doesn't show up until the warranty has lapsed.",
-      included: [
-        "System engineering matched to your building, code requirements, and budget",
-        "Full tear-off, deck inspection, and substrate repair as needed",
-        "Authorized installation of Firestone (Elevate), Mule-Hide, and Duro-Last systems",
-        "Heat-welded seams, mechanically attached or fully adhered per spec",
-        "Manufacturer NDL (No Dollar Limit) and labor warranties",
-      ],
-      why:
-        "We are an authorized installer for the brands we recommend. That means full manufacturer warranties, factory tech support, and a roof that performs as engineered.",
-    },
-  ];
-
-  const servicesList: {
-    id: string;
-    title: string;
-    icon: typeof LayoutGrid;
-    description: string;
-    features: string[];
-    pricing: Pricing;
-  }[] = [
-    {
-      id: "replacement",
-      title: "Full Roof Replacement",
-      icon: LayoutGrid,
-      pricing: {
-        display: "Starting at $7 / sq ft · Typical range $7 – $14 / sq ft installed",
-        starting: 7,
-        min: 7,
-        max: 14,
-        unit: "sqft",
-      },
-      description:
-        "Complete tear-offs and replacements engineered for longevity and minimal disruption to your daily operations.",
-      features: [
-        "Complete tear-offs",
-        "Deck replacement",
-        "System upgrades",
-        "Warranty-backed installation",
-      ],
-    },
-    {
-      id: "maintenance",
-      title: "Maintenance Programs",
-      icon: Activity,
-      pricing: {
-        display: "Starting at $0.08 / sq ft annually · Typical range $0.08 – $0.25 / sq ft per year",
-        starting: 0.08,
-        min: 0.08,
-        max: 0.25,
-        unit: "sqft",
-      },
-      description:
-        "Proactive care that extends the life of your roof and prevents catastrophic failures before they happen.",
-      features: [
-        "Bi-annual inspections",
-        "Debris removal",
-        "Drain clearing",
-        "Preventative sealing",
-      ],
-    },
-    {
-      id: "storm-damage",
-      title: "Storm Damage & Hail Repair",
-      icon: Zap,
-      pricing: {
-        display: "Starting at $1,500 · Typical range $1,500 – $50,000+ (most insurance-covered)",
-        starting: 1500,
-        min: 1500,
-        max: 50000,
-      },
-      description:
-        "Emergency weather recovery and complete insurance claims assistance to get your business back online.",
-      features: [
-        "Emergency tarping",
-        "Hail damage assessment",
-        "Wind uplift repair",
-        "Claims advocacy",
-      ],
-    },
-    {
-      id: "emergency",
-      title: "Emergency Leak Repair",
-      icon: Droplets,
-      pricing: {
-        display: "Starting at $750 · Typical range $750 – $5,000 per dispatch",
-        starting: 750,
-        min: 750,
-        max: 5000,
-      },
-      description:
-        "24/7 rapid response teams ready to deploy across the DFW Metroplex to mitigate water intrusion.",
-      features: [
-        "24/7 dispatch",
-        "Immediate mitigation",
-        "Water extraction",
-        "Temporary sealing",
-      ],
-    },
-    {
-      id: "coatings",
-      title: "Roof Coatings & Restoration",
-      icon: ArrowUpToLine,
-      pricing: {
-        display: "Starting at $2.50 / sq ft · Typical range $2.50 – $5.50 / sq ft installed",
-        starting: 2.5,
-        min: 2.5,
-        max: 5.5,
-        unit: "sqft",
-      },
-      description:
-        "Cost-effective fluid-applied systems that restore your roof's performance and improve energy efficiency.",
-      features: [
-        "Silicone coatings",
-        "Acrylic systems",
-        "Rust inhibition",
-        "Energy star rated",
-      ],
-    },
-    {
-      id: "flat-roofing",
-      title: "Flat / Low-Slope Roofing",
-      icon: AlignHorizontalJustifyCenter,
-      pricing: {
-        display: "Starting at $6 / sq ft · Typical range $6 – $12 / sq ft installed",
-        starting: 6,
-        min: 6,
-        max: 12,
-        unit: "sqft",
-      },
-      description:
-        "Specialized solutions for industrial and commercial flat roofs designed to handle heavy rooftop equipment. We work with Firestone, Mule-Hide, and Duro-Last PVC systems engineered for North Texas heat loads.",
-      features: [
-        "Built-up roofing (BUR)",
-        "Modified bitumen",
-        "Duro-Last PVC systems",
-        "Drainage optimization",
-      ],
-    },
-    {
-      id: "metal-roofing",
-      title: "Metal Roofing Systems",
-      icon: Layers,
-      pricing: {
-        display: "Starting at $9 / sq ft · Typical range $9 – $18 / sq ft installed",
-        starting: 9,
-        min: 9,
-        max: 18,
-        unit: "sqft",
-      },
-      description:
-        "Extremely durable standing seam and corrugated metal systems built to outlast traditional materials — backed by manufacturer warranties from leading brands.",
-      features: [
-        "Standing seam",
-        "R-panel",
-        "Retrofit framing",
-        "Custom fabrication",
-      ],
-    },
-    {
-      id: "tpo-epdm",
-      title: "TPO, EPDM & PVC Membrane Systems",
-      icon: Box,
-      pricing: {
-        display: "Starting at $6 / sq ft · Typical range $6 – $12 / sq ft installed",
-        starting: 6,
-        min: 6,
-        max: 12,
-        unit: "sqft",
-      },
-      description:
-        "High-performance single-ply membrane installation using Firestone, Mule-Hide, and Duro-Last PVC systems. We service, install, and maintain all major membrane brands to keep your manufacturer warranty intact.",
-      features: [
-        "Firestone TPO & EPDM",
-        "Mule-Hide membrane systems",
-        "Duro-Last PVC roofing",
-        "Heat-welded seams",
-        "Fully adhered & mechanically attached",
-        "High-reflectivity roofing",
-      ],
-    },
-  ];
+  const coreServices = services.filter((s) => s.category === "Core");
+  const systemServices = services.filter((s) => s.category === "System");
 
   const tpoBenefits = [
     {
@@ -328,41 +64,13 @@ export default function Services() {
   ];
 
   const comparisonRows: { label: string; tpo: string; pvc: string }[] = [
-    {
-      label: "Installed Cost",
-      tpo: "Lower cost per sq ft — the most affordable major single-ply system",
-      pvc: "Premium pricing, typically 20–40% higher than TPO",
-    },
-    {
-      label: "Chemical & Grease Resistance",
-      tpo: "Good — handles typical rooftop exposure",
-      pvc: "Excellent — resists oils, animal fats, and harsh chemicals (restaurants, food processing)",
-    },
-    {
-      label: "Seam Strength (Weldability)",
-      tpo: "Heat-welded seams; strong, but quality depends on installer skill and weld temperature",
-      pvc: "Heat-welded seams that re-weld easily for decades — easiest membrane to repair and modify",
-    },
-    {
-      label: "Typical Lifespan",
-      tpo: "20–25 years with quality install and maintenance",
-      pvc: "25–30+ years; long history of proven field performance",
-    },
-    {
-      label: "Manufacturer Warranty",
-      tpo: "Strong — up to 20–30 year NDL warranties from Firestone (Elevate) and Mule-Hide",
-      pvc: "Industry-leading — Duro-Last offers a full-system, no-dollar-limit warranty including consequential damages",
-    },
-    {
-      label: "Fire Performance",
-      tpo: "Good — Class A ratings available in most assemblies",
-      pvc: "Excellent — inherently fire-resistant, self-extinguishing",
-    },
-    {
-      label: "Best-Fit Buildings",
-      tpo: "Warehouses, distribution centers, retail, office, schools, churches — large flat roofs where energy efficiency and budget matter most",
-      pvc: "Restaurants, food processing, manufacturing with chemical exposure, hospitals, complex roofs with many penetrations",
-    },
+    { label: "Installed Cost", tpo: "Lower cost per sq ft — the most affordable major single-ply system", pvc: "Premium pricing, typically 20–40% higher than TPO" },
+    { label: "Chemical & Grease Resistance", tpo: "Good — handles typical rooftop exposure", pvc: "Excellent — resists oils, animal fats, and harsh chemicals (restaurants, food processing)" },
+    { label: "Seam Strength (Weldability)", tpo: "Heat-welded seams; strong, but quality depends on installer skill and weld temperature", pvc: "Heat-welded seams that re-weld easily for decades — easiest membrane to repair and modify" },
+    { label: "Typical Lifespan", tpo: "20–25 years with quality install and maintenance", pvc: "25–30+ years; long history of proven field performance" },
+    { label: "Manufacturer Warranty", tpo: "Strong — up to 20–30 year NDL warranties from Firestone (Elevate) and Mule-Hide", pvc: "Industry-leading — Duro-Last offers a full-system, no-dollar-limit warranty including consequential damages" },
+    { label: "Fire Performance", tpo: "Good — Class A ratings available in most assemblies", pvc: "Excellent — inherently fire-resistant, self-extinguishing" },
+    { label: "Best-Fit Buildings", tpo: "Warehouses, distribution centers, retail, office, schools, churches — large flat roofs where energy efficiency and budget matter most", pvc: "Restaurants, food processing, manufacturing with chemical exposure, hospitals, complex roofs with many penetrations" },
   ];
 
   const manufacturers = [
@@ -370,8 +78,7 @@ export default function Services() {
       name: "Firestone (Elevate)",
       tag: "TPO & EPDM Systems",
       logo: "/images/manufacturers/firestone-elevate.svg",
-      lede:
-        "The benchmark for single-ply performance in North America. Now branded Elevate, Firestone's UltraPly TPO and RubberGard EPDM lines are engineered for high wind uplift, hail resistance, and decades of reliable service.",
+      lede: "The benchmark for single-ply performance in North America. Now branded Elevate, Firestone's UltraPly TPO and RubberGard EPDM lines are engineered for high wind uplift, hail resistance, and decades of reliable service.",
       highlights: [
         "UltraPly TPO membranes available up to 80 mil for maximum puncture resistance",
         "Red Shield NDL (No Dollar Limit) warranties up to 30 years",
@@ -384,8 +91,7 @@ export default function Services() {
       name: "Mule-Hide",
       tag: "TPO, EPDM & Coatings",
       logo: "/images/manufacturers/mule-hide.svg",
-      lede:
-        "A contractor-favorite brand owned by ABC Supply. Mule-Hide's TPO and EPDM systems pair excellent membrane quality with strong dealer support, fast material availability across North Texas, and competitive warranty terms.",
+      lede: "A contractor-favorite brand owned by ABC Supply. Mule-Hide's TPO and EPDM systems pair excellent membrane quality with strong dealer support, fast material availability across North Texas, and competitive warranty terms.",
       highlights: [
         "Full line of TPO (45, 60, 80 mil) and EPDM membranes",
         "Total System warranties up to 30 years",
@@ -398,8 +104,7 @@ export default function Services() {
       name: "Duro-Last",
       tag: "Custom Prefabricated PVC",
       logo: "/images/manufacturers/duro-last.svg",
-      lede:
-        '"The World\'s Best Roof" tagline isn\'t marketing fluff — Duro-Last\'s factory-fabricated PVC membranes are custom-built to your roof\'s exact dimensions, including all penetrations and corners. That eliminates 80–85% of field seams, which is where commercial roofs almost always fail.',
+      lede: '"The World\'s Best Roof" tagline isn\'t marketing fluff — Duro-Last\'s factory-fabricated PVC membranes are custom-built to your roof\'s exact dimensions, including all penetrations and corners. That eliminates 80–85% of field seams, which is where commercial roofs almost always fail.',
       highlights: [
         "Factory-fabricated to your roof's exact specs — corners and curbs prewelded",
         "Highly resistant to chemicals, grease, and ponding water",
@@ -407,37 +112,6 @@ export default function Services() {
         "Industry-leading 15- and 20-year edge-to-edge NDL warranties including consequential damages",
       ],
       bestFor: "Restaurants, food processing, manufacturing, and any building with heavy chemical/grease exposure or many roof penetrations.",
-    },
-  ];
-
-  const inspectionSteps: { name: string; text: string }[] = [
-    {
-      name: "Schedule your free inspection",
-      text: "Call (972) 555-0100 or request an inspection online. We confirm a date that fits your operations — typically within 3–5 business days, same-week for active leaks — and coordinate roof access with your facility manager.",
-    },
-    {
-      name: "On-site walkthrough by a senior inspector",
-      text: "A senior inspector (never a commissioned salesperson) walks the entire roof, documents penetrations, flashings, drains, and seams, and flags any safety or code concerns before any pricing conversation begins.",
-    },
-    {
-      name: "Drone aerial imagery & photo documentation",
-      text: "We fly the roof with a high-resolution drone to capture overall condition, ponding patterns, and hail-impact mapping, then supplement with close-up photos of every defect for the written report.",
-    },
-    {
-      name: "Thermal imaging scan for trapped moisture",
-      text: "An infrared thermal scan identifies wet insulation and subsurface moisture that's invisible from the surface — so repairs target the real failure zones instead of just the visible symptoms.",
-    },
-    {
-      name: "Core sampling on aging systems",
-      text: "Where the membrane is near end-of-life or moisture is suspected, we cut small test cores, evaluate the insulation and deck condition, and patch each core to manufacturer spec the same day.",
-    },
-    {
-      name: "Written report with prioritized findings & transparent pricing",
-      text: "Within a few business days you receive a written report with annotated photos, thermal overlays, prioritized findings (urgent vs. monitor), and line-item pricing for any recommended work.",
-    },
-    {
-      name: "Findings review call — no pressure, no obligation",
-      text: "We walk you through the report by phone or in person, answer questions, and help you decide what to do now vs. defer. There is no obligation to hire us — many clients use our report to plan capital budgets.",
     },
   ];
 
@@ -458,33 +132,24 @@ export default function Services() {
         "Most DFW commercial hail claims take 30 to 90 days from initial inspection to roof completion, depending on carrier responsiveness, adjuster availability, and the scope of approved work. We document hail damage with drone imagery and thermal scans, prepare detailed Xactimate-aligned scopes, meet your adjuster on the roof, and advocate through supplements until your scope reflects the actual damage. Emergency tarping happens immediately so secondary water damage doesn't compound the claim.",
     },
     {
-      question: "How long does a commercial TPO or PVC roof last in the DFW climate?",
-      answer:
-        "In the North Texas climate — 100°F+ summers, hail, high winds, and freeze-thaw cycles — a properly installed 60- or 80-mil TPO roof typically lasts 20 to 25 years, and a PVC system like Duro-Last typically lasts 25 to 30+ years. Lifespan depends heavily on membrane thickness, attachment method, insulation quality, drainage design, and a consistent maintenance program. Roofs without bi-annual inspections and drain clearing routinely fail 5–10 years early.",
-    },
-    {
       question: "How much does a commercial roof replacement cost per square foot?",
       answer:
-        "Commercial reroof pricing in North Texas generally ranges from about $7 to $14 per square foot installed, depending on the membrane system (TPO, PVC, EPDM, or metal), insulation R-value, tear-off complexity, deck condition, roof penetrations, and warranty term. A 30,000 sq ft warehouse TPO recover may price very differently from a 30,000 sq ft restaurant PVC tear-off. We provide line-item pricing in every proposal so you can see exactly what drives the number.",
+        "Commercial reroof pricing in North Texas generally ranges from about $7 to $14 per square foot installed, depending on the membrane system (TPO, PVC, EPDM, or metal), insulation R-value, tear-off complexity, deck condition, roof penetrations, and warranty term. We provide line-item pricing in every proposal so you can see exactly what drives the number.",
     },
     {
       question: "Do you offer 24/7 emergency leak repair across the DFW Metroplex?",
       answer:
-        "Yes. We dispatch emergency leak response crews 24/7 across the entire DFW Metroplex, including Dallas, Fort Worth, Plano, Frisco, Arlington, Irving, McKinney, and surrounding cities. Initial response includes water mitigation, emergency tarping or temporary sealing, root-cause leak diagnosis, and documentation for your insurance carrier and warranty file. Permanent repairs use manufacturer-approved materials so your existing warranty stays intact.",
-    },
-    {
-      question: "Will a roof repair void my existing manufacturer warranty?",
-      answer:
-        "Only if it is done incorrectly. Most commercial roof warranties from Firestone (Elevate), Mule-Hide, and Duro-Last require repairs to be performed by an authorized installer using manufacturer-approved materials, methods, and accessories. We are an authorized installer for the brands we recommend, so repairs are completed to manufacturer spec, fully documented, and reported to the manufacturer when required — keeping every clause of your warranty intact.",
+        "Yes. We dispatch emergency leak response crews 24/7 across the entire DFW Metroplex, including Dallas, Fort Worth, Plano, Frisco, Arlington, Irving, McKinney, and surrounding cities. Initial response includes water mitigation, emergency tarping or temporary sealing, root-cause leak diagnosis, and documentation for your insurance carrier and warranty file.",
     },
     {
       question: "Are you an authorized installer for Firestone, Mule-Hide, and Duro-Last?",
       answer:
-        "Yes. We are an authorized installer and service partner for Firestone (Elevate) TPO and EPDM, Mule-Hide TPO/EPDM and coating systems, and Duro-Last custom-prefabricated PVC. Authorized status means we can issue full manufacturer NDL (No Dollar Limit) warranties — up to 30 years on Firestone Red Shield and edge-to-edge coverage on Duro-Last — and pull factory engineering support on complex assemblies.",
+        "Yes. We are an authorized installer and service partner for Firestone (Elevate) TPO and EPDM, Mule-Hide TPO/EPDM and coating systems, and Duro-Last custom-prefabricated PVC. Authorized status means we can issue full manufacturer NDL (No Dollar Limit) warranties.",
     },
   ];
 
-  const providerId = "https://lonestarroofing.com/#organization";
+  const canonical = `${SITE_ORIGIN}/services`;
+
   const countySet = new Set<string>();
   for (const c of cities) {
     for (const part of c.county.split(/\s*&\s*/)) {
@@ -510,89 +175,14 @@ export default function Services() {
     })),
   ];
 
-  const serviceEntries: {
-    id: string;
-    name: string;
-    serviceType: string;
-    description: string;
-    pricing: Pricing;
-  }[] = [
-    ...leadServices.map((s) => ({
-      id: s.id,
-      name: s.title,
-      serviceType: s.title,
-      description: s.problem,
-      pricing: s.pricing,
-    })),
-    ...servicesList.map((s) => ({
-      id: s.id,
-      name: s.title,
-      serviceType: s.title,
-      description: s.description,
-      pricing: s.pricing,
-    })),
-  ];
-
-  const buildOffer = (id: string, p: Pricing) => {
-    const url = `https://lonestarroofing.com/services#${id}`;
-    if (p.starting === 0 && p.max === 0) {
-      return {
-        "@type": "Offer",
-        "url": url,
-        "price": "0",
-        "priceCurrency": "USD",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "price": 0,
-          "priceCurrency": "USD",
-          "description": "Free commercial roof inspection with written report — no obligation.",
-        },
-        "availability": "https://schema.org/InStock",
-        "areaServed": areaServed,
-      };
-    }
-    const isUnit = p.unit === "sqft";
-    return {
-      "@type": "Offer",
-      "url": url,
-      "price": p.starting,
-      "priceCurrency": "USD",
-      "priceSpecification": isUnit
-        ? {
-            "@type": "UnitPriceSpecification",
-            "priceCurrency": "USD",
-            "price": p.starting,
-            "minPrice": p.min,
-            "maxPrice": p.max,
-            "referenceQuantity": {
-              "@type": "QuantitativeValue",
-              "value": 1,
-              "unitCode": "FTK",
-              "unitText": "square foot",
-            },
-            "description": p.display,
-          }
-        : {
-            "@type": "PriceSpecification",
-            "priceCurrency": "USD",
-            "price": p.starting,
-            "minPrice": p.min,
-            "maxPrice": p.max,
-            "description": p.display,
-          },
-      "availability": "https://schema.org/InStock",
-      "areaServed": areaServed,
-    };
-  };
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "RoofingContractor",
-        "@id": providerId,
+        "@id": PROVIDER_ID,
         "name": "Lone Star Commercial Roofing",
-        "image": "https://lonestarroofing.com/images/hero-bg.webp",
+        "image": `${SITE_ORIGIN}/images/hero-bg.webp`,
         "telephone": "(972) 555-0100",
         "email": "info@lonestarroofing.com",
         "address": {
@@ -603,55 +193,24 @@ export default function Services() {
         },
         "areaServed": areaServed,
       },
-      ...serviceEntries.map((s) => ({
-        "@type": "Service",
-        "@id": `https://lonestarroofing.com/services#${s.id}`,
-        "name": s.name,
-        "serviceType": s.serviceType,
-        "description": s.description,
-        "category": "Commercial Roofing",
-        "provider": { "@id": providerId },
-        "areaServed": areaServed,
-        "offers": buildOffer(s.id, s.pricing),
-      })),
       {
-        "@type": "HowTo",
-        "@id": "https://lonestarroofing.com/services#inspection-process",
-        "name": "How a Lone Star commercial roof inspection works",
-        "description":
-          "The step-by-step process Lone Star Commercial Roofing follows for a free commercial roof inspection in the DFW Metroplex — from scheduling through written report and review call.",
-        "totalTime": "P5D",
-        "estimatedCost": {
-          "@type": "MonetaryAmount",
-          "currency": "USD",
-          "value": "0",
-        },
-        "supply": [
-          { "@type": "HowToSupply", "name": "Building roof access" },
-        ],
-        "tool": [
-          { "@type": "HowToTool", "name": "High-resolution inspection drone" },
-          { "@type": "HowToTool", "name": "Infrared thermal imaging camera" },
-          { "@type": "HowToTool", "name": "Core sampling kit" },
-        ],
-        "step": inspectionSteps.map((s, i) => ({
-          "@type": "HowToStep",
+        "@type": "ItemList",
+        "@id": `${canonical}#service-list`,
+        "name": "Commercial Roofing Services",
+        "itemListElement": services.map((s, i) => ({
+          "@type": "ListItem",
           "position": i + 1,
-          "name": s.name,
-          "text": s.text,
-          "url": `https://lonestarroofing.com/services#inspection-step-${i + 1}`,
+          "url": `${SITE_ORIGIN}/services/${s.slug}`,
+          "name": s.title,
         })),
       },
       {
         "@type": "FAQPage",
-        "@id": "https://lonestarroofing.com/services#faq",
+        "@id": `${canonical}#faq`,
         "mainEntity": faqs.map((f) => ({
           "@type": "Question",
           "name": f.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": f.answer,
-          },
+          "acceptedAnswer": { "@type": "Answer", "text": f.answer },
         })),
       },
     ],
@@ -662,6 +221,7 @@ export default function Services() {
       <SEO
         title="Commercial Roofing Services | TPO, PVC & Metal | North Texas"
         description="Commercial flat roof specialists serving the DFW Metroplex: TPO, PVC, and EPDM single-ply membranes, metal roofing, inspections, repairs, and 24/7 emergency leak response. Authorized Firestone (Elevate), Mule-Hide, and Duro-Last installer."
+        canonical={canonical}
         jsonLd={jsonLd}
       />
 
@@ -676,19 +236,19 @@ export default function Services() {
               North Texas commercial flat-roof specialists. We engineer, install, and maintain high-performance TPO, PVC, EPDM, and metal roofing systems built for the DFW climate. Authorized installer and service partner for Firestone (Elevate), Mule-Hide, and Duro-Last PVC.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-sm">
-              <a href="#lead-services" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">Inspections · Repairs · Installs</a>
+              <a href="#core-services" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">Inspections · Repairs · Installs</a>
+              <a href="#all-services" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">All Services</a>
               <a href="#tpo-vs-pvc" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">TPO vs. PVC</a>
               <a href="#manufacturers" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">Firestone · Mule-Hide · Duro-Last</a>
-              <a href="#tpo-benefits" className="px-4 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold uppercase tracking-wider transition-colors">10 Benefits of TPO</a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Lead-focused: Inspections / Repairs / Installs */}
-      <section id="lead-services" className="py-24 bg-background">
+      {/* Core services */}
+      <section id="core-services" className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="max-w-3xl mx-auto text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Core Commercial Services</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               Inspections, Repairs &amp; Installations
@@ -698,179 +258,86 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="space-y-10">
-            {leadServices.map((svc) => (
-              <div
-                key={svc.id}
-                id={svc.id}
-                className="bg-card border border-border rounded-xl p-8 md:p-10 shadow-sm"
-                data-testid={`lead-service-${svc.id}`}
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  <div className="lg:col-span-4">
-                    <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5">
-                      <svc.icon className="h-7 w-7 text-secondary" />
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-4">
-                      {svc.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">{svc.problem}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {coreServices.map((svc) => {
+              const Icon = svc.icon;
+              return (
+                <Link
+                  key={svc.slug}
+                  href={`/services/${svc.slug}`}
+                  className="group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  data-testid={`core-service-${svc.slug}`}
+                >
+                  <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5">
+                    <Icon className="h-7 w-7 text-secondary" />
                   </div>
-
-                  <div className="lg:col-span-5">
-                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">What's Included</p>
-                    <ul className="space-y-3">
-                      {svc.included.map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 text-foreground">
-                          <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="lg:col-span-3 flex flex-col">
-                    <div
-                      className="bg-secondary/5 rounded-lg p-5 border border-secondary/30 mb-4"
-                      data-testid={`pricing-${svc.id}`}
-                    >
-                      <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 flex items-center gap-2">
-                        <DollarSign className="h-3.5 w-3.5" /> Pricing
-                      </p>
-                      <p className="text-sm font-semibold text-foreground leading-snug">{svc.pricing.display}</p>
-                    </div>
-                    <div className="bg-muted rounded-lg p-5 border border-border mb-5">
-                      <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Lone Star</p>
-                      <p className="text-sm text-foreground leading-relaxed">{svc.why}</p>
-                    </div>
-                    <div className="mt-auto flex flex-col gap-3">
-                      <Link href="/contact">
-                        <Button className="w-full font-bold uppercase tracking-wide" data-testid={`cta-${svc.id}-contact`}>
-                          Request {svc.id === "inspection" ? "Free Inspection" : svc.id === "repair" ? "Repair Quote" : "Install Quote"}
-                        </Button>
-                      </Link>
-                      <a href="tel:972-555-0100">
-                        <Button variant="outline" className="w-full font-bold uppercase tracking-wide gap-2" data-testid={`cta-${svc.id}-phone`}>
-                          <Phone className="h-4 w-4" />
-                          (972) 555-0100
-                        </Button>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* HowTo: Inspection process */}
-      <section id="inspection-process" className="py-24 bg-background border-t border-border">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Our Inspection Process</p>
-            <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
-              How a Lone Star Inspection Works
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Every free commercial roof inspection follows the same seven-step process — designed to give you an honest, documented picture of your roof's condition with zero pressure to hire us.
-            </p>
-          </div>
-
-          <ol className="max-w-4xl mx-auto space-y-5" data-testid="inspection-process-steps">
-            {inspectionSteps.map((step, i) => (
-              <li
-                key={i}
-                id={`inspection-step-${i + 1}`}
-                className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm flex gap-5 md:gap-7"
-                data-testid={`inspection-step-${i + 1}`}
-              >
-                <div className="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-secondary text-secondary-foreground flex items-center justify-center font-heading font-black text-xl md:text-2xl">
-                  {i + 1}
-                </div>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-heading font-bold uppercase tracking-tight text-foreground mb-2">
-                    {step.name}
+                  <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">
+                    {svc.shortTitle}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">{step.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <div className="mt-12 max-w-4xl mx-auto bg-muted border border-border rounded-xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-6 justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Ready to Start?</p>
-              <p className="text-lg text-foreground font-semibold">Free inspection, free report, no obligation.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/contact">
-                <Button className="font-bold uppercase tracking-wide w-full sm:w-auto" data-testid="cta-inspection-process-contact">
-                  Request Free Inspection
-                </Button>
-              </Link>
-              <a href="tel:972-555-0100">
-                <Button variant="outline" className="font-bold uppercase tracking-wide gap-2 w-full sm:w-auto" data-testid="cta-inspection-process-phone">
-                  <Phone className="h-4 w-4" />
-                  (972) 555-0100
-                </Button>
-              </a>
-            </div>
+                  <p className="text-muted-foreground leading-relaxed mb-5">{svc.tagline}</p>
+                  <ul className="space-y-2 mb-6">
+                    {svc.included.slice(0, 3).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                        <CheckCircle2 className="h-4 w-4 text-secondary shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="mt-auto text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Explore service <ArrowRight className="h-4 w-4" />
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Other Services Grid */}
-      <section className="py-24 bg-muted border-y border-border">
+      {/* All services grid */}
+      <section id="all-services" className="py-24 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Full Service Capability</p>
             <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
               Every Commercial Roofing System We Support
             </h2>
+            <p className="text-base text-muted-foreground leading-relaxed mt-5">
+              Each service has its own dedicated page with deeper detail, FAQs, and how we approach it.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-            {servicesList.map((service) => (
-              <div
-                key={service.id}
-                id={service.id}
-                className="bg-card border border-border p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow flex flex-col h-full"
-              >
-                <div className="flex items-start gap-6 mb-6">
-                  <div className="w-16 h-16 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
-                    <service.icon className="h-8 w-8 text-secondary" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-heading font-bold uppercase tracking-tight text-foreground mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                  </div>
-                </div>
-
-                <div
-                  className="mb-5 rounded-lg bg-secondary/5 border border-secondary/30 p-4"
-                  data-testid={`pricing-${service.id}`}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {systemServices.map((svc) => {
+              const Icon = svc.icon;
+              return (
+                <Link
+                  key={svc.slug}
+                  href={`/services/${svc.slug}`}
+                  className="group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  data-testid={`service-card-${svc.slug}`}
                 >
-                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-1 flex items-center gap-2">
-                    <DollarSign className="h-3.5 w-3.5" /> Pricing
-                  </p>
-                  <p className="text-sm font-semibold text-foreground leading-snug">{service.pricing.display}</p>
-                </div>
-
-                <div className="mt-auto pt-6 border-t border-border">
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm text-foreground font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
-                        {feature}
-                      </li>
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
+                      <Icon className="h-6 w-6 text-secondary" />
+                    </div>
+                    <h3 className="text-xl font-heading font-bold uppercase tracking-tight text-foreground leading-snug">
+                      {svc.shortTitle}
+                    </h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed text-sm mb-5">{svc.tagline}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-5">
+                    {svc.features.slice(0, 3).map((f) => (
+                      <span key={f} className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-secondary/10 text-secondary">
+                        {f}
+                      </span>
                     ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+                  </div>
+                  <span className="mt-auto text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Learn more <ArrowRight className="h-4 w-4" />
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -896,7 +363,7 @@ export default function Services() {
               <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">TPO Roofing</h3>
               <p className="text-base font-semibold text-secondary mb-3">Affordable, energy-efficient, and durable.</p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Thermoplastic Polyolefin (TPO) is the most widely installed single-ply system in commercial roofing today. Its white reflective surface combats the North Texas heat by deflecting solar radiation, reducing cooling loads and energy costs. Heat-welded seams create a watertight bond stronger than the membrane itself, and TPO's flexibility handles temperature swings from DFW's coldest winters to its brutal summers without cracking or splitting.
+                Thermoplastic Polyolefin (TPO) is the most widely installed single-ply system in commercial roofing today. Its white reflective surface combats the North Texas heat by deflecting solar radiation, reducing cooling loads and energy costs.
               </p>
               <a href="#tpo-benefits" className="text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 hover:gap-3 transition-all">
                 See 10 Benefits of TPO <span>&rarr;</span>
@@ -910,7 +377,7 @@ export default function Services() {
               <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">PVC Roofing</h3>
               <p className="text-base font-semibold text-secondary mb-3">Chemically resistant, fire-rated, premium performance.</p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Polyvinyl Chloride (PVC) membranes are the premium choice when chemical resistance, fire performance, or grease exposure are factors — common in restaurant groups, food processing plants, hospitals, and industrial facilities across the Metroplex. PVC offers exceptional durability and is the foundation of Duro-Last's industry-leading custom-fabricated systems.
+                Polyvinyl Chloride (PVC) membranes are the premium choice when chemical resistance, fire performance, or grease exposure are factors — common in restaurant groups, food processing plants, hospitals, and industrial facilities across the Metroplex.
               </p>
               <a href="#tpo-vs-pvc" className="text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 hover:gap-3 transition-all">
                 Compare TPO vs. PVC <span>&rarr;</span>
@@ -928,9 +395,6 @@ export default function Services() {
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               TPO vs. PVC — Which Single-Ply System Is Right for Your Building?
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Both TPO and PVC are excellent single-ply membranes — but they shine in different scenarios. Here's how they stack up on the factors that actually drive a North Texas commercial roof decision.
-            </p>
           </div>
 
           <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-sm" data-testid="tpo-vs-pvc-table">
@@ -944,10 +408,7 @@ export default function Services() {
               </thead>
               <tbody>
                 {comparisonRows.map((row, i) => (
-                  <tr
-                    key={row.label}
-                    className={`border-t border-border align-top ${i % 2 === 0 ? "bg-background" : "bg-card"}`}
-                  >
+                  <tr key={row.label} className={`border-t border-border align-top ${i % 2 === 0 ? "bg-background" : "bg-card"}`}>
                     <td className="p-5 font-heading font-bold uppercase text-sm tracking-tight text-foreground">{row.label}</td>
                     <td className="p-5 text-sm text-muted-foreground leading-relaxed">{row.tpo}</td>
                     <td className="p-5 text-sm text-muted-foreground leading-relaxed">{row.pvc}</td>
@@ -1058,7 +519,7 @@ export default function Services() {
               10 Benefits of TPO Roofing for North Texas Commercial Buildings
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              If your North Texas commercial building has a flat or low-slope roof, TPO is likely the most cost-effective and climate-appropriate system available today. Here's why property managers and building owners across DFW are choosing it.
+              If your North Texas commercial building has a flat or low-slope roof, TPO is likely the most cost-effective and climate-appropriate system available today.
             </p>
           </div>
 
@@ -1081,27 +542,6 @@ export default function Services() {
               </div>
             ))}
           </div>
-
-          <div className="mt-16 bg-primary rounded-2xl p-10 md:p-14 text-center">
-            <h3 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-white mb-4">
-              Ready to See If TPO Is Right for Your Building?
-            </h3>
-            <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
-              Our inspectors assess your current roof system, drainage, and load requirements — then give you an honest recommendation. Free of charge, no pressure.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/contact">
-                <Button size="lg" className="text-lg h-14 px-10 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white" data-testid="button-tpo-cta">
-                  Request Free Roof Assessment
-                </Button>
-              </Link>
-              <a href="tel:972-555-0100">
-                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 gap-2">
-                  <Phone className="h-5 w-5" /> (972) 555-0100
-                </Button>
-              </a>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1113,9 +553,6 @@ export default function Services() {
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               Commercial Roofing Questions, Answered
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Straight answers to the questions DFW property managers and building owners ask us most often — from TPO vs. PVC lifespan to hail claim timelines and warranty rules.
-            </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-5">
