@@ -314,6 +314,37 @@ export default function Services() {
     },
   ];
 
+  const inspectionSteps: { name: string; text: string }[] = [
+    {
+      name: "Schedule your free inspection",
+      text: "Call (972) 555-0100 or request an inspection online. We confirm a date that fits your operations — typically within 3–5 business days, same-week for active leaks — and coordinate roof access with your facility manager.",
+    },
+    {
+      name: "On-site walkthrough by a senior inspector",
+      text: "A senior inspector (never a commissioned salesperson) walks the entire roof, documents penetrations, flashings, drains, and seams, and flags any safety or code concerns before any pricing conversation begins.",
+    },
+    {
+      name: "Drone aerial imagery & photo documentation",
+      text: "We fly the roof with a high-resolution drone to capture overall condition, ponding patterns, and hail-impact mapping, then supplement with close-up photos of every defect for the written report.",
+    },
+    {
+      name: "Thermal imaging scan for trapped moisture",
+      text: "An infrared thermal scan identifies wet insulation and subsurface moisture that's invisible from the surface — so repairs target the real failure zones instead of just the visible symptoms.",
+    },
+    {
+      name: "Core sampling on aging systems",
+      text: "Where the membrane is near end-of-life or moisture is suspected, we cut small test cores, evaluate the insulation and deck condition, and patch each core to manufacturer spec the same day.",
+    },
+    {
+      name: "Written report with prioritized findings & transparent pricing",
+      text: "Within a few business days you receive a written report with annotated photos, thermal overlays, prioritized findings (urgent vs. monitor), and line-item pricing for any recommended work.",
+    },
+    {
+      name: "Findings review call — no pressure, no obligation",
+      text: "We walk you through the report by phone or in person, answer questions, and help you decide what to do now vs. defer. There is no obligation to hire us — many clients use our report to plan capital budgets.",
+    },
+  ];
+
   const faqs: { question: string; answer: string }[] = [
     {
       question: "What's the difference between TPO and PVC roofing, and which lasts longer?",
@@ -432,6 +463,34 @@ export default function Services() {
         "areaServed": areaServed,
       })),
       {
+        "@type": "HowTo",
+        "@id": "https://lonestarroofing.com/services#inspection-process",
+        "name": "How a Lone Star commercial roof inspection works",
+        "description":
+          "The step-by-step process Lone Star Commercial Roofing follows for a free commercial roof inspection in the DFW Metroplex — from scheduling through written report and review call.",
+        "totalTime": "P5D",
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "0",
+        },
+        "supply": [
+          { "@type": "HowToSupply", "name": "Building roof access" },
+        ],
+        "tool": [
+          { "@type": "HowToTool", "name": "High-resolution inspection drone" },
+          { "@type": "HowToTool", "name": "Infrared thermal imaging camera" },
+          { "@type": "HowToTool", "name": "Core sampling kit" },
+        ],
+        "step": inspectionSteps.map((s, i) => ({
+          "@type": "HowToStep",
+          "position": i + 1,
+          "name": s.name,
+          "text": s.text,
+          "url": `https://lonestarroofing.com/services#inspection-step-${i + 1}`,
+        })),
+      },
+      {
         "@type": "FAQPage",
         "@id": "https://lonestarroofing.com/services#faq",
         "mainEntity": faqs.map((f) => ({
@@ -540,6 +599,62 @@ export default function Services() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HowTo: Inspection process */}
+      <section id="inspection-process" className="py-24 bg-background border-t border-border">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-14">
+            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Our Inspection Process</p>
+            <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
+              How a Lone Star Inspection Works
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Every free commercial roof inspection follows the same seven-step process — designed to give you an honest, documented picture of your roof's condition with zero pressure to hire us.
+            </p>
+          </div>
+
+          <ol className="max-w-4xl mx-auto space-y-5" data-testid="inspection-process-steps">
+            {inspectionSteps.map((step, i) => (
+              <li
+                key={i}
+                id={`inspection-step-${i + 1}`}
+                className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm flex gap-5 md:gap-7"
+                data-testid={`inspection-step-${i + 1}`}
+              >
+                <div className="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-xl bg-secondary text-secondary-foreground flex items-center justify-center font-heading font-black text-xl md:text-2xl">
+                  {i + 1}
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-heading font-bold uppercase tracking-tight text-foreground mb-2">
+                    {step.name}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-12 max-w-4xl mx-auto bg-muted border border-border rounded-xl p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-4 md:gap-6 justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Ready to Start?</p>
+              <p className="text-lg text-foreground font-semibold">Free inspection, free report, no obligation.</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/contact">
+                <Button className="font-bold uppercase tracking-wide w-full sm:w-auto" data-testid="cta-inspection-process-contact">
+                  Request Free Inspection
+                </Button>
+              </Link>
+              <a href="tel:972-555-0100">
+                <Button variant="outline" className="font-bold uppercase tracking-wide gap-2 w-full sm:w-auto" data-testid="cta-inspection-process-phone">
+                  <Phone className="h-4 w-4" />
+                  (972) 555-0100
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
