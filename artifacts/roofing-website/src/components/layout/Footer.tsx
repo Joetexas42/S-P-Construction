@@ -82,7 +82,9 @@ export function Footer() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/60">
             <p>&copy; {new Date().getFullYear()} Scott Commercial Roofing. All rights reserved.</p>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
+              <Link href="/privacy-policy" className="hover:text-primary-foreground/90 transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-primary-foreground/90 transition-colors">Terms of Service</Link>
               <span className="flex items-center gap-1"><HardHat className="h-3 w-3" /> Licensed & Insured in Texas</span>
             </div>
           </div>

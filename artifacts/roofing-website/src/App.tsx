@@ -15,6 +15,8 @@ import CityPage from "@/pages/CityPage";
 import { cityBySlug } from "@/data/cities";
 import Contact from "@/pages/Contact";
 import Estimate from "@/pages/Estimate";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import Terms from "@/pages/Terms";
 import NotFound from "@/pages/not-found";
 
 function CityRoute({ params }: { params: { slug: string } }) {
@@ -47,6 +49,8 @@ function Router() {
         <Route path="/service-areas/:slug" component={CityRoute} />
         <Route path="/contact" component={Contact} />
         <Route path="/estimate" component={Estimate} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms" component={Terms} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
