@@ -1,9 +1,17 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import { CheckCircle2, Phone, HelpCircle, ArrowLeft, ArrowRight, DollarSign } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { ImageLightbox } from "@/components/ImageLightbox";
 import { services, type ServiceDetail as ServiceDetailType } from "@/data/services";
 import { cities } from "@/data/cities";
+
+interface ActiveImage {
+  base: string;
+  alt: string;
+  caption?: string;
+}
 
 interface ServiceDetailProps {
   service: ServiceDetailType;
@@ -122,6 +130,8 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
 
   const Icon = service.icon;
 
+  const [activeImage, setActiveImage] = useState<ActiveImage | null>(null);
+
   return (
     <>
       <SEO
@@ -188,7 +198,18 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             </div>
             </div>
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/20 aspect-[4/3]">
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveImage({
+                    base: service.heroImage.base,
+                    alt: service.heroImage.alt,
+                  })
+                }
+                aria-label={`View full-size image: ${service.heroImage.alt}`}
+                className="group relative block w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/20 aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
+                data-testid={`service-hero-image-button-${service.slug}`}
+              >
                 <img
                   src={`${service.heroImage.base}-800w.webp`}
                   srcSet={`${service.heroImage.base}-480w.webp 480w, ${service.heroImage.base}-800w.webp 800w, ${service.heroImage.base}-1280w.webp 1280w`}
@@ -199,10 +220,10 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   loading="eager"
                   decoding="async"
                   fetchPriority="high"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   data-testid={`service-hero-image-${service.slug}`}
                 />
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -277,7 +298,19 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                     <p className="text-muted-foreground leading-relaxed text-lg">{sec.body}</p>
                     {supporting && (
                       <figure className="mt-6">
-                        <div className="relative rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3]">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setActiveImage({
+                              base: supporting.base,
+                              alt: supporting.alt,
+                              caption: supporting.caption,
+                            })
+                          }
+                          aria-label={`View full-size image: ${supporting.alt}`}
+                          className="group relative block w-full rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                          data-testid={`service-supporting-image-button-${service.slug}`}
+                        >
                           <img
                             src={`${supporting.base}-800w.webp`}
                             srcSet={`${supporting.base}-480w.webp 480w, ${supporting.base}-800w.webp 800w, ${supporting.base}-1280w.webp 1280w`}
@@ -287,10 +320,10 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                             height={960}
                             loading="lazy"
                             decoding="async"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                             data-testid={`service-supporting-image-${service.slug}`}
                           />
-                        </div>
+                        </button>
                         <figcaption className="mt-3 text-sm text-muted-foreground italic leading-relaxed">
                           {supporting.caption}
                         </figcaption>
@@ -415,6 +448,14 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
           </div>
         </div>
       </section>
+
+      <ImageLightbox
+        open={activeImage !== null}
+        imageBase={activeImage?.base ?? null}
+        alt={activeImage?.alt ?? ""}
+        caption={activeImage?.caption}
+        onClose={() => setActiveImage(null)}
+      />
     </>
   );
 }
