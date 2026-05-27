@@ -83,7 +83,7 @@ export default function Home() {
             src="/images/hero-bg.webp"
             srcSet={buildImageSrcSet("/images/hero-bg.webp")}
             sizes={SIZES_FULL_VIEWPORT}
-            alt="Massive commercial flat roof on a warehouse in North Texas during sunset"
+            alt="Aerial drone view of a vast commercial flat roof in North Texas at golden hour, with the Dallas skyline silhouetted on the horizon"
             width={1920}
             height={1080}
             fetchPriority="high"

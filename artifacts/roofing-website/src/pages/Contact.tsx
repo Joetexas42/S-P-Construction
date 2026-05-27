@@ -12,13 +12,33 @@ export default function Contact() {
         description="Contact Lone Star Commercial Roofing for a free inspection or emergency leak repair in North Texas. Call (972) 555-0100."
       />
       
-      {/* Page Header */}
-      <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
-        <div className="container mx-auto px-4 md:px-6">
+      {/* Page Header - Photo Hero */}
+      <section className="relative min-h-[50vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/contact-hero.webp"
+            srcSet="/images/contact-hero-480w.webp 480w, /images/contact-hero-800w.webp 800w, /images/contact-hero-1280w.webp 1280w"
+            sizes="100vw"
+            alt="Lone Star Commercial Roofing foreman reviewing a roof inspection report with a North Texas property manager on a commercial rooftop"
+            width={1280}
+            height={720}
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/45 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent z-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background z-20" />
+        </div>
+        <div className="container relative z-30 mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">Get a Quote</h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed">
-              Request your free, comprehensive roof inspection. Our experts provide honest assessments and transparent pricing.
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-secondary/60 mb-6 backdrop-blur-sm shadow-lg">
+              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+              <span className="text-sm font-bold uppercase tracking-wider text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.6)]">Free Inspection · No Obligation</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">Honest Answers.<br className="hidden md:block" /> On Your Roof.</h1>
+            <p className="text-xl text-white font-medium leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
+              Request your free, comprehensive roof inspection. Our senior inspectors provide transparent assessments and clear pricing — on your roof, in one visit.
             </p>
           </div>
         </div>

@@ -554,7 +554,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Start Storm Claim Help",
     heroImage: {
       base: "/images/services/storm-damage",
-      alt: "Hail damage on a commercial roof membrane after a North Texas storm",
+      alt: "A massive Texas supercell thunderstorm approaching a large commercial warehouse in the North Texas plains",
     },
     supportingImages: [
       {
@@ -642,7 +642,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Call Emergency Line",
     heroImage: {
       base: "/images/services/emergency-leak-repair",
-      alt: "Emergency tarping and leak mitigation on a commercial roof at night",
+      alt: "Lone Star Commercial Roofing crew in high-visibility gear working by headlamp on a wet commercial rooftop during a night emergency response",
     },
     supportingImages: [
       {
@@ -863,7 +863,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Get a Metal Roof Quote",
     heroImage: {
       base: "/images/services/metal-roofing",
-      alt: "Standing seam metal roofing system on a commercial building",
+      alt: "Low-angle architectural view of a freshly installed standing-seam metal roof on a North Texas commercial building against a deep blue sky",
     },
     supportingImages: [
       {
@@ -944,7 +944,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Get a Membrane System Quote",
     heroImage: {
       base: "/images/services/tpo-epdm-pvc",
-      alt: "Heat-welded seam on a white TPO single-ply membrane commercial roof",
+      alt: "Two commercial roofing crew members heat-welding a TPO membrane seam on a large flat commercial rooftop in North Texas",
     },
     supportingImages: [
       {
