@@ -2,7 +2,8 @@ import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2 } from "lucide-react";
+import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2, ArrowRight } from "lucide-react";
+import { SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
 import { ContactForm } from "@/components/ContactForm";
 import { ProjectLightbox } from "@/components/ProjectLightbox";
 import { caseStudies } from "@/data/caseStudies";
@@ -488,6 +489,38 @@ export default function CityPage({ city }: CityPageProps) {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Service-city landing page links */}
+          <div className="mb-16">
+            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local Expertise</p>
+            <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+              {city.name} Service Pages
+            </h2>
+            <p className="text-muted-foreground mb-8">
+              Detailed information about each of our most-requested services in {city.name} — local building context, weather factors, and {city.name}-specific answers.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair"] as const).map((svcSlug) => (
+                <Link
+                  key={svcSlug}
+                  href={`/service-areas/${city.slug}/${svcSlug}`}
+                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  data-testid={`city-service-page-link-${city.slug}-${svcSlug}`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{city.name}, TX</p>
+                  <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-2 leading-snug group-hover:text-secondary transition-colors">
+                    {SERVICE_CITY_SERVICE_LABELS[svcSlug]}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3 flex-1">
+                    {SERVICE_CITY_SERVICE_SHORT[svcSlug]} services specific to {city.name} properties and building types.
+                  </p>
+                  <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Learn more <ArrowRight className="h-4 w-4" />
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Contact CTA */}

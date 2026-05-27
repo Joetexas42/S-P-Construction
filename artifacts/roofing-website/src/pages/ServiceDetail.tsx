@@ -7,6 +7,7 @@ import { ImageLightbox } from "@/components/ImageLightbox";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { services, type ServiceDetail as ServiceDetailType } from "@/data/services";
 import { cities } from "@/data/cities";
+import { SERVICE_CITY_SLUGS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
 
 interface ActiveImage {
   base: string;
@@ -390,6 +391,44 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                     <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                   </div>
                 </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* DFW Cities We Serve — only shown for the 4 service-city services */}
+      {SERVICE_CITY_SLUGS.includes(service.slug as (typeof SERVICE_CITY_SLUGS)[number]) && (
+        <section className="py-20 bg-background border-b border-border">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local SEO Pages</p>
+              <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
+                DFW Cities We Serve
+              </h2>
+              <p className="text-muted-foreground mt-4">
+                We provide {SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle} across the entire DFW Metroplex. Select your city for local building context, weather information, and city-specific answers.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {cities.map((city) => (
+                <Link
+                  key={city.slug}
+                  href={`/service-areas/${city.slug}/${service.slug}`}
+                  className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  data-testid={`service-city-link-${service.slug}-${city.slug}`}
+                >
+                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{city.county}</p>
+                  <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-2 leading-snug group-hover:text-secondary transition-colors">
+                    {SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle} in {city.name}, TX
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                    {city.intro.split(".")[0].trim()}.
+                  </p>
+                  <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    <ArrowRight className="h-4 w-4" /> View {city.name} page
+                  </span>
+                </Link>
               ))}
             </div>
           </div>

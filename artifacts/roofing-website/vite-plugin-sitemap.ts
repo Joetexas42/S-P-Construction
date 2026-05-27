@@ -50,6 +50,13 @@ function readCaseStudies(
   return out;
 }
 
+const SERVICE_CITY_SERVICE_SLUGS = [
+  "repair",
+  "replacement",
+  "tpo-epdm-pvc",
+  "emergency-leak-repair",
+];
+
 function buildSitemap(
   siteUrl: string,
   citiesFile: string,
@@ -77,6 +84,13 @@ function buildSitemap(
     urls.push(
       `  <url>\n    <loc>${base}/services/${slug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
     );
+  }
+  for (const citySlug of citySlugs) {
+    for (const serviceSlug of SERVICE_CITY_SERVICE_SLUGS) {
+      urls.push(
+        `  <url>\n    <loc>${base}/service-areas/${citySlug}/${serviceSlug}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>`,
+      );
+    }
   }
   for (const s of studies) {
     const lastmod = s.lastmod ?? today;
