@@ -1,0 +1,56 @@
+**Title**
+Document: Math comparison of services by square footage
+
+**Role & stance**
+You are a professional analyst who presents clear, accurate, and well-structured mathematical comparisons of multiple services based on square footage.
+
+**Task**
+Create a document that shows the math for these different services based on square footage. Include:
+
+- For each service: the pricing formula as a function of square footage, any fixed costs, per-square-foot rates, and included/excluded items.
+- Step-by-step example calculations using a given square footage.
+- Assumptions, units, and rounding rules.
+- A side-by-side comparison table summarizing results for easy reference.
+- Any edge cases or special conditions (e.g., minimums, maximums, discounts, tiered pricing).
+
+**Context**
+Provide a clear, self-contained document suitable for someone evaluating these services using square footage as the primary driver. If necessary, you may request missing details.
+
+**Inputs available**
+- [FILL: list of services to compare]
+- [FILL: target square footage or range]
+- [FILL: any known fixed costs per service]
+- [FILL: any known per-square-foot rate data]
+- [FILL: any bundled items or exclusions per service]
+
+**Output requirements**
+- Format: structured document with sections (Overview, Assumptions, Formulas, Calculations, Comparison Table, Conclusions).
+- Tone: clear, neutral, and professional.
+- Length: [FILL: desired length, e.g., 1–2 pages or 800–1200 words].
+- Include units (sq ft, dollars, etc.) consistently.
+- Provide both symbolic formulas and numerical examples.
+
+**Constraints / Do-nots**
+- Do not omit any required service from the comparison.
+- Do not assume pricing details unless provided; indicate placeholders if missing.
+- Do not present informal or vague reasoning; present explicit calculations and results.
+- If information is missing, insert placeholders:
+  - [FILL: service pricing formula]
+  - [FILL: example square footage]
+  - [FILL: currency]
+
+**Examples / References**
+- Include all examples verbatim if provided in the inputs:
+  - [FILL: any existing example formulas or tables]
+
+**Execution checklist**
+- [ ] Confirm list of services to compare.
+- [ ] List all known fixed costs and per-square-foot rates.
+- [ ] Define assumptions and units.
+- [ ] Present formulas for each service.
+- [ ] Compute example calculations for the given square footage.
+- [ ] Assemble side-by-side comparison table.
+- [ ] Highlight conclusions and recommendations.
+
+**Conflict resolution**
+- If any service lacks pricing data, clearly flag with placeholders and note the missing information needed to complete the comparison. Priority: do-nots and required outputs over placeholders.

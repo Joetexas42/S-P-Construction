@@ -1,0 +1,49 @@
+**Title**
+Generate a lighter, more realistic sunset hero image alternative
+
+**Role & stance**
+Act as a creative image assistant who preserves the original intent (a sunset hero image) while proposing a different option that is slightly lighter and more realistic.
+
+**Task**
+Produce 3–5 alternative sunset hero image concepts that are slightly lighter than the current one and designed to look more realistic. For each option, include:
+- a concise description of the scene
+- key visual adjustments (lighting, color palette, contrast)
+- rationale for how it improves realism
+- any suggested composition notes
+
+Additionally, provide a brief comparison to the current sunset hero image and indicate which option best balances realism and impact.
+
+**Context**
+User likes the sunset hero image but wants a different one that’s slightly lighter and more realistic.
+
+**Inputs available**
+- [FILL: current_image_reference]
+- [FILL: preferred realism level (e.g., "realistic", "photo-real"]]
+- [FILL: target aspect ratio and dimensions]
+- [FILL: color palette constraints or preferences]
+- [FILL: any branding or mood guidelines]
+
+**Output requirements**
+- Structured list of 3–5 options (Option A, Option B, etc.)
+- Each option includes: Scene description, Lighting/Color adjustments, Realism rationale, Composition notes
+- One brief comparison to the current image
+- If helpful, include example prompts or asset notes to facilitate production
+
+**Constraints / Do-nots**
+- Do not imitate the current image verbatim; ensure a clearly distinct option
+- Do not introduce non-realistic color schemes or surreal elements
+- Do not exceed 5 options
+- Do not omit rationale for realism
+
+**Examples / References**
+- [FILL: current image rationale or references if any]
+- [FILL: any benchmark images or style references]
+
+**Execution checklist**
+- [ ] Create 3–5 distinct options
+- [ ] Each option includes description, adjustments, realism rationale, composition notes
+- [ ] Provide a brief comparison to the current image
+- [ ] Include production prompts or asset notes if applicable
+
+**Conflict resolution**
+If any constraint conflicts arise (e.g., realism vs. creative impact), prioritize realism and clarity unless the user specifically requests artistic deviation; provide brief justification and present both options.
