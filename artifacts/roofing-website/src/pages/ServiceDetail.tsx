@@ -286,6 +286,9 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 const supporting = service.supportingImages.find(
                   (img) => img.sectionHeading === sec.heading,
                 );
+                const pair = service.beforeAfterPairs?.find(
+                  (p) => p.sectionHeading === sec.heading,
+                );
                 return (
                   <article
                     key={sec.heading}
@@ -326,6 +329,54 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                         </button>
                         <figcaption className="mt-3 text-sm text-muted-foreground italic leading-relaxed">
                           {supporting.caption}
+                        </figcaption>
+                      </figure>
+                    )}
+                    {pair && (
+                      <figure
+                        className="mt-6"
+                        data-testid={`service-before-after-pair-${service.slug}`}
+                      >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {(["before", "after"] as const).map((kind) => {
+                            const img = pair[kind];
+                            return (
+                              <div key={kind} className="relative">
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setActiveImage({
+                                      base: img.base,
+                                      alt: img.alt,
+                                      caption: pair.caption,
+                                    })
+                                  }
+                                  aria-label={`View full-size ${kind} image: ${img.alt}`}
+                                  className="group relative block w-full rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
+                                  data-testid={`service-before-after-${kind}-button-${service.slug}`}
+                                >
+                                  <img
+                                    src={`${img.base}-800w.webp`}
+                                    srcSet={`${img.base}-480w.webp 480w, ${img.base}-800w.webp 800w, ${img.base}-1280w.webp 1280w`}
+                                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 100vw"
+                                    alt={img.alt}
+                                    width={1280}
+                                    height={960}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                                    data-testid={`service-before-after-${kind}-image-${service.slug}`}
+                                  />
+                                  <span className="absolute top-3 left-3 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md bg-primary/85 text-primary-foreground backdrop-blur-sm">
+                                    {kind === "before" ? "Before" : "After"}
+                                  </span>
+                                </button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <figcaption className="mt-3 text-sm text-muted-foreground italic leading-relaxed">
+                          {pair.caption}
                         </figcaption>
                       </figure>
                     )}

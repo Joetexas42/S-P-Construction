@@ -24,6 +24,18 @@ export interface ServiceSupportingImage {
   sectionHeading: string;
 }
 
+export interface ServiceBeforeAfterImage {
+  base: string;
+  alt: string;
+}
+
+export interface ServiceBeforeAfterPair {
+  sectionHeading: string;
+  caption: string;
+  before: ServiceBeforeAfterImage;
+  after: ServiceBeforeAfterImage;
+}
+
 export interface ServiceFAQ {
   question: string;
   answer: string;
@@ -61,6 +73,7 @@ export interface ServiceDetail {
   ctaPrimary: string;
   heroImage: ServiceHeroImage;
   supportingImages: ServiceSupportingImage[];
+  beforeAfterPairs?: ServiceBeforeAfterPair[];
 }
 
 export const services: ServiceDetail[] = [
@@ -226,6 +239,20 @@ export const services: ServiceDetail[] = [
         sectionHeading: "Emergency tarping and water mitigation",
       },
     ],
+    beforeAfterPairs: [
+      {
+        sectionHeading: "Root-cause leak diagnosis, not symptom chasing",
+        caption: "Same failed edge-metal flashing before and after a root-cause repair — rusted, split, and leaking on the left; cleanly re-flashed and heat-welded to manufacturer spec on the right.",
+        before: {
+          base: "/images/services/repair-before-1",
+          alt: "Rusted commercial roof edge metal with a split seam and dark water staining streaking across weathered grey TPO membrane",
+        },
+        after: {
+          base: "/images/services/repair-after-1",
+          alt: "Same commercial roof corner after repair with new galvanized edge metal and a clean heat-welded white TPO patch sealing the previous failure point",
+        },
+      },
+    ],
   },
   {
     slug: "installation",
@@ -381,6 +408,20 @@ export const services: ServiceDetail[] = [
         sectionHeading: "Phased work for occupied buildings",
       },
     ],
+    beforeAfterPairs: [
+      {
+        sectionHeading: "Tear-off vs. recover — how we decide",
+        caption: "Same commercial warehouse roof before and after a full tear-off and replacement — cracked, ponding, end-of-life membrane on the left; new white TPO with clean drainage and re-flashed HVAC curbs on the right.",
+        before: {
+          base: "/images/services/replacement-before-1",
+          alt: "Aerial view of an aging commercial flat roof with cracked dark grey membrane, ponding water, and rust-stained drains around rooftop HVAC units",
+        },
+        after: {
+          base: "/images/services/replacement-after-1",
+          alt: "Aerial view of the same commercial warehouse roof after full replacement with bright white TPO single-ply membrane in clean parallel rows and freshly re-flashed HVAC curbs",
+        },
+      },
+    ],
   },
   {
     slug: "maintenance",
@@ -529,6 +570,20 @@ export const services: ServiceDetail[] = [
         sectionHeading: "Meeting your adjuster on the roof",
       },
     ],
+    beforeAfterPairs: [
+      {
+        sectionHeading: "Supplement work until the scope is right",
+        caption: "Same section of commercial roof before and after a fully scoped hail claim — fractured impacts and granule loss across the membrane on the left; brand new TPO with fresh seam and pipe boot on the right.",
+        before: {
+          base: "/images/services/storm-damage-before-1",
+          alt: "Close-up of white TPO commercial roof membrane covered in dark circular hail impact bruises and granule loss with a measuring square set on the surface for scale",
+        },
+        after: {
+          base: "/images/services/storm-damage-after-1",
+          alt: "Close-up of the same commercial roof section after hail claim restoration with brand new bright white TPO membrane, a fresh heat-welded seam, and a new pipe boot flashing",
+        },
+      },
+    ],
   },
   {
     slug: "emergency-leak-repair",
@@ -664,6 +719,20 @@ export const services: ServiceDetail[] = [
         alt: "Roller applying bright white silicone coating over a weathered grey commercial roof, with a clear line between coated and uncoated areas",
         caption: "A fluid-applied silicone restoration over a sound substrate can deliver another 10–15 years of service.",
         sectionHeading: "Silicone vs. acrylic vs. hybrid",
+      },
+    ],
+    beforeAfterPairs: [
+      {
+        sectionHeading: "When a coating is the right move",
+        caption: "Same commercial flat roof before and after a fluid-applied silicone restoration — sun-faded, chalky, oxidized membrane on the left; uniform reflective white coating with reinforced curb detailing on the right.",
+        before: {
+          base: "/images/services/coatings-restoration-before-1",
+          alt: "Weathered commercial flat roof with sun-faded oxidized grey single-ply membrane, chalky surface, and minor cracking before coating restoration",
+        },
+        after: {
+          base: "/images/services/coatings-restoration-after-1",
+          alt: "Same commercial flat roof after fluid-applied silicone coating with a uniform bright reflective white surface and reinforced detailing around the HVAC curb",
+        },
       },
     ],
   },

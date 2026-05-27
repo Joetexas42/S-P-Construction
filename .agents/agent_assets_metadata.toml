@@ -294,6 +294,54 @@ uri = "file://attached_assets/generated_images/tpo-epdm-pvc-detail-2.png"
 type = "image"
 title = "white TPO warehouse roof aerial"
 
+[[generated]]
+id = "LTbfK1C2LKsOV7t-O24VF"
+uri = "file://artifacts/roofing-website/public/images/services/repair-before-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "3-4T5e2znMGKmzi9uKiua"
+uri = "file://artifacts/roofing-website/public/images/services/repair-after-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xvGhGkkBaMIxma3U86MaT"
+uri = "file://artifacts/roofing-website/public/images/services/replacement-before-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "jZuVqXdt7dwiU9abNJ2no"
+uri = "file://artifacts/roofing-website/public/images/services/replacement-after-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2_O5tkCwiKxZUM52hnFZI"
+uri = "file://artifacts/roofing-website/public/images/services/storm-damage-before-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "Hf1ksyWRarE8XAEq3elVF"
+uri = "file://artifacts/roofing-website/public/images/services/storm-damage-after-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "2E9HWdNf3R2SU14DI8vyD"
+uri = "file://artifacts/roofing-website/public/images/services/coatings-restoration-before-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "UKEUuRFqVj6CVUweVA3kS"
+uri = "file://artifacts/roofing-website/public/images/services/coatings-restoration-after-1.png"
+type = "image"
+title = "generated_image"
+
 [[outputs]]
 id = "ps6I91K20mnwCeqf3cTt5"
 uri = "file://attached_assets/stock_images/service-inspection.jpg"
