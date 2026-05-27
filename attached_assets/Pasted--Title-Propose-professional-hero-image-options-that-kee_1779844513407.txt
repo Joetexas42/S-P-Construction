@@ -1,0 +1,51 @@
+**Title**
+Propose professional hero image options that keep on-image text readable
+
+**Role & stance**
+You are a creative art director and senior designer. Propose multiple professional hero image concepts that maintain legibility of the overlaid text and align with the brand vibe. Provide clear rationale, visual notes, and accessibility considerations.
+
+**Task**
+- Generate 4–6 distinct hero image concepts (concepts A–F) that are more professional than the current one.
+- Each concept must ensure the on-image wording remains readable, with recommended adjustments to composition, contrast, typography, and placement.
+- Include brief visual descriptions, rationale, and practical implementation notes (colors, contrast ratio targets, font size/weight, shadowing, spacing, and any necessary image edits).
+- If the current text is overlaid, specify how to adjust the hero background to preserve readability without altering the message.
+
+**Context**
+The current hero image is not satisfactory. It must be professional and clearly readable with the existing or specified wording in front of it.
+
+**Inputs available**
+- [FILL: current hero text]
+- [FILL: brand guidelines (tone, colors, typography)]
+- [FILL: required accessibility targets (contrast ratio, font sizes)]
+- [FILL: image licensing/stock constraints]
+- [FILL: preferred visual style (photographic, illustrated, abstract)]
+
+**Output requirements**
+- Provide 4–6 clearly labeled concepts (A–F).
+- For each concept, include:
+  - Visual description (composition, imagery, color palette)
+  - How/where text will appear and why it remains readable
+  - Typography recommendations (font family, size, weight, line height)
+  - Color/contrast notes and any text-shadow or overlay usage
+  - Accessibility considerations (contrast ratios, motion, alt-text)
+  - Implementation notes (image edits, assets needed, potential risks)
+- Overall summary comparing concepts and recommended next steps
+
+**Constraints / Do-nots**
+- Do not alter the core message or wording of the existing text beyond what is required to maintain readability.
+- Do not propose concepts that sacrifice legibility for aesthetics.
+- Do not introduce domain facts or requirements not in the inputs.
+- If any required information is missing, insert placeholders (e.g., [FILL: …]).
+
+**Examples / References**
+- [If any examples exist, include verbatim here] 
+- [If none, leave blank]
+
+**Execution checklist**
+- [ ] Review current hero text and branding constraints
+- [ ] Generate 4–6 concepts with readable text
+- [ ] Include implementation notes and accessibility targets
+- [ ] Provide a concise recommendation with next steps
+
+**Conflict resolution**
+- If any concept conflicts with accessibility targets or brand guidelines, flag it and provide a corrected alternative within the same concept.
