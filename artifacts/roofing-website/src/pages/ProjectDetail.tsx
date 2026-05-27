@@ -167,6 +167,49 @@ export default function ProjectDetail({
             </DetailSection>
             <DetailSection title="The Outcome">{study.outcome}</DetailSection>
 
+            {study.beforeAfter && (
+              <figure
+                className="mb-10"
+                data-testid={`project-before-after-pair-${study.slug}`}
+              >
+                <h2 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">
+                  Before &amp; After
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {(["before", "after"] as const).map((kind) => {
+                    const img = study.beforeAfter![kind];
+                    return (
+                      <div key={kind} className="relative">
+                        <div
+                          className="relative block w-full rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3]"
+                          data-testid={`project-before-after-${kind}-${study.slug}`}
+                        >
+                          <img
+                            src={`${img.base}-800w.webp`}
+                            srcSet={`${img.base}-480w.webp 480w, ${img.base}-800w.webp 800w, ${img.base}-1280w.webp 1280w`}
+                            sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 100vw"
+                            alt={img.alt}
+                            width={1280}
+                            height={960}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-full object-cover"
+                            data-testid={`project-before-after-${kind}-image-${study.slug}`}
+                          />
+                          <span className="absolute top-3 left-3 text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md bg-primary/85 text-primary-foreground backdrop-blur-sm">
+                            {kind === "before" ? "Before" : "After"}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <figcaption className="mt-3 text-sm text-muted-foreground italic leading-relaxed">
+                  {study.beforeAfter.caption}
+                </figcaption>
+              </figure>
+            )}
+
             <div className="mb-10">
               <h2 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">
                 Project Highlights

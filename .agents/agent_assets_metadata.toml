@@ -342,6 +342,78 @@ uri = "file://artifacts/roofing-website/public/images/services/coatings-restorat
 type = "image"
 title = "generated_image"
 
+[[generated]]
+id = "VJZLj7kNqWZHIzsDSqqpe"
+uri = "file://artifacts/roofing-website/public/images/projects/frisco-retail-tpo-replacement-before.png"
+type = "image"
+title = "frisco-retail-tpo-replacement before"
+
+[[generated]]
+id = "t7AFTrl3QqgWxredMkYeC"
+uri = "file://artifacts/roofing-website/public/images/projects/frisco-retail-tpo-replacement-after.png"
+type = "image"
+title = "frisco-retail-tpo-replacement after"
+
+[[generated]]
+id = "xTFbMUFZRrh9jkOzgXOzu"
+uri = "file://artifacts/roofing-website/public/images/projects/fort-worth-industrial-standing-seam-before.png"
+type = "image"
+title = "fort-worth-industrial-standing-seam before"
+
+[[generated]]
+id = "5WHY6xYQhAwScaHQ_UUhu"
+uri = "file://artifacts/roofing-website/public/images/projects/fort-worth-industrial-standing-seam-after.png"
+type = "image"
+title = "fort-worth-industrial-standing-seam after"
+
+[[generated]]
+id = "9m7-JJgY98CGFb7ih0pOu"
+uri = "file://artifacts/roofing-website/public/images/projects/plano-office-hail-restoration-before.png"
+type = "image"
+title = "plano-office-hail-restoration before"
+
+[[generated]]
+id = "h7e-goEmzIxGrNWIgTEy4"
+uri = "file://artifacts/roofing-website/public/images/projects/plano-office-hail-restoration-after.png"
+type = "image"
+title = "plano-office-hail-restoration after"
+
+[[generated]]
+id = "hsGiN8Mng6vKDvG_kO0NL"
+uri = "file://artifacts/roofing-website/public/images/projects/dallas-warehouse-pvc-replacement-before.png"
+type = "image"
+title = "dallas-warehouse-pvc-replacement before"
+
+[[generated]]
+id = "D_AaYJUbLZ7jQJtzD2KsK"
+uri = "file://artifacts/roofing-website/public/images/projects/dallas-warehouse-pvc-replacement-after.png"
+type = "image"
+title = "dallas-warehouse-pvc-replacement after"
+
+[[generated]]
+id = "3w1d1MaLvIP3Qd_NNCVKe"
+uri = "file://artifacts/roofing-website/public/images/projects/mckinney-medical-tpo-recover-before.png"
+type = "image"
+title = "mckinney-medical-tpo-recover before"
+
+[[generated]]
+id = "WnsqsUVSWV98IR0vmbU7l"
+uri = "file://artifacts/roofing-website/public/images/projects/mckinney-medical-tpo-recover-after.png"
+type = "image"
+title = "mckinney-medical-tpo-recover after"
+
+[[generated]]
+id = "hKzEy2dyX0RjhmeD35d9L"
+uri = "file://artifacts/roofing-website/public/images/projects/arlington-school-pvc-replacement-before.png"
+type = "image"
+title = "arlington-school-pvc-replacement before"
+
+[[generated]]
+id = "WkVYmpnakM_hHUMwUcQma"
+uri = "file://artifacts/roofing-website/public/images/projects/arlington-school-pvc-replacement-after.png"
+type = "image"
+title = "arlington-school-pvc-replacement after"
+
 [[outputs]]
 id = "ps6I91K20mnwCeqf3cTt5"
 uri = "file://attached_assets/stock_images/service-inspection.jpg"

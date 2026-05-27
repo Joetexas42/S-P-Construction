@@ -1,3 +1,14 @@
+export type CaseStudyBeforeAfterImage = {
+  base: string;
+  alt: string;
+};
+
+export type CaseStudyBeforeAfter = {
+  caption: string;
+  before: CaseStudyBeforeAfterImage;
+  after: CaseStudyBeforeAfterImage;
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -14,6 +25,7 @@ export type CaseStudy = {
   image: string;
   seoTitle: string;
   seoDescription: string;
+  beforeAfter?: CaseStudyBeforeAfter;
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -43,6 +55,18 @@ export const caseStudies: CaseStudy[] = [
       "Frisco Commercial Roof Replacement — 40,000 Sq Ft TPO Case Study | Lone Star",
     seoDescription:
       "How Lone Star replaced 40,000 sq ft of failing EPDM with 60-mil Carlisle TPO on a Frisco retail center — phased, zero tenant disruption, 20-year NDL warranty.",
+    beforeAfter: {
+      caption:
+        "Same Frisco retail center roof before and after tear-off — failing ballasted EPDM with split seams and ponding on the left; new 60-mil Carlisle TPO in clean parallel rows with re-flashed HVAC curbs on the right.",
+      before: {
+        base: "/images/projects/frisco-retail-tpo-replacement-before",
+        alt: "Aerial view of a Frisco multi-tenant retail center showing a 20-year-old ballasted EPDM roof with split seams, scattered grey ballast, and ponding water around HVAC units before tear-off",
+      },
+      after: {
+        base: "/images/projects/frisco-retail-tpo-replacement-after",
+        alt: "Aerial view of the same Frisco retail center after replacement with bright white 60-mil Carlisle TPO single-ply membrane in clean parallel rows and freshly re-flashed HVAC and skylight curbs",
+      },
+    },
   },
   {
     slug: "fort-worth-industrial-standing-seam",
@@ -70,6 +94,18 @@ export const caseStudies: CaseStudy[] = [
       "Fort Worth Standing Seam Metal Roof — 85,000 Sq Ft Warehouse Case Study | Lone Star",
     seoDescription:
       "Lone Star roll-formed and installed 85,000 sq ft of 24-gauge MBCI standing seam metal on a Fort Worth distribution warehouse with zero operational downtime.",
+    beforeAfter: {
+      caption:
+        "Same Fort Worth distribution warehouse roof before and after — 30-year-old rusted R-panel with backed-out fasteners and oil-canning on the left; new 24-gauge MBCI Galvalume standing seam panels in long mechanically-seamed runs on the right.",
+      before: {
+        base: "/images/projects/fort-worth-industrial-standing-seam-before",
+        alt: "Aerial view of a Fort Worth distribution warehouse showing a 30-year-old R-panel metal roof with heavy rust streaks, oil-canning waves, and backed-out fasteners across long parallel panels",
+      },
+      after: {
+        base: "/images/projects/fort-worth-industrial-standing-seam-after",
+        alt: "Aerial view of the same Fort Worth warehouse with brand new 24-gauge Galvalume standing seam panels in clean continuous runs, crisp mechanically-seamed clips, and new ridge and eave trim",
+      },
+    },
   },
   {
     slug: "plano-office-hail-restoration",
@@ -97,6 +133,18 @@ export const caseStudies: CaseStudy[] = [
       "Plano Hail Damage Roof Restoration — Office Campus Case Study | Lone Star",
     seoDescription:
       "How Lone Star documented and restored 62,000 sq ft of hail-damaged modified bitumen across a Plano office campus — full insurance approval, 15-year warranty.",
+    beforeAfter: {
+      caption:
+        "Same Plano office campus roof before and after the April 2025 hail claim — hundreds of fresh impact craters and granule loss on the left; new SBS modified bitumen cap sheet and fresh pipe boots on the right.",
+      before: {
+        base: "/images/projects/plano-office-hail-restoration-before",
+        alt: "Close perspective of a Plano Class-A office building flat built-up roof immediately after a severe hailstorm with hundreds of golf-ball-size impact craters, granule loss, and dented pipe boots",
+      },
+      after: {
+        base: "/images/projects/plano-office-hail-restoration-after",
+        alt: "Close perspective of the same Plano office roof after restoration with brand new GAF Ruberoid SBS modified bitumen cap sheet in long uniform granular sheets and newly sealed pipe boots",
+      },
+    },
   },
   {
     slug: "dallas-warehouse-pvc-replacement",
@@ -124,6 +172,18 @@ export const caseStudies: CaseStudy[] = [
       "Dallas PVC Roof Replacement — 120,000 Sq Ft Cold Storage Case Study | Lone Star",
     seoDescription:
       "Lone Star installed 120,000 sq ft of Sika Sarnafil PVC on a Dallas cold-storage warehouse — tapered drainage, zero cold-chain loss, 25-year warranty.",
+    beforeAfter: {
+      caption:
+        "Same Dallas cold-storage warehouse roof before and after — saturated 4-ply BUR with 17 chronic ponding spots on the left; new 60-mil Sika Sarnafil PVC over tapered polyiso with positive drainage on the right.",
+      before: {
+        base: "/images/projects/dallas-warehouse-pvc-replacement-before",
+        alt: "Aerial view of a Dallas cold-storage food distribution warehouse showing a failing 4-ply built-up roof with large ponding water areas, blistering, displaced gravel ballast, and saturated dark wet patches",
+      },
+      after: {
+        base: "/images/projects/dallas-warehouse-pvc-replacement-after",
+        alt: "Aerial view of the same Dallas cold-storage warehouse after replacement with bright white 60-mil fully-adhered Sika Sarnafil PVC membrane, visible roof drains with no ponding, and new galvanized perimeter edge metal",
+      },
+    },
   },
   {
     slug: "mckinney-medical-tpo-recover",
@@ -151,6 +211,18 @@ export const caseStudies: CaseStudy[] = [
       "McKinney Medical Office TPO Recover Roof — Case Study | Lone Star",
     seoDescription:
       "Lone Star installed a 28,000 sq ft GAF EverGuard TPO recover system on a McKinney medical office — night phasing, no OR disruption, 20-year warranty.",
+    beforeAfter: {
+      caption:
+        "Same McKinney medical office roof before and after the recover — aging BUR with failing pipe boots and trapped moisture on the left; bright new 60-mil GAF EverGuard TPO with cleanly heat-welded pipe boots on the right.",
+      before: {
+        base: "/images/projects/mckinney-medical-tpo-recover-before",
+        alt: "Perspective view of a McKinney medical office's weathered built-up roof showing dark blistered asphalt cap surface, cracked deteriorating lead pipe boots on plumbing penetrations, and trapped-moisture stains",
+      },
+      after: {
+        base: "/images/projects/mckinney-medical-tpo-recover-after",
+        alt: "Perspective view of the same McKinney medical office roof recovered with bright white 60-mil GAF EverGuard TPO membrane over cover board, freshly heat-welded white pipe boot flashings, and clean reflective seams",
+      },
+    },
   },
   {
     slug: "arlington-school-pvc-replacement",
@@ -178,6 +250,18 @@ export const caseStudies: CaseStudy[] = [
       "Arlington School District PVC Roof Replacement — Case Study | Lone Star",
     seoDescription:
       "Lone Star replaced 55,000 sq ft of gravel BUR with Johns Manville PVC across an Arlington school campus — abated, finished early, 20-year warranty.",
+    beforeAfter: {
+      caption:
+        "Same Arlington school campus rooftop before and after the summer-break replacement — 30-year-old gravel BUR with weathered asbestos flashings on the left; new 50-mil Johns Manville white PVC over the gymnasium and classroom wings on the right.",
+      before: {
+        base: "/images/projects/arlington-school-pvc-replacement-before",
+        alt: "Aerial view of an Arlington K-8 school campus rooftop showing a 30-year-old gravel ballasted built-up roof with scattered displaced ballast, weathered exposed flashing at the parapets, and aging asbestos-containing tar flashings around penetrations",
+      },
+      after: {
+        base: "/images/projects/arlington-school-pvc-replacement-after",
+        alt: "Aerial view of the same Arlington school campus rooftop after replacement with bright white 50-mil Johns Manville PVC single-ply membrane in clean parallel sheets across the gymnasium and classroom wings with fresh heat-welded seams and new perimeter edge metal",
+      },
+    },
   },
 ];
 
