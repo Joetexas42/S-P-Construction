@@ -257,3 +257,45 @@ id = "lRWvHrvFeKZMQDialMk4O"
 uri = "file://attached_assets/stock_images/service-tpo-epdm-pvc.jpg"
 type = "image"
 title = "white TPO single-ply membrane commercial roof seam welding"
+
+[[outputs]]
+id = "_er-5vFQMSIRJYA-VESWO"
+uri = "file://attached_assets/stock_images/city-dallas.jpg"
+type = "image"
+title = "Dallas Texas downtown skyline with modern commercial high-rise buildings, daytime"
+
+[[outputs]]
+id = "z51W9j4rlfMbJKpeAWcxI"
+uri = "file://attached_assets/stock_images/city-fort-worth.jpg"
+type = "image"
+title = "Fort Worth Texas downtown skyline with Sundance Square commercial buildings, daytime"
+
+[[outputs]]
+id = "cxLxPFYGwZDwKPuRXOa8l"
+uri = "file://attached_assets/stock_images/city-frisco.jpg"
+type = "image"
+title = "Frisco Texas modern commercial development buildings and corporate offices"
+
+[[outputs]]
+id = "KuhNGd0wLM2NBVepqg90r"
+uri = "file://attached_assets/stock_images/city-plano.jpg"
+type = "image"
+title = "Plano Texas Legacy West corporate office buildings and modern commercial campus"
+
+[[outputs]]
+id = "s50Ncg-in88PrSwkV20Bo"
+uri = "file://attached_assets/stock_images/city-mckinney.jpg"
+type = "image"
+title = "McKinney Texas historic downtown commercial brick buildings"
+
+[[outputs]]
+id = "lqJ7KqvIUUZNpQWITDagQ"
+uri = "file://attached_assets/stock_images/city-arlington.jpg"
+type = "image"
+title = "Arlington Texas commercial district with stadium and modern buildings"
+
+[[outputs]]
+id = "524TW9NlFI2vNlPn0ABp9"
+uri = "file://attached_assets/stock_images/city-frisco-v2.jpg"
+type = "image"
+title = "Frisco Texas The Star Cowboys headquarters modern mixed-use development office buildings"

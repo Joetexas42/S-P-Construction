@@ -32,6 +32,10 @@ export const cities: CityData[] = [
     ],
     weatherNote:
       "Dallas sees some of the most punishing hail and UV exposure in Texas. Our TPO and PVC systems are spec'd with hail-rated cover boards and reflective membranes to extend service life and keep your cooling bills predictable through the long DFW summer.",
+    heroImage: {
+      base: "/images/cities/dallas",
+      alt: "Dallas, Texas downtown skyline with commercial high-rise buildings",
+    },
     testimonials: [
       {
         quote:
@@ -102,6 +106,10 @@ export const cities: CityData[] = [
     ],
     weatherNote:
       "Fort Worth sits squarely in hail alley. We build roof assemblies with high-density cover boards, reinforced membranes, and properly fastened perimeter details to ride out the spring hail and straight-line winds the metroplex throws at every commercial building.",
+    heroImage: {
+      base: "/images/cities/fort-worth",
+      alt: "Fort Worth, Texas downtown commercial district skyline",
+    },
     testimonials: [
       {
         quote:
@@ -172,6 +180,10 @@ export const cities: CityData[] = [
     ],
     weatherNote:
       "Collin County hailstorms regularly produce baseball-sized stones. Frisco property owners benefit from our hail-rated TPO and PVC assemblies, plus thorough post-storm inspections with documentation built for insurance claims.",
+    heroImage: {
+      base: "/images/cities/frisco",
+      alt: "Modern commercial development in Frisco, Texas",
+    },
     testimonials: [
       {
         quote:
@@ -242,6 +254,10 @@ export const cities: CityData[] = [
     ],
     weatherNote:
       "Plano's corporate roofs face the same hail and heat cycles as the rest of Collin County, but with tenants who can't afford downtime. We schedule re-roofs in phases, work nights and weekends, and use low-odor adhesives so occupied buildings keep running.",
+    heroImage: {
+      base: "/images/cities/plano",
+      alt: "Legacy West corporate campus in Plano, Texas",
+    },
     testimonials: [
       {
         quote:
@@ -312,6 +328,10 @@ export const cities: CityData[] = [
     ],
     weatherNote:
       "McKinney's mix of historic brick buildings and modern flex space demands two very different roofing playbooks — and we run both. From flashing repairs on 100-year-old parapets to full TPO systems on new construction, we match the assembly to the building.",
+    heroImage: {
+      base: "/images/cities/mckinney",
+      alt: "Historic downtown commercial buildings in McKinney, Texas",
+    },
     testimonials: [
       {
         quote:
@@ -382,6 +402,10 @@ export const cities: CityData[] = [
     ],
     weatherNote:
       "Arlington's industrial roofs are big — often a half-million square feet or more — which means small leaks turn into massive interior damage fast. Our drone surveys and infrared scans catch wet insulation before the next storm turns it into a tenant call.",
+    heroImage: {
+      base: "/images/cities/arlington",
+      alt: "Commercial buildings in Arlington, Texas",
+    },
     testimonials: [
       {
         quote:

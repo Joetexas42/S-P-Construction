@@ -23,6 +23,13 @@ type Target =
 
 const TARGETS: Target[] = [
   { kind: "dir", path: join(imagesRoot, "projects"), sourceExt: ".webp" },
+  {
+    kind: "dir",
+    path: join(roofingRoot, "image-sources/cities"),
+    sourceExt: ".png",
+    outputPath: join(imagesRoot, "cities"),
+    emitBaseWebp: false,
+  },
   { kind: "file", path: join(imagesRoot, "hero-bg.png") },
   { kind: "file", path: join(imagesRoot, "gallery-tpo.png") },
   { kind: "file", path: join(imagesRoot, "gallery-metal.png") },

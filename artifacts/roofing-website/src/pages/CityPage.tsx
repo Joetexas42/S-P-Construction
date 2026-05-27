@@ -26,6 +26,11 @@ export interface CityRecentProject {
   completed: string;
 }
 
+export interface CityHeroImage {
+  base: string;
+  alt: string;
+}
+
 export interface CityData {
   slug: string;
   name: string;
@@ -37,6 +42,7 @@ export interface CityData {
   weatherNote: string;
   seoTitle: string;
   seoDescription: string;
+  heroImage: CityHeroImage;
   testimonials: CityTestimonial[];
   recentProjects: CityRecentProject[];
 }
@@ -169,27 +175,46 @@ export default function CityPage({ city }: CityPageProps) {
       {/* Hero */}
       <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl">
-            <Link href="/service-areas" className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 text-sm font-bold uppercase tracking-wider mb-6">
-              <MapPin className="h-4 w-4" /> All Service Areas
-            </Link>
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
-              Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
-            </h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed mb-8">
-              {city.intro}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact">
-                <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto">
-                  Free {city.name} Roof Inspection
-                </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <Link href="/service-areas" className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 text-sm font-bold uppercase tracking-wider mb-6">
+                <MapPin className="h-4 w-4" /> All Service Areas
               </Link>
-              <a href="tel:972-555-0100">
-                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto">
-                  Call (972) 555-0100
-                </Button>
-              </a>
+              <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+                Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
+              </h1>
+              <p className="text-xl text-primary-foreground/80 leading-relaxed mb-8">
+                {city.intro}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/contact">
+                  <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto">
+                    Free {city.name} Roof Inspection
+                  </Button>
+                </Link>
+                <a href="tel:972-555-0100">
+                  <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto">
+                    Call (972) 555-0100
+                  </Button>
+                </a>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/20 aspect-[4/3]">
+                <img
+                  src={`${city.heroImage.base}-800w.webp`}
+                  srcSet={`${city.heroImage.base}-480w.webp 480w, ${city.heroImage.base}-800w.webp 800w, ${city.heroImage.base}-1280w.webp 1280w`}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  alt={city.heroImage.alt}
+                  width={1280}
+                  height={960}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="w-full h-full object-cover"
+                  data-testid={`city-hero-image-${city.slug}`}
+                />
+              </div>
             </div>
           </div>
         </div>
