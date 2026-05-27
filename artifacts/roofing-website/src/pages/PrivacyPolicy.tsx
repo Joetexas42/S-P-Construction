@@ -32,25 +32,30 @@ export default function PrivacyPolicy() {
                 <li><strong>Contact Information:</strong> Name, phone number, email address, and business or property address when you submit an estimate request, contact form, or call us directly.</li>
                 <li><strong>Project Details:</strong> Information about your roof, building type, and roofing needs that you provide when requesting a quote or inspection.</li>
                 <li><strong>Usage Data:</strong> Standard web server logs including your IP address, browser type, pages visited, and referring URLs. This data is collected automatically when you visit our site.</li>
-                <li><strong>Cookies:</strong> We may use cookies or similar technologies to understand how visitors use our site and to improve your experience.</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">3. How We Use Your Information</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">3. Cookies &amp; Tracking</h2>
+              <p>
+                This website does not use tracking cookies, analytics cookies, or any third-party tracking technologies. We do not collect behavioral data about your browsing session, and no cookie consent is required to use this site.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">4. How We Use Your Information</h2>
               <p>We use the information we collect to:</p>
               <ul className="list-disc pl-6 mt-3 space-y-2">
                 <li>Respond to your estimate requests, questions, and service inquiries</li>
                 <li>Schedule inspections and communicate about your roofing project</li>
                 <li>Provide quotes, invoices, and project documentation</li>
-                <li>Improve our website and understand visitor behavior</li>
                 <li>Send follow-up communications related to your inquiry or project (we do not send unsolicited marketing emails)</li>
                 <li>Comply with legal obligations</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">4. How We Share Your Information</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">5. How We Share Your Information</h2>
               <p>
                 We do not sell, rent, or trade your personal information. We may share your information only in these limited circumstances:
               </p>
@@ -62,49 +67,49 @@ export default function PrivacyPolicy() {
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">5. Data Retention</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">6. Data Retention</h2>
               <p>
                 We retain your information for as long as necessary to fulfill the purposes outlined in this policy, provide ongoing services, and comply with applicable legal requirements. Project records may be retained for up to seven years for warranty and legal purposes.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">6. Your Choices</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">7. Your Choices</h2>
               <p>
                 You may contact us at any time to access, correct, or request deletion of personal information we hold about you. To opt out of follow-up communications, simply reply to any email or call us and we will remove you from our contact list promptly.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">7. Security</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">8. Security</h2>
               <p>
                 We take reasonable technical and organizational measures to protect your information from unauthorized access, disclosure, or misuse. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">8. Third-Party Links</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">9. Third-Party Links</h2>
               <p>
                 Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of those sites and encourage you to review their privacy policies independently.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">9. Children's Privacy</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">10. Children's Privacy</h2>
               <p>
                 Our website is not directed at children under 13. We do not knowingly collect personal information from minors.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">10. Changes to This Policy</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">11. Changes to This Policy</h2>
               <p>
                 We may update this Privacy Policy from time to time. When we do, we will revise the effective date at the top of this page. Continued use of our website after changes are posted constitutes your acceptance of the updated policy.
               </p>
             </section>
 
             <section>
-              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">11. Contact Us</h2>
+              <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">12. Contact Us</h2>
               <p>
                 If you have questions about this Privacy Policy, please contact us:
               </p>
