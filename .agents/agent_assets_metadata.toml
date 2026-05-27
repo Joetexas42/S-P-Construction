@@ -258,6 +258,42 @@ uri = "file://artifacts/roofing-website/public/images/services/tpo-epdm-pvc-deta
 type = "image"
 title = "generated_image"
 
+[[generated]]
+id = "aEFbgf2OB7OybkJ4qDzgX"
+uri = "file://attached_assets/generated_images/inspection-detail-2.png"
+type = "image"
+title = "drone over commercial roof"
+
+[[generated]]
+id = "fnNS7b-i73UqTJ21ss9Co"
+uri = "file://attached_assets/generated_images/repair-detail-2.png"
+type = "image"
+title = "emergency tarp on commercial roof"
+
+[[generated]]
+id = "wXf2eyz7B-J4y4SFaXona"
+uri = "file://attached_assets/generated_images/installation-detail-2.png"
+type = "image"
+title = "foreman with roof plans on tablet"
+
+[[generated]]
+id = "L43pEExQBWnRXvI3prTDM"
+uri = "file://attached_assets/generated_images/replacement-detail-2.png"
+type = "image"
+title = "phased warehouse reroof in progress"
+
+[[generated]]
+id = "AS4HW9cDk3otb4Pt3H5Uu"
+uri = "file://attached_assets/generated_images/storm-damage-detail-2.png"
+type = "image"
+title = "contractor meeting adjuster on roof"
+
+[[generated]]
+id = "sgt2aniq9tL4xILOmK1co"
+uri = "file://attached_assets/generated_images/tpo-epdm-pvc-detail-2.png"
+type = "image"
+title = "white TPO warehouse roof aerial"
+
 [[outputs]]
 id = "ps6I91K20mnwCeqf3cTt5"
 uri = "file://attached_assets/stock_images/service-inspection.jpg"
