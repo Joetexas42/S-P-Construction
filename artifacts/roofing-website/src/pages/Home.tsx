@@ -28,6 +28,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
     "name": "Scott Commercial Roofing",
+    "url": "https://scottcommercialroofing.com",
     "image": "https://scottcommercialroofing.com/images/hero-bg.webp",
     "telephone": "(972) 555-0100",
     "email": "info@scottcommercialroofing.com",

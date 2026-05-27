@@ -182,6 +182,7 @@ export default function Services() {
         "@type": "RoofingContractor",
         "@id": PROVIDER_ID,
         "name": "Scott Commercial Roofing",
+        "url": SITE_ORIGIN,
         "image": `${SITE_ORIGIN}/images/hero-bg.webp`,
         "telephone": "(972) 555-0100",
         "email": "info@scottcommercialroofing.com",

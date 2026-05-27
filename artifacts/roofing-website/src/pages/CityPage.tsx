@@ -104,6 +104,7 @@ export default function CityPage({ city }: CityPageProps) {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
     "name": `Scott Commercial Roofing — ${city.name}`,
+    "url": "https://scottcommercialroofing.com",
     "telephone": "(972) 555-0100",
     "email": "info@scottcommercialroofing.com",
     "address": {
