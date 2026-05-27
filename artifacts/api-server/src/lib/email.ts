@@ -2,7 +2,7 @@ import { Resend } from "resend";
 import { logger } from "./logger";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const FROM_ADDRESS = process.env.ESTIMATOR_FROM_EMAIL ?? "Lone Star Estimator <onboarding@resend.dev>";
+const FROM_ADDRESS = process.env.ESTIMATOR_FROM_EMAIL ?? "Scott Commercial Estimator <onboarding@resend.dev>";
 
 let resendClient: Resend | null = null;
 function getResend(): Resend | null {

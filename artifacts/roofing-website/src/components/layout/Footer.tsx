@@ -11,7 +11,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2">
               <HardHat className="h-8 w-8 text-secondary" />
               <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl leading-none text-white uppercase tracking-tight">Lone Star</span>
+                <span className="font-heading font-bold text-xl leading-none text-white uppercase tracking-tight">Scott</span>
                 <span className="text-xs text-primary-foreground/70 uppercase font-semibold tracking-wider">Commercial Roofing</span>
               </div>
             </Link>
@@ -33,7 +33,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-secondary shrink-0" />
-                <a href="mailto:info@lonestarroofing.com" className="hover:text-white transition-colors">info@lonestarroofing.com</a>
+                <a href="mailto:info@scottcommercialroofing.com" className="hover:text-white transition-colors">info@scottcommercialroofing.com</a>
               </li>
             </ul>
           </div>
@@ -81,7 +81,7 @@ export function Footer() {
             ))}
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/60">
-            <p>&copy; {new Date().getFullYear()} Lone Star Commercial Roofing. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Scott Commercial Roofing. All rights reserved.</p>
             <div className="flex gap-4">
               <span className="flex items-center gap-1"><HardHat className="h-3 w-3" /> Licensed & Insured in Texas</span>
             </div>

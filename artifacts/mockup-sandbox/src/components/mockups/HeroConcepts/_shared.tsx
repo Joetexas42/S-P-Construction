@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 
 export const HERO_COPY = {
   eyebrow: "Serving North Texas Since 2003",
-  headlineLine1: "North Texas Commercial",
+  headlineLine1: "Scott Commercial",
   headlineLine2: "Flat Roof Specialists.",
   sub: "TPO, PVC, and single-ply membrane systems engineered for the DFW Metroplex — installed and serviced by an authorized Firestone (Elevate), Mule-Hide, and Duro-Last contractor. Hail-tough, energy-efficient, warranty-backed.",
   ctas: {

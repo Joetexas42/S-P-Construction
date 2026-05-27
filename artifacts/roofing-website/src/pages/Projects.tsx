@@ -169,7 +169,7 @@ export default function Projects() {
   return (
     <>
       <SEO
-        title="Commercial Roofing Case Studies — DFW Projects | Lone Star Commercial Roofing"
+        title="Commercial Roofing Case Studies — DFW Projects | Scott Commercial Roofing"
         description="Real DFW commercial roofing case studies: TPO, PVC, and standing-seam metal replacements in Frisco, Fort Worth, Dallas, Plano, McKinney, and Arlington."
         jsonLd={seoJsonLd}
       />

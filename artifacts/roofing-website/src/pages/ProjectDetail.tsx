@@ -75,7 +75,7 @@ export default function ProjectDetail({
         },
         itemReviewed: {
           "@type": "RoofingContractor",
-          name: "Lone Star Commercial Roofing",
+          name: "Scott Commercial Roofing",
           description: `${study.system} project in ${study.city}: ${study.title}`,
           areaServed: study.city,
         },

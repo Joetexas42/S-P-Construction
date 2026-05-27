@@ -37,7 +37,7 @@ export default function Gallery() {
   return (
     <>
       <SEO 
-        title="Project Gallery | Lone Star Commercial Roofing"
+        title="Project Gallery | Scott Commercial Roofing"
         description="View our portfolio of commercial roofing projects across the DFW Metroplex, including TPO, metal roofing, and flat roof restorations."
       />
       

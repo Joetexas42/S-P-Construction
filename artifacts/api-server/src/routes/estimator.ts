@@ -124,7 +124,7 @@ router.post("/estimator", async (req, res) => {
       </table>
       ${data.message ? `<hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;" /><div style="font-size: 14px;"><strong>Message:</strong><p style="white-space: pre-wrap;">${escapeHtml(data.message)}</p></div>` : ""}
       <p style="margin-top: 20px; font-size: 14px;"><a href="${satelliteViewUrl}">Open satellite view in Google Maps →</a></p>
-      <p style="margin-top: 24px; font-size: 12px; color: #64748b;">This is an automated lead notification from the Lone Star Commercial Roofing instant estimator. The dollar figure shown is a ballpark generated from per-sqft pricing — not a binding quote.</p>
+      <p style="margin-top: 24px; font-size: 12px; color: #64748b;">This is an automated lead notification from the Scott Commercial Roofing instant estimator. The dollar figure shown is a ballpark generated from per-sqft pricing — not a binding quote.</p>
     </div>
   `;
 

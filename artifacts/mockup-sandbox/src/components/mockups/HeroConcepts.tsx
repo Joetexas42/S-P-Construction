@@ -600,7 +600,7 @@ export default function HeroConcepts() {
               marginBottom: 8,
             }}
           >
-            North Texas Commercial Roofing · Homepage Hero
+            Scott Commercial Roofing · Homepage Hero
           </div>
           <h1
             style={{

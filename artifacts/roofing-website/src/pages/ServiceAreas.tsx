@@ -11,7 +11,7 @@ export default function ServiceAreas() {
     "Richardson", "Mesquite", "Carrollton", "Grand Prairie",
   ];
 
-  const siteUrl = "https://lonestarroofing.com";
+  const siteUrl = "https://scottcommercialroofing.com";
   const breadcrumbLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -34,7 +34,7 @@ export default function ServiceAreas() {
   return (
     <>
       <SEO 
-        title="DFW Service Areas | North Texas Commercial Roofing Contractor"
+        title="DFW Service Areas | Scott Commercial Roofing Contractor"
         description="Commercial flat roof, TPO, and PVC roofing services across the entire Dallas-Fort Worth Metroplex: Dallas, Fort Worth, Frisco, Plano, McKinney, Allen, Arlington, Denton, Lewisville, and all of North Texas."
         jsonLd={breadcrumbLd}
       />

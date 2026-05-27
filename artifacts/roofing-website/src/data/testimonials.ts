@@ -14,7 +14,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "marcus-frisco-retail",
     quote:
-      "After the spring hail event in Frisco, Lone Star was on site within hours. They phased a full 40,000 sq ft TPO replacement across eight occupied storefronts without ever closing a tenant, and dealt directly with our insurance adjuster. Utterly professional.",
+      "After the spring hail event in Frisco, Scott Commercial was on site within hours. They phased a full 40,000 sq ft TPO replacement across eight occupied storefronts without ever closing a tenant, and dealt directly with our insurance adjuster. Utterly professional.",
     name: "Marcus Thompson",
     role: "Property Manager",
     company: "Eldorado Crossing Retail Center",
@@ -26,7 +26,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "sarah-fort-worth-industrial",
     quote:
-      "Three other roofers told us we'd have to shut down our 24/7 logistics floor for a metal roof replacement. Lone Star roll-formed 85,000 sq ft of standing seam on site and never paused a shift. The 25-year weathertight warranty was the easy part — the operational discipline was the impressive part.",
+      "Three other roofers told us we'd have to shut down our 24/7 logistics floor for a metal roof replacement. Scott Commercial roll-formed 85,000 sq ft of standing seam on site and never paused a shift. The 25-year weathertight warranty was the easy part — the operational discipline was the impressive part.",
     name: "Sarah Jiménez",
     role: "Director of Operations",
     company: "Trinity Logistics Partners",
@@ -49,7 +49,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "rachel-plano-office",
     quote:
-      "Golf-ball hail in April put 400+ punctures through our built-up roof across three office buildings. Lone Star tarped within four hours, documented the entire scope for our carrier, and got us a 100% replacement-cost approval. We are back to watertight with a 15-year GAF warranty.",
+      "Golf-ball hail in April put 400+ punctures through our built-up roof across three office buildings. Scott Commercial tarped within four hours, documented the entire scope for our carrier, and got us a 100% replacement-cost approval. We are back to watertight with a 15-year GAF warranty.",
     name: "Rachel Okafor",
     role: "Senior Property Manager",
     company: "Preston Ridge Office Campus",
@@ -61,10 +61,10 @@ export const testimonials: Testimonial[] = [
   {
     id: "antonio-dallas-cold-storage",
     quote:
-      "We run a refrigerated food distribution floor that cannot be open to outside air for more than 90 minutes at a stretch. Lone Star re-engineered our drainage, eliminated 17 ponding spots, and installed 120,000 sq ft of Sika PVC in dry-in stages without ever breaking our cold chain.",
+      "We run a refrigerated food distribution floor that cannot be open to outside air for more than 90 minutes at a stretch. Scott Commercial re-engineered our drainage, eliminated 17 ponding spots, and installed 120,000 sq ft of Sika PVC in dry-in stages without ever breaking our cold chain.",
     name: "Antonio Reyes",
     role: "Director of Facilities",
-    company: "Lone Star Cold Logistics",
+    company: "Scott Commercial Cold Logistics",
     city: "Dallas, TX",
     system: "60-mil Sika Sarnafil PVC",
     caseStudySlug: "dallas-warehouse-pvc-replacement",
@@ -85,7 +85,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "james-arlington-school",
     quote:
-      "Nine weeks from last bell to teacher in-service, plus an asbestos abatement before we could even start. Lone Star finished four days early, on budget, and our gymnasium and cafeteria opened on time with a 20-year manufacturer warranty.",
+      "Nine weeks from last bell to teacher in-service, plus an asbestos abatement before we could even start. Scott Commercial finished four days early, on budget, and our gymnasium and cafeteria opened on time with a 20-year manufacturer warranty.",
     name: "James Whitfield",
     role: "Director of Operations",
     company: "Arlington ISD — South Campus",
@@ -97,7 +97,7 @@ export const testimonials: Testimonial[] = [
   {
     id: "monique-irving-hospitality",
     quote:
-      "Our Las Colinas hotel had a chronic leak above two guest floors that two other contractors couldn't isolate. Lone Star's infrared survey found the source in under an hour and sealed it permanently the same week. They are now on our preferred vendor list for the entire portfolio.",
+      "Our Las Colinas hotel had a chronic leak above two guest floors that two other contractors couldn't isolate. Scott Commercial's infrared survey found the source in under an hour and sealed it permanently the same week. They are now on our preferred vendor list for the entire portfolio.",
     name: "Monique Delacroix",
     role: "Regional Asset Manager",
     company: "Vantage Hospitality Group",
@@ -111,7 +111,7 @@ export function getTestimonialBySlug(slug: string): Testimonial | undefined {
   return testimonials.find((t) => t.caseStudySlug === slug);
 }
 
-const BUSINESS_NAME = "Lone Star Commercial Roofing";
+const BUSINESS_NAME = "Scott Commercial Roofing";
 
 export const testimonialReviewsJsonLd = testimonials.map((t) => ({
   "@type": "Review",

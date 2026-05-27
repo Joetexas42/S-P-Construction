@@ -83,9 +83,9 @@ export const services: ServiceDetail[] = [
     shortTitle: "Roof Inspections",
     icon: Search,
     category: "Core",
-    seoTitle: "Free Commercial Roof Inspection in DFW | Drone & Thermal | Lone Star",
+    seoTitle: "Free Commercial Roof Inspection in DFW | Drone & Thermal | Scott Commercial",
     seoDescription:
-      "Free North Texas commercial roof inspections with drone imagery, thermal moisture scans, and written reports. Senior inspectors, no salespeople, no pressure.",
+      "Free DFW commercial roof inspections with drone imagery, thermal moisture scans, and written reports. Senior inspectors, no salespeople, no pressure.",
     tagline: "Senior inspector, drone imagery, thermal scan — no salespeople, no pressure.",
     problem:
       "Most commercial roof failures in North Texas start as small, invisible issues — hail bruising, loose flashing, clogged drains, or hairline membrane splits. By the time water reaches the ceiling tiles, damage is already widespread.",
@@ -144,7 +144,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Request Free Inspection",
     heroImage: {
       base: "/images/services/inspection",
-      alt: "Senior roof inspector documenting a North Texas commercial rooftop with a drone",
+      alt: "Senior roof inspector documenting a DFW commercial rooftop with a drone",
     },
     supportingImages: [
       {
@@ -167,7 +167,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Roof Repair & Leak Response",
     icon: Wrench,
     category: "Core",
-    seoTitle: "Commercial Roof Repair & 24/7 Leak Response | DFW | Lone Star",
+    seoTitle: "Commercial Roof Repair & 24/7 Leak Response | DFW | Scott Commercial",
     seoDescription:
       "24/7 commercial roof repair and emergency leak response across the DFW Metroplex. Root-cause leak diagnosis, manufacturer-approved repairs, warranty preserved.",
     tagline: "24/7 dispatch. Root-cause diagnosis. Warranty-preserving repairs.",
@@ -260,7 +260,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "New Installation & Replacement",
     icon: LayoutGrid,
     category: "Core",
-    seoTitle: "Commercial Roof Installation & Replacement | DFW | Lone Star",
+    seoTitle: "Commercial Roof Installation & Replacement | DFW | Scott Commercial",
     seoDescription:
       "Authorized commercial roof installation and full replacement in North Texas. Firestone, Mule-Hide, and Duro-Last systems with full NDL manufacturer warranties.",
     tagline: "System engineering, full tear-off, NDL manufacturer warranty.",
@@ -340,7 +340,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Full Roof Replacement",
     icon: LayoutGrid,
     category: "System",
-    seoTitle: "Commercial Full Roof Replacement | DFW Tear-Off | Lone Star",
+    seoTitle: "Commercial Full Roof Replacement | DFW Tear-Off | Scott Commercial",
     seoDescription:
       "Complete commercial roof tear-offs and replacements across North Texas. Deck repair, system upgrades, warranty-backed installation with minimal operational disruption.",
     tagline: "Complete tear-offs engineered for longevity and minimal disruption.",
@@ -429,7 +429,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Maintenance Programs",
     icon: Activity,
     category: "System",
-    seoTitle: "Commercial Roof Maintenance Programs | DFW | Lone Star Roofing",
+    seoTitle: "Commercial Roof Maintenance Programs | DFW | Scott Commercial Roofing",
     seoDescription:
       "Proactive bi-annual commercial roof maintenance across North Texas. Inspections, drain clearing, debris removal, and preventative repairs that extend roof life 5–10 years.",
     tagline: "Bi-annual care that adds 5–10 years to a commercial roof.",
@@ -498,7 +498,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Storm Damage & Hail Repair",
     icon: Zap,
     category: "System",
-    seoTitle: "Commercial Hail & Storm Damage Repair | DFW Insurance Claims | Lone Star",
+    seoTitle: "Commercial Hail & Storm Damage Repair | DFW Insurance Claims | Scott Commercial",
     seoDescription:
       "Commercial hail damage repair and insurance claim advocacy across North Texas. Drone documentation, Xactimate scopes, adjuster meetings, and supplement work until your scope reflects actual damage.",
     tagline: "Hail documentation, claim advocacy, supplements until the scope is right.",
@@ -591,7 +591,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Emergency Leak Repair",
     icon: Droplets,
     category: "System",
-    seoTitle: "24/7 Emergency Commercial Roof Leak Repair | DFW | Lone Star",
+    seoTitle: "24/7 Emergency Commercial Roof Leak Repair | DFW | Scott Commercial",
     seoDescription:
       "24/7 emergency commercial roof leak repair across the DFW Metroplex. Rapid dispatch, water mitigation, temporary sealing, and root-cause repair to protect inventory and operations.",
     tagline: "Rapid dispatch across the DFW Metroplex — day or night.",
@@ -642,7 +642,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Call Emergency Line",
     heroImage: {
       base: "/images/services/emergency-leak-repair",
-      alt: "Lone Star Commercial Roofing crew in high-visibility gear working by headlamp on a wet commercial rooftop during a night emergency response",
+      alt: "Scott Commercial Roofing crew in high-visibility gear working by headlamp on a wet commercial rooftop during a night emergency response",
     },
     supportingImages: [
       {
@@ -659,7 +659,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Coatings & Restoration",
     icon: ArrowUpToLine,
     category: "System",
-    seoTitle: "Commercial Roof Coatings & Restoration | DFW Silicone & Acrylic | Lone Star",
+    seoTitle: "Commercial Roof Coatings & Restoration | DFW Silicone & Acrylic | Scott Commercial",
     seoDescription:
       "Fluid-applied silicone and acrylic roof coatings for DFW commercial buildings. Restore performance, improve reflectivity, and defer full replacement at a fraction of the cost.",
     tagline: "Defer full replacement and restore performance for a fraction of the cost.",
@@ -742,7 +742,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Flat / Low-Slope Roofing",
     icon: AlignHorizontalJustifyCenter,
     category: "System",
-    seoTitle: "Commercial Flat & Low-Slope Roofing | DFW | TPO, PVC, BUR | Lone Star",
+    seoTitle: "Commercial Flat & Low-Slope Roofing | DFW | TPO, PVC, BUR | Scott Commercial",
     seoDescription:
       "DFW commercial flat and low-slope roofing specialists. TPO, PVC, modified bitumen, and built-up systems engineered for North Texas heat, hail, and ponding water.",
     tagline: "Purpose-built systems for North Texas heat, hail, and rooftop equipment loads.",
@@ -811,7 +811,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "Metal Roofing",
     icon: Layers,
     category: "System",
-    seoTitle: "Commercial Metal Roofing | DFW Standing Seam & R-Panel | Lone Star",
+    seoTitle: "Commercial Metal Roofing | DFW Standing Seam & R-Panel | Scott Commercial",
     seoDescription:
       "Commercial standing seam and R-panel metal roofing across North Texas. Custom fabrication, retrofit framing, and decades-long manufacturer warranties.",
     tagline: "Standing seam and R-panel systems built to outlast traditional materials.",
@@ -863,7 +863,7 @@ export const services: ServiceDetail[] = [
     ctaPrimary: "Get a Metal Roof Quote",
     heroImage: {
       base: "/images/services/metal-roofing",
-      alt: "Low-angle architectural view of a freshly installed standing-seam metal roof on a North Texas commercial building against a deep blue sky",
+      alt: "Low-angle architectural view of a freshly installed standing-seam metal roof on a DFW commercial building against a deep blue sky",
     },
     supportingImages: [
       {
@@ -880,7 +880,7 @@ export const services: ServiceDetail[] = [
     shortTitle: "TPO / EPDM / PVC Membranes",
     icon: Box,
     category: "System",
-    seoTitle: "Commercial TPO, EPDM & PVC Membrane Roofing | DFW | Lone Star",
+    seoTitle: "Commercial TPO, EPDM & PVC Membrane Roofing | DFW | Scott Commercial",
     seoDescription:
       "Authorized installer of Firestone (Elevate), Mule-Hide, and Duro-Last TPO, EPDM, and PVC single-ply membrane systems across the DFW Metroplex.",
     tagline: "Authorized installer for Firestone (Elevate), Mule-Hide, and Duro-Last.",

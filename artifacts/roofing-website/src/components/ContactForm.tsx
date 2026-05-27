@@ -257,7 +257,7 @@ export function ContactForm() {
           )}
         </Button>
         <p className="text-xs text-center text-muted-foreground mt-4">
-          By submitting this form, you agree to be contacted by Lone Star Commercial Roofing regarding your project.
+          By submitting this form, you agree to be contacted by Scott Commercial Roofing regarding your project.
         </p>
       </form>
     </Form>

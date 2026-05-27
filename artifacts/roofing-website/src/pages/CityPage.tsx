@@ -73,7 +73,7 @@ export default function CityPage({ city }: CityPageProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
 
-  const siteUrl = "https://lonestarroofing.com";
+  const siteUrl = "https://scottcommercialroofing.com";
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -103,9 +103,9 @@ export default function CityPage({ city }: CityPageProps) {
   const contractorLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
-    "name": `Lone Star Commercial Roofing — ${city.name}`,
+    "name": `Scott Commercial Roofing — ${city.name}`,
     "telephone": "(972) 555-0100",
-    "email": "info@lonestarroofing.com",
+    "email": "info@scottcommercialroofing.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": city.name,

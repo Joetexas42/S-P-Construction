@@ -76,7 +76,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2 z-50">
               <HardHat className="h-8 w-8 text-secondary" />
               <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl leading-none text-foreground uppercase tracking-tight">Lone Star</span>
+                <span className="font-heading font-bold text-xl leading-none text-foreground uppercase tracking-tight">Scott</span>
                 <span className="text-xs text-muted-foreground uppercase font-semibold tracking-wider">Commercial Roofing</span>
               </div>
             </Link>

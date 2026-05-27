@@ -18,7 +18,7 @@ interface ServiceDetailProps {
   service: ServiceDetailType;
 }
 
-const SITE_ORIGIN = "https://lonestarroofing.com";
+const SITE_ORIGIN = "https://scottcommercialroofing.com";
 const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
 
 export default function ServiceDetail({ service }: ServiceDetailProps) {
@@ -241,7 +241,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
               <div className="bg-muted border border-border rounded-xl p-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Lone Star</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
                 <p className="text-foreground leading-relaxed">{service.why}</p>
               </div>
             </div>

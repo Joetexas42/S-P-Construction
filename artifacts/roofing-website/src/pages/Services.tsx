@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { cities } from "@/data/cities";
 import { services } from "@/data/services";
 
-const SITE_ORIGIN = "https://lonestarroofing.com";
+const SITE_ORIGIN = "https://scottcommercialroofing.com";
 const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
 
 export default function Services() {
@@ -181,10 +181,10 @@ export default function Services() {
       {
         "@type": "RoofingContractor",
         "@id": PROVIDER_ID,
-        "name": "Lone Star Commercial Roofing",
+        "name": "Scott Commercial Roofing",
         "image": `${SITE_ORIGIN}/images/hero-bg.webp`,
         "telephone": "(972) 555-0100",
-        "email": "info@lonestarroofing.com",
+        "email": "info@scottcommercialroofing.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Dallas",
@@ -233,7 +233,7 @@ export default function Services() {
               Commercial Roofing Services
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
-              North Texas commercial flat-roof specialists. We engineer, install, and maintain high-performance TPO, PVC, EPDM, and metal roofing systems built for the DFW climate. Authorized installer and service partner for Firestone (Elevate), Mule-Hide, and Duro-Last PVC.
+              Scott Commercial Roofing — DFW's flat-roof specialists. We engineer, install, and maintain high-performance TPO, PVC, EPDM, and metal roofing systems built for the DFW climate. Authorized installer and service partner for Firestone (Elevate), Mule-Hide, and Duro-Last PVC.
             </p>
             <div className="mt-6">
               <Link href="/estimate">
@@ -523,10 +523,10 @@ export default function Services() {
           <div className="max-w-3xl mx-auto text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Educational Resource</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
-              10 Benefits of TPO Roofing for North Texas Commercial Buildings
+              10 Benefits of TPO Roofing for DFW Commercial Buildings
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              If your North Texas commercial building has a flat or low-slope roof, TPO is likely the most cost-effective and climate-appropriate system available today.
+              If your DFW commercial building has a flat or low-slope roof, TPO is likely the most cost-effective and climate-appropriate system available today.
             </p>
           </div>
 

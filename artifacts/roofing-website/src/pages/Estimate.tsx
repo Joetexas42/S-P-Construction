@@ -395,7 +395,7 @@ export default function EstimatePage() {
   return (
     <>
       <SEO
-        title="Instant Satellite Roof Estimate | North Texas Commercial Roofing"
+        title="Instant Satellite Roof Estimate | Scott Commercial Roofing"
         description="Get an instant ballpark roofing estimate for your North Texas commercial property. Type your address, see your roof from satellite, and get a ballpark price in under a minute."
       />
 
