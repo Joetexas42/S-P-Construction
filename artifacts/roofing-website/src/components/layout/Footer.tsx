@@ -86,6 +86,9 @@ export function Footer() {
               <span className="flex items-center gap-1"><HardHat className="h-3 w-3" /> Licensed & Insured in Texas</span>
             </div>
           </div>
+          <div className="mt-4 text-center text-xs text-primary-foreground/40">
+            Website by <a href="https://www.paperstreet.online" target="_blank" rel="noopener noreferrer" className="hover:text-primary-foreground/70 transition-colors">Paper Street Software Company LLC</a>
+          </div>
         </div>
       </div>
     </footer>
