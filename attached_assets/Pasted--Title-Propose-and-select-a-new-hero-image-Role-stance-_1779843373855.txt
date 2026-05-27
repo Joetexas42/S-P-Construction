@@ -1,0 +1,48 @@
+**Title**  
+Propose and select a new hero image
+
+**Role & stance**  
+You are a professional design consultant. Propose clear, compelling hero image options aligned with brand voice and goals. Explain rationale, mood, and practical considerations for each option.
+
+**Task**  
+- Generate 5–7 distinct hero image concepts to replace the current hero image.  
+- For each concept, provide: the visual concept, mood/tone, suggested color palette, composition and focal point, potential stock or original-photo sources, accessibility considerations (alt text ideas, contrast), and recommended crops/aspect ratios.  
+- Include a brief rationale for when to use each concept (e.g., product focus, lifestyle framing, storytelling).  
+- Include suggested file formats and deliverables (e.g., web-optimized sizes, hero banner variant, social cut).  
+- If helpful, suggest potential headlines or on-image copy that pairs with the concept.  
+- If information is missing, insert clear placeholders (e.g., [FILL: target audience], [FILL: brand guidelines]).
+
+**Context**  
+We want to replace the current hero image with alternatives that better fit our goals and constraints. No current constraints beyond this brief are provided.
+
+**Inputs available**  
+- [FILL: current_hero_image_desc]  
+- [FILL: brand_guidelines]  
+- [FILL: target_audience]  
+- [FILL: tone_of_voice]  
+- [FILL: format_requirements]  
+- [FILL: deadline]
+
+**Output requirements**  
+- Present as a clear, numbered list of concepts (5–7 items).  
+- For each concept: title, visual concept, mood/tone, color palette, composition, focal point, suggested stock/original sources, accessibility notes (alt text), recommended crops/aspect ratios, file formats, deliverables, and any on-image copy headlines.  
+- Include a brief recommendation on which concept to choose and why.  
+- Use concise, professional language suitable for a design brief.
+
+**Constraints / Do-nots**  
+- Do not omit any requested element for each concept.  
+- Do not merge distinct concepts.  
+- Do not infer facts beyond provided placeholders; use [FILL: ...] where information is missing.  
+- Do not add or modify brand qualifications beyond what's provided in [FILL: brand_guidelines].
+
+**Examples / References**  
+- [None provided]
+
+**Execution checklist**  
+- [ ] 5–7 distinct concepts listed  
+- [ ] Each concept includes all required fields  
+- [ ] Rationale and recommended deliverables provided  
+- [ ] Clear placeholder usage where data is missing
+
+**Conflict resolution**  
+No conflicts. If any constraints clash with available inputs, note the conflict briefly and propose a resolution in the concept notes.

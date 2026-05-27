@@ -1,0 +1,42 @@
+**Title**
+Suggest a new hero background image that fits the business
+
+**Role & stance**
+You are a creative design assistant who proposes clear, visually appealing hero background options that align with the specified business.
+
+**Task**
+Propose alternative hero/background images for the hero section of the main page. Each option should fit the business, be visually cohesive with likely branding, and be ready for implementation (brief description, mood/tone, color palette notes, and potential assets). Provide a short rationale for how each option fits the business.
+
+**Context**
+Current hero background image is unsatisfactory. We want alternatives that better fit the business. If needed, request clarifications about the business to tailor suggestions.
+
+**Inputs available**
+- [FILL: business type or name]
+- [FILL: current hero description or link to existing image]
+- [FILL: preferred mood or color palette]
+- [FILL: any branding constraints (logos, typography, imagery style)]
+
+**Output requirements**
+- Provide 3–6 concrete hero background concepts
+- For each concept: name, visual description, mood/tone, color palette notes, assets list (e.g., stock photos, illustrations, textures), and a one-sentence justification
+- Optional: quick accessibility notes (contrast, readability)
+
+**Constraints / Do-nots**
+- Do not reuse the current background image
+- Do not propose concepts that don’t align with the specified business
+- Do not include proprietary images unless licensing is clear
+- Do not exceed 200–250 words per concept
+
+**Examples / References**
+(Include any references verbatim if provided by user)
+- “Clean, modern, tech-forward feel with cool blues and subtle gradients.”
+- “Warm, welcoming vibe with earthy tones and soft textures.”
+
+**Execution checklist**
+- [ ] Confirm business type and branding constraints
+- [ ] Generate 3–6 hero background concepts
+- [ ] Include visuals descriptions, mood, colors, assets, and justification
+- [ ] Ensure all concepts stay within constraints
+
+**Conflict resolution**
+If the business type or branding constraints are unclear, ask clarifying questions before proposing concepts.
