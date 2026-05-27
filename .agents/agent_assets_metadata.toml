@@ -192,6 +192,72 @@ uri = "file://attached_assets/generated_images/service-tpo-epdm-pvc.png"
 type = "image"
 title = "generated_image"
 
+[[generated]]
+id = "dZZ3aiOKGegcOO3DmBR-l"
+uri = "file://artifacts/roofing-website/public/images/services/inspection-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "0DUIhmDGkupa1OkKpsjFa"
+uri = "file://artifacts/roofing-website/public/images/services/repair-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "tX7B4DZ6-L3YqnJ6yyfyu"
+uri = "file://artifacts/roofing-website/public/images/services/installation-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "UaU9HwlfVz_W0N7dwvywd"
+uri = "file://artifacts/roofing-website/public/images/services/replacement-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "o6fAF-8zQ1ciJY-YvndLB"
+uri = "file://artifacts/roofing-website/public/images/services/maintenance-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "z9OzZUcjnMFt6tVCDclj2"
+uri = "file://artifacts/roofing-website/public/images/services/storm-damage-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "CTC6xZG79TzOfEtUzlacR"
+uri = "file://artifacts/roofing-website/public/images/services/emergency-leak-repair-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "9HeeePOokLk4jmHAfj3ci"
+uri = "file://artifacts/roofing-website/public/images/services/coatings-restoration-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "L2lqOkw7Z8r4tjJFRz2Vj"
+uri = "file://artifacts/roofing-website/public/images/services/flat-roofing-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "NjzLQpaAC8Oq8mw5S9qKO"
+uri = "file://artifacts/roofing-website/public/images/services/metal-roofing-detail-1.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "YkukCvMVbXzpGzo3FoUJh"
+uri = "file://artifacts/roofing-website/public/images/services/tpo-epdm-pvc-detail-1.png"
+type = "image"
+title = "generated_image"
+
 [[outputs]]
 id = "ps6I91K20mnwCeqf3cTt5"
 uri = "file://attached_assets/stock_images/service-inspection.jpg"

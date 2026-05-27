@@ -261,18 +261,44 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         <section className="py-20 bg-muted border-y border-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto space-y-6">
-              {service.sections.map((sec) => (
-                <article
-                  key={sec.heading}
-                  className="bg-card border border-border rounded-xl p-7 md:p-9 shadow-sm"
-                  data-testid={`service-section-${service.slug}`}
-                >
-                  <h2 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-4">
-                    {sec.heading}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed text-lg">{sec.body}</p>
-                </article>
-              ))}
+              {service.sections.map((sec) => {
+                const supporting = service.supportingImages.find(
+                  (img) => img.sectionHeading === sec.heading,
+                );
+                return (
+                  <article
+                    key={sec.heading}
+                    className="bg-card border border-border rounded-xl p-7 md:p-9 shadow-sm"
+                    data-testid={`service-section-${service.slug}`}
+                  >
+                    <h2 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-4">
+                      {sec.heading}
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed text-lg">{sec.body}</p>
+                    {supporting && (
+                      <figure className="mt-6">
+                        <div className="relative rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3]">
+                          <img
+                            src={`${supporting.base}-800w.webp`}
+                            srcSet={`${supporting.base}-480w.webp 480w, ${supporting.base}-800w.webp 800w, ${supporting.base}-1280w.webp 1280w`}
+                            sizes="(min-width: 1024px) 768px, 100vw"
+                            alt={supporting.alt}
+                            width={1280}
+                            height={960}
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-full object-cover"
+                            data-testid={`service-supporting-image-${service.slug}`}
+                          />
+                        </div>
+                        <figcaption className="mt-3 text-sm text-muted-foreground italic leading-relaxed">
+                          {supporting.caption}
+                        </figcaption>
+                      </figure>
+                    )}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>

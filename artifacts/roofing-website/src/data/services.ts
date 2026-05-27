@@ -17,6 +17,13 @@ export interface ServiceSection {
   body: string;
 }
 
+export interface ServiceSupportingImage {
+  base: string;
+  alt: string;
+  caption: string;
+  sectionHeading: string;
+}
+
 export interface ServiceFAQ {
   question: string;
   answer: string;
@@ -53,6 +60,7 @@ export interface ServiceDetail {
   faqs: ServiceFAQ[];
   ctaPrimary: string;
   heroImage: ServiceHeroImage;
+  supportingImages: ServiceSupportingImage[];
 }
 
 export const services: ServiceDetail[] = [
@@ -125,6 +133,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/inspection",
       alt: "Senior roof inspector documenting a North Texas commercial rooftop with a drone",
     },
+    supportingImages: [
+      {
+        base: "/images/services/inspection-detail-1",
+        alt: "Inspector reviewing a thermal-imaging scan of a commercial roof on a rugged tablet",
+        caption: "Thermal scans reveal moisture trapped under the membrane during the on-site walkthrough.",
+        sectionHeading: "What our written report includes",
+      },
+    ],
   },
   {
     slug: "repair",
@@ -190,6 +206,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/repair",
       alt: "Roofer heat-welding a membrane patch on a commercial flat roof repair",
     },
+    supportingImages: [
+      {
+        base: "/images/services/repair-detail-1",
+        alt: "Close-up of a hot-air welder sealing a TPO membrane patch on a commercial flat roof",
+        caption: "Heat-welded patches installed to manufacturer spec keep your existing warranty intact.",
+        sectionHeading: "Manufacturer-approved materials only",
+      },
+    ],
   },
   {
     slug: "installation",
@@ -256,6 +280,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/installation",
       alt: "Crew installing a new TPO single-ply membrane on a large commercial building roof",
     },
+    supportingImages: [
+      {
+        base: "/images/services/installation-detail-1",
+        alt: "Roof core sample showing layers of TPO membrane, polyiso insulation, and metal deck",
+        caption: "Core samples confirm what's inside the existing assembly before we recommend tear-off or recover.",
+        sectionHeading: "Tear-off, recover, or hybrid",
+      },
+    ],
   },
   {
     slug: "replacement",
@@ -317,6 +349,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/replacement",
       alt: "Commercial roof tear-off in progress with workers removing old insulation",
     },
+    supportingImages: [
+      {
+        base: "/images/services/replacement-detail-1",
+        alt: "Tapered polyiso insulation boards installed across a commercial roof deck sloping toward a drain",
+        caption: "Tapered insulation corrects slope-to-drain deficiencies and raises R-value during a replacement.",
+        sectionHeading: "Insulation R-value and code upgrades",
+      },
+    ],
   },
   {
     slug: "maintenance",
@@ -378,6 +418,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/maintenance",
       alt: "Maintenance technician clearing a roof drain on a commercial flat roof",
     },
+    supportingImages: [
+      {
+        base: "/images/services/maintenance-detail-1",
+        alt: "Technician resealing a pipe penetration with fresh sealant on a commercial flat roof",
+        caption: "Preventative resealing at flashings and penetrations is the bread and butter of a maintenance visit.",
+        sectionHeading: "What a maintenance visit actually does",
+      },
+    ],
   },
   {
     slug: "storm-damage",
@@ -443,6 +491,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/storm-damage",
       alt: "Hail damage on a commercial roof membrane after a North Texas storm",
     },
+    supportingImages: [
+      {
+        base: "/images/services/storm-damage-detail-1",
+        alt: "Hail impacts circled in blue chalk on a white TPO commercial roof with a measuring square for scale",
+        caption: "Chalk-test photo logs of impacts per square are the evidence package adjusters can't dismiss.",
+        sectionHeading: "Documentation that holds up with the carrier",
+      },
+    ],
   },
   {
     slug: "emergency-leak-repair",
@@ -503,6 +559,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/emergency-leak-repair",
       alt: "Emergency tarping and leak mitigation on a commercial roof at night",
     },
+    supportingImages: [
+      {
+        base: "/images/services/emergency-leak-repair-detail-1",
+        alt: "Heavy-duty blue emergency tarp battened down across a damaged section of commercial flat roof at dusk",
+        caption: "First-visit mitigation: tarping engineered to hold through the next storm, not just to make the drip stop.",
+        sectionHeading: "Mitigation first, permanent fix second",
+      },
+    ],
   },
   {
     slug: "coatings-restoration",
@@ -564,6 +628,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/coatings-restoration",
       alt: "Applying a white reflective fluid-applied coating on a commercial flat roof",
     },
+    supportingImages: [
+      {
+        base: "/images/services/coatings-restoration-detail-1",
+        alt: "Roller applying bright white silicone coating over a weathered grey commercial roof, with a clear line between coated and uncoated areas",
+        caption: "A fluid-applied silicone restoration over a sound substrate can deliver another 10–15 years of service.",
+        sectionHeading: "Silicone vs. acrylic vs. hybrid",
+      },
+    ],
   },
   {
     slug: "flat-roofing",
@@ -625,6 +697,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/flat-roofing",
       alt: "Aerial view of a large commercial flat warehouse roof in North Texas",
     },
+    supportingImages: [
+      {
+        base: "/images/services/flat-roofing-detail-1",
+        alt: "Roof drain with clamping ring set into a white TPO membrane with water flowing toward it",
+        caption: "Positive slope to drain — engineered with tapered insulation — is what keeps a flat roof out of trouble.",
+        sectionHeading: "Drainage is the failure point",
+      },
+    ],
   },
   {
     slug: "metal-roofing",
@@ -686,6 +766,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/metal-roofing",
       alt: "Standing seam metal roofing system on a commercial building",
     },
+    supportingImages: [
+      {
+        base: "/images/services/metal-roofing-detail-1",
+        alt: "Close-up of a standing seam detail between two charcoal grey metal roof panels with concealed clip fastening",
+        caption: "Standing seams hide their fasteners — eliminating the most common metal-roof leak point.",
+        sectionHeading: "Standing seam vs. R-panel",
+      },
+    ],
   },
   {
     slug: "tpo-epdm-pvc",
@@ -759,6 +847,14 @@ export const services: ServiceDetail[] = [
       base: "/images/services/tpo-epdm-pvc",
       alt: "Heat-welded seam on a white TPO single-ply membrane commercial roof",
     },
+    supportingImages: [
+      {
+        base: "/images/services/tpo-epdm-pvc-detail-1",
+        alt: "Roofer probe-testing a heat-welded seam on a white TPO single-ply membrane",
+        caption: "Every seam gets probe-tested and documented in your warranty file. Not glamorous — but decisive.",
+        sectionHeading: "Heat-welded seams done right",
+      },
+    ],
   },
 ];
 
