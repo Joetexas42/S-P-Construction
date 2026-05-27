@@ -79,8 +79,6 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/80 mix-blend-multiply z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-20" />
           <img
             src="/images/hero-bg.webp"
             srcSet={buildImageSrcSet("/images/hero-bg.webp")}
@@ -92,38 +90,41 @@ export default function Home() {
             decoding="async"
             className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-black/45 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent z-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background z-20" />
         </div>
         
         <div className="container relative z-30 mx-auto px-4 md:px-6">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 text-secondary-foreground mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-secondary/60 mb-6 backdrop-blur-sm shadow-lg">
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-              <span className="text-sm font-bold uppercase tracking-wider text-white">Serving North Texas Since 2003</span>
+              <span className="text-sm font-bold uppercase tracking-wider text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.6)]">Serving North Texas Since 2003</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight">
+            <h1 className="text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
               North Texas Commercial <br className="hidden md:block"/><span className="text-secondary">Flat Roof Specialists.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-primary-foreground/90 font-medium mb-10 max-w-2xl leading-relaxed">
+            <p className="text-xl md:text-2xl text-white font-medium mb-10 max-w-2xl leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
               TPO, PVC, and single-ply membrane systems engineered for the DFW Metroplex — installed and serviced by an authorized Firestone (Elevate), Mule-Hide, and Duro-Last contractor. Hail-tough, energy-efficient, warranty-backed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/estimate">
-                <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto" data-testid="hero-cta-estimate">
+                <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto shadow-xl shadow-black/30" data-testid="hero-cta-estimate">
                   Get Instant Estimate
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto backdrop-blur-sm">
+                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-black/30 text-white border-white/40 hover:bg-black/50 hover:text-white w-full sm:w-auto backdrop-blur-sm">
                   Request Free Inspection
                 </Button>
               </Link>
               <a href="tel:972-555-0100">
-                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto backdrop-blur-sm">
+                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-black/30 text-white border-white/40 hover:bg-black/50 hover:text-white w-full sm:w-auto backdrop-blur-sm">
                   Call (972) 555-0100
                 </Button>
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/80 font-semibold">
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white font-semibold [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
               <Link href="/services#tpo-vs-pvc" className="hover:text-secondary transition-colors">TPO vs. PVC →</Link>
               <Link href="/services#tpo-benefits" className="hover:text-secondary transition-colors">10 Benefits of TPO →</Link>
               <Link href="/services#manufacturers" className="hover:text-secondary transition-colors">Firestone · Mule-Hide · Duro-Last →</Link>
