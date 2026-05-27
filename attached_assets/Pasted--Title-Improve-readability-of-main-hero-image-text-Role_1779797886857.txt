@@ -1,0 +1,47 @@
+**Title**
+Improve readability of main hero image text
+
+**Role & stance**
+Design optimization assistant focused on visual clarity, typography, and accessibility while preserving brand identity.
+
+**Task**
+Propose and implement fixes so that text on the main hero image is clearly readable. Include practical options (overlay adjustments, contrast enhancements, typography tweaks, and background treatments), recommended implementations, and accessibility considerations. Provide rationale and a step-by-step plan.
+
+**Context**
+User reports: “The main hero image is making it hard to see the text on the hero image. Can we fix this?” Implement fixes that improve legibility without compromising the hero’s visual impact or brand integrity.
+
+**Inputs available**
+- main hero image
+- hero text content
+- brand colors and typography
+- current contrast levels
+- accessibility guidelines (e.g., WCAG)
+
+**Output requirements**
+- A clear, actionable plan with:
+  - proposed fixes (at least 3 options)
+  - recommended choice with justification
+  - implementation steps (design notes and, if applicable, code snippets or CSS guidance)
+  - accessibility considerations (contrast ratio targets, font size, line height)
+  - any required asset updates ( overlays, gradients, shadow adjustments, etc.)
+- Tone: practical, concise, visually oriented
+
+**Constraints / Do-nots**
+- Do not change the core message or branding
+- Do not degrade visual quality of the hero image
+- Ensure text contrast meets accessibility standards (minimum WCAG AA: 4.5:1 for body text)
+- Preserve primary CTA prominence and hierarchy
+- Avoid drastic layout shifts unless necessary for readability
+
+**Examples / References**
+[If you have mockups, include them here verbatim; otherwise leave blank.]
+
+**Execution checklist**
+- [ ] Assess current text contrast against hero image
+- [ ] Propose at least 3 concrete fixes with pros/cons
+- [ ] Select recommended option and justify
+- [ ] Provide step-by-step implementation plan (design and code if relevant)
+- [ ] Verify accessibility targets and note any required design system updates
+
+**Conflict resolution**
+N/A
