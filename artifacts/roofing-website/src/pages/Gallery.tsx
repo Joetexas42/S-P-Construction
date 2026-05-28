@@ -115,9 +115,15 @@ export default function Gallery() {
               No projects match that filter yet.
             </p>
           ) : (
-            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8${isExiting ? " filter-cards-exit" : ""}`}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+              style={{
+                opacity: isExiting ? 0 : 1,
+                transition: "opacity 0.18s ease",
+              }}
+            >
               {filtered.map((project, i) => (
-                <ScrollRevealWrapper key={`${animKey}-${project.id}`} delay={rowDelay(i, 2)}>
+                <ScrollRevealWrapper key={project.id} revealKey={animKey} delay={rowDelay(i, 2)}>
                   <div className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
                     <div className="aspect-[4/3] overflow-hidden bg-muted">
                       <img

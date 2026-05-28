@@ -5,13 +5,16 @@ interface ScrollRevealWrapperProps {
   children: ReactNode;
   delay?: number;
   className?: string;
+  revealKey?: string | number;
 }
 
-function useScrollRevealState(delay: number = 0) {
+function useScrollRevealState(delay: number = 0, revealKey?: string | number) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    setIsVisible(false);
+
     const el = ref.current;
     if (!el) return;
 
@@ -27,7 +30,7 @@ function useScrollRevealState(delay: number = 0) {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [revealKey]);
 
   return {
     ref,
@@ -40,8 +43,9 @@ export function ScrollRevealWrapper({
   children,
   delay = 0,
   className,
+  revealKey,
 }: ScrollRevealWrapperProps) {
-  const reveal = useScrollRevealState(delay);
+  const reveal = useScrollRevealState(delay, revealKey);
 
   return (
     <div
