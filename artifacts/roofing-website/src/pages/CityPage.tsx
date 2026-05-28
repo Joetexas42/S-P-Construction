@@ -501,7 +501,7 @@ export default function CityPage({ city }: CityPageProps) {
               Detailed information about each of our most-requested services in {city.name} — local building context, weather factors, and {city.name}-specific answers.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair"] as const).map((svcSlug) => (
+              {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair", "maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"] as const).map((svcSlug) => (
                 <Link
                   key={svcSlug}
                   href={`/service-areas/${city.slug}/${svcSlug}`}

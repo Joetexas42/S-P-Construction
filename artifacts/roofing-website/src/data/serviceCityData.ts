@@ -18,6 +18,10 @@ export const SERVICE_CITY_SLUGS = [
   "replacement",
   "tpo-epdm-pvc",
   "emergency-leak-repair",
+  "maintenance",
+  "coatings-restoration",
+  "flat-roofing",
+  "metal-roofing",
 ] as const;
 
 export type ServiceCityServiceSlug = (typeof SERVICE_CITY_SLUGS)[number];
@@ -705,6 +709,682 @@ export const serviceCityData: ServiceCityEntry[] = [
       },
     ],
   },
+
+  // ── MAINTENANCE ──────────────────────────────────────────────────────────
+  {
+    citySlug: "dallas",
+    serviceSlug: "maintenance",
+    intro:
+      "A proactive roof maintenance program is the single highest-ROI investment a Dallas commercial property owner can make. From Design District showrooms to Medical District hospital campuses, our Dallas maintenance teams perform bi-annual inspections, drain cleaning, flashing reseal, and minor repairs on a fixed-fee schedule — catching failures worth thousands before they become disasters worth hundreds of thousands.",
+    localDistricts: [
+      "Medical District hospital & MOB campuses",
+      "Design District showrooms & mixed-use buildings",
+      "Stemmons Corridor logistics & distribution parks",
+    ],
+    buildingContext:
+      "Dallas commercial roofs face some of the harshest UV exposure in Texas combined with heavy hail seasons. A maintenance contract typically includes spring and fall inspections, post-storm assessments, drain and scupper cleaning, flashing and caulk inspection, and minor repairs — all documented with photos for warranty and insurance files. Buildings with maintenance records qualify for better insurance rates and see 30–50% longer roof life.",
+    weatherUrgency:
+      "Dallas County averages 50+ hail days annually. Without a maintenance program that catches post-storm membrane bruising early, those impacts turn into full-section moisture saturation within 12–18 months. Regular maintenance is the only way to catch developing failures before a Dallas storm season converts them into emergency calls.",
+    faqs: [
+      {
+        question: "What does a Dallas commercial roof maintenance program include?",
+        answer:
+          "Bi-annual inspections with photo documentation, drain and scupper cleaning, flashing and caulk inspection and resealing, minor repairs up to a defined sq ft threshold, post-storm assessments after any significant hail or wind event, and a written maintenance log that satisfies manufacturer warranty requirements.",
+      },
+      {
+        question: "Can a maintenance contract extend the life of our aging Dallas roof?",
+        answer:
+          "Yes — documented maintenance programs regularly extend roof life by 30–50% beyond their actuarial end-of-life date. We've kept Dallas roofs in service for 5–8 extra years on maintenance contracts that deferred a full replacement until the capital budget was ready.",
+      },
+      {
+        question: "Does our Dallas manufacturer warranty require a maintenance program?",
+        answer:
+          "Most NDL warranties from Firestone, Mule-Hide, and Duro-Last require documented annual or bi-annual maintenance to remain valid. We maintain the documentation trail and submit to the manufacturer on your behalf.",
+      },
+    ],
+  },
+  {
+    citySlug: "fort-worth",
+    serviceSlug: "maintenance",
+    intro:
+      "Fort Worth's industrial and logistics building stock — from AllianceTexas warehouses to Near Southside manufacturing facilities — accumulates roof wear faster than Class A office. Our Fort Worth maintenance programs are calibrated for industrial exposure: heavy foot traffic from HVAC technicians, standing water in low-slope drains, and the straight-line wind stress that degrades perimeter flashings on Tarrant County buildings year after year.",
+    localDistricts: [
+      "AllianceTexas industrial & logistics corridor",
+      "Near Southside manufacturing & warehouse district",
+      "West 7th & Cultural District mixed-use and hospitality",
+    ],
+    buildingContext:
+      "Fort Worth maintenance contracts cover the full range: aerospace-adjacent facilities at Alliance that require FOD-compliant inspection protocols, historic Stockyards-area buildings with modified bitumen and built-up assemblies that need specialized maintenance attention, and downtown hospitality buildings where any roof event impacts guest experience. We tailor the maintenance scope to the building type rather than applying a one-size program.",
+    weatherUrgency:
+      "Tarrant County derechos produce the highest straight-line wind speeds in the Metroplex. Perimeter fasteners on aging Fort Worth industrial buildings loosen progressively under these events — maintenance inspections catch pull-out early, before the next storm converts loose perimeter into a full-section blow-off.",
+    faqs: [
+      {
+        question: "Can you maintain the roof on our Alliance aerospace facility under FOD protocols?",
+        answer:
+          "Yes. Our Fort Worth maintenance crews carry FOD-compliant toolkits and follow debris-containment protocols on every inspection. We provide pre- and post-inspection FOD documentation that meets aerospace facility requirements.",
+      },
+      {
+        question: "What's the cost of a commercial roof maintenance program in Fort Worth?",
+        answer:
+          "Maintenance contracts are priced per square foot with a minimum annual fee. For most Fort Worth industrial buildings in the 50,000–200,000 sq ft range, the program cost is less than 5% of what a single emergency response and interior damage remediation would run. We provide fixed-fee quotes with no surprise add-ons.",
+      },
+    ],
+  },
+  {
+    citySlug: "frisco",
+    serviceSlug: "maintenance",
+    intro:
+      "Frisco's Class A retail centers, corporate campuses, and sports and entertainment venues along the Tollway corridor represent major real estate assets whose value depends heavily on building envelope integrity. Our Frisco maintenance programs protect those assets with bi-annual inspections, post-storm assessments, and a documented maintenance history that satisfies institutional investors, insurance carriers, and manufacturer warranty requirements.",
+    localDistricts: [
+      "Dallas North Tollway Class A corporate & retail corridor",
+      "The Star at Frisco & Fields development district",
+      "Frisco ISD and sports venue campuses",
+    ],
+    buildingContext:
+      "Frisco's commercial roof stock is dominated by systems installed in the early-to-mid 2000s — single-ply membranes that have completed their original warranty terms and are entering their highest-risk years. A maintenance program at this stage of building life catches seam fatigue, flashing separation, and drain deterioration before they escalate — and preserves the option of a cost-effective restoration rather than a full replacement.",
+    weatherUrgency:
+      "Collin County hail frequency makes post-storm assessments a critical maintenance component for Frisco properties. Many insurance claims are denied because the storm damage was not documented promptly. Our maintenance agreements include post-storm inspection with written and photographic documentation within 48 hours of any significant weather event.",
+    faqs: [
+      {
+        question: "Our Frisco retail center has an institutional owner. What documentation does a maintenance program produce?",
+        answer:
+          "Every inspection produces a written report with photo documentation of each observation, a repair log, and a building health summary. The file is formatted to satisfy institutional lender requirements and serves as evidence of good-faith maintenance for warranty and insurance purposes.",
+      },
+      {
+        question: "Can we add a Frisco maintenance contract mid-warranty to an existing roof?",
+        answer:
+          "Yes. We perform an initial condition assessment, document the current state, and begin the maintenance program from that baseline. Most manufacturers accept maintenance programs that begin mid-warranty as long as the roof is in serviceable condition at the time of enrollment.",
+      },
+    ],
+  },
+  {
+    citySlug: "plano",
+    serviceSlug: "maintenance",
+    intro:
+      "Plano's Fortune 500 corporate campuses and Class A medical office buildings have zero tolerance for unplanned roof events. Our Plano maintenance programs provide the structured, documented, proactive care these assets require — fixed-fee bi-annual inspections, post-storm assessments within 48 hours, and a maintenance record that your institutional lender, insurance carrier, and manufacturer warranty all demand.",
+    localDistricts: [
+      "Legacy West & Granite Park corporate towers",
+      "Medical corridor along Coit, Independence, and Preston",
+      "Plano's US-75 office campus corridor",
+    ],
+    buildingContext:
+      "Class A office buildings in Plano carry some of the highest interior damage cost profiles in the DFW market — a ceiling tile event above a corporate trading floor or a clean-room drip in a medical facility creates disruption that far exceeds the roof repair cost itself. Maintenance programs for these buildings prioritize drain capacity, penetration integrity, and post-storm assessment so the roof never becomes the weak link in the tenant experience.",
+    weatherUrgency:
+      "Plano's exposure to Collin County hail is well-documented — and so is the cost of failing to document storm damage promptly. Our maintenance agreements include a 48-hour post-storm response commitment that produces the written record your carrier needs to approve the claim before the deadline window closes.",
+    faqs: [
+      {
+        question: "Can our Plano building's maintenance program be coordinated with our property management team?",
+        answer:
+          "Absolutely. We assign a dedicated project manager for each Plano maintenance account who coordinates scheduling, access, and reporting directly with your property management team. You receive inspection summaries within 24 hours of each visit.",
+      },
+      {
+        question: "How does a maintenance program affect our building's insurance premiums in Plano?",
+        answer:
+          "Documented maintenance programs are increasingly recognized by Texas commercial carriers as a premium reduction factor — particularly for buildings with Class 4 impact-rated systems and a history of proactive post-storm assessments. We can provide the documentation format most carriers require.",
+      },
+    ],
+  },
+  {
+    citySlug: "mckinney",
+    serviceSlug: "maintenance",
+    intro:
+      "McKinney's mixed building stock — century-old downtown masonry, 1990s flex-industrial, and brand-new Craig Ranch medical campuses — all benefit from maintenance programs tailored to each assembly type. Our McKinney teams inspect and maintain built-up, modified bitumen, and single-ply systems with equal fluency, providing the documentation that Collin County building owners need for warranty compliance and post-storm insurance claims.",
+    localDistricts: [
+      "Historic Downtown McKinney commercial square",
+      "Craig Ranch medical & corporate campus",
+      "US-380 flex-industrial & retail corridor",
+    ],
+    buildingContext:
+      "McKinney's historic downtown buildings require maintenance approaches that respect the existing assembly — modified bitumen patching, parapet flashing resealing, and built-up repairs using compatible materials. Newer Craig Ranch buildings need warranty-compliant single-ply maintenance with manufacturer-approved materials. We differentiate our approach for every building in the portfolio.",
+    weatherUrgency:
+      "Northern Collin County sees the largest hail stones in the DFW metro. McKinney buildings take the first and often hardest hit in major storm tracks, and without a post-storm inspection on file, insurance claims for those events can be denied weeks later. Our maintenance agreements guarantee a documented post-storm assessment within 48 hours of any significant weather.",
+    faqs: [
+      {
+        question: "Can you maintain our 1910s McKinney downtown building under a fixed-fee contract?",
+        answer:
+          "Yes. We assess historic assemblies during the initial condition survey, set a maintenance scope appropriate for the building type, and price the program on a fixed annual fee. Older assemblies typically require more frequent drain cleaning and flashing attention — we factor that into the program design rather than charging for it as extras.",
+      },
+      {
+        question: "Our McKinney medical campus has multiple buildings. Can one contract cover all of them?",
+        answer:
+          "Absolutely. Portfolio maintenance contracts for multi-building campuses receive a volume discount and a single coordinated inspection schedule that minimizes disruption across the campus.",
+      },
+    ],
+  },
+  {
+    citySlug: "arlington",
+    serviceSlug: "maintenance",
+    intro:
+      "Arlington's massive industrial roof footprint — Great Southwest distribution centers, manufacturing plants, and stadium-adjacent hospitality buildings — generates more deferred maintenance exposure than almost any other DFW submarket. Our Arlington maintenance programs bring drone surveys, thermal imaging, and trained crews to systematically inspect and maintain these large, complex roofs on a fixed-fee schedule before small problems become expensive surprises.",
+    localDistricts: [
+      "Great Southwest Industrial District distribution & manufacturing",
+      "Entertainment District hotels & event venues",
+      "Arlington ISD school and athletic campuses",
+    ],
+    buildingContext:
+      "Large Arlington industrial roofs — common at 100,000–500,000 sq ft — cannot be manually walked in their entirety on a routine basis. Our maintenance programs include drone aerial surveys that cover every square foot efficiently, supplemented by infrared scans to detect moisture before it migrates through the insulation. This technology-first approach makes maintenance cost-effective at large scale.",
+    weatherUrgency:
+      "Arlington's large industrial roofs accumulate storm damage across enormous surface areas. A single hail event can produce dozens of membrane punctures across a 300,000 sq ft distribution center — and without a systematic post-storm inspection, each unrepaired puncture saturates insulation through the next 12 months of normal rainfall. Our post-storm inspection scope for Arlington industrial buildings uses drone imagery to map every impact point.",
+    faqs: [
+      {
+        question: "How do you inspect a 400,000 sq ft Arlington warehouse roof efficiently?",
+        answer:
+          "Drone aerial photography combined with evening infrared thermal scans — the same pass that takes hours to walk manually takes 45 minutes with our drone program. We generate a full-coverage inspection report with GPS-tagged findings so the repair scope is precise.",
+      },
+      {
+        question: "Our Arlington school district requires documented maintenance on all campus buildings. Can you manage the entire portfolio?",
+        answer:
+          "Yes. We manage portfolio maintenance contracts for AISD and other Tarrant County school districts, providing inspection reports in the format required for public building documentation and capital planning.",
+      },
+    ],
+  },
+
+  // ── COATINGS & RESTORATION ───────────────────────────────────────────────
+  {
+    citySlug: "dallas",
+    serviceSlug: "coatings-restoration",
+    intro:
+      "A silicone or acrylic roof coating can add 10–15 years to a Dallas commercial roof at a fraction of full replacement cost — but only when applied to a structurally sound substrate. Our Dallas coatings and restoration teams begin every project with moisture scanning and a full condition assessment, so you know before the first gallon is sprayed whether restoration is the right call or whether the substrate requires tear-off first.",
+    localDistricts: [
+      "Design District warehouses & mixed-use buildings",
+      "Stemmons Corridor distribution & logistics facilities",
+      "Oak Cliff & South Dallas commercial strip centers",
+    ],
+    buildingContext:
+      "Dallas flat roofs suitable for coatings span a huge range: metal buildings in the industrial parks south of I-30, 20-year-old modified bitumen systems on neighborhood retail centers in Oak Cliff, and aging single-ply on the Stemmons Corridor warehouse buildings. Each substrate requires a different coating system — silicone for roofs with ponding-water exposure, acrylic where UV is the primary stressor, and polyurethane foam where additional R-value and slope correction are needed.",
+    weatherUrgency:
+      "Dallas's UV intensity is among the highest in Texas — reflective coatings can reduce rooftop surface temperatures by 50–80°F and cut cooling loads meaningfully for buildings with HVAC systems working against a black-rooftop heat island. Energy savings alone often pay for a Dallas coating restoration within 3–5 years before the extended roof life is even factored in.",
+    faqs: [
+      {
+        question: "Is my Dallas commercial roof a candidate for coating restoration?",
+        answer:
+          "The key factors are substrate condition and moisture content. We perform a moisture scan (infrared and nuclear if needed) to confirm there is no wet insulation. If the substrate is dry and structurally sound, restoration is typically cost-effective. If moisture is present in more than 25% of the roof area, tear-off and replacement is the more responsible recommendation.",
+      },
+      {
+        question: "What coating systems do you install on Dallas commercial roofs?",
+        answer:
+          "Silicone (best for ponding-water exposure), acrylic (cost-effective for low-ponding roofs with strong slope), and spray polyurethane foam with a silicone topcoat (for roofs needing slope correction and added R-value). We specify the right system for the substrate and the building's drainage profile.",
+      },
+      {
+        question: "Does a coating restoration qualify for an extended manufacturer warranty in Dallas?",
+        answer:
+          "Yes — restoration systems from Firestone, Mule-Hide, and several other manufacturers offer 10–15 year system warranties when applied over a properly prepared substrate. We handle the manufacturer inspection and warranty registration as part of every coatings project.",
+      },
+    ],
+  },
+  {
+    citySlug: "fort-worth",
+    serviceSlug: "coatings-restoration",
+    intro:
+      "Fort Worth's large industrial and manufacturing building inventory — steel-framed buildings with metal panel roofs, older modified bitumen warehouse systems, and mid-century built-up assemblies — is a strong candidate for coatings restoration. We have restored hundreds of thousands of square feet of Fort Worth commercial roofs with silicone and acrylic systems that add years of life at well under replacement cost.",
+    localDistricts: [
+      "AllianceTexas industrial park warehouses & manufacturing facilities",
+      "Near Southside commercial & manufacturing corridor",
+      "West Fort Worth / Benbrook industrial and retail properties",
+    ],
+    buildingContext:
+      "Metal roofing is common throughout Fort Worth's industrial market — and metal panel roofs are among the best candidates for spray polyurethane foam restoration, which seals lap seams, re-flashes penetrations, and adds insulation value in a single application. Older built-up and modified bitumen systems on Tarrant County commercial buildings can often be restored with acrylic or silicone coatings applied over a properly cleaned and primed surface.",
+    weatherUrgency:
+      "Fort Worth's UV load and temperature swings — from 105°F summer rooftop temperatures to sub-freezing winter nights — stress coating films more than in coastal climates. We specify coating systems with the flexibility and UV resistance to cycle through these extremes without chalking, cracking, or delaminating in Fort Worth's specific exposure profile.",
+    faqs: [
+      {
+        question: "Can you coat a metal panel roof on our Alliance industrial building?",
+        answer:
+          "Metal panel roofs are excellent coating candidates — particularly with spray polyurethane foam over the substrate followed by a silicone topcoat. The foam seals every lap seam and penetration and adds meaningful R-value, while the silicone topcoat provides a fully seamless, waterproof surface. Projects typically deliver 15–20 year system warranties.",
+      },
+      {
+        question: "How long does a coatings restoration take on a large Fort Worth warehouse?",
+        answer:
+          "A 100,000 sq ft warehouse typically takes 5–8 working days — significantly faster than a full replacement — and the building stays operational throughout. We seal sections in stages and never leave an open substrate overnight.",
+      },
+    ],
+  },
+  {
+    citySlug: "frisco",
+    serviceSlug: "coatings-restoration",
+    intro:
+      "Frisco's aging first-wave commercial roofs — retail centers and office parks built along the Tollway in the early 2000s — are prime candidates for coatings restoration. A properly executed silicone or acrylic restoration on a sound substrate delivers 10–15 additional years at 30–50% of full replacement cost, protects the asset through the next ownership cycle, and qualifies for a new manufacturer system warranty.",
+    localDistricts: [
+      "Dallas North Tollway Frisco office and retail corridor",
+      "Preston Road commercial centers",
+      "Frisco Square mixed-use and civic buildings",
+    ],
+    buildingContext:
+      "Frisco's retail and office roofs from the early 2000s are predominantly TPO and EPDM single-ply systems that are approaching or past their original warranty terms. Many are still structurally sound — dry insulation, intact fasteners — but the membrane surface has oxidized and the flashings are beginning to fail. This is the ideal window for restoration: the substrate is salvageable and the restoration delivers maximum value before the roof deteriorates into replacement territory.",
+    weatherUrgency:
+      "Collin County hail accelerates membrane surface degradation. Oxidized and chalked membranes absorb hail impact differently than fresh single-ply — they crack rather than deflect. A coating applied over a sound membrane before hail season provides an additional impact-absorbing layer and significantly reduces the probability of penetrations from moderate hail events.",
+    faqs: [
+      {
+        question: "Our Frisco retail center roof is 18 years old. Is restoration still an option?",
+        answer:
+          "Age alone doesn't disqualify a roof from restoration — condition and moisture content do. We'll perform a moisture scan and condition survey. If the insulation is dry and the membrane is intact (no open seams or exposed felt), restoration is likely the most cost-effective path.",
+      },
+      {
+        question: "Does a Frisco coating restoration reset the insurance inspection clock?",
+        answer:
+          "A documented restoration with a new manufacturer system warranty typically satisfies carriers as evidence of a renewed roof envelope. Some Collin County carriers treat a restoration as equivalent to a new roof for underwriting purposes — we recommend asking your broker to verify before the project begins.",
+      },
+    ],
+  },
+  {
+    citySlug: "plano",
+    serviceSlug: "coatings-restoration",
+    intro:
+      "Plano's Class A office campuses and medical office buildings represent high-value real estate where a coatings restoration can defer a major capital expenditure by a decade or more. We apply silicone and acrylic restoration systems over properly prepared substrates, extending roof life with a new manufacturer warranty and a fully documented condition history that satisfies institutional lenders and property auditors.",
+    localDistricts: [
+      "Legacy West & Granite Park corporate towers",
+      "Coit Road & Independence medical office corridor",
+      "Shops at Legacy & upscale retail centers",
+    ],
+    buildingContext:
+      "Plano's high-end commercial buildings have demanding coatings restoration requirements: the substrate must be confirmed completely dry, the application must not disrupt Class A tenants or medical operations, and the finished system must carry a manufacturer warranty acceptable to institutional property owners. We manage all three — moisture scanning before contract execution, phased application around tenant schedules, and full manufacturer warranty registration at project close.",
+    weatherUrgency:
+      "Plano's UV load — combined with the rooftop heat island effect on Class A office buildings with large HVAC arrays — degrades membranes faster than UV data alone would suggest. A white silicone coating reduces rooftop temperatures by 60–80°F, meaningfully extending HVAC system life on the buildings below in addition to protecting the membrane.",
+    faqs: [
+      {
+        question: "Can a coatings restoration be applied without disrupting our Plano Class A tenants?",
+        answer:
+          "Yes. We stage the application in sections, working sections above unoccupied floors or during after-hours windows where tenants are sensitive. Silicone coatings applied correctly produce minimal odor and no VOC exposure inside the building.",
+      },
+      {
+        question: "What warranty does a coating restoration carry on a Plano Class A office building?",
+        answer:
+          "10–15 year manufacturer system warranties are available from Firestone, Mule-Hide, and other approved restoration manufacturers, depending on the substrate condition and coating thickness applied. We specify and register the warranty as part of the project deliverables.",
+      },
+    ],
+  },
+  {
+    citySlug: "mckinney",
+    serviceSlug: "coatings-restoration",
+    intro:
+      "McKinney's commercial roof stock includes some of the best coatings restoration candidates in Collin County — older modified bitumen systems on downtown commercial buildings, aging single-ply on retail centers along US-380, and metal buildings in the industrial corridor that are ideal for spray polyurethane foam restoration. We assess every candidate with moisture scanning before recommending restoration so the investment is protected from day one.",
+    localDistricts: [
+      "Historic Downtown McKinney commercial and retail square",
+      "US-380 commercial corridor retail and flex-industrial",
+      "Craig Ranch medical campus adjacent commercial buildings",
+    ],
+    buildingContext:
+      "McKinney's historic downtown buildings present a specialized restoration opportunity: older modified bitumen and built-up systems with sound substrates that have never been properly maintained. An acrylic or silicone coating applied over a cleaned and primed surface can add 10+ years at a fraction of the cost of a full replacement on a historic building where tear-off and re-decking would be significantly more complex and expensive.",
+    weatherUrgency:
+      "Collin County hail frequency makes impact resistance a key specification criterion for McKinney coating projects. We evaluate silicone systems with published hail impact ratings when specifying for McKinney properties, providing documentation that can support insurance premium reductions on properties that achieve FM or UL impact ratings with the restored assembly.",
+    faqs: [
+      {
+        question: "Can you restore the roof on our historic McKinney downtown building with a coating?",
+        answer:
+          "Yes, provided the substrate passes moisture scanning. We apply coatings compatible with modified bitumen and built-up assemblies — including base and finish coats appropriate for the existing surface — and detail the historic parapet flashings so the restoration is comprehensive, not just a surface coat.",
+      },
+      {
+        question: "What's the ROI on a coatings restoration versus replacement on a McKinney commercial building?",
+        answer:
+          "For a sound substrate, restoration typically costs 40–60% of replacement and extends life by 10–15 years. The break-even on that investment versus the deferred replacement capital is typically 2–4 years when energy savings are included.",
+      },
+    ],
+  },
+  {
+    citySlug: "arlington",
+    serviceSlug: "coatings-restoration",
+    intro:
+      "Arlington's enormous industrial roof footprint — hundreds of buildings in the Great Southwest district with metal panels, modified bitumen, and aging single-ply — makes it one of the best coatings restoration markets in the DFW Metroplex. At scale, restoration versus replacement on a 200,000 sq ft warehouse can save $500,000 or more in capital expenditure while delivering 10–15 additional years of service life with a new manufacturer warranty.",
+    localDistricts: [
+      "Great Southwest Industrial District warehouses & distribution centers",
+      "North Arlington commercial and retail corridor",
+      "Entertainment District hotels and stadium-adjacent buildings",
+    ],
+    buildingContext:
+      "Arlington's industrial metal buildings are the most common and most cost-effective coatings restoration candidates in the market. Metal panel roofs with leaking lap seams are frequently misquoted for full replacement when a spray polyurethane foam restoration with a silicone topcoat would solve the problem at half the cost and provide better thermal performance. We provide honest condition assessments that recommend the right scope — not the largest scope.",
+    weatherUrgency:
+      "Arlington's position between two storm tracks means its large industrial roofs accumulate UV, hail, and thermal cycle stress at an accelerated rate. A fresh silicone coating on a sound substrate reflects 85%+ of solar radiation, reducing rooftop temperatures dramatically and slowing the thermal fatigue that degrades coating films and lap seam adhesion on uncoated metal roofs.",
+    faqs: [
+      {
+        question: "Our Great Southwest warehouse has a leaking metal panel roof. Is restoration the right answer?",
+        answer:
+          "Often yes — we'll start with a moisture scan and lap seam inspection. If the substrate is dry and the panel profiles are structurally sound, spray polyurethane foam restoration seals every seam and penetration more reliably than re-caulking, and the silicone topcoat provides a 15–20 year NDL warranty. The project cost is typically half of a standing seam re-roof.",
+      },
+      {
+        question: "Can you restore multiple Arlington warehouse roofs under a single project contract?",
+        answer:
+          "Yes — portfolio restoration projects across multiple Arlington buildings receive competitive pricing due to mobilization efficiency. We sequence projects to maintain production momentum and minimize crew transition time between buildings.",
+      },
+    ],
+  },
+
+  // ── FLAT ROOFING ─────────────────────────────────────────────────────────
+  {
+    citySlug: "dallas",
+    serviceSlug: "flat-roofing",
+    intro:
+      "Virtually every large commercial building in Dallas — from high-bay warehouses in the Design District to multi-story medical office buildings near Parkland — has a flat or low-slope roof. We design and install flat roofing systems engineered for Dallas's specific combination of UV intensity, hail exposure, and ponding-water risk, backed by manufacturer NDL warranties from Firestone, Mule-Hide, and Duro-Last.",
+    localDistricts: [
+      "Design District warehouse & showroom buildings",
+      "Medical District hospital systems & MOB campuses",
+      "I-30 / I-20 distribution & logistics parks",
+    ],
+    buildingContext:
+      "Dallas flat roofing projects range from 5,000 sq ft neighborhood retail pad sites to 400,000+ sq ft cold-storage distribution centers. Each requires a tailored approach: proper slope design for ponding prevention, correct insulation R-value for the occupancy type, and the right membrane system for the building's UV, traffic, and chemical exposure. We core-drill every Dallas flat roofing project to assess the existing assembly before specifying the new one.",
+    weatherUrgency:
+      "Dallas flat roofs collect more water per storm than any other roof geometry — and Dallas averages more than 40 inches of rain annually with a significant portion falling in high-intensity events. Proper drainage design is the most important flat roofing decision a Dallas building owner makes. We size primary and secondary drainage for 100-year storm events, not average annual rainfall.",
+    faqs: [
+      {
+        question: "What flat roofing systems do you install in Dallas?",
+        answer:
+          "TPO, EPDM, and PVC single-ply (mechanically attached, fully adhered, or ballasted), built-up roofing (BUR), modified bitumen (torch-applied and cold-process), and spray polyurethane foam (SPF). System selection is driven by the building's use, drainage profile, traffic pattern, and owner's warranty preference.",
+      },
+      {
+        question: "How do you address ponding water on Dallas flat roofs?",
+        answer:
+          "We assess the existing slope during our core-drill and drain survey. Where primary drains are inadequate, we add drains, install tapered insulation to direct water to existing drains, or specify a coating-grade membrane that tolerates intermittent ponding. The goal is zero standing water 48 hours after any storm event.",
+      },
+      {
+        question: "What warranties are available on a Dallas flat roofing installation?",
+        answer:
+          "Manufacturer NDL (No Dollar Limit) warranties of 15, 20, 25, or 30 years from Firestone, Mule-Hide, and Duro-Last depending on the system and substrate. We also provide a separate craftsmanship warranty on our labor.",
+      },
+    ],
+  },
+  {
+    citySlug: "fort-worth",
+    serviceSlug: "flat-roofing",
+    intro:
+      "Fort Worth's industrial and logistics sector has one of the highest concentrations of large flat roofs in the Metroplex. From AllianceTexas mega-distribution facilities to Near Southside manufacturing plants, we design and install flat roofing systems that handle the wind uplift requirements, drainage challenges, and occupancy-specific needs of Tarrant County's diverse commercial building inventory.",
+    localDistricts: [
+      "AllianceTexas industrial & logistics mega-facilities",
+      "Near Southside manufacturing & warehouse district",
+      "Sundance Square & downtown Fort Worth office and hospitality buildings",
+    ],
+    buildingContext:
+      "Fort Worth flat roofing is dominated by large-scale industrial applications. Warehouses and distribution centers at Alliance can exceed 1,000,000 sq ft under a single roof — these projects require sophisticated phasing plans, advanced logistics for material delivery, and attachment designs engineered for Tarrant County's extreme wind uplift requirements. We have the experience and equipment to execute at this scale without interrupting operations.",
+    weatherUrgency:
+      "Tarrant County's wind uplift requirements are among the most demanding in Texas. Fort Worth's position in the open plains west of the Metroplex exposes large flat roofs to derechos and severe thunderstorm wind events that regularly exceed design speed. We specify attachment densities above code minimum on Fort Worth flat roofing projects to build in safety factor for the real wind environment.",
+    faqs: [
+      {
+        question: "Can you install a flat roof on a Fort Worth distribution center that operates 24/7?",
+        answer:
+          "Yes — phased flat roofing installation on occupied industrial facilities is a Fort Worth specialty. We sequence tear-off and installation section by section with daily dry-in, so no part of the building is ever left with an open deck and operations never stop.",
+      },
+      {
+        question: "What flat roofing system performs best on Fort Worth's large industrial buildings?",
+        answer:
+          "For large Tarrant County industrial buildings, mechanically attached 60-mil or 80-mil TPO is the most cost-effective system that meets all wind uplift and warranty requirements. Heavy-duty mechanically attached assemblies can be designed to exceed FM 1-90 and 1-120 uplift requirements for the most exposed Alliance-area facilities.",
+      },
+    ],
+  },
+  {
+    citySlug: "frisco",
+    serviceSlug: "flat-roofing",
+    intro:
+      "Frisco's booming commercial construction market — new Class A office towers, lifestyle retail centers, mixed-use developments, and sports and entertainment facilities along the Tollway — demands flat roofing systems specified for the long term, not just the lowest initial cost. We work with Frisco developers, general contractors, and building owners to engineer and install flat roofing systems that deliver 20–30 year service life with manufacturer NDL warranty backing.",
+    localDistricts: [
+      "Dallas North Tollway Frisco new construction corridor",
+      "The Star & Fields development zone",
+      "Frisco Square mixed-use civic and retail buildings",
+    ],
+    buildingContext:
+      "Frisco's new construction flat roofing market requires tight coordination with general contractors and MEP trades — rooftop HVAC equipment placement, solar-ready substrate requirements, and green roof assemblies are increasingly common on Frisco's Class A projects. We bring design-assist capability to the table early in the project so the flat roofing system integrates correctly with the building systems above and below.",
+    weatherUrgency:
+      "New flat roofing in Collin County must be specified for Class 4 hail impact resistance — the insurance market increasingly requires it, and Frisco's hail exposure makes it the right call regardless. We specify Class 4 impact-rated assemblies as the default on Frisco flat roofing installations and provide the documentation package your insurance broker needs.",
+    faqs: [
+      {
+        question: "Do you work with Frisco general contractors on new commercial construction flat roofing?",
+        answer:
+          "Yes — we provide design-assist services during pre-construction, work under the GC's coordination schedule, and deliver manufacturer warranty documentation at substantial completion. We're comfortable with Procore, Bluebeam, and the typical GC documentation requirements for Frisco commercial projects.",
+      },
+      {
+        question: "Can you install a green roof or solar-ready assembly on a new Frisco commercial building?",
+        answer:
+          "Yes. We install protected membrane assemblies (IRMA) for green roof applications and can coordinate the waterproofing layer with the landscape or solar contractor's requirements. We also provide ballast-free, penetration-free solar-ready substrates for standing seam solar mount systems.",
+      },
+    ],
+  },
+  {
+    citySlug: "plano",
+    serviceSlug: "flat-roofing",
+    intro:
+      "Plano's Class A office campuses and medical office buildings set a high bar for flat roofing performance — no interior events, minimal tenant disruption during installation, and long-term warranty documentation that satisfies institutional investors. We engineer and install flat roofing systems for Plano's most demanding properties with that standard as our baseline, not our stretch goal.",
+    localDistricts: [
+      "Legacy West & Granite Park corporate office towers",
+      "Medical corridor buildings along Coit and Independence",
+      "Plano US-75 office campus corridor",
+    ],
+    buildingContext:
+      "Plano flat roofing installations on occupied Class A properties require a level of coordination that goes beyond standard commercial roofing. Tenant notifications, access control for crews working above leased floors, low-odor adhesive specifications near sensitive medical areas, and daily close-out protocols are part of every Plano flat roofing project we execute. We bring that operational discipline as standard practice.",
+    weatherUrgency:
+      "Plano's Collin County location subjects flat roofs to the highest hail frequency in the DFW metro. We specify Class 4 impact-rated assemblies on every Plano flat roofing installation — the combination of FM-approved cover board and 60-mil or heavier single-ply provides demonstrated resistance to the golf-ball and baseball-sized hail that Collin County produces every spring season.",
+    faqs: [
+      {
+        question: "How do you coordinate a flat roof installation above occupied Plano Class A office floors?",
+        answer:
+          "Pre-project: written tenant notification, crew access protocol review, and a daily schedule shared with the property manager. During project: section-by-section installation with same-day close-out, no open deck overnight, low-odor materials above sensitive areas, and a daily summary to the property management team.",
+      },
+      {
+        question: "What flat roofing warranty is appropriate for a Plano institutional office building?",
+        answer:
+          "For institutional-grade assets, we recommend a 25 or 30-year manufacturer NDL warranty from Firestone or Duro-Last, combined with a 5-year labor warranty. This warranty package meets most institutional lender requirements and is acceptable to the major commercial property carriers active in the Collin County market.",
+      },
+    ],
+  },
+  {
+    citySlug: "mckinney",
+    serviceSlug: "flat-roofing",
+    intro:
+      "McKinney's fast-growing commercial market spans a wide range of flat roofing needs — historic downtown buildings that need careful tear-off and assembly-matched replacement, new Craig Ranch medical campuses requiring precision installation, and US-380 corridor industrial buildings where cost-per-square-foot and operational uptime both matter. We serve the full spectrum with the right approach for each building type.",
+    localDistricts: [
+      "Historic Downtown McKinney commercial district",
+      "Craig Ranch medical and corporate campus",
+      "US-380 commercial and industrial corridor",
+    ],
+    buildingContext:
+      "McKinney's historic downtown buildings require flat roofing approaches that respect existing parapet heights and architectural details — tear-off must be carefully managed to avoid disturbing the masonry, and flashing details must match the historic character. Craig Ranch medical buildings demand precision installation around dense rooftop mechanical equipment. US-380 industrial buildings need cost-effective systems with strong wind uplift performance for northern Collin County's exposure profile.",
+    weatherUrgency:
+      "Northern Collin County is at the leading edge of the DFW hail corridor — McKinney flat roofs absorb some of the highest annual hail impact loads in the metro area. We specify impact-rated assemblies on all McKinney flat roofing projects and provide the FM impact classification documentation that qualifies buildings for insurance premium reductions.",
+    faqs: [
+      {
+        question: "We're replacing the flat roof on our 1920s McKinney downtown building. What system do you recommend?",
+        answer:
+          "Fully adhered EPDM or TPO over a cover board, with custom-fabricated metal flashings that match the historic parapet height and profile. Fully adhered systems require no fasteners through the historic deck and provide excellent performance on the irregular substrates common in older McKinney downtown buildings.",
+      },
+      {
+        question: "How do flat roofing costs compare between new construction and replacement in McKinney?",
+        answer:
+          "New construction flat roofing is typically 15–25% less expensive per square foot than replacement because there's no tear-off cost. Replacement projects also add deck repair labor and materials if the substrate is compromised. We provide transparent line-item quotes so you can see every component.",
+      },
+    ],
+  },
+  {
+    citySlug: "arlington",
+    serviceSlug: "flat-roofing",
+    intro:
+      "Arlington has more flat roofing square footage than almost any other DFW city — the Great Southwest Industrial District alone contains millions of square feet of low-slope commercial roof across distribution centers, manufacturing plants, and warehouses. We install and replace flat roofing systems at this scale with phased execution plans that keep operations running throughout the project.",
+    localDistricts: [
+      "Great Southwest Industrial District mega-warehouses & distribution centers",
+      "Entertainment District hotels, arenas & retail",
+      "UT Arlington campus & surrounding commercial buildings",
+    ],
+    buildingContext:
+      "Arlington flat roofing at industrial scale demands a different approach than a typical commercial project. Material delivery logistics, crane placement for large HVAC equipment, sequenced tear-off and installation across active logistics floors, and FOD protocols on facilities adjacent to heavy equipment operations are all standard considerations for Great Southwest district projects. We have the equipment and planning capacity to manage them.",
+    weatherUrgency:
+      "Arlington's large flat roofs are the most exposure-intensive in the Metroplex — massive surface areas catching UV, hail, and thermal cycling with no topographic protection. We size every Arlington flat roofing installation for the worst-case storm event rather than average annual conditions, specifying attachment densities and membrane weights that provide meaningful margin above code minimum requirements.",
+    faqs: [
+      {
+        question: "Can you re-roof a 250,000 sq ft Arlington warehouse while it stays open?",
+        answer:
+          "Yes — we have completed multiple projects at this scale in the Great Southwest district without halting a shift. The project is divided into daily installation sections, each dried in completely before the crew leaves that evening. Operations continue below throughout the project.",
+      },
+      {
+        question: "What are the wind uplift requirements for flat roofing in Arlington?",
+        answer:
+          "Arlington falls in the ASCE 7 wind zone that requires designs meeting FM 1-60 minimum and typically 1-90 for most commercial roof configurations. We calculate uplift requirements based on building height, roof zone, and exposure category and specify attachment to exceed those requirements.",
+      },
+    ],
+  },
+
+  // ── METAL ROOFING ────────────────────────────────────────────────────────
+  {
+    citySlug: "dallas",
+    serviceSlug: "metal-roofing",
+    intro:
+      "Standing seam metal roofing is the highest-durability, longest-service-life option available for Dallas commercial buildings — 40-to-60-year lifespans, Class 4 hail resistance, and excellent energy performance. From Design District adaptive reuse buildings to new corporate campuses in the northern suburbs, we install and restore commercial metal roofing systems designed for Dallas's hail exposure and UV intensity.",
+    localDistricts: [
+      "Design District adaptive reuse & creative office buildings",
+      "Medical District and hospital campus facilities",
+      "North Dallas & Park Cities corporate and institutional buildings",
+    ],
+    buildingContext:
+      "Dallas metal roofing spans new construction standing seam on corporate campuses to retrofit standing seam over existing low-slope assemblies. We also restore aging Dallas metal panel roofs — lap seam re-caulking, panel replacement, and spray polyurethane foam restoration — as cost-effective alternatives to full re-roofing when the panel structure is still sound.",
+    weatherUrgency:
+      "Dallas's hail environment makes Class 4 impact rating a strong argument for metal roofing — a standing seam metal roof rated Class 4 can qualify for significant property insurance discounts in Dallas County, where hail claims drive the highest commercial roofing insurance losses in Texas. We provide the Class 4 impact certification documentation your carrier needs.",
+    faqs: [
+      {
+        question: "What types of commercial metal roofing do you install in Dallas?",
+        answer:
+          "Standing seam (snap-lock and mechanically seamed), exposed-fastener metal panels, metal shingle systems, and retrofit standing seam over existing low-slope roofs. System selection depends on the building's architectural requirements, budget, and long-term ownership horizon.",
+      },
+      {
+        question: "Can metal roofing be installed over our existing Dallas flat roof assembly?",
+        answer:
+          "Often yes — a retrofit standing seam system installed over a structurally sound existing roof eliminates tear-off cost, adds slope for drainage, and provides a 40-year service life. We assess the existing assembly's load capacity and attachment points before recommending this approach.",
+      },
+      {
+        question: "Does Dallas commercial metal roofing qualify for energy tax credits?",
+        answer:
+          "Reflective metal roofing with Energy Star or Cool Roof Rating Council certification qualifies for federal energy efficiency incentives under current IRS guidance for commercial properties. We can provide the product certification documentation your CPA needs.",
+      },
+    ],
+  },
+  {
+    citySlug: "fort-worth",
+    serviceSlug: "metal-roofing",
+    intro:
+      "Metal roofing has dominated Fort Worth's industrial and manufacturing building stock for decades — and it remains the preferred system for new industrial construction in the AllianceTexas corridor. We install, repair, and restore commercial metal roofing across all of Tarrant County, from standing seam on new manufacturing facilities to spray polyurethane foam restoration on aging exposed-fastener panels.",
+    localDistricts: [
+      "AllianceTexas industrial & aerospace manufacturing corridor",
+      "Near Southside manufacturing and warehouse district",
+      "West Fort Worth industrial and commercial properties",
+    ],
+    buildingContext:
+      "Tarrant County's industrial metal roofing market is one of the largest in Texas. Exposed-fastener metal panels on aging Fort Worth warehouses are the most common restoration project — failing lap seam caulk and backed-out fasteners create widespread small leaks that traditional re-caulking fails to solve permanently. We offer spray polyurethane foam restoration as a definitive fix: foam seals every seam and penetration, and a silicone topcoat provides a 15–20 year system warranty.",
+    weatherUrgency:
+      "Fort Worth's straight-line wind events — particularly the derechos that roll in from the west during spring and fall — create the highest fastener pull-out and panel uplift risk in the Metroplex. We design Fort Worth metal roofing attachment for the ASCE 7 wind exposure appropriate to each building's location and height, not just code minimum.",
+    faqs: [
+      {
+        question: "Our Fort Worth warehouse has an exposed-fastener metal panel roof that leaks at every lap seam. What's the best fix?",
+        answer:
+          "Spray polyurethane foam restoration is the most durable solution for lap seam leaks on Fort Worth metal buildings. Foam adheres to the panel and fills the seam completely — there's nothing to back out or crack over time the way re-caulked fasteners do. A silicone topcoat finishes the system with a 15–20 year manufacturer warranty.",
+      },
+      {
+        question: "Can you install new standing seam metal roofing on an Alliance industrial facility?",
+        answer:
+          "Yes. We install Berridge, MBCI, and other commercial-grade standing seam systems on new Fort Worth industrial construction and on retrofit applications over existing low-slope assemblies. Alliance-area projects receive our full FOD-compliant protocol for aerospace-adjacent facilities.",
+      },
+    ],
+  },
+  {
+    citySlug: "frisco",
+    serviceSlug: "metal-roofing",
+    intro:
+      "Frisco's upscale commercial and mixed-use development along the Tollway corridor increasingly specifies standing seam metal roofing for its architectural character, longevity, and Class 4 hail rating. We install commercial metal roofing systems on Frisco's new construction projects and restore aging metal panel systems on earlier Frisco commercial buildings, delivering manufacturer-warranted systems designed for Collin County's hail environment.",
+    localDistricts: [
+      "Dallas North Tollway Frisco mixed-use & corporate campuses",
+      "The Star development and Fields district",
+      "Frisco Square civic and retail buildings",
+    ],
+    buildingContext:
+      "Frisco commercial metal roofing spans standing seam architectural systems on Class A mixed-use buildings to exposed-fastener panels on retail and light commercial structures. New Frisco construction increasingly specifies metal for its 40–60 year service life and Class 4 impact rating — ownership groups and institutional investors recognize that the higher upfront cost is justified by the dramatically lower life-cycle cost compared to single-ply systems on a 30-year hold.",
+    weatherUrgency:
+      "Collin County's hail frequency makes Class 4 impact-rated metal roofing the most logical long-term choice for Frisco commercial property owners. A standing seam metal roof with Class 4 rating can reduce annual property insurance premiums by 20–30% with Collin County carriers — a discount that starts reducing the premium cost differential between metal and single-ply from year one.",
+    faqs: [
+      {
+        question: "How does the long-term cost of metal roofing compare to TPO on a Frisco commercial building?",
+        answer:
+          "Over a 40-year ownership horizon, standing seam metal typically costs less per year than TPO when the TPO's two replacement cycles are included. The higher upfront cost of metal is offset by zero replacement cycles and lower maintenance costs — and the Class 4 insurance premium discount adds to the economic case.",
+      },
+      {
+        question: "What metal roofing systems are suitable for Frisco's Class A mixed-use buildings?",
+        answer:
+          "Mechanically seamed standing seam in Galvalume, painted steel, or aluminum for architectural applications. For energy performance, we specify high-reflectivity Kynar 500 coatings that achieve Energy Star certification and the Cool Roof Rating Council values that qualify for commercial energy incentives.",
+      },
+    ],
+  },
+  {
+    citySlug: "plano",
+    serviceSlug: "metal-roofing",
+    intro:
+      "Plano's high-end commercial real estate market — Fortune 500 corporate campuses, medical office buildings, and upscale retail centers — is increasingly specifying standing seam metal roofing for its combination of architectural quality, 40–60 year service life, and Class 4 hail resistance. We install and restore commercial metal roofing systems across Plano with the operational precision that Class A occupied buildings require.",
+    localDistricts: [
+      "Legacy West & Granite Park corporate campuses",
+      "Shops at Legacy & upscale retail and dining",
+      "Medical office corridor along Coit and Independence",
+    ],
+    buildingContext:
+      "Plano metal roofing installations on high-end corporate properties carry strict aesthetic and operational requirements. Panel profiles, coating colors, and seam detailing must satisfy architectural review and corporate brand standards. Crew access, noise management, and daily close-out protocols must satisfy property management requirements for Class A occupied buildings. We deliver on both the technical and operational requirements.",
+    weatherUrgency:
+      "Collin County hail is the top property insurance risk for Plano commercial building owners. A Class 4 impact-rated standing seam metal roof is one of the most effective risk-management tools available — providing documented impact resistance that qualifies for meaningful insurance premium reductions while delivering a roof that demonstrably outlasts the hail events that trigger single-ply replacement cycles.",
+    faqs: [
+      {
+        question: "Can you match the panel profile and color of existing metal roofing on our Plano corporate campus expansion?",
+        answer:
+          "Yes. We source panels from the same manufacturers as common original installations on Plano corporate campuses and can match Kynar 500 color formulations to existing panels with high precision. For expansions adjacent to existing metal roofing, color and profile matching is part of our standard pre-construction process.",
+      },
+      {
+        question: "How long does a commercial metal roofing installation take on a Plano Class A building?",
+        answer:
+          "A 20,000–40,000 sq ft standing seam installation typically takes 3–4 weeks from first crew on-site. We sequence around occupied floors and provide daily progress summaries to property management so tenant communications are coordinated throughout.",
+      },
+    ],
+  },
+  {
+    citySlug: "mckinney",
+    serviceSlug: "metal-roofing",
+    intro:
+      "McKinney's mix of historic commercial buildings, modern medical campuses, and growing industrial corridor creates a diverse metal roofing market. We install new standing seam systems on McKinney's new construction, restore aging exposed-fastener metal panels on industrial buildings along US-380, and carefully detail metal flashings on historic downtown buildings where the roofing is an integral part of the building's architectural character.",
+    localDistricts: [
+      "Historic Downtown McKinney commercial district",
+      "US-380 commercial and light-industrial corridor",
+      "Craig Ranch medical campus and adjacent development",
+    ],
+    buildingContext:
+      "McKinney's historic downtown buildings present the most technically demanding metal roofing work in the market — copper or painted steel coping caps on historic parapets, custom-fabricated gravel stops on aging built-up assemblies, and standing seam sections on dormers and canopies that must match the building's architectural period. We fabricate custom metal roofing components in-house for McKinney's historic projects.",
+    weatherUrgency:
+      "Northern Collin County's position at the leading edge of the DFW hail corridor makes impact-rated metal roofing especially valuable for McKinney property owners. Class 4 standing seam metal roofing on a McKinney commercial building can produce the highest insurance premium discounts available to a Collin County property owner — we document the impact classification for every McKinney metal roofing installation.",
+    faqs: [
+      {
+        question: "Can you install custom metal roofing details on our historic McKinney downtown building?",
+        answer:
+          "Yes — we fabricate custom coping caps, gravel stops, and standing seam sections to match historical profiles and dimensions. Our McKinney historic building work includes copper and pre-patinated metal details that respect the building's original architectural character.",
+      },
+      {
+        question: "Our US-380 industrial building has an old exposed-fastener metal roof. What are my options?",
+        answer:
+          "Three paths: re-caulk and re-fastener (shortest-term fix, rarely holds more than 5 years), spray polyurethane foam restoration with silicone topcoat (15–20 year warranted solution at half the cost of re-roofing), or full standing seam re-roof (40–60 year solution). We'll assess the panel condition and give you a straight comparison of all three.",
+      },
+    ],
+  },
+  {
+    citySlug: "arlington",
+    serviceSlug: "metal-roofing",
+    intro:
+      "Arlington's massive industrial roof footprint includes more exposed-fastener metal panel square footage than almost any other DFW city. Leaking lap seams and backed-out fasteners are the most common roofing complaint in the Great Southwest district — and we offer three levels of metal roofing response, from targeted restoration to full standing seam re-roof, scaled to your building's condition and ownership horizon.",
+    localDistricts: [
+      "Great Southwest Industrial District warehouses & manufacturing plants",
+      "Entertainment District hotels & stadium venues",
+      "North Arlington commercial retail and office corridor",
+    ],
+    buildingContext:
+      "Arlington metal roofing at industrial scale involves buildings with 100,000–500,000 sq ft of exposed-fastener panels installed during the Great Southwest district's build-out in the 1980s and 1990s. These roofs are 25–40 years old and increasingly at or past their design life — but many still have structurally sound panels that are restoration candidates rather than replacement requirements. We provide honest condition assessments that tell you which path is right for your building.",
+    weatherUrgency:
+      "Arlington's wind exposure and thermal cycling create accelerated fastener pull-out on aging metal panel roofs. Backed-out fasteners create hundreds of small penetrations that allow water entry at every fastener location — and re-caulking is not a durable fix in Arlington's thermal environment. Spray polyurethane foam restoration encapsulates every fastener head and seam in a monolithic waterproof layer that doesn't fail from thermal movement.",
+    faqs: [
+      {
+        question: "How do I know if my Arlington metal roof needs restoration or full replacement?",
+        answer:
+          "The key factors are panel structural integrity and moisture content in the insulation below. We perform a panel condition inspection and moisture scan. If the panels are flat, fastener pull-out is moderate, and the insulation is dry, restoration is the right call. If panels are significantly oil-canned, the deck below has moisture, or more than 20% of fasteners are backed out, re-roofing is the more cost-effective long-term choice.",
+      },
+      {
+        question: "Can you restore a 300,000 sq ft Arlington metal roof while the distribution center operates?",
+        answer:
+          "Yes — spray polyurethane foam and silicone restoration is applied from above with no interior disruption. The facility continues operating normally throughout. We section the roof and maintain a buffer zone around any active exhaust or fresh-air intake equipment during application.",
+      },
+    ],
+  },
 ];
 
 export const serviceCityByKey = Object.fromEntries(
@@ -731,6 +1411,10 @@ export const SERVICE_CITY_SERVICE_LABELS: Record<string, string> = {
   replacement: "Full Roof Replacement",
   "tpo-epdm-pvc": "TPO / EPDM / PVC Membranes",
   "emergency-leak-repair": "Emergency Leak Repair",
+  maintenance: "Roof Maintenance Programs",
+  "coatings-restoration": "Coatings & Restoration",
+  "flat-roofing": "Flat & Low-Slope Roofing",
+  "metal-roofing": "Commercial Metal Roofing",
 };
 
 export const SERVICE_CITY_SERVICE_SHORT: Record<string, string> = {
@@ -738,4 +1422,8 @@ export const SERVICE_CITY_SERVICE_SHORT: Record<string, string> = {
   replacement: "Roof Replacement",
   "tpo-epdm-pvc": "Membrane Systems",
   "emergency-leak-repair": "Emergency Leak Repair",
+  maintenance: "Roof Maintenance",
+  "coatings-restoration": "Roof Coatings",
+  "flat-roofing": "Flat Roofing",
+  "metal-roofing": "Metal Roofing",
 };

@@ -19,7 +19,16 @@ const SERVICE_SLUGS = [
   "tpo-epdm-pvc",
 ];
 
-const SERVICE_CITY_SERVICE_SLUGS = ["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair"];
+const SERVICE_CITY_SERVICE_SLUGS = [
+  "repair",
+  "replacement",
+  "tpo-epdm-pvc",
+  "emergency-leak-repair",
+  "maintenance",
+  "coatings-restoration",
+  "flat-roofing",
+  "metal-roofing",
+];
 
 function urlEntry(
   loc: string,
