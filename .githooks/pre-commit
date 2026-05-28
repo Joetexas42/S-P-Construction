@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# pre-commit: auto-bump content dates when content source files are staged.
+#
+# Mapping of watched files → bump-date key:
+#   cities.ts          → cityPages
+#   services.ts        → servicePages
+#   serviceCityData.ts → serviceCityPages
+#   caseStudies.ts     → staticPages
+#   testimonials.ts    → staticPages
+
+set -euo pipefail
+
+STAGED=$(git diff --cached --name-only 2>/dev/null || true)
+
+if [ -z "$STAGED" ]; then
+  exit 0
+fi
+
+BUMP_CITY_PAGES=0
+BUMP_SERVICE_PAGES=0
+BUMP_SERVICE_CITY_PAGES=0
+BUMP_STATIC_PAGES=0
+
+while IFS= read -r file; do
+  case "$file" in
+    artifacts/roofing-website/src/data/cities.ts)
+      BUMP_CITY_PAGES=1
+      ;;
+    artifacts/roofing-website/src/data/services.ts)
+      BUMP_SERVICE_PAGES=1
+      ;;
+    artifacts/roofing-website/src/data/serviceCityData.ts)
+      BUMP_SERVICE_CITY_PAGES=1
+      ;;
+    artifacts/roofing-website/src/data/caseStudies.ts|\
+    artifacts/roofing-website/src/data/testimonials.ts)
+      BUMP_STATIC_PAGES=1
+      ;;
+  esac
+done <<< "$STAGED"
+
+TOTAL=$((BUMP_CITY_PAGES + BUMP_SERVICE_PAGES + BUMP_SERVICE_CITY_PAGES + BUMP_STATIC_PAGES))
+
+if [ "$TOTAL" -eq 0 ]; then
+  exit 0
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+run_bump() {
+  local key="$1"
+  echo "[pre-commit] bumping content date: $key"
+  (cd "$REPO_ROOT" && pnpm --filter @workspace/api-server run bump-date "$key")
+}
+
+[ "$BUMP_CITY_PAGES"        -eq 1 ] && run_bump cityPages
+[ "$BUMP_SERVICE_PAGES"     -eq 1 ] && run_bump servicePages
+[ "$BUMP_SERVICE_CITY_PAGES" -eq 1 ] && run_bump serviceCityPages
+[ "$BUMP_STATIC_PAGES"      -eq 1 ] && run_bump staticPages
+
+git add "$REPO_ROOT/artifacts/api-server/src/content-dates.ts"
