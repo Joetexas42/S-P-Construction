@@ -278,8 +278,10 @@ export function Navbar() {
                 <Link
                   key={link.path}
                   href={link.path}
-                  className={`text-2xl font-heading font-bold uppercase tracking-tight ${
-                    location === link.path ? "text-secondary" : "text-foreground"
+                  className={`rounded-md px-2 py-1 -mx-2 text-2xl font-heading font-bold uppercase tracking-tight transition-all duration-200 hover:bg-muted active:scale-[0.97] ${
+                    location === link.path
+                      ? "text-secondary"
+                      : "text-foreground hover:text-secondary active:text-secondary"
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
