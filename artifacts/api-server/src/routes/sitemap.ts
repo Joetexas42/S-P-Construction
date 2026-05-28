@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { CONTENT_DATES } from "../content-dates.js";
 
 const router = Router();
 
@@ -30,8 +31,6 @@ const SERVICE_CITY_SERVICE_SLUGS = [
   "metal-roofing",
 ];
 
-const SERVICE_CITY_LASTMOD = "2026-05-28";
-
 function urlEntry(
   loc: string,
   opts: { priority?: string; changefreq?: string; lastmod?: string } = {},
@@ -53,39 +52,43 @@ function sitemapXml(entries: string[]): string {
   ].join("\n");
 }
 
-function buildStaticEntries(today: string): string[] {
+function buildStaticEntries(): string[] {
+  const lastmod = CONTENT_DATES.staticPages;
   return [
-    urlEntry(`${SITE_ORIGIN}/`, { priority: "1.0", changefreq: "weekly", lastmod: today }),
-    urlEntry(`${SITE_ORIGIN}/services`, { priority: "0.9", changefreq: "monthly", lastmod: today }),
-    urlEntry(`${SITE_ORIGIN}/service-areas`, { priority: "0.9", changefreq: "monthly", lastmod: today }),
-    urlEntry(`${SITE_ORIGIN}/projects`, { priority: "0.8", changefreq: "monthly", lastmod: today }),
-    urlEntry(`${SITE_ORIGIN}/gallery`, { priority: "0.7", changefreq: "monthly", lastmod: today }),
-    urlEntry(`${SITE_ORIGIN}/contact`, { priority: "0.8", changefreq: "yearly", lastmod: today }),
-    urlEntry(`${SITE_ORIGIN}/estimate`, { priority: "0.8", changefreq: "yearly", lastmod: today }),
+    urlEntry(`${SITE_ORIGIN}/`, { priority: "1.0", changefreq: "weekly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/services`, { priority: "0.9", changefreq: "monthly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/service-areas`, { priority: "0.9", changefreq: "monthly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/projects`, { priority: "0.8", changefreq: "monthly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/gallery`, { priority: "0.7", changefreq: "monthly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/contact`, { priority: "0.8", changefreq: "yearly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/estimate`, { priority: "0.8", changefreq: "yearly", lastmod }),
   ];
 }
 
-function buildServiceEntries(today: string): string[] {
+function buildServiceEntries(): string[] {
+  const lastmod = CONTENT_DATES.servicePages;
   return SERVICE_SLUGS.map((slug) =>
     urlEntry(`${SITE_ORIGIN}/services/${slug}`, {
       priority: "0.8",
       changefreq: "monthly",
-      lastmod: today,
+      lastmod,
     }),
   );
 }
 
-function buildCityEntries(today: string): string[] {
+function buildCityEntries(): string[] {
+  const lastmod = CONTENT_DATES.cityPages;
   return CITY_SLUGS.map((slug) =>
     urlEntry(`${SITE_ORIGIN}/service-areas/${slug}`, {
       priority: "0.8",
       changefreq: "monthly",
-      lastmod: today,
+      lastmod,
     }),
   );
 }
 
 function buildServiceCityEntries(): string[] {
+  const lastmod = CONTENT_DATES.serviceCityPages;
   const entries: string[] = [];
   for (const citySlug of CITY_SLUGS) {
     for (const serviceSlug of SERVICE_CITY_SERVICE_SLUGS) {
@@ -93,7 +96,7 @@ function buildServiceCityEntries(): string[] {
         urlEntry(`${SITE_ORIGIN}/service-areas/${citySlug}/${serviceSlug}`, {
           priority: "0.8",
           changefreq: "monthly",
-          lastmod: SERVICE_CITY_LASTMOD,
+          lastmod,
         }),
       );
     }
@@ -102,26 +105,24 @@ function buildServiceCityEntries(): string[] {
 }
 
 router.get("/sitemap-index.xml", (_req, res) => {
-  const today = new Date().toISOString().split("T")[0];
-
   const xml = [
     `<?xml version="1.0" encoding="UTF-8"?>`,
     `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
     `  <sitemap>`,
     `    <loc>${SITE_ORIGIN}/sitemap-static.xml</loc>`,
-    `    <lastmod>${today}</lastmod>`,
+    `    <lastmod>${CONTENT_DATES.staticPages}</lastmod>`,
     `  </sitemap>`,
     `  <sitemap>`,
     `    <loc>${SITE_ORIGIN}/sitemap-services.xml</loc>`,
-    `    <lastmod>${today}</lastmod>`,
+    `    <lastmod>${CONTENT_DATES.servicePages}</lastmod>`,
     `  </sitemap>`,
     `  <sitemap>`,
     `    <loc>${SITE_ORIGIN}/sitemap-cities.xml</loc>`,
-    `    <lastmod>${today}</lastmod>`,
+    `    <lastmod>${CONTENT_DATES.cityPages}</lastmod>`,
     `  </sitemap>`,
     `  <sitemap>`,
     `    <loc>${SITE_ORIGIN}/sitemap-service-cities.xml</loc>`,
-    `    <lastmod>${SERVICE_CITY_LASTMOD}</lastmod>`,
+    `    <lastmod>${CONTENT_DATES.serviceCityPages}</lastmod>`,
     `  </sitemap>`,
     `</sitemapindex>`,
   ].join("\n");
@@ -131,21 +132,18 @@ router.get("/sitemap-index.xml", (_req, res) => {
 });
 
 router.get("/sitemap-static.xml", (_req, res) => {
-  const today = new Date().toISOString().split("T")[0];
   res.setHeader("Content-Type", "application/xml");
-  res.send(sitemapXml(buildStaticEntries(today)));
+  res.send(sitemapXml(buildStaticEntries()));
 });
 
 router.get("/sitemap-services.xml", (_req, res) => {
-  const today = new Date().toISOString().split("T")[0];
   res.setHeader("Content-Type", "application/xml");
-  res.send(sitemapXml(buildServiceEntries(today)));
+  res.send(sitemapXml(buildServiceEntries()));
 });
 
 router.get("/sitemap-cities.xml", (_req, res) => {
-  const today = new Date().toISOString().split("T")[0];
   res.setHeader("Content-Type", "application/xml");
-  res.send(sitemapXml(buildCityEntries(today)));
+  res.send(sitemapXml(buildCityEntries()));
 });
 
 router.get("/sitemap-service-cities.xml", (_req, res) => {
@@ -154,12 +152,10 @@ router.get("/sitemap-service-cities.xml", (_req, res) => {
 });
 
 router.get("/sitemap.xml", (_req, res) => {
-  const today = new Date().toISOString().split("T")[0];
-
   const xml = sitemapXml([
-    ...buildStaticEntries(today),
-    ...buildServiceEntries(today),
-    ...buildCityEntries(today),
+    ...buildStaticEntries(),
+    ...buildServiceEntries(),
+    ...buildCityEntries(),
     ...buildServiceCityEntries(),
   ]);
 
