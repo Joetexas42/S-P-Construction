@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { MapPin, Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2, ArrowRight } from "lucide-react";
+import { Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2, ArrowRight } from "lucide-react";
 import { SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
 import { ContactForm } from "@/components/ContactForm";
 import { ProjectLightbox } from "@/components/ProjectLightbox";
@@ -179,9 +179,13 @@ export default function CityPage({ city }: CityPageProps) {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
-              <Link href="/service-areas" className="inline-flex items-center gap-2 text-secondary hover:text-secondary/80 text-sm font-bold uppercase tracking-wider mb-6">
-                <MapPin className="h-4 w-4" /> All Service Areas
-              </Link>
+              <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">
+                <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                <span className="mx-2">/</span>
+                <Link href="/service-areas" className="hover:text-white transition-colors">Service Areas</Link>
+                <span className="mx-2">/</span>
+                <span className="text-white">{city.name}, TX</span>
+              </nav>
               <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
                 Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
               </h1>

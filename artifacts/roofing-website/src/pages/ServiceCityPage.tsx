@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning, ChevronRight } from "lucide-react";
+import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/ContactForm";
@@ -93,19 +93,19 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
       {
         "@type": "ListItem",
         position: 2,
-        name: "Service Areas",
-        item: `${SITE_ORIGIN}/service-areas`,
+        name: "Services",
+        item: `${SITE_ORIGIN}/services`,
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: `${city.name}, TX`,
-        item: `${SITE_ORIGIN}/service-areas/${city.slug}`,
+        name: service.shortTitle,
+        item: `${SITE_ORIGIN}/services/${service.slug}`,
       },
       {
         "@type": "ListItem",
         position: 4,
-        name: serviceLabel,
+        name: `${city.name}, TX`,
         item: canonical,
       },
     ],
@@ -212,16 +212,14 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
               {/* Breadcrumb */}
-              <nav className="flex flex-wrap items-center gap-1 text-sm text-primary-foreground/60 mb-6" aria-label="Breadcrumb">
-                <Link href="/service-areas" className="hover:text-white transition-colors flex items-center gap-1">
-                  <MapPin className="h-3.5 w-3.5" /> Service Areas
-                </Link>
-                <ChevronRight className="h-3.5 w-3.5 shrink-0" />
-                <Link href={`/service-areas/${city.slug}`} className="hover:text-white transition-colors">
-                  {city.name}, TX
-                </Link>
-                <ChevronRight className="h-3.5 w-3.5 shrink-0" />
-                <span className="text-white">{SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle}</span>
+              <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">
+                <Link href="/" className="hover:text-white transition-colors">Home</Link>
+                <span className="mx-2">/</span>
+                <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+                <span className="mx-2">/</span>
+                <Link href={`/services/${service.slug}`} className="hover:text-white transition-colors">{service.shortTitle}</Link>
+                <span className="mx-2">/</span>
+                <span className="text-white">{city.name}, TX</span>
               </nav>
 
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
