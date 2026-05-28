@@ -274,13 +274,14 @@ export default function Services() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {coreServices.map((svc) => {
+            {coreServices.map((svc, idx) => {
               const Icon = svc.icon;
               return (
                 <Link
                   key={svc.slug}
                   href={`/services/${svc.slug}`}
-                  className="group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  className="service-card-animate group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  style={{ animationDelay: `${idx * 40}ms` }}
                   data-testid={`core-service-${svc.slug}`}
                 >
                   <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 transition-transform duration-200 group-hover:scale-110">
