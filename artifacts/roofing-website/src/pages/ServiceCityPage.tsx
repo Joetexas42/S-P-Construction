@@ -212,14 +212,16 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
               {/* Breadcrumb */}
-              <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">
-                <Link href="/" className="hover:text-white transition-colors">Home</Link>
-                <span className="mx-2">/</span>
-                <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-                <span className="mx-2">/</span>
-                <Link href={`/services/${service.slug}`} className="hover:text-white transition-colors">{service.shortTitle}</Link>
-                <span className="mx-2">/</span>
-                <span className="text-white">{city.name}, TX</span>
+              <nav className="mb-6 text-sm text-primary-foreground/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
+                <Link href="/" className="hover:text-white transition-colors hidden sm:inline shrink-0">Home</Link>
+                <span className="mx-2 hidden sm:inline shrink-0">/</span>
+                <Link href="/services" className="hover:text-white transition-colors hidden sm:inline shrink-0">Services</Link>
+                <span className="mx-2 hidden sm:inline shrink-0">/</span>
+                <Link href={`/services/${service.slug}`} className="hover:text-white transition-colors hidden sm:inline shrink-0">{service.shortTitle}</Link>
+                <span className="mx-2 hidden sm:inline shrink-0">/</span>
+                <span className="sm:hidden text-primary-foreground/70 shrink-0">…</span>
+                <span className="mx-2 sm:hidden shrink-0">/</span>
+                <span className="text-white truncate">{city.name}, TX</span>
               </nav>
 
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">

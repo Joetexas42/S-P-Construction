@@ -148,12 +148,14 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
-            <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">
-              <Link href="/" className="hover:text-white transition-colors">Home</Link>
-              <span className="mx-2">/</span>
-              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-              <span className="mx-2">/</span>
-              <span className="text-white">{service.shortTitle}</span>
+            <nav className="mb-6 text-sm text-primary-foreground/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-white transition-colors hidden sm:inline shrink-0">Home</Link>
+              <span className="mx-2 hidden sm:inline shrink-0">/</span>
+              <Link href="/services" className="hover:text-white transition-colors hidden sm:inline shrink-0">Services</Link>
+              <span className="mx-2 hidden sm:inline shrink-0">/</span>
+              <span className="sm:hidden text-primary-foreground/70 shrink-0">…</span>
+              <span className="mx-2 sm:hidden shrink-0">/</span>
+              <span className="text-white truncate">{service.shortTitle}</span>
             </nav>
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center shrink-0">
