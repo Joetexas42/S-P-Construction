@@ -127,10 +127,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
   const contractorLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
+    "@id": `${canonical}#contractor`,
     name: `Scott Commercial Roofing — ${city.name}`,
     url: "https://scottcommercialroofing.com",
     telephone: "(972) 555-0100",
     email: "info@scottcommercialroofing.com",
+    image: `${SITE_ORIGIN}${service.heroImage.base}-800w.webp`,
     address: {
       "@type": "PostalAddress",
       addressLocality: city.name,
@@ -167,10 +169,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
+      "@id": `${canonical}#offer-catalog`,
       name: serviceLabel,
       itemListElement: [
         {
           "@type": "Offer",
+          "@id": `${canonical}#offer`,
           itemOffered: {
             "@type": "Service",
             name: serviceLabel,
