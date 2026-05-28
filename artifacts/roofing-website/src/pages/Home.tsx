@@ -61,12 +61,12 @@ export default function Home() {
   };
 
   const services = [
-    { name: "Commercial Roof Repair", icon: Wrench, desc: "Fast, permanent repairs for leaks, punctures, and weathering." },
-    { name: "Full Roof Replacement", icon: LayoutGrid, desc: "Complete tear-offs and replacements with minimal business disruption." },
-    { name: "Free Roof Inspections", icon: Search, desc: "Comprehensive structural assessments and thermal imaging." },
-    { name: "Storm & Hail Damage", icon: Zap, desc: "Insurance claims assistance and emergency weather recovery." },
-    { name: "TPO & EPDM Systems", icon: Layers, desc: "Durable, energy-efficient single-ply membrane installation." },
-    { name: "Metal Roofing Systems", icon: Shield, desc: "Standing seam and corrugated systems built to outlast." }
+    { name: "Commercial Roof Repair", icon: Wrench, desc: "Fast, permanent repairs for leaks, punctures, and weathering.", slug: "repair" },
+    { name: "Full Roof Replacement", icon: LayoutGrid, desc: "Complete tear-offs and replacements with minimal business disruption.", slug: "replacement" },
+    { name: "Free Roof Inspections", icon: Search, desc: "Comprehensive structural assessments and thermal imaging.", slug: "inspection" },
+    { name: "Storm & Hail Damage", icon: Zap, desc: "Insurance claims assistance and emergency weather recovery.", slug: "storm-damage" },
+    { name: "TPO & EPDM Systems", icon: Layers, desc: "Durable, energy-efficient single-ply membrane installation.", slug: "tpo-epdm-pvc" },
+    { name: "Metal Roofing Systems", icon: Shield, desc: "Standing seam and corrugated systems built to outlast.", slug: "metal-roofing" }
   ];
 
   return (
@@ -227,8 +227,8 @@ export default function Home() {
                 <service.icon className="h-12 w-12 text-secondary mb-6 group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-3 text-foreground">{service.name}</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{service.desc}</p>
-                <Link href="/services" className="text-sm font-bold text-secondary uppercase tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Learn More <span>&rarr;</span>
+                <Link href={`/services/${service.slug}`} className="text-sm font-bold text-secondary uppercase tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all">
+                  Explore Service <span>&rarr;</span>
                 </Link>
               </div>
             ))}
