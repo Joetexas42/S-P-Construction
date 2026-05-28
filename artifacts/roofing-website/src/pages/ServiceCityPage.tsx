@@ -85,6 +85,82 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
     ],
   };
 
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: entry.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+
+  const contractorLd = {
+    "@context": "https://schema.org",
+    "@type": "RoofingContractor",
+    name: `Scott Commercial Roofing — ${city.name}`,
+    url: "https://scottcommercialroofing.com",
+    telephone: "(972) 555-0100",
+    email: "info@scottcommercialroofing.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: city.name,
+      addressRegion: "TX",
+      addressCountry: "US",
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: city.name,
+        containedInPlace: {
+          "@type": "AdministrativeArea",
+          name: city.county,
+          addressRegion: "TX",
+          addressCountry: "US",
+        },
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: city.county,
+        addressRegion: "TX",
+        addressCountry: "US",
+      },
+      ...city.neighborhoods.map((n) => ({
+        "@type": "Place",
+        name: n,
+        containedInPlace: {
+          "@type": "City",
+          name: city.name,
+          addressRegion: "TX",
+          addressCountry: "US",
+        },
+      })),
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: serviceLabel,
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: serviceLabel,
+            url: canonical,
+            areaServed: {
+              "@type": "City",
+              name: city.name,
+              addressRegion: "TX",
+              addressCountry: "US",
+            },
+          },
+        },
+      ],
+    },
+  };
+
   const siblings = getSiblingCombos(city.slug, service.slug);
 
   const relatedServices = services
@@ -97,7 +173,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         title={seoTitle}
         description={seoDescription}
         canonical={canonical}
-        jsonLd={breadcrumbLd}
+        jsonLd={[contractorLd, faqLd, breadcrumbLd]}
       />
 
       {/* Hero */}
