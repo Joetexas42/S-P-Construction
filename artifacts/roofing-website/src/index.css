@@ -152,6 +152,10 @@
   animation: service-card-in 0.25s ease both;
 }
 
+.section-heading-animate {
+  animation: service-card-in 0.35s ease both;
+}
+
 @keyframes mobile-nav-item-in {
   from {
     opacity: 0;
@@ -173,7 +177,8 @@
     scroll-behavior: auto !important;
   }
 
-  .service-card-animate {
+  .service-card-animate,
+  .section-heading-animate {
     animation: none;
   }
 

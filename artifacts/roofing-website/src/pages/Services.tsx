@@ -263,7 +263,7 @@ export default function Services() {
       {/* Core services */}
       <section id="core-services" className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="section-heading-animate max-w-3xl mx-auto text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Core Commercial Services</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               Inspections, Repairs &amp; Installations
@@ -312,7 +312,7 @@ export default function Services() {
       {/* All services grid */}
       <section id="all-services" className="py-24 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Full Service Capability</p>
             <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
               Every Commercial Roofing System We Support
