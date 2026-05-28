@@ -2,6 +2,8 @@ import { SEO } from "@/components/SEO";
 import { MapPin, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import { cities } from "@/data/cities";
 
 export default function ServiceAreas() {
@@ -70,18 +72,18 @@ export default function ServiceAreas() {
               <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Featured Cities</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {cities.map((city, i) => (
-                  <Link
-                    key={city.slug}
-                    href={`/service-areas/${city.slug}`}
-                    className="service-card-animate group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted hover:border-secondary hover:scale-[1.02] rounded-md border border-border transition-all duration-200"
-                    style={{ animationDelay: `${i * 40}ms` }}
-                  >
-                    <span className="flex items-center gap-2 text-foreground font-bold">
-                      <MapPin className="h-4 w-4 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
-                      {city.name}
-                    </span>
-                    <ArrowRight className="h-4 w-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </Link>
+                  <ScrollRevealWrapper key={city.slug} delay={rowDelay(i, 2)}>
+                    <Link
+                      href={`/service-areas/${city.slug}`}
+                      className="group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted hover:border-secondary hover:scale-[1.02] rounded-md border border-border transition-all duration-200"
+                    >
+                      <span className="flex items-center gap-2 text-foreground font-bold">
+                        <MapPin className="h-4 w-4 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
+                        {city.name}
+                      </span>
+                      <ArrowRight className="h-4 w-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </Link>
+                  </ScrollRevealWrapper>
                 ))}
               </div>
 
