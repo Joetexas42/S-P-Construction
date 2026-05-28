@@ -8,60 +8,18 @@ import {
   buildImageSrcSet,
   SIZES_HALF_COLUMN_GRID,
 } from "@/lib/responsiveImage";
+import { useListProjects } from "@workspace/api-client-react";
 
 const FILTERS = ["All", "TPO", "Metal", "Flat Roof", "Storm Repair"] as const;
 type Filter = (typeof FILTERS)[number];
-
-const projects = [
-  {
-    src: "/images/gallery-tpo.webp",
-    title: "TPO Membrane Installation",
-    location: "Frisco Retail Center",
-    desc: "40,000 sq ft single-ply TPO membrane system over rigid insulation.",
-    category: "TPO" as Filter,
-  },
-  {
-    src: "/images/gallery-metal.webp",
-    title: "Standing Seam Metal Roof",
-    location: "Fort Worth Industrial Park",
-    desc: "Architectural standing seam panels custom-fabricated on site.",
-    category: "Metal" as Filter,
-  },
-  {
-    src: "/images/hero-bg.webp",
-    title: "Flat Roof Restoration",
-    location: "Dallas Warehouse District",
-    desc: "Massive commercial flat roof assessment and total system replacement.",
-    category: "Flat Roof" as Filter,
-  },
-  {
-    src: "/images/gallery-storm.webp",
-    title: "Storm Damage Repair",
-    location: "Plano Office Complex",
-    desc: "Emergency recovery and repair following severe spring hail storms.",
-    category: "Storm Repair" as Filter,
-  },
-  {
-    src: "/images/gallery-tpo.webp",
-    title: "TPO Re-Roof",
-    location: "Allen Distribution Center",
-    desc: "Full tear-off and TPO re-roof on a 60,000 sq ft logistics facility.",
-    category: "TPO" as Filter,
-  },
-  {
-    src: "/images/gallery-metal.webp",
-    title: "Metal Panel Retrofit",
-    location: "Garland Manufacturing Plant",
-    desc: "Over-roofing with concealed-fastener metal panels to extend building life.",
-    category: "Metal" as Filter,
-  },
-];
 
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
   const [displayFilter, setDisplayFilter] = useState<Filter>("All");
   const [animKey, setAnimKey] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
+
+  const { data: projects = [], isLoading, isError } = useListProjects();
 
   const filtered =
     displayFilter === "All"
@@ -132,19 +90,39 @@ export default function Gallery() {
             ))}
           </div>
 
-          {filtered.length === 0 ? (
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[...Array(4)].map((_, i) => (
+                <div
+                  key={i}
+                  className="rounded-lg border border-border bg-card shadow-sm overflow-hidden"
+                >
+                  <div className="aspect-[4/3] bg-muted animate-pulse" />
+                  <div className="p-6 space-y-3">
+                    <div className="h-6 bg-muted animate-pulse rounded w-3/4" />
+                    <div className="h-4 bg-muted animate-pulse rounded w-full" />
+                    <div className="h-4 bg-muted animate-pulse rounded w-2/3" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : isError ? (
+            <p className="text-destructive text-center py-24">
+              Unable to load projects. Please try again later.
+            </p>
+          ) : filtered.length === 0 ? (
             <p className="text-muted-foreground text-center py-24">
               No projects match that filter yet.
             </p>
           ) : (
             <div className={`grid grid-cols-1 md:grid-cols-2 gap-8${isExiting ? " filter-cards-exit" : ""}`}>
               {filtered.map((project, i) => (
-                <ScrollRevealWrapper key={`${animKey}-${project.title}`} delay={rowDelay(i, 2)}>
+                <ScrollRevealWrapper key={`${animKey}-${project.id}`} delay={rowDelay(i, 2)}>
                   <div className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
                     <div className="aspect-[4/3] overflow-hidden bg-muted">
                       <img
-                        src={project.src}
-                        srcSet={buildImageSrcSet(project.src)}
+                        src={project.imageUrl}
+                        srcSet={buildImageSrcSet(project.imageUrl)}
                         sizes={SIZES_HALF_COLUMN_GRID}
                         alt={project.title}
                         width={800}
@@ -163,7 +141,7 @@ export default function Gallery() {
                           {project.location}
                         </span>
                       </div>
-                      <p className="text-muted-foreground">{project.desc}</p>
+                      <p className="text-muted-foreground">{project.description}</p>
                     </div>
                   </div>
                 </ScrollRevealWrapper>

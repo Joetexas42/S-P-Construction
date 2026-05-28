@@ -14,6 +14,8 @@ tags:
     description: Contact form submissions
   - name: estimator
     description: Instant satellite roof estimator
+  - name: projects
+    description: Portfolio project gallery
 paths:
   /healthz:
     get:
@@ -134,6 +136,20 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/EstimatorSubmission"
+  /projects:
+    get:
+      operationId: listProjects
+      tags: [projects]
+      summary: List all portfolio projects
+      responses:
+        "200":
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
 components:
   schemas:
     HealthStatus:
@@ -343,6 +359,32 @@ components:
               swLng: { type: number }
               neLat: { type: number }
               neLng: { type: number }
+    Project:
+      type: object
+      required:
+        - id
+        - title
+        - location
+        - description
+        - imageUrl
+        - category
+        - createdAt
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        location:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        category:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
     ErrorResponse:
       type: object
       properties:

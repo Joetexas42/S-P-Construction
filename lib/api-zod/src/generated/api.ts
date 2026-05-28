@@ -127,3 +127,18 @@ export const ListEstimatorSubmissionsResponseItem = zod.object({
 export const ListEstimatorSubmissionsResponse = zod.array(ListEstimatorSubmissionsResponseItem)
 
 
+/**
+ * @summary List all portfolio projects
+ */
+export const ListProjectsResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "location": zod.string(),
+  "description": zod.string(),
+  "imageUrl": zod.string(),
+  "category": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+export const ListProjectsResponse = zod.array(ListProjectsResponseItem)
+
+

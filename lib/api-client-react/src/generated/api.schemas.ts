@@ -148,6 +148,16 @@ export interface RoofAreaResult {
   roofSegments: RoofAreaResultRoofSegmentsItem[];
 }
 
+export interface Project {
+  id: number;
+  title: string;
+  location: string;
+  description: string;
+  imageUrl: string;
+  category: string;
+  createdAt: string;
+}
+
 export interface ErrorResponse {
   error: string;
 }
