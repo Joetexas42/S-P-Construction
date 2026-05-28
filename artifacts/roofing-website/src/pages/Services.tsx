@@ -13,6 +13,7 @@ import {
   Maximize,
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { Button } from "@/components/ui/button";
 import { cities } from "@/data/cities";
 import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
@@ -299,11 +300,10 @@ export default function Services() {
             {coreServices.map((svc, idx) => {
               const Icon = svc.icon;
               return (
+                <ScrollRevealWrapper key={svc.slug} delay={idx * 80}>
                 <Link
-                  key={svc.slug}
                   href={`/services/${svc.slug}`}
-                  className="service-card-animate group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                  style={{ animationDelay: `${idx * 40}ms` }}
+                  className="group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`core-service-${svc.slug}`}
                 >
                   <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 transition-transform duration-200 group-hover:scale-110">
@@ -325,6 +325,7 @@ export default function Services() {
                     Explore service <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
+                </ScrollRevealWrapper>
               );
             })}
           </div>
@@ -371,11 +372,10 @@ export default function Services() {
             const renderCard = (svc: (typeof systemServices)[number], cardIndex: number) => {
               const Icon = svc.icon;
               return (
+                <ScrollRevealWrapper key={svc.slug} delay={cardIndex * 80}>
                 <Link
-                  key={svc.slug}
                   href={`/services/${svc.slug}`}
-                  className="service-card-animate group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                  style={{ animationDelay: `${cardIndex * 40}ms` }}
+                  className="group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`service-card-${svc.slug}`}
                 >
                   <div className="flex items-start gap-4 mb-4">
@@ -398,6 +398,7 @@ export default function Services() {
                     Learn more <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
+                </ScrollRevealWrapper>
               );
             };
 
