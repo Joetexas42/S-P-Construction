@@ -64,6 +64,9 @@ export function Navbar() {
 
   const isServiceActive = location.startsWith("/services");
 
+  const isCoreGroupActive = coreServices.some((s) => location === s.path);
+  const isSpecialtyGroupActive = specialtyServices.some((s) => location === s.path);
+
   return (
     <>
       <div className="bg-destructive text-destructive-foreground px-4 py-2 text-center text-sm font-semibold flex justify-center items-center gap-2 z-50 relative">
@@ -126,12 +129,17 @@ export function Navbar() {
                           </Link>
                           <div className="grid grid-cols-2 gap-x-6">
                             {[
-                              { label: "Core Systems", items: coreServices },
-                              { label: "Specialty Services", items: specialtyServices },
+                              { label: "Core Systems", items: coreServices, isActive: isCoreGroupActive },
+                              { label: "Specialty Services", items: specialtyServices, isActive: isSpecialtyGroupActive },
                             ].map((group) => (
                               <div key={group.label} className="group/section">
-                                <p className="px-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground transition-colors duration-200 group-hover/section:text-secondary">
+                                <p className={`px-3 pb-1 text-[10px] font-bold uppercase tracking-widest transition-colors duration-200 group-hover/section:text-secondary ${
+                                  group.isActive ? "text-secondary" : "text-muted-foreground"
+                                }`}>
                                   {group.label}
+                                  {group.isActive && (
+                                    <span className="ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-secondary align-middle" />
+                                  )}
                                 </p>
                                 <div className="flex flex-col gap-0.5">
                                   {group.items.map((child) => {
@@ -252,12 +260,17 @@ export function Navbar() {
                   {mobileServicesOpen && (
                     <div className="pl-4 border-l-2 border-secondary/40 flex flex-col gap-4">
                       {[
-                        { label: "Core Systems", items: coreServices },
-                        { label: "Specialty Services", items: specialtyServices },
+                        { label: "Core Systems", items: coreServices, isActive: isCoreGroupActive },
+                        { label: "Specialty Services", items: specialtyServices, isActive: isSpecialtyGroupActive },
                       ].map((group) => (
                         <div key={group.label} className="flex flex-col gap-1">
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground pb-1">
+                          <p className={`text-[10px] font-bold uppercase tracking-widest pb-1 ${
+                            group.isActive ? "text-secondary" : "text-muted-foreground"
+                          }`}>
                             {group.label}
+                            {group.isActive && (
+                              <span className="ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-secondary align-middle" />
+                            )}
                           </p>
                           {group.items.map((child) => {
                             const Icon = child.icon;
