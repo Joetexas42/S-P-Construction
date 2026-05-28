@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import {
   buildImageSrcSet,
   SIZES_HALF_COLUMN_GRID,
@@ -119,36 +120,34 @@ export default function Gallery() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filtered.map((project, i) => (
-                <div
-                  key={`${animKey}-${project.title}`}
-                  className="service-card-animate group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
-                  style={{ animationDelay: `${i * 60}ms` }}
-                >
-                  <div className="aspect-[4/3] overflow-hidden bg-muted">
-                    <img
-                      src={project.src}
-                      srcSet={buildImageSrcSet(project.src)}
-                      sizes={SIZES_HALF_COLUMN_GRID}
-                      alt={project.title}
-                      width={800}
-                      height={600}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <div className="flex justify-between items-start mb-4 gap-2">
-                      <h3 className="text-2xl font-heading font-bold uppercase tracking-tight text-foreground">
-                        {project.title}
-                      </h3>
-                      <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2 py-1 rounded">
-                        {project.location}
-                      </span>
+                <ScrollRevealWrapper key={`${animKey}-${project.title}`} delay={i * 60}>
+                  <div className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                    <div className="aspect-[4/3] overflow-hidden bg-muted">
+                      <img
+                        src={project.src}
+                        srcSet={buildImageSrcSet(project.src)}
+                        sizes={SIZES_HALF_COLUMN_GRID}
+                        alt={project.title}
+                        width={800}
+                        height={600}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
                     </div>
-                    <p className="text-muted-foreground">{project.desc}</p>
+                    <div className="p-6">
+                      <div className="flex justify-between items-start mb-4 gap-2">
+                        <h3 className="text-2xl font-heading font-bold uppercase tracking-tight text-foreground">
+                          {project.title}
+                        </h3>
+                        <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2 py-1 rounded">
+                          {project.location}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground">{project.desc}</p>
+                    </div>
                   </div>
-                </div>
+                </ScrollRevealWrapper>
               ))}
             </div>
           )}

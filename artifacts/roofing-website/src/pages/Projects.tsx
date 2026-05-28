@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect, useRef, useState } from "react";
 import { Link, useSearch, useLocation } from "wouter";
 import {
   Building2,
@@ -412,12 +412,35 @@ export default function Projects() {
 }
 
 function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const testimonial = getTestimonialBySlug(study.slug);
   return (
     <article
+      ref={cardRef}
       id={study.slug}
-      className="service-card-animate group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24"
-      style={{ animationDelay: `${index * 40}ms` }}
+      className={cn(
+        "scroll-reveal group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24",
+        isVisible && "is-visible",
+      )}
+      style={{ transitionDelay: `${index * 60}ms` }}
     >
       <Link
         href={`/projects/${study.slug}`}

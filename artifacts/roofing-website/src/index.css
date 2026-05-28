@@ -156,6 +156,17 @@
   animation: service-card-in 0.35s ease both;
 }
 
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes mobile-nav-item-in {
   from {
     opacity: 0;

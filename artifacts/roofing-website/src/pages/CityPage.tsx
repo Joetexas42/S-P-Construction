@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2, ArrowRight } from "lucide-react";
 import { SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
 import { ContactForm } from "@/components/ContactForm";
@@ -232,39 +233,45 @@ export default function CityPage({ city }: CityPageProps) {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-              <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
-              <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Landmarks We Serve</h3>
-              <ul className="space-y-2">
-                {city.landmarks.map((l) => (
-                  <li key={l} className="text-muted-foreground flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span><span>{l}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-              <Factory className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
-              <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Local Industries</h3>
-              <ul className="space-y-2">
-                {city.industries.map((i) => (
-                  <li key={i} className="text-muted-foreground flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span><span>{i}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-              <ShieldCheck className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
-              <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Neighborhoods Covered</h3>
-              <ul className="space-y-2">
-                {city.neighborhoods.map((n) => (
-                  <li key={n} className="text-muted-foreground flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span><span>{n}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ScrollRevealWrapper delay={0}>
+              <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
+                <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Landmarks We Serve</h3>
+                <ul className="space-y-2">
+                  {city.landmarks.map((l) => (
+                    <li key={l} className="text-muted-foreground flex items-start gap-2">
+                      <span className="text-secondary mt-1">•</span><span>{l}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={60}>
+              <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <Factory className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
+                <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Local Industries</h3>
+                <ul className="space-y-2">
+                  {city.industries.map((i) => (
+                    <li key={i} className="text-muted-foreground flex items-start gap-2">
+                      <span className="text-secondary mt-1">•</span><span>{i}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={120}>
+              <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <ShieldCheck className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
+                <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Neighborhoods Covered</h3>
+                <ul className="space-y-2">
+                  {city.neighborhoods.map((n) => (
+                    <li key={n} className="text-muted-foreground flex items-start gap-2">
+                      <span className="text-secondary mt-1">•</span><span>{n}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollRevealWrapper>
           </div>
 
           {/* Weather/climate note */}
@@ -287,9 +294,9 @@ export default function CityPage({ city }: CityPageProps) {
                 In-depth case studies from commercial roofs we've completed in {city.name}.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {cityCaseStudies.map((cs) => (
+                {cityCaseStudies.map((cs, csIdx) => (
+                  <ScrollRevealWrapper key={cs.slug} delay={csIdx * 60}>
                   <Link
-                    key={cs.slug}
                     href={`/projects/${cs.slug}`}
                     data-testid={`city-case-study-link-${cs.slug}`}
                     className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
@@ -348,6 +355,7 @@ export default function CityPage({ city }: CityPageProps) {
                       </span>
                     </div>
                   </Link>
+                  </ScrollRevealWrapper>
                 ))}
               </div>
             </div>
@@ -364,8 +372,8 @@ export default function CityPage({ city }: CityPageProps) {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {city.recentProjects.map((p, idx) => (
+                  <ScrollRevealWrapper key={p.title} delay={idx * 60}>
                   <article
-                    key={p.title}
                     className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
                     <button
@@ -428,6 +436,7 @@ export default function CityPage({ city }: CityPageProps) {
                       </div>
                     </div>
                   </article>
+                  </ScrollRevealWrapper>
                 ))}
               </div>
               <ProjectLightbox
@@ -450,32 +459,31 @@ export default function CityPage({ city }: CityPageProps) {
                 Named feedback from local property managers, facility directors, and business owners.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {city.testimonials.map((t) => (
-                  <figure
-                    key={t.name}
-                    className="flex flex-col bg-card border border-border rounded-lg p-6 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
-                  >
-                    <div className="flex gap-0.5 text-secondary mb-3">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current" />
-                      ))}
-                    </div>
-                    <blockquote className="text-foreground/90 leading-relaxed italic mb-5 flex-1">
-                      <Quote className="h-4 w-4 inline -mt-1 mr-1 text-secondary" />
-                      {t.quote}
-                    </blockquote>
-                    <figcaption className="flex items-center gap-3 border-t border-border pt-4">
-                      <div className="h-11 w-11 rounded-full bg-secondary/15 text-secondary font-bold flex items-center justify-center text-sm shrink-0">
-                        {initialsOf(t.name)}
+                {city.testimonials.map((t, tIdx) => (
+                  <ScrollRevealWrapper key={t.name} delay={tIdx * 60}>
+                    <figure className="flex flex-col bg-card border border-border rounded-lg p-6 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                      <div className="flex gap-0.5 text-secondary mb-3">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-current" />
+                        ))}
                       </div>
-                      <div className="min-w-0">
-                        <div className="font-bold text-foreground text-sm">{t.name}</div>
-                        <div className="text-xs uppercase tracking-wider text-muted-foreground">
-                          {t.businessType} — {city.name}, TX
+                      <blockquote className="text-foreground/90 leading-relaxed italic mb-5 flex-1">
+                        <Quote className="h-4 w-4 inline -mt-1 mr-1 text-secondary" />
+                        {t.quote}
+                      </blockquote>
+                      <figcaption className="flex items-center gap-3 border-t border-border pt-4">
+                        <div className="h-11 w-11 rounded-full bg-secondary/15 text-secondary font-bold flex items-center justify-center text-sm shrink-0">
+                          {initialsOf(t.name)}
                         </div>
-                      </div>
-                    </figcaption>
-                  </figure>
+                        <div className="min-w-0">
+                          <div className="font-bold text-foreground text-sm">{t.name}</div>
+                          <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                            {t.businessType} — {city.name}, TX
+                          </div>
+                        </div>
+                      </figcaption>
+                    </figure>
+                  </ScrollRevealWrapper>
                 ))}
               </div>
             </div>
@@ -486,14 +494,16 @@ export default function CityPage({ city }: CityPageProps) {
             Commercial Roofing Services in {city.name}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            {services.map((s) => (
-              <div key={s.name} className="group bg-card border border-border p-6 rounded-lg flex gap-4 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-                <s.icon className="h-8 w-8 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
-                <div>
-                  <h3 className="font-heading font-bold text-lg mb-2 text-foreground">{s.name}</h3>
-                  <p className="text-muted-foreground">{s.desc}</p>
+            {services.map((s, sIdx) => (
+              <ScrollRevealWrapper key={s.name} delay={sIdx * 60}>
+                <div className="group bg-card border border-border p-6 rounded-lg flex gap-4 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                  <s.icon className="h-8 w-8 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
+                  <div>
+                    <h3 className="font-heading font-bold text-lg mb-2 text-foreground">{s.name}</h3>
+                    <p className="text-muted-foreground">{s.desc}</p>
+                  </div>
                 </div>
-              </div>
+              </ScrollRevealWrapper>
             ))}
           </div>
 
@@ -507,24 +517,25 @@ export default function CityPage({ city }: CityPageProps) {
               Detailed information about each of our most-requested services in {city.name} — local building context, weather factors, and {city.name}-specific answers.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair", "maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"] as const).map((svcSlug) => (
-                <Link
-                  key={svcSlug}
-                  href={`/service-areas/${city.slug}/${svcSlug}`}
-                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                  data-testid={`city-service-page-link-${city.slug}-${svcSlug}`}
-                >
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{city.name}, TX</p>
-                  <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-2 leading-snug group-hover:text-secondary transition-colors">
-                    {SERVICE_CITY_SERVICE_LABELS[svcSlug]}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-3 flex-1">
-                    {SERVICE_CITY_SERVICE_SHORT[svcSlug]} services specific to {city.name} properties and building types.
-                  </p>
-                  <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Learn more <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Link>
+              {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair", "maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"] as const).map((svcSlug, svcIdx) => (
+                <ScrollRevealWrapper key={svcSlug} delay={svcIdx * 40}>
+                  <Link
+                    href={`/service-areas/${city.slug}/${svcSlug}`}
+                    className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                    data-testid={`city-service-page-link-${city.slug}-${svcSlug}`}
+                  >
+                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{city.name}, TX</p>
+                    <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-2 leading-snug group-hover:text-secondary transition-colors">
+                      {SERVICE_CITY_SERVICE_LABELS[svcSlug]}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3 flex-1">
+                      {SERVICE_CITY_SERVICE_SHORT[svcSlug]} services specific to {city.name} properties and building types.
+                    </p>
+                    <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Learn more <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </Link>
+                </ScrollRevealWrapper>
               ))}
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { CheckCircle2, Phone, HelpCircle, ArrowLeft, ArrowRight, DollarSign } from "lucide-react";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -286,7 +287,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         <section id="details" className="py-20 bg-muted border-y border-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto space-y-6">
-              {service.sections.map((sec) => {
+              {service.sections.map((sec, secIdx) => {
                 const supporting = service.supportingImages.find(
                   (img) => img.sectionHeading === sec.heading,
                 );
@@ -294,8 +295,8 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   (p) => p.sectionHeading === sec.heading,
                 );
                 return (
+                  <ScrollRevealWrapper key={sec.heading} delay={secIdx * 60}>
                   <article
-                    key={sec.heading}
                     className="bg-card border border-border rounded-xl p-7 md:p-9 shadow-sm"
                     data-testid={`service-section-${service.slug}`}
                   >
@@ -356,6 +357,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                       </figure>
                     )}
                   </article>
+                  </ScrollRevealWrapper>
                 );
               })}
             </div>
@@ -413,9 +415,9 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {cities.map((city) => (
+              {cities.map((city, cityIdx) => (
+                <ScrollRevealWrapper key={city.slug} delay={cityIdx * 50}>
                 <Link
-                  key={city.slug}
                   href={`/service-areas/${city.slug}/${service.slug}`}
                   className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`service-city-link-${service.slug}-${city.slug}`}
@@ -431,6 +433,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                     <ArrowRight className="h-4 w-4" /> View {city.name} page
                   </span>
                 </Link>
+                </ScrollRevealWrapper>
               ))}
             </div>
           </div>
@@ -447,11 +450,11 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {related.map((rel) => {
+            {related.map((rel, relIdx) => {
               const RelIcon = rel.icon;
               return (
+                <ScrollRevealWrapper key={rel.slug} delay={relIdx * 60}>
                 <Link
-                  key={rel.slug}
                   href={`/services/${rel.slug}`}
                   className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`related-service-${rel.slug}`}
@@ -467,6 +470,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                     Learn more <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
+                </ScrollRevealWrapper>
               );
             })}
           </div>

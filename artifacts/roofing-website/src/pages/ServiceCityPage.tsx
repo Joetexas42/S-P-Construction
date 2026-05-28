@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning } from "lucide-react";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/ContactForm";
@@ -279,29 +280,33 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Districts */}
-            <div className="service-card-animate group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200" style={{ animationDelay: "0ms" }}>
-              <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
-              <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
-                {city.name} Districts We Serve
-              </h3>
-              <ul className="space-y-2">
-                {entry.localDistricts.map((d) => (
-                  <li key={d} className="text-muted-foreground flex items-start gap-2">
-                    <span className="text-secondary mt-1">•</span>
-                    <span>{d}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ScrollRevealWrapper delay={0}>
+              <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
+                <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
+                  {city.name} Districts We Serve
+                </h3>
+                <ul className="space-y-2">
+                  {entry.localDistricts.map((d) => (
+                    <li key={d} className="text-muted-foreground flex items-start gap-2">
+                      <span className="text-secondary mt-1">•</span>
+                      <span>{d}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollRevealWrapper>
 
             {/* Building context */}
-            <div className="service-card-animate group bg-card border border-border p-8 rounded-lg lg:col-span-2 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200" style={{ animationDelay: "40ms" }}>
-              <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
-              <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
-                {city.name} Building Types We Work On
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">{entry.buildingContext}</p>
-            </div>
+            <ScrollRevealWrapper delay={60} className="lg:col-span-2">
+              <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
+                <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
+                  {city.name} Building Types We Work On
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">{entry.buildingContext}</p>
+              </div>
+            </ScrollRevealWrapper>
           </div>
 
           {/* Weather urgency */}
@@ -386,54 +391,56 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Parent city page */}
-              <Link
-                href={`/service-areas/${city.slug}`}
-                className="service-card-animate group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                style={{ animationDelay: "0ms" }}
-              >
-                <MapPin className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
-                <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
-                  Commercial Roofing in {city.name}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-3">All services for {city.name} properties</p>
-                <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  View City Page <ArrowRight className="h-4 w-4" />
-                </span>
-              </Link>
-
-              {/* Parent service page */}
-              <Link
-                href={`/services/${service.slug}`}
-                className="service-card-animate group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                style={{ animationDelay: "40ms" }}
-              >
-                <Zap className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
-                <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
-                  {service.shortTitle}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-3">Full service overview for DFW</p>
-                <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  View Service Page <ArrowRight className="h-4 w-4" />
-                </span>
-              </Link>
-
-              {/* Sibling service×city combos */}
-              {siblings.slice(0, 2).map((s, i) => (
+              <ScrollRevealWrapper delay={0}>
                 <Link
-                  key={`${s.citySlug}--${s.serviceSlug}`}
-                  href={`/service-areas/${s.citySlug}/${s.serviceSlug}`}
-                  className="service-card-animate group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                  style={{ animationDelay: `${(i + 2) * 40}ms` }}
+                  href={`/service-areas/${city.slug}`}
+                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                 >
-                  <ArrowRight className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
+                  <MapPin className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                   <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
-                    {s.label}
+                    Commercial Roofing in {city.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-3">Local expertise, same quality</p>
+                  <p className="text-sm text-muted-foreground mb-3">All services for {city.name} properties</p>
                   <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Learn more <ArrowRight className="h-4 w-4" />
+                    View City Page <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
+              </ScrollRevealWrapper>
+
+              {/* Parent service page */}
+              <ScrollRevealWrapper delay={60}>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                >
+                  <Zap className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
+                  <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
+                    {service.shortTitle}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3">Full service overview for DFW</p>
+                  <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    View Service Page <ArrowRight className="h-4 w-4" />
+                  </span>
+                </Link>
+              </ScrollRevealWrapper>
+
+              {/* Sibling service×city combos */}
+              {siblings.slice(0, 2).map((s, sIdx) => (
+                <ScrollRevealWrapper key={`${s.citySlug}--${s.serviceSlug}`} delay={(sIdx + 2) * 60}>
+                  <Link
+                    href={`/service-areas/${s.citySlug}/${s.serviceSlug}`}
+                    className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  >
+                    <ArrowRight className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
+                    <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
+                      {s.label}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3">Local expertise, same quality</p>
+                    <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Learn more <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </Link>
+                </ScrollRevealWrapper>
               ))}
             </div>
           </div>
@@ -449,26 +456,26 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               Other Services for {city.name} Properties
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {relatedServices.map((rel, i) => {
+              {relatedServices.map((rel, relIdx) => {
                 const RelIcon = rel.icon;
                 return (
-                  <Link
-                    key={rel.slug}
-                    href={`/service-areas/${city.slug}/${rel.slug}`}
-                    className="service-card-animate group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
-                    style={{ animationDelay: `${i * 40}ms` }}
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
-                      <RelIcon className="h-6 w-6 text-secondary group-hover:scale-110 transition-transform duration-200" />
-                    </div>
-                    <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-2 leading-snug">
-                      {SERVICE_CITY_SERVICE_SHORT[rel.slug] ?? rel.shortTitle} in {city.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{rel.tagline}</p>
-                    <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Learn more <ArrowRight className="h-4 w-4" />
-                    </span>
-                  </Link>
+                  <ScrollRevealWrapper key={rel.slug} delay={relIdx * 60}>
+                    <Link
+                      href={`/service-areas/${city.slug}/${rel.slug}`}
+                      className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                    >
+                      <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
+                        <RelIcon className="h-6 w-6 text-secondary group-hover:scale-110 transition-transform duration-200" />
+                      </div>
+                      <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-2 leading-snug">
+                        {SERVICE_CITY_SERVICE_SHORT[rel.slug] ?? rel.shortTitle} in {city.name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">{rel.tagline}</p>
+                      <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Learn more <ArrowRight className="h-4 w-4" />
+                      </span>
+                    </Link>
+                  </ScrollRevealWrapper>
                 );
               })}
             </div>
