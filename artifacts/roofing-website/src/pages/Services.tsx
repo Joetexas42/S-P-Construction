@@ -351,12 +351,12 @@ export default function Services() {
                 <Link
                   key={svc.slug}
                   href={`/services/${svc.slug}`}
-                  className="group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  className="group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`service-card-${svc.slug}`}
                 >
                   <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
-                      <Icon className="h-6 w-6 text-secondary" />
+                    <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-110">
+                      <Icon className="h-6 w-6 text-secondary transition-transform duration-200 group-hover:scale-110" />
                     </div>
                     <h3 className="text-xl font-heading font-bold uppercase tracking-tight text-foreground leading-snug">
                       {svc.shortTitle}
