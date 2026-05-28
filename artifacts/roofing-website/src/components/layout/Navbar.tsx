@@ -150,18 +150,26 @@ export function Navbar() {
                                       <Link
                                         key={child.path}
                                         href={child.path}
-                                        className={`group flex items-start gap-3 px-3 py-2 rounded-md transition-all hover:bg-muted ${
-                                          active ? "bg-muted" : ""
+                                        className={`group flex items-start gap-3 px-3 py-2 rounded-md transition-all hover:bg-muted border-l-2 ${
+                                          active
+                                            ? "bg-secondary/5 border-secondary"
+                                            : "border-transparent hover:border-secondary/30"
                                         }`}
                                       >
                                         {Icon ? (
-                                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary transition-transform duration-200 group-hover:scale-110">
+                                          <span className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md transition-all duration-200 group-hover:scale-110 ${
+                                            active
+                                              ? "bg-secondary text-white"
+                                              : "bg-secondary/10 text-secondary"
+                                          }`}>
                                             <Icon className="h-4 w-4" />
                                           </span>
                                         ) : null}
                                         <span
-                                          className={`text-sm font-semibold leading-tight pt-1.5 transition-colors duration-200 ${
-                                            active ? "text-secondary" : "text-foreground group-hover:text-secondary"
+                                          className={`text-sm leading-tight pt-1.5 transition-colors duration-200 ${
+                                            active
+                                              ? "font-bold text-secondary"
+                                              : "font-semibold text-foreground group-hover:text-secondary"
                                           }`}
                                         >
                                           {child.name}
@@ -289,13 +297,19 @@ export function Navbar() {
                               <Link
                                 key={child.path}
                                 href={child.path}
-                                className={`group flex items-center gap-3 text-base font-semibold rounded-md px-2 py-1.5 -mx-2 transition-all duration-200 hover:bg-muted active:scale-[0.97] ${
-                                  active ? "text-secondary" : "text-foreground/80 hover:text-secondary active:text-secondary"
+                                className={`group flex items-center gap-3 text-base rounded-md px-2 py-1.5 -mx-2 border-l-2 transition-all duration-200 hover:bg-muted active:scale-[0.97] ${
+                                  active
+                                    ? "font-bold text-secondary bg-secondary/5 border-secondary"
+                                    : "font-semibold text-foreground/80 border-transparent hover:text-secondary hover:border-secondary/30 active:text-secondary"
                                 }`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
                                 {Icon ? (
-                                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary transition-transform duration-200 group-hover:scale-110">
+                                  <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-all duration-200 group-hover:scale-110 ${
+                                    active
+                                      ? "bg-secondary text-white"
+                                      : "bg-secondary/10 text-secondary"
+                                  }`}>
                                     <Icon className="h-4 w-4" />
                                   </span>
                                 ) : null}
