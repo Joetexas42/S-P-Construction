@@ -13,7 +13,7 @@ import {
   Maximize,
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
-import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { ScrollRevealWrapper, ScrollRevealTr } from "@/components/ScrollRevealWrapper";
 import { Button } from "@/components/ui/button";
 import { cities } from "@/data/cities";
 import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
@@ -527,11 +527,11 @@ export default function Services() {
               </thead>
               <tbody>
                 {comparisonRows.map((row, i) => (
-                  <tr key={row.label} className={`border-t border-border align-top ${i % 2 === 0 ? "bg-background" : "bg-card"}`}>
+                  <ScrollRevealTr key={row.label} delay={i * 80} className={`border-t border-border align-top ${i % 2 === 0 ? "bg-background" : "bg-card"}`}>
                     <td className="p-5 font-heading font-bold uppercase text-sm tracking-tight text-foreground">{row.label}</td>
                     <td className="p-5 text-sm text-muted-foreground leading-relaxed">{row.tpo}</td>
                     <td className="p-5 text-sm text-muted-foreground leading-relaxed">{row.pvc}</td>
-                  </tr>
+                  </ScrollRevealTr>
                 ))}
               </tbody>
             </table>
@@ -572,10 +572,10 @@ export default function Services() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {manufacturers.map((mfr) => (
+            {manufacturers.map((mfr, i) => (
+              <ScrollRevealWrapper key={mfr.name} delay={i * 120}>
               <div
-                key={mfr.name}
-                className="group bg-card border border-border rounded-xl p-8 flex flex-col hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+                className="group bg-card border border-border rounded-xl p-8 flex flex-col hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 h-full"
                 data-testid={`mfr-card-${mfr.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
               >
                 <div className="mb-5 bg-white border border-border rounded-lg h-20 flex items-center justify-center px-4">
@@ -624,6 +624,7 @@ export default function Services() {
                   <p className="text-sm text-foreground leading-relaxed">{mfr.bestFor}</p>
                 </div>
               </div>
+              </ScrollRevealWrapper>
             ))}
           </div>
         </div>
@@ -644,8 +645,8 @@ export default function Services() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {tpoBenefits.map((benefit, i) => (
+              <ScrollRevealWrapper key={i} delay={i * 80}>
               <div
-                key={i}
                 className="flex gap-6 bg-card border border-border rounded-xl p-7 hover:border-secondary hover:scale-[1.02] hover:shadow-lg transition-all duration-200 group"
                 data-testid={`benefit-card-${i}`}
               >
@@ -659,6 +660,7 @@ export default function Services() {
                   <p className="text-muted-foreground text-sm leading-relaxed">{benefit.body}</p>
                 </div>
               </div>
+              </ScrollRevealWrapper>
             ))}
           </div>
         </div>
