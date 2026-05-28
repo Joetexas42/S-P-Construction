@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Phone, Menu, X, HardHat, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { services } from "@/data/services";
+import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
 
 interface NavLink {
   name: string;
@@ -31,11 +31,17 @@ export function Navbar() {
     setMobileServicesOpen(false);
   }, [location]);
 
-  const serviceLinks = services.map((s) => ({
-    name: s.shortTitle,
-    path: `/services/${s.slug}`,
-    icon: s.icon,
-  }));
+  const systemServices = services.filter((s) => s.category === "System");
+
+  const coreServices = systemServices
+    .filter((s) => (coreSystemSlugs as readonly string[]).includes(s.slug))
+    .map((s) => ({ name: s.shortTitle, path: `/services/${s.slug}`, icon: s.icon }));
+
+  const specialtyServices = systemServices
+    .filter((s) => (specialtyServiceSlugs as readonly string[]).includes(s.slug))
+    .map((s) => ({ name: s.shortTitle, path: `/services/${s.slug}`, icon: s.icon }));
+
+  const serviceLinks = [...coreServices, ...specialtyServices];
 
   const navLinks: NavLink[] = [
     { name: "Home", path: "/" },
@@ -110,40 +116,54 @@ export function Navbar() {
                         onMouseEnter={openServices}
                         onMouseLeave={scheduleCloseServices}
                       >
-                        <div className="w-[640px] rounded-lg border border-border bg-background shadow-xl p-4 grid grid-cols-2 gap-1">
+                        <div className="w-[680px] rounded-lg border border-border bg-background shadow-xl p-4">
                           <Link
                             href="/services"
-                            className="col-span-2 flex items-center justify-between px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider text-secondary hover:bg-muted"
+                            className="flex items-center justify-between px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider text-secondary hover:bg-muted mb-3"
                           >
                             <span>All Services Overview</span>
                             <span aria-hidden>→</span>
                           </Link>
-                          {link.children.map((child) => {
-                            const Icon = child.icon;
-                            const active = location === child.path;
-                            return (
-                              <Link
-                                key={child.path}
-                                href={child.path}
-                                className={`flex items-start gap-3 px-3 py-2 rounded-md transition-colors hover:bg-muted ${
-                                  active ? "bg-muted" : ""
-                                }`}
-                              >
-                                {Icon ? (
-                                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary">
-                                    <Icon className="h-4 w-4" />
-                                  </span>
-                                ) : null}
-                                <span
-                                  className={`text-sm font-semibold leading-tight pt-1.5 ${
-                                    active ? "text-secondary" : "text-foreground"
-                                  }`}
-                                >
-                                  {child.name}
-                                </span>
-                              </Link>
-                            );
-                          })}
+                          <div className="grid grid-cols-2 gap-x-6">
+                            {[
+                              { label: "Core Systems", items: coreServices },
+                              { label: "Specialty Services", items: specialtyServices },
+                            ].map((group) => (
+                              <div key={group.label}>
+                                <p className="px-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                                  {group.label}
+                                </p>
+                                <div className="flex flex-col gap-0.5">
+                                  {group.items.map((child) => {
+                                    const Icon = child.icon;
+                                    const active = location === child.path;
+                                    return (
+                                      <Link
+                                        key={child.path}
+                                        href={child.path}
+                                        className={`flex items-start gap-3 px-3 py-2 rounded-md transition-colors hover:bg-muted ${
+                                          active ? "bg-muted" : ""
+                                        }`}
+                                      >
+                                        {Icon ? (
+                                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary">
+                                            <Icon className="h-4 w-4" />
+                                          </span>
+                                        ) : null}
+                                        <span
+                                          className={`text-sm font-semibold leading-tight pt-1.5 ${
+                                            active ? "text-secondary" : "text-foreground"
+                                          }`}
+                                        >
+                                          {child.name}
+                                        </span>
+                                      </Link>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     )}
@@ -219,24 +239,34 @@ export function Navbar() {
                     </button>
                   </div>
                   {mobileServicesOpen && (
-                    <div className="pl-4 border-l-2 border-secondary/40 flex flex-col gap-3">
-                      {link.children.map((child) => {
-                        const Icon = child.icon;
-                        const active = location === child.path;
-                        return (
-                          <Link
-                            key={child.path}
-                            href={child.path}
-                            className={`flex items-center gap-3 text-base font-semibold ${
-                              active ? "text-secondary" : "text-foreground/80"
-                            }`}
-                            onClick={() => setMobileMenuOpen(false)}
-                          >
-                            {Icon ? <Icon className="h-5 w-5 text-secondary" /> : null}
-                            <span>{child.name}</span>
-                          </Link>
-                        );
-                      })}
+                    <div className="pl-4 border-l-2 border-secondary/40 flex flex-col gap-4">
+                      {[
+                        { label: "Core Systems", items: coreServices },
+                        { label: "Specialty Services", items: specialtyServices },
+                      ].map((group) => (
+                        <div key={group.label} className="flex flex-col gap-1">
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground pb-1">
+                            {group.label}
+                          </p>
+                          {group.items.map((child) => {
+                            const Icon = child.icon;
+                            const active = location === child.path;
+                            return (
+                              <Link
+                                key={child.path}
+                                href={child.path}
+                                className={`flex items-center gap-3 text-base font-semibold ${
+                                  active ? "text-secondary" : "text-foreground/80"
+                                }`}
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {Icon ? <Icon className="h-5 w-5 text-secondary" /> : null}
+                                <span>{child.name}</span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>

@@ -966,3 +966,17 @@ export const services: ServiceDetail[] = [
 export const serviceBySlug: Record<string, ServiceDetail> = Object.fromEntries(
   services.map((s) => [s.slug, s]),
 );
+
+export const coreSystemSlugs = [
+  "replacement",
+  "storm-damage",
+  "emergency-leak-repair",
+  "tpo-epdm-pvc",
+] as const;
+
+export const specialtyServiceSlugs = [
+  "maintenance",
+  "coatings-restoration",
+  "flat-roofing",
+  "metal-roofing",
+] as const;

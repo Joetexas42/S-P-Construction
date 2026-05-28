@@ -11,7 +11,7 @@ import {
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { cities } from "@/data/cities";
-import { services } from "@/data/services";
+import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
 
 const SITE_ORIGIN = "https://scottcommercialroofing.com";
 const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
@@ -334,10 +334,8 @@ export default function Services() {
           </div>
 
           {(() => {
-            const coreSystemSlugs = ["replacement", "storm-damage", "emergency-leak-repair", "tpo-epdm-pvc"];
-            const specialtySlugs = ["maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"];
-            const coreSystems = systemServices.filter((s) => coreSystemSlugs.includes(s.slug));
-            const specialtyServices = systemServices.filter((s) => specialtySlugs.includes(s.slug));
+            const coreSystems = systemServices.filter((s) => (coreSystemSlugs as readonly string[]).includes(s.slug));
+            const specialtyServices = systemServices.filter((s) => (specialtyServiceSlugs as readonly string[]).includes(s.slug));
 
             const renderCard = (svc: (typeof systemServices)[number]) => {
               const Icon = svc.icon;
