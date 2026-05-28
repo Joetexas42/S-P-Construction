@@ -452,9 +452,9 @@ export default function Services() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-card border border-border rounded-xl p-8">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6">
-                <Thermometer className="h-7 w-7 text-secondary" />
+            <div className="group bg-card border border-border rounded-xl p-8 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 transition-transform duration-200 group-hover:scale-110">
+                <Thermometer className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
               </div>
               <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">TPO Roofing</h3>
               <p className="text-base font-semibold text-secondary mb-3">Affordable, energy-efficient, and durable.</p>
@@ -466,9 +466,9 @@ export default function Services() {
               </a>
             </div>
 
-            <div className="bg-card border border-border rounded-xl p-8">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6">
-                <Shield className="h-7 w-7 text-secondary" />
+            <div className="group bg-card border border-border rounded-xl p-8 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 transition-transform duration-200 group-hover:scale-110">
+                <Shield className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
               </div>
               <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">PVC Roofing</h3>
               <p className="text-base font-semibold text-secondary mb-3">Chemically resistant, fire-rated, premium performance.</p>
@@ -552,7 +552,7 @@ export default function Services() {
             {manufacturers.map((mfr) => (
               <div
                 key={mfr.name}
-                className="bg-card border border-border rounded-xl p-8 flex flex-col hover:border-secondary transition-colors"
+                className="group bg-card border border-border rounded-xl p-8 flex flex-col hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                 data-testid={`mfr-card-${mfr.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
               >
                 <div className="mb-5 bg-white border border-border rounded-lg h-20 flex items-center justify-center px-4">
@@ -580,7 +580,7 @@ export default function Services() {
                   />
                 </div>
                 <div className="flex items-center gap-3 mb-4">
-                  <HardHat className="h-6 w-6 text-secondary" />
+                  <HardHat className="h-6 w-6 text-secondary transition-transform duration-200 group-hover:scale-110" />
                   <p className="text-xs font-bold uppercase tracking-widest text-secondary">{mfr.tag}</p>
                 </div>
                 <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">{mfr.name}</h3>
