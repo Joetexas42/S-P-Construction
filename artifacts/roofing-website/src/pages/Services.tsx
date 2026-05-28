@@ -280,11 +280,11 @@ export default function Services() {
                 <Link
                   key={svc.slug}
                   href={`/services/${svc.slug}`}
-                  className="group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  className="group bg-card border border-border rounded-xl p-8 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`core-service-${svc.slug}`}
                 >
-                  <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5">
-                    <Icon className="h-7 w-7 text-secondary" />
+                  <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-5 transition-transform duration-200 group-hover:scale-110">
+                    <Icon className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
                   </div>
                   <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">
                     {svc.shortTitle}
