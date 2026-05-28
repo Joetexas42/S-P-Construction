@@ -358,11 +358,11 @@ export function Navbar() {
                   : { opacity: 0 }
               }
             >
-              <a href="tel:972-555-0100" className="flex items-center gap-3 text-2xl font-bold">
+              <a href="tel:972-555-0100" className="flex items-center gap-3 text-2xl font-bold transition-all duration-200 hover:text-secondary active:scale-[0.97] active:text-secondary">
                 <Phone className="h-6 w-6 text-secondary" />
                 (972) 555-0100
               </a>
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/contact" className="active:scale-[0.97] transition-transform duration-200 block" onClick={() => setMobileMenuOpen(false)}>
                 <Button size="lg" className="w-full font-bold uppercase tracking-wide text-lg mt-4">
                   Get Free Inspection
                 </Button>
