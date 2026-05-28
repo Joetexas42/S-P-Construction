@@ -42,9 +42,37 @@ export function Navbar() {
   const [citiesOpen, setCitiesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileCitiesOpen, setMobileCitiesOpen] = useState(false);
+  const [swipeOffset, setSwipeOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const [location] = useLocation();
   const closeServicesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeCitiesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = touchStartX.current - e.touches[0].clientX;
+    if (dx > 0) {
+      setSwipeOffset(dx);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    const threshold = Math.min(window.innerWidth * 0.3, 100);
+    if (swipeOffset >= threshold) {
+      setSwipeOffset(0);
+      setMobileMenuOpen(false);
+    } else {
+      setSwipeOffset(0);
+    }
+    touchStartX.current = null;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -354,9 +382,21 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed inset-0 bg-background z-40 pt-28 px-6 pb-12 overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out md:hidden ${
-            mobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
-          }`}
+          className={`fixed inset-0 bg-background z-40 pt-28 px-6 pb-12 overflow-y-auto md:hidden ${
+            isDragging
+              ? ""
+              : "transition-[transform,opacity] duration-300 ease-in-out"
+          } ${mobileMenuOpen ? "opacity-100" : "translate-x-full opacity-0"}`}
+          style={
+            isDragging
+              ? { transform: `translateX(-${swipeOffset}px)` }
+              : mobileMenuOpen && swipeOffset === 0
+              ? { transform: "translateX(0)" }
+              : undefined
+          }
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <nav className="flex flex-col gap-6">
             {navLinks.map((link, index) => {
