@@ -1,9 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 
+const DEFAULT_STAGGER = 60;
+const DEFAULT_MAX_DELAY = 200;
+
 export function useRevealGrid<T extends HTMLElement = HTMLDivElement>(
-  options: { stagger?: number; threshold?: number } = {},
+  options: { stagger?: number; threshold?: number; maxDelay?: number } = {},
 ) {
-  const { stagger = 60, threshold = 0.08 } = options;
+  const {
+    stagger = DEFAULT_STAGGER,
+    threshold = 0.08,
+    maxDelay = DEFAULT_MAX_DELAY,
+  } = options;
   const ref = useRef<T>(null);
 
   useEffect(() => {
@@ -12,10 +19,16 @@ export function useRevealGrid<T extends HTMLElement = HTMLDivElement>(
 
     const items = Array.from(container.children) as HTMLElement[];
 
-    items.forEach((item, i) => {
+    const rowTopValues = Array.from(new Set(items.map((el) => el.offsetTop))).sort(
+      (a, b) => a - b,
+    );
+    const rowIndexByTop = new Map(rowTopValues.map((top, i) => [top, i]));
+
+    items.forEach((item) => {
       item.classList.add("scroll-reveal");
       if (stagger > 0) {
-        item.style.transitionDelay = `${i * stagger}ms`;
+        const row = rowIndexByTop.get(item.offsetTop) ?? 0;
+        item.style.transitionDelay = `${Math.min(row * stagger, maxDelay)}ms`;
       }
     });
 
@@ -34,9 +47,18 @@ export function useRevealGrid<T extends HTMLElement = HTMLDivElement>(
     items.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
-  }, [stagger, threshold]);
+  }, [stagger, threshold, maxDelay]);
 
   return ref;
+}
+
+export function rowDelay(
+  index: number,
+  columns: number,
+  stagger = DEFAULT_STAGGER,
+  maxMs = DEFAULT_MAX_DELAY,
+): number {
+  return Math.min(Math.floor(index / columns) * stagger, maxMs);
 }
 
 export function useScrollReveal(options: { threshold?: number } = {}) {

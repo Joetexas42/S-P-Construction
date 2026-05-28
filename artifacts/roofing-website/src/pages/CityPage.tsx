@@ -3,6 +3,7 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import { Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, Star, Ruler, Calendar, Maximize2, ArrowRight } from "lucide-react";
 import { SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
 import { ContactForm } from "@/components/ContactForm";
@@ -295,7 +296,7 @@ export default function CityPage({ city }: CityPageProps) {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {cityCaseStudies.map((cs, csIdx) => (
-                  <ScrollRevealWrapper key={cs.slug} delay={csIdx * 60}>
+                  <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)}>
                   <Link
                     href={`/projects/${cs.slug}`}
                     data-testid={`city-case-study-link-${cs.slug}`}
@@ -372,7 +373,7 @@ export default function CityPage({ city }: CityPageProps) {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {city.recentProjects.map((p, idx) => (
-                  <ScrollRevealWrapper key={p.title} delay={idx * 60}>
+                  <ScrollRevealWrapper key={p.title} delay={rowDelay(idx, 2)}>
                   <article
                     className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
@@ -460,7 +461,7 @@ export default function CityPage({ city }: CityPageProps) {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {city.testimonials.map((t, tIdx) => (
-                  <ScrollRevealWrapper key={t.name} delay={tIdx * 60}>
+                  <ScrollRevealWrapper key={t.name} delay={rowDelay(tIdx, 2)}>
                     <figure className="flex flex-col bg-card border border-border rounded-lg p-6 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
                       <div className="flex gap-0.5 text-secondary mb-3">
                         {[...Array(5)].map((_, i) => (
@@ -495,7 +496,7 @@ export default function CityPage({ city }: CityPageProps) {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             {services.map((s, sIdx) => (
-              <ScrollRevealWrapper key={s.name} delay={sIdx * 60}>
+              <ScrollRevealWrapper key={s.name} delay={rowDelay(sIdx, 2)}>
                 <div className="group bg-card border border-border p-6 rounded-lg flex gap-4 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
                   <s.icon className="h-8 w-8 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
                   <div>
@@ -518,7 +519,7 @@ export default function CityPage({ city }: CityPageProps) {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair", "maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"] as const).map((svcSlug, svcIdx) => (
-                <ScrollRevealWrapper key={svcSlug} delay={svcIdx * 40}>
+                <ScrollRevealWrapper key={svcSlug} delay={rowDelay(svcIdx, 2, 60)}>
                   <Link
                     href={`/service-areas/${city.slug}/${svcSlug}`}
                     className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"

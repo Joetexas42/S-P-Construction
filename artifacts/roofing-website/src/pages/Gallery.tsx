@@ -3,6 +3,7 @@ import { SEO } from "@/components/SEO";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import {
   buildImageSrcSet,
   SIZES_HALF_COLUMN_GRID,
@@ -120,7 +121,7 @@ export default function Gallery() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filtered.map((project, i) => (
-                <ScrollRevealWrapper key={`${animKey}-${project.title}`} delay={i * 60}>
+                <ScrollRevealWrapper key={`${animKey}-${project.title}`} delay={rowDelay(i, 2)}>
                   <div className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
                     <div className="aspect-[4/3] overflow-hidden bg-muted">
                       <img

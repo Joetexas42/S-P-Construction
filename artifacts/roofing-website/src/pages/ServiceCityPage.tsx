@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning } from "lucide-react";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/ContactForm";
@@ -426,7 +427,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
               {/* Sibling service×city combos */}
               {siblings.slice(0, 2).map((s, sIdx) => (
-                <ScrollRevealWrapper key={`${s.citySlug}--${s.serviceSlug}`} delay={(sIdx + 2) * 60}>
+                <ScrollRevealWrapper key={`${s.citySlug}--${s.serviceSlug}`} delay={rowDelay(sIdx, 2)}>
                   <Link
                     href={`/service-areas/${s.citySlug}/${s.serviceSlug}`}
                     className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
@@ -459,7 +460,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               {relatedServices.map((rel, relIdx) => {
                 const RelIcon = rel.icon;
                 return (
-                  <ScrollRevealWrapper key={rel.slug} delay={relIdx * 60}>
+                  <ScrollRevealWrapper key={rel.slug} delay={rowDelay(relIdx, 2)}>
                     <Link
                       href={`/service-areas/${city.slug}/${rel.slug}`}
                       className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
