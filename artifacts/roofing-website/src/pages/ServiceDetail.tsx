@@ -240,10 +240,12 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-6xl mx-auto">
             <div className="lg:col-span-7">
-              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">The Problem We Solve</p>
-              <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
-                Why this service matters
-              </h2>
+              <div className="section-heading-animate">
+                <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">The Problem We Solve</p>
+                <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
+                  Why this service matters
+                </h2>
+              </div>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
               <div className="bg-muted border border-border rounded-xl p-6">
                 <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
@@ -370,7 +372,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {service.faqs.length > 0 && (
         <section id="faq" className="py-20 bg-background border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-3xl mx-auto text-center mb-12">
+            <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Frequently Asked</p>
               <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
                 Questions about {service.shortTitle}
@@ -406,7 +408,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {SERVICE_CITY_SLUGS.includes(service.slug as (typeof SERVICE_CITY_SLUGS)[number]) && (
         <section id="service-areas" className="py-20 bg-background border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-3xl mx-auto text-center mb-12">
+            <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local SEO Pages</p>
               <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
                 DFW Cities We Serve
@@ -444,7 +446,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {/* Related services */}
       <section className="py-20 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Related Services</p>
             <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
               Other commercial roofing services
