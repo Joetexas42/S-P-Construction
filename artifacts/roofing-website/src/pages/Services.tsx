@@ -345,13 +345,14 @@ export default function Services() {
             const coreSystems = systemServices.filter((s) => (coreSystemSlugs as readonly string[]).includes(s.slug));
             const specialtyServices = systemServices.filter((s) => (specialtyServiceSlugs as readonly string[]).includes(s.slug));
 
-            const renderCard = (svc: (typeof systemServices)[number]) => {
+            const renderCard = (svc: (typeof systemServices)[number], cardIndex: number) => {
               const Icon = svc.icon;
               return (
                 <Link
                   key={svc.slug}
                   href={`/services/${svc.slug}`}
-                  className="group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  className="service-card-animate group bg-card border border-border p-7 rounded-xl shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  style={{ animationDelay: `${cardIndex * 40}ms` }}
                   data-testid={`service-card-${svc.slug}`}
                 >
                   <div className="flex items-start gap-4 mb-4">
@@ -403,7 +404,7 @@ export default function Services() {
                   ))}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div key={activeFilter} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {(activeFilter === "all" || activeFilter === "core") && (
                     <>
                       <div className="col-span-full flex items-center gap-4">
@@ -413,7 +414,7 @@ export default function Services() {
                         </span>
                         <div className="flex-1 h-px bg-border" />
                       </div>
-                      {coreSystems.map(renderCard)}
+                      {coreSystems.map((svc, i) => renderCard(svc, i))}
                     </>
                   )}
 
@@ -426,7 +427,7 @@ export default function Services() {
                         </span>
                         <div className="flex-1 h-px bg-border" />
                       </div>
-                      {specialtyServices.map(renderCard)}
+                      {specialtyServices.map((svc, i) => renderCard(svc, activeFilter === "all" ? coreSystems.length + i : i))}
                     </>
                   )}
                 </div>
