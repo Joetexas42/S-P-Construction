@@ -317,18 +317,19 @@ export default function Services() {
           {/* Category highlight strip */}
           <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-4xl mx-auto">
             {[
-              { label: "Maintenance Programs", desc: "Scheduled inspections & proactive repairs" },
-              { label: "Coatings & Restoration", desc: "Extend membrane life without tear-off" },
-              { label: "Flat Roofing", desc: "Low-slope systems built for Texas weather" },
-              { label: "Metal Roofing", desc: "Standing-seam & retrofit solutions" },
-            ].map(({ label, desc }) => (
-              <div
+              { label: "Maintenance Programs", desc: "Scheduled inspections & proactive repairs", slug: "maintenance" },
+              { label: "Coatings & Restoration", desc: "Extend membrane life without tear-off", slug: "coatings-restoration" },
+              { label: "Flat Roofing", desc: "Low-slope systems built for Texas weather", slug: "flat-roofing" },
+              { label: "Metal Roofing", desc: "Standing-seam & retrofit solutions", slug: "metal-roofing" },
+            ].map(({ label, desc, slug }) => (
+              <Link
                 key={label}
-                className="flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px]"
+                href={`/services/${slug}`}
+                className="flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px] hover:border-secondary hover:shadow-md transition-all cursor-pointer"
               >
                 <span className="text-sm font-heading font-bold uppercase tracking-tight text-foreground leading-snug">{label}</span>
                 <span className="text-xs text-muted-foreground mt-1 leading-snug">{desc}</span>
-              </div>
+              </Link>
             ))}
           </div>
 
