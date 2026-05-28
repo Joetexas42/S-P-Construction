@@ -314,6 +314,24 @@ export default function Services() {
             </p>
           </div>
 
+          {/* Category highlight strip */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-4xl mx-auto">
+            {[
+              { label: "Maintenance Programs", desc: "Scheduled inspections & proactive repairs" },
+              { label: "Coatings & Restoration", desc: "Extend membrane life without tear-off" },
+              { label: "Flat Roofing", desc: "Low-slope systems built for Texas weather" },
+              { label: "Metal Roofing", desc: "Standing-seam & retrofit solutions" },
+            ].map(({ label, desc }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px]"
+              >
+                <span className="text-sm font-heading font-bold uppercase tracking-tight text-foreground leading-snug">{label}</span>
+                <span className="text-xs text-muted-foreground mt-1 leading-snug">{desc}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
             {systemServices.map((svc) => {
               const Icon = svc.icon;
