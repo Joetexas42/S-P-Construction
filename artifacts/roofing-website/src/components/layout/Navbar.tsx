@@ -255,12 +255,16 @@ export function Navbar() {
                               <Link
                                 key={child.path}
                                 href={child.path}
-                                className={`flex items-center gap-3 text-base font-semibold ${
-                                  active ? "text-secondary" : "text-foreground/80"
+                                className={`group flex items-center gap-3 text-base font-semibold rounded-md px-2 py-1.5 -mx-2 transition-all duration-200 hover:bg-muted active:scale-[0.97] ${
+                                  active ? "text-secondary" : "text-foreground/80 hover:text-secondary active:text-secondary"
                                 }`}
                                 onClick={() => setMobileMenuOpen(false)}
                               >
-                                {Icon ? <Icon className="h-5 w-5 text-secondary" /> : null}
+                                {Icon ? (
+                                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary transition-transform duration-200 group-hover:scale-110">
+                                    <Icon className="h-4 w-4" />
+                                  </span>
+                                ) : null}
                                 <span>{child.name}</span>
                               </Link>
                             );
