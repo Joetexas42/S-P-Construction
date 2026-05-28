@@ -59,16 +59,34 @@ const projects = [
 
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const [displayFilter, setDisplayFilter] = useState<Filter>("All");
   const [animKey, setAnimKey] = useState(0);
+  const [isExiting, setIsExiting] = useState(false);
 
   const filtered =
-    activeFilter === "All"
+    displayFilter === "All"
       ? projects
-      : projects.filter((p) => p.category === activeFilter);
+      : projects.filter((p) => p.category === displayFilter);
 
   function handleFilter(f: Filter) {
+    if (f === activeFilter) return;
     setActiveFilter(f);
-    setAnimKey((k) => k + 1);
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReduced) {
+      setDisplayFilter(f);
+      setAnimKey((k) => k + 1);
+      return;
+    }
+
+    setIsExiting(true);
+    setTimeout(() => {
+      setDisplayFilter(f);
+      setAnimKey((k) => k + 1);
+      setIsExiting(false);
+    }, 180);
   }
 
   return (
@@ -119,7 +137,7 @@ export default function Gallery() {
               No projects match that filter yet.
             </p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className={`grid grid-cols-1 md:grid-cols-2 gap-8${isExiting ? " filter-cards-exit" : ""}`}>
               {filtered.map((project, i) => (
                 <ScrollRevealWrapper key={`${animKey}-${project.title}`} delay={rowDelay(i, 2)}>
                   <div className="group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
