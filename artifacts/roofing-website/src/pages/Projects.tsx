@@ -347,9 +347,9 @@ export default function Projects() {
           </div>
 
           {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {filtered.map((c) => (
-                <CaseStudyCard key={c.slug} study={c} />
+            <div key={`${city}-${system}`} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {filtered.map((c, i) => (
+                <CaseStudyCard key={c.slug} study={c} index={i} />
               ))}
             </div>
           ) : (
@@ -411,12 +411,13 @@ export default function Projects() {
   );
 }
 
-function CaseStudyCard({ study }: { study: CaseStudy }) {
+function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
   const testimonial = getTestimonialBySlug(study.slug);
   return (
     <article
       id={study.slug}
-      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-lg transition-shadow scroll-mt-24"
+      className="service-card-animate group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-lg transition-shadow scroll-mt-24"
+      style={{ animationDelay: `${index * 40}ms` }}
     >
       <Link
         href={`/projects/${study.slug}`}

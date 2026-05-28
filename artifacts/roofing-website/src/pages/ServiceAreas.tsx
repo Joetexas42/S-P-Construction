@@ -69,11 +69,12 @@ export default function ServiceAreas() {
 
               <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Featured Cities</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                {cities.map((city) => (
+                {cities.map((city, i) => (
                   <Link
                     key={city.slug}
                     href={`/service-areas/${city.slug}`}
-                    className="group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted rounded-md border border-border transition-colors"
+                    className="service-card-animate group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted rounded-md border border-border transition-colors"
+                    style={{ animationDelay: `${i * 40}ms` }}
                   >
                     <span className="flex items-center gap-2 text-foreground font-bold">
                       <MapPin className="h-4 w-4 text-secondary shrink-0" />
