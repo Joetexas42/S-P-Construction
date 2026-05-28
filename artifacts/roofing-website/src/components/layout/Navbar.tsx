@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Phone, Menu, X, HardHat, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
 
@@ -257,8 +258,17 @@ export function Navbar() {
                       />
                     </button>
                   </div>
+                  <AnimatePresence initial={false}>
                   {mobileServicesOpen && (
-                    <div className="pl-4 border-l-2 border-secondary/40 flex flex-col gap-4">
+                    <motion.div
+                      key="mobile-services-submenu"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                      style={{ overflow: "hidden" }}
+                    >
+                    <div className="pl-4 border-l-2 border-secondary/40 flex flex-col gap-4 pt-1">
                       {[
                         { label: "Core Systems", items: coreServices, isActive: isCoreGroupActive },
                         { label: "Specialty Services", items: specialtyServices, isActive: isSpecialtyGroupActive },
@@ -296,7 +306,9 @@ export function Navbar() {
                         </div>
                       ))}
                     </div>
+                    </motion.div>
                   )}
+                  </AnimatePresence>
                 </div>
               ) : (
                 <Link
