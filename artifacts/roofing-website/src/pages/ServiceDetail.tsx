@@ -144,7 +144,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       />
 
       {/* Header */}
-      <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
+      <section id="top" className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">
@@ -234,7 +234,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       </section>
 
       {/* Overview */}
-      <section className="py-20 bg-background">
+      <section id="overview" className="py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-6xl mx-auto">
             <div className="lg:col-span-7">
@@ -283,7 +283,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
 
       {/* Deep content sections */}
       {service.sections.length > 0 && (
-        <section className="py-20 bg-muted border-y border-border">
+        <section id="details" className="py-20 bg-muted border-y border-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto space-y-6">
               {service.sections.map((sec) => {
@@ -365,7 +365,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
 
       {/* FAQ */}
       {service.faqs.length > 0 && (
-        <section className="py-20 bg-background border-b border-border">
+        <section id="faq" className="py-20 bg-background border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Frequently Asked</p>
@@ -401,7 +401,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
 
       {/* DFW Cities We Serve — only shown for the 4 service-city services */}
       {SERVICE_CITY_SLUGS.includes(service.slug as (typeof SERVICE_CITY_SLUGS)[number]) && (
-        <section className="py-20 bg-background border-b border-border">
+        <section id="service-areas" className="py-20 bg-background border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local SEO Pages</p>
