@@ -279,8 +279,8 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Districts */}
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <Building2 className="h-8 w-8 text-secondary mb-4" />
+            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
                 {city.name} Districts We Serve
               </h3>
@@ -295,8 +295,8 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
             </div>
 
             {/* Building context */}
-            <div className="bg-card border border-border p-8 rounded-lg lg:col-span-2">
-              <Building2 className="h-8 w-8 text-secondary mb-4" />
+            <div className="group bg-card border border-border p-8 rounded-lg lg:col-span-2 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
                 {city.name} Building Types We Work On
               </h3>
@@ -388,9 +388,9 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               {/* Parent city page */}
               <Link
                 href={`/service-areas/${city.slug}`}
-                className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
               >
-                <MapPin className="h-6 w-6 text-secondary mb-3" />
+                <MapPin className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
                   Commercial Roofing in {city.name}
                 </h3>
@@ -403,9 +403,9 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               {/* Parent service page */}
               <Link
                 href={`/services/${service.slug}`}
-                className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
               >
-                <Zap className="h-6 w-6 text-secondary mb-3" />
+                <Zap className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
                   {service.shortTitle}
                 </h3>
@@ -420,9 +420,9 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
                 <Link
                   key={`${s.citySlug}--${s.serviceSlug}`}
                   href={`/service-areas/${s.citySlug}/${s.serviceSlug}`}
-                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                 >
-                  <ArrowRight className="h-6 w-6 text-secondary mb-3" />
+                  <ArrowRight className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                   <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
                     {s.label}
                   </h3>
@@ -452,10 +452,10 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
                   <Link
                     key={rel.slug}
                     href={`/service-areas/${city.slug}/${rel.slug}`}
-                    className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                    className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   >
                     <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
-                      <RelIcon className="h-6 w-6 text-secondary" />
+                      <RelIcon className="h-6 w-6 text-secondary group-hover:scale-110 transition-transform duration-200" />
                     </div>
                     <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-2 leading-snug">
                       {SERVICE_CITY_SERVICE_SHORT[rel.slug] ?? rel.shortTitle} in {city.name}

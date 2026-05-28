@@ -416,7 +416,7 @@ function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
   return (
     <article
       id={study.slug}
-      className="service-card-animate group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-lg transition-shadow scroll-mt-24"
+      className="service-card-animate group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24"
       style={{ animationDelay: `${index * 40}ms` }}
     >
       <Link

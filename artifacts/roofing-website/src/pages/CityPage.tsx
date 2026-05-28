@@ -232,8 +232,8 @@ export default function CityPage({ city }: CityPageProps) {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <Building2 className="h-8 w-8 text-secondary mb-4" />
+            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Landmarks We Serve</h3>
               <ul className="space-y-2">
                 {city.landmarks.map((l) => (
@@ -243,8 +243,8 @@ export default function CityPage({ city }: CityPageProps) {
                 ))}
               </ul>
             </div>
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <Factory className="h-8 w-8 text-secondary mb-4" />
+            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <Factory className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Local Industries</h3>
               <ul className="space-y-2">
                 {city.industries.map((i) => (
@@ -254,8 +254,8 @@ export default function CityPage({ city }: CityPageProps) {
                 ))}
               </ul>
             </div>
-            <div className="bg-card border border-border p-8 rounded-lg">
-              <ShieldCheck className="h-8 w-8 text-secondary mb-4" />
+            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+              <ShieldCheck className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">Neighborhoods Covered</h3>
               <ul className="space-y-2">
                 {city.neighborhoods.map((n) => (
@@ -292,7 +292,7 @@ export default function CityPage({ city }: CityPageProps) {
                     key={cs.slug}
                     href={`/projects/${cs.slug}`}
                     data-testid={`city-case-study-link-${cs.slug}`}
-                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:shadow-md transition-shadow"
+                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
                     <div className="aspect-[16/10] overflow-hidden bg-muted relative">
                       <img
@@ -366,7 +366,7 @@ export default function CityPage({ city }: CityPageProps) {
                 {city.recentProjects.map((p, idx) => (
                   <article
                     key={p.title}
-                    className="flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm"
+                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
                     <button
                       type="button"
@@ -453,7 +453,7 @@ export default function CityPage({ city }: CityPageProps) {
                 {city.testimonials.map((t) => (
                   <figure
                     key={t.name}
-                    className="flex flex-col bg-card border border-border rounded-lg p-6 shadow-sm"
+                    className="flex flex-col bg-card border border-border rounded-lg p-6 shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
                     <div className="flex gap-0.5 text-secondary mb-3">
                       {[...Array(5)].map((_, i) => (
@@ -487,8 +487,8 @@ export default function CityPage({ city }: CityPageProps) {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             {services.map((s) => (
-              <div key={s.name} className="bg-card border border-border p-6 rounded-lg flex gap-4">
-                <s.icon className="h-8 w-8 text-secondary shrink-0" />
+              <div key={s.name} className="group bg-card border border-border p-6 rounded-lg flex gap-4 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <s.icon className="h-8 w-8 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2 text-foreground">{s.name}</h3>
                   <p className="text-muted-foreground">{s.desc}</p>
@@ -511,7 +511,7 @@ export default function CityPage({ city }: CityPageProps) {
                 <Link
                   key={svcSlug}
                   href={`/service-areas/${city.slug}/${svcSlug}`}
-                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`city-service-page-link-${city.slug}-${svcSlug}`}
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{city.name}, TX</p>

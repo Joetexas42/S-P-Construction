@@ -58,7 +58,7 @@ export default function Gallery() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, i) => (
-              <div key={i} className="service-card-animate group overflow-hidden rounded-lg border border-border bg-card shadow-sm" style={{ animationDelay: `${i * 40}ms` }}>
+              <div key={i} className="service-card-animate group overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200" style={{ animationDelay: `${i * 40}ms` }}>
                 <div className="aspect-[4/3] overflow-hidden bg-muted">
                   <img
                     src={project.src}

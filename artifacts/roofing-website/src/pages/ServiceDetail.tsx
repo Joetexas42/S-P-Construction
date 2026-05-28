@@ -417,7 +417,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 <Link
                   key={city.slug}
                   href={`/service-areas/${city.slug}/${service.slug}`}
-                  className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`service-city-link-${service.slug}-${city.slug}`}
                 >
                   <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">{city.county}</p>
@@ -453,11 +453,11 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 <Link
                   key={rel.slug}
                   href={`/services/${rel.slug}`}
-                  className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md transition-all flex flex-col"
+                  className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
                   data-testid={`related-service-${rel.slug}`}
                 >
                   <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
-                    <RelIcon className="h-6 w-6 text-secondary" />
+                    <RelIcon className="h-6 w-6 text-secondary group-hover:scale-110 transition-transform duration-200" />
                   </div>
                   <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-2 leading-snug">
                     {rel.shortTitle}

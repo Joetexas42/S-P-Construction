@@ -73,11 +73,11 @@ export default function ServiceAreas() {
                   <Link
                     key={city.slug}
                     href={`/service-areas/${city.slug}`}
-                    className="service-card-animate group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted rounded-md border border-border transition-colors"
+                    className="service-card-animate group flex items-center justify-between gap-2 p-4 bg-card hover:bg-muted hover:border-secondary hover:scale-[1.02] rounded-md border border-border transition-all duration-200"
                     style={{ animationDelay: `${i * 40}ms` }}
                   >
                     <span className="flex items-center gap-2 text-foreground font-bold">
-                      <MapPin className="h-4 w-4 text-secondary shrink-0" />
+                      <MapPin className="h-4 w-4 text-secondary shrink-0 group-hover:scale-110 transition-transform duration-200" />
                       {city.name}
                     </span>
                     <ArrowRight className="h-4 w-4 text-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
