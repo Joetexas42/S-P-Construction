@@ -129,6 +129,10 @@ export function Navbar() {
     closeCitiesTimer.current = setTimeout(() => setCitiesOpen(false), 150);
   };
 
+  const darkHeroPages = ["/", "/contact"];
+  const isDarkHero = darkHeroPages.includes(location);
+  const isTransparent = isDarkHero && !isScrolled;
+
   const isServiceActive = location.startsWith("/services");
   const isCitiesActive = location.startsWith("/service-areas");
 
@@ -150,6 +154,8 @@ export function Navbar() {
         className={`sticky top-0 z-40 w-full transition-all duration-300 border-b ${
           isScrolled
             ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-md border-border"
+            : isTransparent
+            ? "bg-black/40 backdrop-blur-sm border-white/10"
             : "bg-background border-border shadow-sm"
         }`}
       >
@@ -158,8 +164,8 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2 z-50">
               <HardHat className="h-8 w-8 text-secondary" />
               <div className="flex flex-col">
-                <span className="font-heading font-bold text-xl leading-none text-foreground uppercase tracking-tight">Scott</span>
-                <span className="text-xs text-muted-foreground uppercase font-semibold tracking-wider">Commercial Roofing</span>
+                <span className={`font-heading font-bold text-xl leading-none uppercase tracking-tight transition-colors duration-300 ${isTransparent ? "text-white" : "text-foreground"}`}>Scott</span>
+                <span className={`text-xs uppercase font-semibold tracking-wider transition-colors duration-300 ${isTransparent ? "text-white/70" : "text-muted-foreground"}`}>Commercial Roofing</span>
               </div>
             </Link>
 
@@ -176,7 +182,7 @@ export function Navbar() {
                       <Link
                         href={link.path}
                         className={`flex items-center gap-1 text-sm font-semibold uppercase tracking-wide transition-colors hover:text-secondary ${
-                          isServiceActive ? "text-secondary" : "text-foreground/80"
+                          isServiceActive ? "text-secondary" : isTransparent ? "text-white/90" : "text-foreground/80"
                         }`}
                         aria-haspopup="true"
                         aria-expanded={servicesOpen}
@@ -272,7 +278,7 @@ export function Navbar() {
                       <Link
                         href={link.path}
                         className={`flex items-center gap-1 text-sm font-semibold uppercase tracking-wide transition-colors hover:text-secondary ${
-                          isCitiesActive ? "text-secondary" : "text-foreground/80"
+                          isCitiesActive ? "text-secondary" : isTransparent ? "text-white/90" : "text-foreground/80"
                         }`}
                         aria-haspopup="true"
                         aria-expanded={citiesOpen}
@@ -349,7 +355,7 @@ export function Navbar() {
                     key={link.path}
                     href={link.path}
                     className={`text-sm font-semibold uppercase tracking-wide transition-colors hover:text-secondary ${
-                      location === link.path ? "text-secondary" : "text-foreground/80"
+                      location === link.path ? "text-secondary" : isTransparent ? "text-white/90" : "text-foreground/80"
                     }`}
                   >
                     {link.name}
@@ -359,7 +365,7 @@ export function Navbar() {
             </nav>
 
             <div className="hidden md:flex items-center gap-6">
-              <a href="tel:972-555-0100" className="flex items-center gap-2 text-foreground font-bold hover:text-secondary transition-colors">
+              <a href="tel:972-555-0100" className={`flex items-center gap-2 font-bold hover:text-secondary transition-colors duration-300 ${isTransparent ? "text-white" : "text-foreground"}`}>
                 <Phone className="h-5 w-5 text-secondary" />
                 <span>(972) 555-0100</span>
               </a>
@@ -371,7 +377,7 @@ export function Navbar() {
             </div>
 
             <button
-              className="md:hidden p-2 text-foreground z-50"
+              className={`md:hidden p-2 z-50 transition-colors duration-300 ${isTransparent && !mobileMenuOpen ? "text-white" : "text-foreground"}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Menu"
             >
