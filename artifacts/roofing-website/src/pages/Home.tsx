@@ -223,8 +223,8 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, i) => (
-              <div key={i} className="group bg-card border border-border p-8 rounded-lg hover:border-secondary transition-all hover:shadow-lg hover:-translate-y-1">
-                <service.icon className="h-12 w-12 text-secondary mb-6 group-hover:scale-110 transition-transform" />
+              <div key={i} className="group bg-card border border-border p-8 rounded-lg hover:border-secondary transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
+                <service.icon className="h-12 w-12 text-secondary mb-6 group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-3 text-foreground">{service.name}</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">{service.desc}</p>
                 <Link href="/services" className="text-sm font-bold text-secondary uppercase tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all">
