@@ -119,10 +119,10 @@ export function Navbar() {
                         <div className="w-[680px] rounded-lg border border-border bg-background shadow-xl p-4">
                           <Link
                             href="/services"
-                            className="flex items-center justify-between px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider text-secondary hover:bg-muted mb-3"
+                            className="group flex items-center justify-between px-3 py-2 rounded-md text-xs font-bold uppercase tracking-wider text-secondary hover:bg-muted mb-3 transition-colors"
                           >
-                            <span>All Services Overview</span>
-                            <span aria-hidden>→</span>
+                            <span className="transition-colors group-hover:text-secondary/80">All Services Overview</span>
+                            <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                           </Link>
                           <div className="grid grid-cols-2 gap-x-6">
                             {[
