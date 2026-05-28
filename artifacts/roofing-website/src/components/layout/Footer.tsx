@@ -75,7 +75,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-primary-foreground/10">
           <div className="flex flex-wrap justify-center gap-3 mb-6">
             {["Firestone Building Products", "Mule-Hide Products Co.", "Duro-Last PVC Systems", "TPO Membrane Systems"].map((brand) => (
-              <span key={brand} className="px-3 py-1 rounded border border-primary-foreground/20 text-xs text-primary-foreground/60 font-semibold uppercase tracking-wide">
+              <span key={brand} className="inline-block px-3 py-1 rounded border border-primary-foreground/20 text-xs text-primary-foreground/60 font-semibold uppercase tracking-wide hover:border-primary-foreground/40 hover:scale-[1.02] transition-all duration-200">
                 {brand}
               </span>
             ))}
