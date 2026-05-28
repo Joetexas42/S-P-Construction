@@ -141,18 +141,18 @@ export function Navbar() {
                                       <Link
                                         key={child.path}
                                         href={child.path}
-                                        className={`flex items-start gap-3 px-3 py-2 rounded-md transition-colors hover:bg-muted ${
+                                        className={`group flex items-start gap-3 px-3 py-2 rounded-md transition-all hover:bg-muted ${
                                           active ? "bg-muted" : ""
                                         }`}
                                       >
                                         {Icon ? (
-                                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary">
+                                          <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-secondary transition-transform duration-200 group-hover:scale-110">
                                             <Icon className="h-4 w-4" />
                                           </span>
                                         ) : null}
                                         <span
-                                          className={`text-sm font-semibold leading-tight pt-1.5 ${
-                                            active ? "text-secondary" : "text-foreground"
+                                          className={`text-sm font-semibold leading-tight pt-1.5 transition-colors duration-200 ${
+                                            active ? "text-secondary" : "text-foreground group-hover:text-secondary"
                                           }`}
                                         >
                                           {child.name}
