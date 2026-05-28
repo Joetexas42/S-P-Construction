@@ -43,10 +43,10 @@ export default function ServiceAreas() {
       <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
-            <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">
-              <Link href="/" className="hover:text-white transition-colors">Home</Link>
-              <span className="mx-2">/</span>
-              <span className="text-white">Service Areas</span>
+            <nav className="mb-6 text-sm text-primary-foreground/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-white transition-colors hidden sm:inline shrink-0">Home</Link>
+              <span className="mx-2 hidden sm:inline shrink-0">/</span>
+              <span className="text-white shrink-0">Service Areas</span>
             </nav>
             <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">Service Areas</h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
