@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import {
   CheckCircle2,
@@ -16,7 +17,10 @@ import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/service
 const SITE_ORIGIN = "https://scottcommercialroofing.com";
 const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
 
+type ServiceFilter = "all" | "core" | "specialty";
+
 export default function Services() {
+  const [activeFilter, setActiveFilter] = useState<ServiceFilter>("all");
   const coreServices = services.filter((s) => s.category === "Core");
   const systemServices = services.filter((s) => s.category === "System");
 
@@ -369,25 +373,59 @@ export default function Services() {
               );
             };
 
-            return (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                <div className="col-span-full flex items-center gap-4">
-                  <div className="flex-1 h-px bg-border" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-secondary px-4 py-1.5 rounded-full bg-secondary/10 whitespace-nowrap">
-                    Core Systems
-                  </span>
-                  <div className="flex-1 h-px bg-border" />
-                </div>
-                {coreSystems.map(renderCard)}
+            const filterTabs: { id: ServiceFilter; label: string }[] = [
+              { id: "all", label: "All Services" },
+              { id: "core", label: "Core Systems" },
+              { id: "specialty", label: "Specialty Services" },
+            ];
 
-                <div className="col-span-full flex items-center gap-4 mt-4">
-                  <div className="flex-1 h-px bg-border" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-secondary px-4 py-1.5 rounded-full bg-secondary/10 whitespace-nowrap">
-                    Specialty Services
-                  </span>
-                  <div className="flex-1 h-px bg-border" />
+            return (
+              <div className="max-w-7xl mx-auto">
+                {/* Filter tabs */}
+                <div className="flex justify-center gap-2 mb-10 flex-wrap">
+                  {filterTabs.map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveFilter(tab.id)}
+                      className={`px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wider transition-all border ${
+                        activeFilter === tab.id
+                          ? "bg-secondary text-secondary-foreground border-secondary shadow-sm"
+                          : "bg-transparent text-muted-foreground border-border hover:border-secondary hover:text-foreground"
+                      }`}
+                      data-testid={`filter-tab-${tab.id}`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
                 </div>
-                {specialtyServices.map(renderCard)}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {(activeFilter === "all" || activeFilter === "core") && (
+                    <>
+                      <div className="col-span-full flex items-center gap-4">
+                        <div className="flex-1 h-px bg-border" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-secondary px-4 py-1.5 rounded-full bg-secondary/10 whitespace-nowrap">
+                          Core Systems
+                        </span>
+                        <div className="flex-1 h-px bg-border" />
+                      </div>
+                      {coreSystems.map(renderCard)}
+                    </>
+                  )}
+
+                  {(activeFilter === "all" || activeFilter === "specialty") && (
+                    <>
+                      <div className={`col-span-full flex items-center gap-4 ${activeFilter === "all" ? "mt-4" : ""}`}>
+                        <div className="flex-1 h-px bg-border" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-secondary px-4 py-1.5 rounded-full bg-secondary/10 whitespace-nowrap">
+                          Specialty Services
+                        </span>
+                        <div className="flex-1 h-px bg-border" />
+                      </div>
+                      {specialtyServices.map(renderCard)}
+                    </>
+                  )}
+                </div>
               </div>
             );
           })()}
