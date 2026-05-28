@@ -176,7 +176,7 @@ export default function Home() {
             ].map((brand) => (
               <div
                 key={brand.name}
-                className="flex items-center justify-center border border-border rounded-lg px-6 py-4 min-w-[180px] h-[88px] bg-card hover:border-secondary transition-colors"
+                className="flex items-center justify-center border border-border rounded-lg px-6 py-4 min-w-[180px] h-[88px] bg-card hover:border-secondary hover:scale-[1.02] transition-all duration-200"
                 data-testid={`partner-logo-${brand.name.toLowerCase()}`}
               >
                 <img
