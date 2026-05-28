@@ -8,6 +8,9 @@ import {
   HardHat,
   HelpCircle,
   ArrowRight,
+  Wrench,
+  Layers,
+  Maximize,
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
@@ -321,16 +324,17 @@ export default function Services() {
           {/* Category highlight strip */}
           <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-4xl mx-auto">
             {[
-              { label: "Maintenance Programs", desc: "Scheduled inspections & proactive repairs", slug: "maintenance" },
-              { label: "Coatings & Restoration", desc: "Extend membrane life without tear-off", slug: "coatings-restoration" },
-              { label: "Flat Roofing", desc: "Low-slope systems built for Texas weather", slug: "flat-roofing" },
-              { label: "Metal Roofing", desc: "Standing-seam & retrofit solutions", slug: "metal-roofing" },
-            ].map(({ label, desc, slug }) => (
+              { label: "Maintenance Programs", desc: "Scheduled inspections & proactive repairs", slug: "maintenance", Icon: Wrench },
+              { label: "Coatings & Restoration", desc: "Extend membrane life without tear-off", slug: "coatings-restoration", Icon: Layers },
+              { label: "Flat Roofing", desc: "Low-slope systems built for Texas weather", slug: "flat-roofing", Icon: Maximize },
+              { label: "Metal Roofing", desc: "Standing-seam & retrofit solutions", slug: "metal-roofing", Icon: Shield },
+            ].map(({ label, desc, slug, Icon }) => (
               <Link
                 key={label}
                 href={`/services/${slug}`}
                 className="flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px] hover:border-secondary hover:shadow-md transition-all cursor-pointer"
               >
+                <Icon className="w-5 h-5 text-secondary mb-2" />
                 <span className="text-sm font-heading font-bold uppercase tracking-tight text-foreground leading-snug">{label}</span>
                 <span className="text-xs text-muted-foreground mt-1 leading-snug">{desc}</span>
               </Link>
