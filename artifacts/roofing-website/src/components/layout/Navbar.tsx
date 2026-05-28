@@ -129,8 +129,8 @@ export function Navbar() {
                               { label: "Core Systems", items: coreServices },
                               { label: "Specialty Services", items: specialtyServices },
                             ].map((group) => (
-                              <div key={group.label}>
-                                <p className="px-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                              <div key={group.label} className="group/section">
+                                <p className="px-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-muted-foreground transition-colors duration-200 group-hover/section:text-secondary">
                                   {group.label}
                                 </p>
                                 <div className="flex flex-col gap-0.5">
