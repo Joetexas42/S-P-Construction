@@ -333,8 +333,13 @@ export default function Services() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {systemServices.map((svc) => {
+          {(() => {
+            const coreSystemSlugs = ["replacement", "storm-damage", "emergency-leak-repair", "tpo-epdm-pvc"];
+            const specialtySlugs = ["maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"];
+            const coreSystems = systemServices.filter((s) => coreSystemSlugs.includes(s.slug));
+            const specialtyServices = systemServices.filter((s) => specialtySlugs.includes(s.slug));
+
+            const renderCard = (svc: (typeof systemServices)[number]) => {
               const Icon = svc.icon;
               return (
                 <Link
@@ -364,8 +369,30 @@ export default function Services() {
                   </span>
                 </Link>
               );
-            })}
-          </div>
+            };
+
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                <div className="col-span-full flex items-center gap-4">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-secondary px-4 py-1.5 rounded-full bg-secondary/10 whitespace-nowrap">
+                    Core Systems
+                  </span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+                {coreSystems.map(renderCard)}
+
+                <div className="col-span-full flex items-center gap-4 mt-4">
+                  <div className="flex-1 h-px bg-border" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-secondary px-4 py-1.5 rounded-full bg-secondary/10 whitespace-nowrap">
+                    Specialty Services
+                  </span>
+                  <div className="flex-1 h-px bg-border" />
+                </div>
+                {specialtyServices.map(renderCard)}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
