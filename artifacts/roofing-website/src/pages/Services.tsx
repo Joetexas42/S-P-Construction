@@ -332,9 +332,9 @@ export default function Services() {
               <Link
                 key={label}
                 href={`/services/${slug}`}
-                className="flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px] hover:border-secondary hover:shadow-md transition-all cursor-pointer"
+                className="group flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px] hover:border-secondary hover:shadow-md hover:scale-[1.04] transition-all cursor-pointer"
               >
-                <Icon className="w-5 h-5 text-secondary mb-2" />
+                <Icon className="w-5 h-5 text-secondary mb-2 transition-transform duration-200 group-hover:scale-125 group-hover:text-secondary/80" />
                 <span className="text-sm font-heading font-bold uppercase tracking-tight text-foreground leading-snug">{label}</span>
                 <span className="text-xs text-muted-foreground mt-1 leading-snug">{desc}</span>
               </Link>
