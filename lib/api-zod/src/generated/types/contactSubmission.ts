@@ -19,5 +19,9 @@ export interface ContactSubmission {
   message: string;
   /** @nullable */
   preferredContact?: string | null;
+  /** @nullable */
+  city?: string | null;
+  /** @nullable */
+  serviceContext?: string | null;
   createdAt: Date;
 }

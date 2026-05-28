@@ -184,6 +184,12 @@ components:
         preferredContact:
           type: ["string", "null"]
           enum: ["phone", "email", null]
+        city:
+          type: ["string", "null"]
+          description: City context pre-populated from a service×city landing page
+        serviceContext:
+          type: ["string", "null"]
+          description: Human-readable service label pre-populated from a service×city landing page
     ContactSubmission:
       type: object
       required:
@@ -212,6 +218,10 @@ components:
         message:
           type: string
         preferredContact:
+          type: ["string", "null"]
+        city:
+          type: ["string", "null"]
+        serviceContext:
           type: ["string", "null"]
         createdAt:
           type: string

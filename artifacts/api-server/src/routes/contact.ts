@@ -26,6 +26,8 @@ const contactInputSchema = z.object({
   propertyType: z.string().nullable().optional(),
   message: z.string().min(1),
   preferredContact: z.enum(["phone", "email"]).nullable().optional(),
+  city: z.string().nullable().optional(),
+  serviceContext: z.string().nullable().optional(),
 });
 
 router.post("/contact", async (req, res) => {
@@ -48,6 +50,8 @@ router.post("/contact", async (req, res) => {
       propertyType: data.propertyType ?? null,
       message: data.message,
       preferredContact: data.preferredContact ?? null,
+      city: data.city ?? null,
+      serviceContext: data.serviceContext ?? null,
     })
     .returning();
 

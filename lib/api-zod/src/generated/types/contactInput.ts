@@ -22,4 +22,14 @@ export interface ContactInput {
   message: string;
   /** @nullable */
   preferredContact?: ContactInputPreferredContact;
+  /**
+     * City context pre-populated from a service×city landing page
+     * @nullable
+     */
+  city?: string | null;
+  /**
+     * Human-readable service label pre-populated from a service×city landing page
+     * @nullable
+     */
+  serviceContext?: string | null;
 }

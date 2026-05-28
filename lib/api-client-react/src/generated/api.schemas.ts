@@ -51,6 +51,16 @@ export interface ContactInput {
   message: string;
   /** @nullable */
   preferredContact?: ContactInputPreferredContact;
+  /**
+     * City context pre-populated from a service×city landing page
+     * @nullable
+     */
+  city?: string | null;
+  /**
+     * Human-readable service label pre-populated from a service×city landing page
+     * @nullable
+     */
+  serviceContext?: string | null;
 }
 
 export interface ContactSubmission {
@@ -66,6 +76,10 @@ export interface ContactSubmission {
   message: string;
   /** @nullable */
   preferredContact?: string | null;
+  /** @nullable */
+  city?: string | null;
+  /** @nullable */
+  serviceContext?: string | null;
   createdAt: string;
 }
 

@@ -23,24 +23,28 @@ import { useSubmitContact } from "@workspace/api-client-react";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 
+const serviceTypeValues = [
+  "roof-repair",
+  "roof-replacement",
+  "inspection",
+  "maintenance",
+  "storm-damage",
+  "emergency-leak",
+  "coatings",
+  "flat-roofing",
+  "metal-roofing",
+  "tpo-epdm",
+  "other",
+] as const;
+
+type ServiceTypeValue = typeof serviceTypeValues[number];
+
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number is required"),
   company: z.string().optional(),
-  serviceType: z.enum([
-    "roof-repair",
-    "roof-replacement",
-    "inspection",
-    "maintenance",
-    "storm-damage",
-    "emergency-leak",
-    "coatings",
-    "flat-roofing",
-    "metal-roofing",
-    "tpo-epdm",
-    "other",
-  ], {
+  serviceType: z.enum(serviceTypeValues, {
     required_error: "Please select a service type",
   }),
   propertyType: z.string().optional(),
@@ -48,7 +52,13 @@ const formSchema = z.object({
   preferredContact: z.enum(["phone", "email"]).optional(),
 });
 
-export function ContactForm() {
+interface ContactFormProps {
+  defaultServiceType?: ServiceTypeValue;
+  defaultCity?: string;
+  defaultServiceContext?: string;
+}
+
+export function ContactForm({ defaultServiceType, defaultCity, defaultServiceContext }: ContactFormProps = {}) {
   const { toast } = useToast();
   const submitContact = useSubmitContact();
   
@@ -61,12 +71,19 @@ export function ContactForm() {
       company: "",
       propertyType: "",
       message: "",
+      ...(defaultServiceType ? { serviceType: defaultServiceType } : {}),
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     submitContact.mutate(
-      { data: values },
+      {
+        data: {
+          ...values,
+          ...(defaultCity ? { city: defaultCity } : {}),
+          ...(defaultServiceContext ? { serviceContext: defaultServiceContext } : {}),
+        },
+      },
       {
         onSuccess: () => {
           toast({
@@ -149,7 +166,7 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Service Needed *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a service" />

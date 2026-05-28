@@ -12,6 +12,8 @@ export const contactSubmissionsTable = pgTable("contact_submissions", {
   propertyType: text("property_type"),
   message: text("message").notNull(),
   preferredContact: text("preferred_contact"),
+  city: text("city"),
+  serviceContext: text("service_context"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

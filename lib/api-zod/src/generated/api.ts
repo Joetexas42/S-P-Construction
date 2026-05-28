@@ -33,7 +33,9 @@ export const SubmitContactBody = zod.object({
   "serviceType": zod.enum(['roof-repair', 'roof-replacement', 'inspection', 'maintenance', 'storm-damage', 'emergency-leak', 'coatings', 'flat-roofing', 'metal-roofing', 'tpo-epdm', 'other']),
   "propertyType": zod.string().nullish(),
   "message": zod.string().min(1),
-  "preferredContact": zod.union([zod.literal('phone'),zod.literal('email'),zod.literal(null)]).nullish()
+  "preferredContact": zod.union([zod.literal('phone'),zod.literal('email'),zod.literal(null)]).nullish(),
+  "city": zod.string().nullish().describe('City context pre-populated from a service×city landing page'),
+  "serviceContext": zod.string().nullish().describe('Human-readable service label pre-populated from a service×city landing page')
 })
 
 
@@ -50,6 +52,8 @@ export const ListContactSubmissionsResponseItem = zod.object({
   "propertyType": zod.string().nullish(),
   "message": zod.string(),
   "preferredContact": zod.string().nullish(),
+  "city": zod.string().nullish(),
+  "serviceContext": zod.string().nullish(),
   "createdAt": zod.coerce.date()
 })
 export const ListContactSubmissionsResponse = zod.array(ListContactSubmissionsResponseItem)

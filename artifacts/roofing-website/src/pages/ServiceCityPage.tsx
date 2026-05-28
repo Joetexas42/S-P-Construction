@@ -2,11 +2,37 @@ import { Link } from "wouter";
 import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning, ChevronRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { ContactForm } from "@/components/ContactForm";
 import { type ServiceDetail } from "@/data/services";
 import { type CityData } from "@/pages/CityPage";
 import { type ServiceCityEntry, SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
 import { cities } from "@/data/cities";
 import { services } from "@/data/services";
+
+type ServiceTypeValue =
+  | "roof-repair"
+  | "roof-replacement"
+  | "inspection"
+  | "maintenance"
+  | "storm-damage"
+  | "emergency-leak"
+  | "coatings"
+  | "flat-roofing"
+  | "metal-roofing"
+  | "tpo-epdm"
+  | "other";
+
+const SERVICE_SLUG_TO_TYPE: Record<string, ServiceTypeValue> = {
+  "repair": "roof-repair",
+  "replacement": "roof-replacement",
+  "tpo-epdm-pvc": "tpo-epdm",
+  "emergency-leak-repair": "emergency-leak",
+  "maintenance": "maintenance",
+  "coatings": "coatings",
+  "flat-roofing": "flat-roofing",
+  "metal-roofing": "metal-roofing",
+  "inspection": "inspection",
+};
 
 const SITE_ORIGIN = "https://scottcommercialroofing.com";
 
@@ -442,33 +468,47 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         </section>
       )}
 
-      {/* Final CTA */}
-      <section className="py-20 bg-secondary text-secondary-foreground text-center">
+      {/* Inline Contact Form */}
+      <section className="py-20 bg-muted border-t border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-white">
-            Ready for {serviceLabel} in {city.name}?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Free inspection, transparent pricing, and an honest recommendation — delivered by a senior inspector, not a salesperson.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white text-secondary hover:bg-white/90 border-transparent"
-              >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: context copy */}
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
                 Get a Free Estimate
-              </Button>
-            </Link>
-            <a href="tel:972-555-0100">
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/30 hover:bg-white/20 gap-2"
-              >
+              </p>
+              <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-foreground">
+                Request {serviceLabel} in {city.name}
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Fill out the form and a senior inspector will follow up — usually within one business day. No pressure, no obligation.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Free roof inspection & written report",
+                  "Transparent, itemised pricing",
+                  "Manufacturer-backed material warranties",
+                  "24/7 emergency response available",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-foreground">
+                    <span className="h-5 w-5 rounded-full bg-secondary/20 text-secondary flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="tel:972-555-0100" className="inline-flex items-center gap-2 text-secondary font-bold text-lg hover:text-secondary/80 transition-colors">
                 <Phone className="h-5 w-5" /> (972) 555-0100
-              </Button>
-            </a>
+              </a>
+            </div>
+
+            {/* Right: form */}
+            <div>
+              <ContactForm
+                defaultServiceType={SERVICE_SLUG_TO_TYPE[service.slug] ?? "other"}
+                defaultCity={city.name}
+                defaultServiceContext={serviceLabel}
+              />
+            </div>
           </div>
         </div>
       </section>
