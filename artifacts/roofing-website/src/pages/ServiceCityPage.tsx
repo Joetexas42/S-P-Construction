@@ -279,7 +279,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Districts */}
-            <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+            <div className="service-card-animate group bg-card border border-border p-8 rounded-lg hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200" style={{ animationDelay: "0ms" }}>
               <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
                 {city.name} Districts We Serve
@@ -295,7 +295,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
             </div>
 
             {/* Building context */}
-            <div className="group bg-card border border-border p-8 rounded-lg lg:col-span-2 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+            <div className="service-card-animate group bg-card border border-border p-8 rounded-lg lg:col-span-2 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200" style={{ animationDelay: "40ms" }}>
               <Building2 className="h-8 w-8 text-secondary mb-4 group-hover:scale-110 transition-transform duration-200" />
               <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
                 {city.name} Building Types We Work On
@@ -388,7 +388,8 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               {/* Parent city page */}
               <Link
                 href={`/service-areas/${city.slug}`}
-                className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                className="service-card-animate group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                style={{ animationDelay: "0ms" }}
               >
                 <MapPin className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
@@ -403,7 +404,8 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               {/* Parent service page */}
               <Link
                 href={`/services/${service.slug}`}
-                className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                className="service-card-animate group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                style={{ animationDelay: "40ms" }}
               >
                 <Zap className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                 <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
@@ -416,11 +418,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               </Link>
 
               {/* Sibling service×city combos */}
-              {siblings.slice(0, 2).map((s) => (
+              {siblings.slice(0, 2).map((s, i) => (
                 <Link
                   key={`${s.citySlug}--${s.serviceSlug}`}
                   href={`/service-areas/${s.citySlug}/${s.serviceSlug}`}
-                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  className="service-card-animate group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  style={{ animationDelay: `${(i + 2) * 40}ms` }}
                 >
                   <ArrowRight className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                   <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
@@ -446,13 +449,14 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               Other Services for {city.name} Properties
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {relatedServices.map((rel) => {
+              {relatedServices.map((rel, i) => {
                 const RelIcon = rel.icon;
                 return (
                   <Link
                     key={rel.slug}
                     href={`/service-areas/${city.slug}/${rel.slug}`}
-                    className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                    className="service-card-animate group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                    style={{ animationDelay: `${i * 40}ms` }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
                       <RelIcon className="h-6 w-6 text-secondary group-hover:scale-110 transition-transform duration-200" />
