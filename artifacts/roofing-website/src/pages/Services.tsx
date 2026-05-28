@@ -623,11 +623,11 @@ export default function Services() {
             {tpoBenefits.map((benefit, i) => (
               <div
                 key={i}
-                className="flex gap-6 bg-card border border-border rounded-xl p-7 hover:border-secondary transition-colors group"
+                className="flex gap-6 bg-card border border-border rounded-xl p-7 hover:border-secondary hover:scale-[1.02] hover:shadow-lg transition-all duration-200 group"
                 data-testid={`benefit-card-${i}`}
               >
                 <div className="shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 group-hover:scale-110 transition-all duration-200">
                     <span className="font-heading font-black text-secondary text-lg">{i + 1}</span>
                   </div>
                 </div>
