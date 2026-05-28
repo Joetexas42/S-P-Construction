@@ -206,14 +206,25 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`fixed inset-0 bg-background z-40 pt-28 px-6 pb-12 overflow-y-auto transition-transform duration-300 ease-in-out md:hidden ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed inset-0 bg-background z-40 pt-28 px-6 pb-12 overflow-y-auto transition-[transform,opacity] duration-300 ease-in-out md:hidden ${
+            mobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
           }`}
         >
           <nav className="flex flex-col gap-6">
-            {navLinks.map((link) =>
+            {navLinks.map((link, index) =>
               link.children ? (
-                <div key={link.path} className="flex flex-col gap-3">
+                <div
+                  key={link.path}
+                  className="flex flex-col gap-3"
+                  style={
+                    mobileMenuOpen
+                      ? {
+                          animation: `mobile-nav-item-in 0.35s ease both`,
+                          animationDelay: `${index * 60 + 60}ms`,
+                        }
+                      : { opacity: 0 }
+                  }
+                >
                   <div className="flex items-center justify-between gap-3">
                     <Link
                       href={link.path}
@@ -283,13 +294,31 @@ export function Navbar() {
                       ? "text-secondary"
                       : "text-foreground hover:text-secondary active:text-secondary"
                   }`}
+                  style={
+                    mobileMenuOpen
+                      ? {
+                          animation: `mobile-nav-item-in 0.35s ease both`,
+                          animationDelay: `${index * 60 + 60}ms`,
+                        }
+                      : { opacity: 0 }
+                  }
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ),
             )}
-            <div className="mt-8 pt-8 border-t border-border flex flex-col gap-4">
+            <div
+              className="mt-8 pt-8 border-t border-border flex flex-col gap-4"
+              style={
+                mobileMenuOpen
+                  ? {
+                      animation: `mobile-nav-item-in 0.35s ease both`,
+                      animationDelay: `${navLinks.length * 60 + 60}ms`,
+                    }
+                  : { opacity: 0 }
+              }
+            >
               <a href="tel:972-555-0100" className="flex items-center gap-3 text-2xl font-bold">
                 <Phone className="h-6 w-6 text-secondary" />
                 (972) 555-0100
