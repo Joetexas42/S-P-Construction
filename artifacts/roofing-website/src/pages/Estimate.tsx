@@ -402,13 +402,13 @@ export default function EstimatePage() {
       <section className="bg-primary text-primary-foreground pt-24 pb-12 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 mb-5 backdrop-blur-sm">
+            <div className="section-heading-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 mb-5 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
               <span className="text-xs font-bold uppercase tracking-wider text-white">
                 New — Instant Satellite Estimate
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-5 text-white">
+            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-5 text-white [animation-delay:120ms]">
               Instant Roof Estimate
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 leading-relaxed">
