@@ -32,11 +32,11 @@ export default function Contact() {
         </div>
         <div className="container relative z-30 mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-secondary/60 mb-6 backdrop-blur-sm shadow-lg">
+            <div className="section-heading-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-secondary/60 mb-6 backdrop-blur-sm shadow-lg">
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
               <span className="text-sm font-bold uppercase tracking-wider text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.6)]">Free Inspection · No Obligation</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">Honest Answers.<br className="hidden md:block" /> On Your Roof.</h1>
+            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.65)] [animation-delay:120ms]">Honest Answers.<br className="hidden md:block" /> On Your Roof.</h1>
             <p className="text-xl text-white font-medium leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
               Request your free, comprehensive roof inspection. Our senior inspectors provide transparent assessments and clear pricing — on your roof, in one visit.
             </p>
