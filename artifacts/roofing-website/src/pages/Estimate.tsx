@@ -684,7 +684,7 @@ export default function EstimatePage() {
           {submitted && (
             <div className="mt-12 rounded-xl border-2 border-secondary bg-secondary/5 p-8 text-center" data-testid="estimator-success">
               <CheckCircle2 className="mx-auto h-12 w-12 text-secondary mb-4" />
-              <h2 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-3">
+              <h2 className="section-heading-animate text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-3">
                 Request Received
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
@@ -715,7 +715,7 @@ function Step({
 }) {
   return (
     <div className="mb-10 md:mb-12">
-      <div className="flex items-center gap-3 mb-4">
+      <div className="section-heading-animate flex items-center gap-3 mb-4">
         <div className="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-heading font-black">
           {number}
         </div>
