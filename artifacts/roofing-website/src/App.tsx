@@ -7,7 +7,6 @@ import Home from "@/pages/Home";
 import Services from "@/pages/Services";
 import ServiceDetail from "@/pages/ServiceDetail";
 import { serviceBySlug } from "@/data/services";
-import Gallery from "@/pages/Gallery";
 import Projects from "@/pages/Projects";
 import ProjectDetail from "@/pages/ProjectDetail";
 import ServiceAreas from "@/pages/ServiceAreas";
@@ -60,7 +59,6 @@ function Router() {
         <Route path="/" component={Home} />
         <Route path="/services" component={Services} />
         <Route path="/services/:slug" component={ServiceRoute} />
-        <Route path="/gallery" component={Gallery} />
         <Route path="/projects" component={Projects} />
         <Route path="/projects/:slug" component={ProjectDetail} />
         <Route path="/case-studies" component={Projects} />

@@ -105,7 +105,6 @@ export function Navbar() {
     { name: "Home", path: "/" },
     { name: "Services", path: "/services", children: serviceLinks },
     { name: "Projects", path: "/projects" },
-    { name: "Gallery", path: "/gallery" },
     { name: "Service Areas", path: "/service-areas", children: allCityLinks },
     { name: "Instant Estimate", path: "/estimate" },
     { name: "Contact", path: "/contact" },
