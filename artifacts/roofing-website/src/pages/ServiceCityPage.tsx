@@ -226,10 +226,10 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
                 <span className="text-white truncate">{city.name}, TX</span>
               </nav>
 
-              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
+              <p className="section-heading-animate text-xs font-bold uppercase tracking-widest text-secondary mb-3">
                 {city.county} · Commercial Roofing
               </p>
-              <h1 className="text-4xl md:text-5xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+              <h1 className="section-heading-animate [animation-delay:120ms] text-4xl md:text-5xl font-heading font-black uppercase tracking-tight mb-6 text-white">
                 {serviceLabel} in{" "}
                 <span className="text-secondary">{city.name}, TX</span>
               </h1>

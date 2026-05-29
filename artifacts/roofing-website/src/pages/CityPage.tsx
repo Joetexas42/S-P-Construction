@@ -190,7 +190,10 @@ export default function CityPage({ city }: CityPageProps) {
                 <span className="mx-2 sm:hidden shrink-0">/</span>
                 <span className="text-white truncate">{city.name}, TX</span>
               </nav>
-              <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+              <p className="section-heading-animate text-xs font-bold uppercase tracking-widest text-secondary mb-3">
+                {city.county} · Commercial Roofing
+              </p>
+              <h1 className="section-heading-animate [animation-delay:120ms] text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
                 Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
               </h1>
               <p className="text-xl text-primary-foreground/80 leading-relaxed mb-8">
