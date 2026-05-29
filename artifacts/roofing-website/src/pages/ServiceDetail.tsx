@@ -159,7 +159,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               <span className="mx-2 sm:hidden shrink-0">/</span>
               <span className="text-white truncate">{service.shortTitle}</span>
             </nav>
-            <div className="flex items-center gap-4 mb-6">
+            <div className="section-heading-animate flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center shrink-0">
                 <Icon className="h-7 w-7 text-secondary-foreground" />
               </div>
@@ -167,7 +167,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 {service.category === "Core" ? "Core Commercial Service" : "Commercial Roofing System"}
               </p>
             </div>
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms]">
               {service.title}
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed mb-6">
