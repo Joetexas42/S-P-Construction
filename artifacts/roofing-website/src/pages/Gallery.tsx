@@ -58,7 +58,10 @@ export default function Gallery() {
       <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+            <div className="section-heading-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 mb-5 backdrop-blur-sm">
+              <span className="text-xs font-bold uppercase tracking-widest text-secondary">Portfolio</span>
+            </div>
+            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms]">
               Project Gallery
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">

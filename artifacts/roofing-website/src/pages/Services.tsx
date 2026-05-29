@@ -260,7 +260,10 @@ export default function Services() {
               <span className="mx-2">/</span>
               <span className="text-white">Services</span>
             </nav>
-            <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+            <div className="section-heading-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 mb-5 backdrop-blur-sm">
+              <span className="text-xs font-bold uppercase tracking-widest text-secondary">DFW Flat-Roof Specialists</span>
+            </div>
+            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms]">
               Commercial Roofing Services
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
