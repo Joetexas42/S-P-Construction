@@ -315,7 +315,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
             <div className="flex items-start gap-4">
               <CloudLightning className="h-8 w-8 text-secondary shrink-0 mt-1" />
               <div>
-                <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
+                <h2 className="section-heading-animate text-2xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
                   {city.name} Weather & {SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle}
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">{entry.weatherUrgency}</p>
@@ -325,10 +325,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
           {/* Service overview from the parent service */}
           <div className="mb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Service Overview</p>
-            <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">
-              {service.title}
-            </h2>
+            <div className="section-heading-animate">
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Service Overview</p>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">
+                {service.title}
+              </h2>
+            </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
@@ -353,7 +355,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
           {/* City-specific FAQs */}
           <div className="mb-16">
-            <div className="max-w-3xl mx-auto text-center mb-12">
+            <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local Questions Answered</p>
               <h2 className="text-3xl font-heading font-black uppercase tracking-tight text-foreground">
                 {serviceLabel} FAQs for {city.name}
@@ -386,10 +388,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
           {/* Related pages grid */}
           <div className="mb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Explore More</p>
-            <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
-              Related Pages
-            </h2>
+            <div className="section-heading-animate">
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Explore More</p>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
+                Related Pages
+              </h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Parent city page */}
               <ScrollRevealWrapper delay={0}>
@@ -452,10 +456,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
       {relatedServices.length > 0 && (
         <section className="py-16 bg-muted border-y border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3 text-center">Also Available in {city.name}</p>
-            <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground text-center">
-              Other Services for {city.name} Properties
-            </h2>
+            <div className="section-heading-animate text-center">
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Also Available in {city.name}</p>
+              <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
+                Other Services for {city.name} Properties
+              </h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {relatedServices.map((rel, relIdx) => {
                 const RelIcon = rel.icon;
@@ -490,12 +496,14 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: context copy */}
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
-                Get a Free Estimate
-              </p>
-              <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-foreground">
-                Request {serviceLabel} in {city.name}
-              </h2>
+              <div className="section-heading-animate">
+                <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
+                  Get a Free Estimate
+                </p>
+                <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-foreground">
+                  Request {serviceLabel} in {city.name}
+                </h2>
+              </div>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 Fill out the form and a senior inspector will follow up — usually within one business day. No pressure, no obligation.
               </p>
