@@ -170,7 +170,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms]">
               {service.title}
             </h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed mb-6">
+            <p className="section-heading-animate text-xl text-primary-foreground/80 leading-relaxed mb-6 [animation-delay:240ms]">
               {service.tagline}
             </p>
             <div
@@ -182,7 +182,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 {service.pricing.display}
               </span>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="section-heading-animate flex flex-col sm:flex-row gap-3 [animation-delay:360ms]">
               <Link href="/contact">
                 <Button
                   size="lg"
