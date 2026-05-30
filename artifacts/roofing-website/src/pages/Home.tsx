@@ -98,11 +98,11 @@ export default function Home() {
         
         <div className="container relative z-30 mx-auto px-4 md:px-6">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-secondary/60 mb-6 backdrop-blur-sm shadow-lg">
+            <div className="section-heading-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 border border-secondary/60 mb-6 backdrop-blur-sm shadow-lg">
               <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
               <span className="text-sm font-bold uppercase tracking-wider text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.6)]">Serving North Texas Since 2003</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
+            <h1 className="section-heading-animate [animation-delay:120ms] text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
               Scott Commercial <br className="hidden md:block"/><span className="text-secondary">Flat Roof Specialists.</span>
             </h1>
             <p className="text-xl md:text-2xl text-white font-medium mb-10 max-w-2xl leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">

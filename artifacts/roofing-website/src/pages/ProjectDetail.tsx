@@ -110,7 +110,7 @@ export default function ProjectDetail({
             <ArrowLeft className="h-4 w-4" />
             Back to all case studies
           </Link>
-          <div className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary-foreground/80 mb-4">
+          <div className="section-heading-animate flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary-foreground/80 mb-4">
             <span className="text-secondary bg-secondary/15 px-2 py-1 rounded">
               {study.system}
             </span>
@@ -122,7 +122,7 @@ export default function ProjectDetail({
               {study.completed}
             </span>
           </div>
-          <h1 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-white leading-tight max-w-4xl">
+          <h1 className="section-heading-animate [animation-delay:120ms] text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-white leading-tight max-w-4xl">
             {study.title}
           </h1>
         </div>
