@@ -106,9 +106,8 @@ export default function Home() {
             decoding="async"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/45 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/45 to-transparent z-20" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background z-20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent z-20" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-background z-20" />
         </div>
         
         <div className="container relative z-30 mx-auto px-4 md:px-6">
