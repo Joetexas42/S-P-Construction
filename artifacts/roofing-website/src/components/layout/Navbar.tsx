@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Phone, Menu, X, HardHat, ChevronDown } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
@@ -48,6 +48,8 @@ export function Navbar() {
   const closeServicesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeCitiesTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartX = useRef<number | null>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -88,6 +90,51 @@ export function Navbar() {
     setMobileServicesOpen(false);
     setMobileCitiesOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const focusable = menuRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      focusable?.[0]?.focus();
+    } else {
+      hamburgerRef.current?.focus();
+    }
+  }, [mobileMenuOpen]);
+
+  const handleMenuKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Tab" || !menuRef.current) return;
+    const focusable = Array.from(
+      menuRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, []);
 
   const systemServices = services.filter((s) => s.category === "System");
 
@@ -377,10 +424,12 @@ export function Navbar() {
 
             {/* Only opens the menu; close is handled by the X inside the overlay (which is above the header's stacking context) */}
             <button
+              ref={hamburgerRef}
               className={`md:hidden p-2 transition-colors duration-300 ${isTransparent && !mobileMenuOpen ? "text-white" : "text-foreground"}`}
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open Menu"
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -391,11 +440,17 @@ export function Navbar() {
 
       {/* Mobile Menu — rendered outside <header> so it is not clipped by the header's stacking context */}
       <div
+        ref={menuRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+        onKeyDown={handleMenuKeyDown}
         className={`fixed inset-0 bg-background z-50 pt-28 px-6 pb-12 overflow-y-auto md:hidden ${
             isDragging
               ? ""
               : "transition-[transform,opacity] duration-300 ease-in-out"
-          } ${mobileMenuOpen ? "opacity-100" : "translate-x-full opacity-0"}`}
+          } ${mobileMenuOpen ? "opacity-100" : "translate-x-full opacity-0 pointer-events-none"}`}
           style={
             isDragging
               ? { transform: `translateX(-${swipeOffset}px)` }
