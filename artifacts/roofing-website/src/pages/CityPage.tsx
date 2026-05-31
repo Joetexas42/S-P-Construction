@@ -237,7 +237,7 @@ export default function CityPage({ city }: CityPageProps) {
               </div>
             </div>
             <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/20 aspect-[4/3]">
+              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl aspect-[4/3]">
                 <img
                   src={`${city.heroImage.base}-800w.webp`}
                   srcSet={`${city.heroImage.base}-480w.webp 480w, ${city.heroImage.base}-800w.webp 800w, ${city.heroImage.base}-1280w.webp 1280w`}
@@ -251,6 +251,8 @@ export default function CityPage({ city }: CityPageProps) {
                   className="w-full h-full object-cover"
                   data-testid={`city-hero-image-${city.slug}`}
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>

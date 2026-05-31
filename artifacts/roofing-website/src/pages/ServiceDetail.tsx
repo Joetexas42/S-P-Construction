@@ -213,7 +213,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   })
                 }
                 aria-label={`View full-size image: ${service.heroImage.alt}`}
-                className="group relative block w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black/20 aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
+                className="group relative block w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
                 data-testid={`service-hero-image-button-${service.slug}`}
               >
                 <img
@@ -229,6 +229,8 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   data-testid={`service-hero-image-${service.slug}`}
                 />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-transparent pointer-events-none" />
               </button>
             </div>
           </div>
