@@ -681,8 +681,8 @@ export default function Services() {
 
           <div className="max-w-4xl mx-auto space-y-5">
             {faqs.map((faq, i) => (
+              <ScrollRevealWrapper key={i} delay={i * 80}>
               <details
-                key={i}
                 className="group bg-card border border-border rounded-xl p-6 md:p-7 shadow-sm open:border-secondary transition-colors"
                 data-testid={`faq-item-${i}`}
               >
@@ -699,6 +699,7 @@ export default function Services() {
                   <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                 </div>
               </details>
+              </ScrollRevealWrapper>
             ))}
           </div>
         </div>
