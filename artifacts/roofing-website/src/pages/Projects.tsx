@@ -97,6 +97,31 @@ function FilterChip({
 const CARD_EXIT_STAGGER_MS = 38;
 const CARD_EXIT_BASE_MS = 200;
 
+function SkeletonCard() {
+  return (
+    <div className="gallery-skeleton-card flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+      <div className="aspect-[16/10] skeleton-shimmer" />
+      <div className="p-6 flex flex-col flex-1 gap-3">
+        <div className="skeleton-shimmer h-3 w-2/5 rounded" />
+        <div className="space-y-2">
+          <div className="skeleton-shimmer h-6 w-4/5 rounded" />
+          <div className="skeleton-shimmer h-6 w-3/5 rounded" />
+        </div>
+        <div className="grid grid-cols-2 gap-3 mt-1">
+          <div className="skeleton-shimmer h-10 rounded" />
+          <div className="skeleton-shimmer h-10 rounded" />
+        </div>
+        <div className="space-y-2 mt-1">
+          <div className="skeleton-shimmer h-3 w-full rounded" />
+          <div className="skeleton-shimmer h-3 w-full rounded" />
+          <div className="skeleton-shimmer h-3 w-4/5 rounded" />
+        </div>
+        <div className="skeleton-shimmer h-4 w-1/3 rounded mt-auto pt-2" />
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
   const { city, system, setFilter, clearFilters } = useFilterState();
 
@@ -388,7 +413,15 @@ export default function Projects() {
             )}
           </div>
 
-          {renderedSet.length > 0 ? (
+          {isExiting ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {Array.from({ length: Math.max(filtered.length, 2) }).map(
+                (_, i) => (
+                  <SkeletonCard key={i} />
+                ),
+              )}
+            </div>
+          ) : renderedSet.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {renderedSet.map((c, i) => (
                 <ScrollRevealWrapper
@@ -396,16 +429,11 @@ export default function Projects() {
                   delay={rowDelay(i, 2, 80, 160)}
                   revealKey={`${city}-${system}`}
                 >
-                  <CaseStudyCard
-                    study={c}
-                    index={i}
-                    isExiting={isExiting}
-                    exitIndex={i}
-                  />
+                  <CaseStudyCard study={c} index={i} />
                 </ScrollRevealWrapper>
               ))}
             </div>
-          ) : !isExiting ? (
+          ) : (
             <div
               className="text-center py-16 rounded-lg border border-dashed border-border bg-muted/40"
               data-testid="filter-empty-state"
@@ -425,7 +453,7 @@ export default function Projects() {
                 Clear filters <ArrowRight className="h-4 w-4" />
               </button>
             </div>
-          ) : null}
+          )}
         </div>
       </section>
 
@@ -467,27 +495,15 @@ export default function Projects() {
 function CaseStudyCard({
   study,
   index,
-  isExiting = false,
-  exitIndex = 0,
 }: {
   study: CaseStudy;
   index: number;
-  isExiting?: boolean;
-  exitIndex?: number;
 }) {
   const testimonial = getTestimonialBySlug(study.slug);
   return (
     <article
       id={study.slug}
-      className={cn(
-        "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24",
-        isExiting && "filter-cards-exit",
-      )}
-      style={
-        isExiting
-          ? { animationDelay: `${exitIndex * CARD_EXIT_STAGGER_MS}ms` }
-          : undefined
-      }
+      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24"
     >
       <Link
         href={`/projects/${study.slug}`}
