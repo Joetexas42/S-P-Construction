@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { CheckCircle2, Phone, HelpCircle, ArrowLeft, ArrowRight, DollarSign } from "lucide-react";
+import { CheckCircle2, Phone, HelpCircle, ArrowLeft, ArrowRight, DollarSign, ChevronDown } from "lucide-react";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { rowDelay } from "@/hooks/useRevealGrid";
 import { SEO } from "@/components/SEO";
@@ -231,6 +231,17 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 />
               </button>
             </div>
+          </div>
+          {/* Scroll hint */}
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
+              aria-label="Scroll down to page content"
+              className="section-heading-animate [animation-delay:480ms] flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors duration-200 group"
+            >
+              <span className="text-xs font-semibold uppercase tracking-widest">Explore</span>
+              <ChevronDown className="h-6 w-6 animate-bounce" />
+            </button>
           </div>
         </div>
       </section>
