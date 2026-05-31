@@ -14,6 +14,7 @@ import CityPage from "@/pages/CityPage";
 import { cityBySlug } from "@/data/cities";
 import ServiceCityPage from "@/pages/ServiceCityPage";
 import { getServiceCityEntry, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
+import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Estimate from "@/pages/Estimate";
 import FAQ from "@/pages/FAQ";
@@ -71,6 +72,7 @@ function Router() {
             <Route path="/service-areas" component={ServiceAreas} />
             <Route path="/service-areas/:slug" component={CityRoute} />
             <Route path="/service-areas/:citySlug/:serviceSlug" component={ServiceCityRoute} />
+            <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/estimate" component={Estimate} />
             <Route path="/faq" component={FAQ} />

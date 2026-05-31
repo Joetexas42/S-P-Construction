@@ -161,6 +161,7 @@ export function Navbar() {
     { name: "Services", path: "/services", children: serviceLinks },
     { name: "Projects", path: "/projects" },
     { name: "Service Areas", path: "/service-areas", children: allCityLinks },
+    { name: "About", path: "/about" },
     { name: "Instant Estimate", path: "/estimate" },
     { name: "Contact", path: "/contact" },
   ];

@@ -11,7 +11,7 @@ import { type CityData } from "@/pages/CityPage";
 import { type ServiceCityEntry, SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
 import { cities } from "@/data/cities";
 import { services } from "@/data/services";
-import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/pages/Projects";
+import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 
 type ServiceTypeValue =
