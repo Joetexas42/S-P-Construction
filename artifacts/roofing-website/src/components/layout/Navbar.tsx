@@ -375,19 +375,23 @@ export function Navbar() {
               </Link>
             </div>
 
+            {/* Only opens the menu; close is handled by the X inside the overlay (which is above the header's stacking context) */}
             <button
-              className={`md:hidden p-2 z-50 transition-colors duration-300 ${isTransparent && !mobileMenuOpen ? "text-white" : "text-foreground"}`}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Menu"
+              className={`md:hidden p-2 transition-colors duration-300 ${isTransparent && !mobileMenuOpen ? "text-white" : "text-foreground"}`}
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open Menu"
+              aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <div
-          className={`fixed inset-0 bg-background z-40 pt-28 px-6 pb-12 overflow-y-auto md:hidden ${
+      </header>
+
+      {/* Mobile Menu — rendered outside <header> so it is not clipped by the header's stacking context */}
+      <div
+        className={`fixed inset-0 bg-background z-50 pt-28 px-6 pb-12 overflow-y-auto md:hidden ${
             isDragging
               ? ""
               : "transition-[transform,opacity] duration-300 ease-in-out"
@@ -403,6 +407,14 @@ export function Navbar() {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          {/* Close button lives inside the overlay so it is always above the overlay's z-level */}
+          <button
+            className="absolute top-5 right-4 p-2 text-foreground"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <X className="h-6 w-6" />
+          </button>
           <nav className="flex flex-col gap-6">
             {navLinks.map((link, index) => {
               if (link.path === "/services" && link.children) {
@@ -636,7 +648,6 @@ export function Navbar() {
             </div>
           </nav>
         </div>
-      </header>
     </>
   );
 }
