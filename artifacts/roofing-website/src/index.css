@@ -178,13 +178,14 @@ html {
   }
   to {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(14px);
   }
 }
 
 .filter-cards-exit {
-  animation: filter-cards-out 0.18s ease forwards;
+  animation: filter-cards-out 0.2s ease forwards;
   pointer-events: none;
+  transition: none !important;
 }
 
 @keyframes mobile-nav-item-in {

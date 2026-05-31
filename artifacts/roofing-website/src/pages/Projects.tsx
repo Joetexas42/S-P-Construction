@@ -92,6 +92,9 @@ function FilterChip({
   );
 }
 
+const CARD_EXIT_STAGGER_MS = 38;
+const CARD_EXIT_BASE_MS = 200;
+
 export default function Projects() {
   const { city, system, setFilter, clearFilters } = useFilterState();
 
@@ -132,6 +135,37 @@ export default function Projects() {
         system === "all" || getSystemFamily(c.system) === system;
       return cityMatch && systemMatch;
     });
+  }, [city, system]);
+
+  // Two-phase transition: exit old cards → enter new cards
+  const [renderedSet, setRenderedSet] = useState<CaseStudy[]>(filtered);
+  const [isExiting, setIsExiting] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const renderedSetRef = useRef<CaseStudy[]>(filtered);
+  const filteredRef = useRef<CaseStudy[]>(filtered);
+  const isFirstRender = useRef(true);
+
+  filteredRef.current = filtered;
+
+  useEffect(() => {
+    renderedSetRef.current = renderedSet;
+  }, [renderedSet]);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    clearTimeout(timerRef.current);
+    const exitCount = renderedSetRef.current.length;
+    const exitDuration = CARD_EXIT_BASE_MS + exitCount * CARD_EXIT_STAGGER_MS;
+    setIsExiting(true);
+    timerRef.current = setTimeout(() => {
+      setIsExiting(false);
+      setRenderedSet(filteredRef.current);
+    }, exitDuration);
+    return () => clearTimeout(timerRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city, system]);
 
   const activeCityLabel =
@@ -346,13 +380,19 @@ export default function Projects() {
             )}
           </div>
 
-          {filtered.length > 0 ? (
-            <div key={`${city}-${system}`} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {filtered.map((c, i) => (
-                <CaseStudyCard key={c.slug} study={c} index={i} />
+          {renderedSet.length > 0 ? (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {renderedSet.map((c, i) => (
+                <CaseStudyCard
+                  key={c.slug}
+                  study={c}
+                  index={i}
+                  isExiting={isExiting}
+                  exitIndex={i}
+                />
               ))}
             </div>
-          ) : (
+          ) : !isExiting ? (
             <div
               className="text-center py-16 rounded-lg border border-dashed border-border bg-muted/40"
               data-testid="filter-empty-state"
@@ -372,7 +412,7 @@ export default function Projects() {
                 Clear filters <ArrowRight className="h-4 w-4" />
               </button>
             </div>
-          )}
+          ) : null}
         </div>
       </section>
 
@@ -411,13 +451,25 @@ export default function Projects() {
   );
 }
 
-function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
+function CaseStudyCard({
+  study,
+  index,
+  isExiting = false,
+  exitIndex = 0,
+}: {
+  study: CaseStudy;
+  index: number;
+  isExiting?: boolean;
+  exitIndex?: number;
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = cardRef.current;
     if (!el) return;
+    // Reset visibility so the entry animation replays when this card mounts
+    setIsVisible(false);
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -439,8 +491,13 @@ function CaseStudyCard({ study, index }: { study: CaseStudy; index: number }) {
       className={cn(
         "scroll-reveal group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24",
         isVisible && "is-visible",
+        isExiting && "filter-cards-exit",
       )}
-      style={{ transitionDelay: `${index * 60}ms` }}
+      style={
+        isExiting
+          ? { animationDelay: `${exitIndex * CARD_EXIT_STAGGER_MS}ms` }
+          : { transitionDelay: `${index * 60}ms` }
+      }
     >
       <Link
         href={`/projects/${study.slug}`}
