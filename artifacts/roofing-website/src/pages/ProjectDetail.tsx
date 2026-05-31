@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import {
   caseStudyBySlug,
   caseStudies,
@@ -151,6 +153,7 @@ export default function ProjectDetail({
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto">
+            <ScrollRevealWrapper>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 p-6 bg-muted rounded-lg border border-border">
               <DetailStat label="Building" value={study.buildingType} />
               <DetailStat label="System" value={study.brand} />
@@ -160,14 +163,22 @@ export default function ProjectDetail({
               />
               <DetailStat label="Completed" value={study.completed} />
             </div>
+            </ScrollRevealWrapper>
 
-            <DetailSection title="Scope of Work">{study.scope}</DetailSection>
-            <DetailSection title="The Challenge">
-              {study.challenge}
-            </DetailSection>
-            <DetailSection title="The Outcome">{study.outcome}</DetailSection>
+            <ScrollRevealWrapper delay={80}>
+              <DetailSection title="Scope of Work">{study.scope}</DetailSection>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={160}>
+              <DetailSection title="The Challenge">
+                {study.challenge}
+              </DetailSection>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={240}>
+              <DetailSection title="The Outcome">{study.outcome}</DetailSection>
+            </ScrollRevealWrapper>
 
             {study.beforeAfter && (
+              <ScrollRevealWrapper>
               <figure
                 className="mb-10"
                 data-testid={`project-before-after-pair-${study.slug}`}
@@ -208,8 +219,10 @@ export default function ProjectDetail({
                   {study.beforeAfter.caption}
                 </figcaption>
               </figure>
+              </ScrollRevealWrapper>
             )}
 
+            <ScrollRevealWrapper>
             <div className="mb-10">
               <h2 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">
                 Project Highlights
@@ -226,7 +239,9 @@ export default function ProjectDetail({
                 ))}
               </ul>
             </div>
+            </ScrollRevealWrapper>
 
+            <ScrollRevealWrapper delay={80}>
             <div className="border-t border-border pt-8 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
               <p className="text-muted-foreground">
                 Have a similar project in {cityShort} or the DFW area?
@@ -237,6 +252,7 @@ export default function ProjectDetail({
                 </Button>
               </Link>
             </div>
+            </ScrollRevealWrapper>
           </div>
         </div>
       </section>
@@ -249,9 +265,12 @@ export default function ProjectDetail({
         >
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto">
+              <ScrollRevealWrapper>
               <h2 className="text-xs font-bold uppercase tracking-widest text-secondary mb-4 text-center">
                 What the Client Said
               </h2>
+              </ScrollRevealWrapper>
+              <ScrollRevealWrapper delay={80}>
               <article className="relative p-8 md:p-10 rounded-lg border bg-white/10 border-white/10 backdrop-blur-sm flex flex-col">
                 <Quote
                   className="h-8 w-8 mb-4 text-secondary"
@@ -305,6 +324,7 @@ export default function ProjectDetail({
                   </div>
                 </div>
               </article>
+              </ScrollRevealWrapper>
             </div>
           </div>
         </section>
@@ -315,15 +335,19 @@ export default function ProjectDetail({
         <section className="py-16 bg-background border-t border-border">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-6xl mx-auto">
+              <ScrollRevealWrapper>
               <h2 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground mb-2">
                 Related Projects
               </h2>
               <p className="text-muted-foreground mb-8">
                 Similar commercial roofing work across DFW.
               </p>
+              </ScrollRevealWrapper>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {related.map((r) => (
-                  <RelatedCard key={r.slug} study={r} />
+                {related.map((r, i) => (
+                  <ScrollRevealWrapper key={r.slug} delay={rowDelay(i, 3, 80)}>
+                    <RelatedCard study={r} />
+                  </ScrollRevealWrapper>
                 ))}
               </div>
             </div>

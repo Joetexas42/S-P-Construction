@@ -246,10 +246,10 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   Why this service matters
                 </h2>
               </ScrollRevealWrapper>
-              <ScrollRevealWrapper delay={60}>
+              <ScrollRevealWrapper delay={80}>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
               </ScrollRevealWrapper>
-              <ScrollRevealWrapper delay={120}>
+              <ScrollRevealWrapper delay={160}>
                 <div className="bg-muted border border-border rounded-xl p-6">
                   <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
                   <p className="text-foreground leading-relaxed">{service.why}</p>
@@ -304,7 +304,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                   (p) => p.sectionHeading === sec.heading,
                 );
                 return (
-                  <ScrollRevealWrapper key={sec.heading} delay={rowDelay(secIdx, 1)}>
+                  <ScrollRevealWrapper key={sec.heading} delay={rowDelay(secIdx, 1, 80)}>
                   <article
                     className="bg-card border border-border rounded-xl p-7 md:p-9 shadow-sm"
                     data-testid={`service-section-${service.slug}`}
@@ -386,7 +386,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             </ScrollRevealWrapper>
             <div className="max-w-4xl mx-auto space-y-4">
               {service.faqs.map((faq, i) => (
-                <ScrollRevealWrapper key={i} delay={rowDelay(i, 1, 50)}>
+                <ScrollRevealWrapper key={i} delay={rowDelay(i, 1, 80)}>
                   <details
                     className="group bg-card border border-border rounded-xl p-6 shadow-sm open:border-secondary transition-colors"
                     data-testid={`service-faq-${service.slug}-${i}`}
@@ -426,7 +426,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {cities.map((city, cityIdx) => (
-                <ScrollRevealWrapper key={city.slug} delay={rowDelay(cityIdx, 2, 60)}>
+                <ScrollRevealWrapper key={city.slug} delay={rowDelay(cityIdx, 2, 80)}>
                 <Link
                   href={`/service-areas/${city.slug}/${service.slug}`}
                   className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
@@ -463,7 +463,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
             {related.map((rel, relIdx) => {
               const RelIcon = rel.icon;
               return (
-                <ScrollRevealWrapper key={rel.slug} delay={rowDelay(relIdx, 2)}>
+                <ScrollRevealWrapper key={rel.slug} delay={rowDelay(relIdx, 2, 80)}>
                 <Link
                   href={`/services/${rel.slug}`}
                   className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
