@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -13,6 +13,7 @@ import {
   buildImageSrcSet as buildProjectImageSrcSet,
   SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
 } from "@/lib/responsiveImage";
+import { cn } from "@/lib/utils";
 
 export interface CityTestimonial {
   quote: string;
@@ -69,8 +70,22 @@ interface CityPageProps {
 }
 
 export default function CityPage({ city }: CityPageProps) {
+  const [displayedCity, setDisplayedCity] = useState(city);
+  const [exiting, setExiting] = useState(false);
+
+  useEffect(() => {
+    if (city.slug === displayedCity.slug) return;
+    setLightboxIndex(null);
+    setExiting(true);
+    const t = setTimeout(() => {
+      setDisplayedCity(city);
+      setExiting(false);
+    }, 180);
+    return () => clearTimeout(t);
+  }, [city.slug]);
+
   const cityCaseStudies = caseStudies.filter(
-    (cs) => cs.city.split(",")[0].trim().toLowerCase() === city.name.toLowerCase(),
+    (cs) => cs.city.split(",")[0].trim().toLowerCase() === displayedCity.name.toLowerCase(),
   );
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -312,9 +327,9 @@ export default function CityPage({ city }: CityPageProps) {
                   In-depth case studies from commercial roofs we've completed in {city.name}.
                 </p>
               </ScrollRevealWrapper>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", exiting && "filter-cards-exit")}>
                 {cityCaseStudies.map((cs, csIdx) => (
-                  <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)}>
+                  <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)} revealKey={displayedCity.slug}>
                   <Link
                     href={`/projects/${cs.slug}`}
                     data-testid={`city-case-study-link-${cs.slug}`}
@@ -381,7 +396,7 @@ export default function CityPage({ city }: CityPageProps) {
           )}
 
           {/* Recent Projects */}
-          {city.recentProjects.length > 0 && (
+          {displayedCity.recentProjects.length > 0 && (
             <div className="mb-16" data-testid={`city-recent-projects-${city.slug}`}>
               <ScrollRevealWrapper>
                 <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
@@ -391,9 +406,9 @@ export default function CityPage({ city }: CityPageProps) {
                   A look at flat roof systems we've recently completed for {city.name} building owners.
                 </p>
               </ScrollRevealWrapper>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {city.recentProjects.map((p, idx) => (
-                  <ScrollRevealWrapper key={p.title} delay={rowDelay(idx, 2)}>
+              <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", exiting && "filter-cards-exit")}>
+                {displayedCity.recentProjects.map((p, idx) => (
+                  <ScrollRevealWrapper key={p.title} delay={rowDelay(idx, 2)} revealKey={displayedCity.slug}>
                   <article
                     className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
@@ -461,9 +476,9 @@ export default function CityPage({ city }: CityPageProps) {
                 ))}
               </div>
               <ProjectLightbox
-                projects={city.recentProjects}
+                projects={displayedCity.recentProjects}
                 index={lightboxIndex}
-                cityName={city.name}
+                cityName={displayedCity.name}
                 onClose={() => setLightboxIndex(null)}
                 onNavigate={(next) => setLightboxIndex(next)}
               />
