@@ -6,6 +6,8 @@ import { Shield, Wrench, Search, Zap, Droplets, Droplet, Layers, Maximize, Activ
 import { ContactForm } from "@/components/ContactForm";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { Testimonials } from "@/components/Testimonials";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import {
   testimonials,
   testimonialReviewsJsonLd,
@@ -157,76 +159,84 @@ export default function Home() {
       {/* Trust Signals Bar */}
       <section id="content-start" className="bg-card border-y border-border py-8">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center text-center">
-            <div className="space-y-1">
-              <p className="font-heading font-bold text-2xl text-foreground">20+</p>
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Years Experience</p>
+          <ScrollRevealWrapper>
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center text-center">
+              <div className="space-y-1">
+                <p className="font-heading font-bold text-2xl text-foreground">20+</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Years Experience</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-heading font-bold text-2xl text-foreground">Licensed</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">& Insured in TX</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-heading font-bold text-2xl text-foreground">24/7</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Emergency Response</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-heading font-bold text-2xl text-foreground">Claims</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Specialists</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-heading font-bold text-2xl text-foreground">Financing</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Available</p>
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="font-heading font-bold text-2xl text-foreground">Licensed</p>
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">& Insured in TX</p>
-            </div>
-            <div className="space-y-1">
-              <p className="font-heading font-bold text-2xl text-foreground">24/7</p>
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Emergency Response</p>
-            </div>
-            <div className="space-y-1">
-              <p className="font-heading font-bold text-2xl text-foreground">Claims</p>
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Specialists</p>
-            </div>
-            <div className="space-y-1">
-              <p className="font-heading font-bold text-2xl text-foreground">Financing</p>
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Available</p>
-            </div>
-          </div>
+          </ScrollRevealWrapper>
         </div>
       </section>
 
       {/* Manufacturer Partners */}
       <section className="py-14 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8">
-            Authorized Installer &amp; Service Partner — Leading Roofing Manufacturers
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-            {[
-              { name: "Firestone", sub: "Elevate (Building Products)", logo: "/images/manufacturers/firestone-elevate.svg" },
-              { name: "Mule-Hide", sub: "Products Co.", logo: "/images/manufacturers/mule-hide.svg" },
-              { name: "Duro-Last", sub: "PVC Roofing Systems", logo: "/images/manufacturers/duro-last.svg" },
-            ].map((brand) => (
-              <div
-                key={brand.name}
-                className="flex items-center justify-center border border-border rounded-lg px-6 py-4 min-w-[180px] h-[88px] bg-card hover:border-secondary hover:scale-[1.02] transition-all duration-200"
-                data-testid={`partner-logo-${brand.name.toLowerCase()}`}
-              >
-                <img
-                  src={brand.logo}
-                  alt={`${brand.name} — ${brand.sub}`}
-                  width={180}
-                  height={48}
-                  className="max-h-12 w-auto object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    const parent = img.parentElement;
-                    if (!parent) return;
-                    img.style.display = "none";
-                    if (!parent.querySelector("[data-fallback]")) {
-                      const fb = document.createElement("div");
-                      fb.setAttribute("data-fallback", "true");
-                      fb.className = "flex flex-col items-center justify-center text-center";
-                      fb.innerHTML = `<span class="font-heading font-black text-lg uppercase tracking-tight text-foreground">${brand.name}</span><span class="text-xs text-muted-foreground font-semibold tracking-wide">${brand.sub}</span>`;
-                      parent.appendChild(fb);
-                    }
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-sm text-muted-foreground mt-8 max-w-2xl mx-auto">
-            We install, repair, and maintain roofing systems from the industry's most trusted manufacturers — so your warranty stays intact and your building stays protected.
-          </p>
+          <ScrollRevealWrapper>
+            <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8">
+              Authorized Installer &amp; Service Partner — Leading Roofing Manufacturers
+            </p>
+          </ScrollRevealWrapper>
+          <ScrollRevealWrapper delay={60}>
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+              {[
+                { name: "Firestone", sub: "Elevate (Building Products)", logo: "/images/manufacturers/firestone-elevate.svg" },
+                { name: "Mule-Hide", sub: "Products Co.", logo: "/images/manufacturers/mule-hide.svg" },
+                { name: "Duro-Last", sub: "PVC Roofing Systems", logo: "/images/manufacturers/duro-last.svg" },
+              ].map((brand) => (
+                <div
+                  key={brand.name}
+                  className="flex items-center justify-center border border-border rounded-lg px-6 py-4 min-w-[180px] h-[88px] bg-card hover:border-secondary hover:scale-[1.02] transition-all duration-200"
+                  data-testid={`partner-logo-${brand.name.toLowerCase()}`}
+                >
+                  <img
+                    src={brand.logo}
+                    alt={`${brand.name} — ${brand.sub}`}
+                    width={180}
+                    height={48}
+                    className="max-h-12 w-auto object-contain"
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      const parent = img.parentElement;
+                      if (!parent) return;
+                      img.style.display = "none";
+                      if (!parent.querySelector("[data-fallback]")) {
+                        const fb = document.createElement("div");
+                        fb.setAttribute("data-fallback", "true");
+                        fb.className = "flex flex-col items-center justify-center text-center";
+                        fb.innerHTML = `<span class="font-heading font-black text-lg uppercase tracking-tight text-foreground">${brand.name}</span><span class="text-xs text-muted-foreground font-semibold tracking-wide">${brand.sub}</span>`;
+                        parent.appendChild(fb);
+                      }
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </ScrollRevealWrapper>
+          <ScrollRevealWrapper delay={120}>
+            <p className="text-center text-sm text-muted-foreground mt-8 max-w-2xl mx-auto">
+              We install, repair, and maintain roofing systems from the industry's most trusted manufacturers — so your warranty stays intact and your building stays protected.
+            </p>
+          </ScrollRevealWrapper>
         </div>
       </section>
 
@@ -236,31 +246,33 @@ export default function Home() {
       {/* Key Services */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <ScrollRevealWrapper className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl md:text-5xl font-heading font-black text-foreground uppercase tracking-tight mb-4">Urgently Capable. <br/>Proven Systems.</h2>
             <p className="text-lg text-muted-foreground">From massive warehouses to retail centers, we engineer roofing systems that withstand the brutal Texas climate. No shortcuts, no compromises.</p>
-          </div>
+          </ScrollRevealWrapper>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, i) => (
-              <div key={i} className="group bg-card border border-border p-8 rounded-lg hover:border-secondary transition-all duration-200 hover:shadow-lg hover:scale-[1.02]">
-                <service.icon className="h-12 w-12 text-secondary mb-6 group-hover:scale-110 transition-transform duration-200" />
-                <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-3 text-foreground">{service.name}</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">{service.desc}</p>
-                <Link href={`/services/${service.slug}`} className="text-sm font-bold text-secondary uppercase tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Explore Service <span>&rarr;</span>
-                </Link>
-              </div>
+              <ScrollRevealWrapper key={i} delay={rowDelay(i, 3)}>
+                <div className="group bg-card border border-border p-8 rounded-lg hover:border-secondary transition-all duration-200 hover:shadow-lg hover:scale-[1.02] h-full">
+                  <service.icon className="h-12 w-12 text-secondary mb-6 group-hover:scale-110 transition-transform duration-200" />
+                  <h3 className="text-xl font-heading font-bold uppercase tracking-tight mb-3 text-foreground">{service.name}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{service.desc}</p>
+                  <Link href={`/services/${service.slug}`} className="text-sm font-bold text-secondary uppercase tracking-wide flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Explore Service <span>&rarr;</span>
+                  </Link>
+                </div>
+              </ScrollRevealWrapper>
             ))}
           </div>
           
-          <div className="mt-12 text-center">
+          <ScrollRevealWrapper delay={60} className="mt-12 text-center">
             <Link href="/services">
               <Button variant="outline" size="lg" className="font-bold uppercase tracking-wide border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                 View All Services
               </Button>
             </Link>
-          </div>
+          </ScrollRevealWrapper>
         </div>
       </section>
 
@@ -279,44 +291,52 @@ export default function Home() {
         <div className="container relative z-10 mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-heading font-black uppercase tracking-tight mb-6 text-foreground">Stop Leaks Before They Stop Your Business.</h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Water damage waits for no one. Whether you need an emergency repair right now or want to schedule a comprehensive structural inspection, our teams are ready to deploy across the DFW Metroplex.
-              </p>
+              <ScrollRevealWrapper>
+                <h2 className="text-4xl md:text-5xl font-heading font-black uppercase tracking-tight mb-6 text-foreground">Stop Leaks Before They Stop Your Business.</h2>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  Water damage waits for no one. Whether you need an emergency repair right now or want to schedule a comprehensive structural inspection, our teams are ready to deploy across the DFW Metroplex.
+                </p>
+              </ScrollRevealWrapper>
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                    <Search className="h-6 w-6 text-secondary" />
+                <ScrollRevealWrapper delay={60}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+                      <Search className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-heading font-bold text-foreground">1. Free Inspection</h4>
+                      <p className="text-muted-foreground">Comprehensive drone and physical assessment.</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xl font-heading font-bold text-foreground">1. Free Inspection</h4>
-                    <p className="text-muted-foreground">Comprehensive drone and physical assessment.</p>
+                </ScrollRevealWrapper>
+                <ScrollRevealWrapper delay={120}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+                      <Activity className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-heading font-bold text-foreground">2. Detailed Action Plan</h4>
+                      <p className="text-muted-foreground">Clear scope of work with transparent pricing.</p>
+                    </div>
                   </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                    <Activity className="h-6 w-6 text-secondary" />
+                </ScrollRevealWrapper>
+                <ScrollRevealWrapper delay={180}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
+                      <Shield className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-heading font-bold text-foreground">3. Flawless Execution</h4>
+                      <p className="text-muted-foreground">Professional installation backed by strong warranties.</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xl font-heading font-bold text-foreground">2. Detailed Action Plan</h4>
-                    <p className="text-muted-foreground">Clear scope of work with transparent pricing.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-                    <Shield className="h-6 w-6 text-secondary" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-heading font-bold text-foreground">3. Flawless Execution</h4>
-                    <p className="text-muted-foreground">Professional installation backed by strong warranties.</p>
-                  </div>
-                </div>
+                </ScrollRevealWrapper>
               </div>
             </div>
             
-            <div className="w-full max-w-lg mx-auto lg:mr-0">
+            <ScrollRevealWrapper delay={80} className="w-full max-w-lg mx-auto lg:mr-0">
               <ContactForm />
-            </div>
+            </ScrollRevealWrapper>
           </div>
         </div>
       </section>

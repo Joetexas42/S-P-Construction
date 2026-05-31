@@ -5,6 +5,8 @@ import {
   googleReviewsSummary,
   type Testimonial,
 } from "@/data/testimonials";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 
 type Variant = "dark" | "light";
 
@@ -53,27 +55,27 @@ export function Testimonials({
   return (
     <section className={`py-24 ${sectionBg} ${className}`}>
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <ScrollRevealWrapper className="text-center mb-16 max-w-3xl mx-auto">
           <h2
             className={`text-4xl md:text-5xl font-heading font-black uppercase tracking-tight mb-4 ${headingColor}`}
           >
             {heading}
           </h2>
           <p className={`text-lg ${subheadColor}`}>{subheading}</p>
-        </div>
+        </ScrollRevealWrapper>
 
         {showGoogleSummary && (
-          <div className="mb-12 max-w-2xl mx-auto">
+          <ScrollRevealWrapper delay={60} className="mb-12 max-w-2xl mx-auto">
             <GoogleReviewsSummary variant={variant} />
-          </div>
+          </ScrollRevealWrapper>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {list.map((t) => (
+          {list.map((t, i) => (
+            <ScrollRevealWrapper key={t.id} delay={rowDelay(i, 3)}>
             <article
-              key={t.id}
               data-testid={`testimonial-${t.id}`}
-              className={`relative p-8 rounded-lg border ${cardBg} flex flex-col`}
+              className={`relative p-8 rounded-lg border ${cardBg} flex flex-col h-full`}
             >
               <Quote
                 className={`h-8 w-8 mb-4 ${isDark ? "text-secondary" : "text-secondary"}`}
@@ -120,6 +122,7 @@ export function Testimonials({
                 </div>
               </div>
             </article>
+            </ScrollRevealWrapper>
           ))}
         </div>
       </div>
