@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning } from "lucide-react";
+import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning, ChevronDown } from "lucide-react";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { rowDelay } from "@/hooks/useRevealGrid";
 import { SEO } from "@/components/SEO";
@@ -273,11 +273,22 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               </div>
             </div>
           </div>
+          {/* Scroll hint */}
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => document.getElementById("local-context")?.scrollIntoView({ behavior: "smooth" })}
+              aria-label="Scroll down to page content"
+              className="section-heading-animate [animation-delay:480ms] flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors duration-200 group"
+            >
+              <span className="text-xs font-semibold uppercase tracking-widest">Explore</span>
+              <ChevronDown className="h-6 w-6 animate-bounce" />
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Local context */}
-      <section className="py-20 bg-background">
+      <section id="local-context" className="py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Districts */}
