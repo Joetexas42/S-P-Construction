@@ -290,24 +290,28 @@ export default function CityPage({ city }: CityPageProps) {
           </div>
 
           {/* Weather/climate note */}
-          <div className="bg-secondary/5 border border-secondary/20 rounded-lg p-8 mb-16">
-            <h2 className="section-heading-animate text-2xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
-              Built for {city.name} Weather
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              {city.weatherNote}
-            </p>
-          </div>
+          <ScrollRevealWrapper className="mb-16">
+            <div className="bg-secondary/5 border border-secondary/20 rounded-lg p-8">
+              <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
+                Built for {city.name} Weather
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {city.weatherNote}
+              </p>
+            </div>
+          </ScrollRevealWrapper>
 
           {/* Featured Case Studies for this city */}
           {cityCaseStudies.length > 0 && (
             <div className="mb-16" data-testid={`city-case-studies-${city.slug}`}>
-              <h2 className="section-heading-animate text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
-                Recent Projects in {city.name}
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                In-depth case studies from commercial roofs we've completed in {city.name}.
-              </p>
+              <ScrollRevealWrapper>
+                <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+                  Recent Projects in {city.name}
+                </h2>
+                <p className="text-muted-foreground mb-8">
+                  In-depth case studies from commercial roofs we've completed in {city.name}.
+                </p>
+              </ScrollRevealWrapper>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {cityCaseStudies.map((cs, csIdx) => (
                   <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)}>
@@ -379,12 +383,14 @@ export default function CityPage({ city }: CityPageProps) {
           {/* Recent Projects */}
           {city.recentProjects.length > 0 && (
             <div className="mb-16" data-testid={`city-recent-projects-${city.slug}`}>
-              <h2 className="section-heading-animate text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
-                Recent {city.name} Projects
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                A look at flat roof systems we've recently completed for {city.name} building owners.
-              </p>
+              <ScrollRevealWrapper>
+                <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+                  Recent {city.name} Projects
+                </h2>
+                <p className="text-muted-foreground mb-8">
+                  A look at flat roof systems we've recently completed for {city.name} building owners.
+                </p>
+              </ScrollRevealWrapper>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {city.recentProjects.map((p, idx) => (
                   <ScrollRevealWrapper key={p.title} delay={rowDelay(idx, 2)}>
@@ -467,12 +473,14 @@ export default function CityPage({ city }: CityPageProps) {
           {/* Testimonials */}
           {city.testimonials.length > 0 && (
             <div className="mb-16" data-testid={`city-testimonials-${city.slug}`}>
-              <h2 className="section-heading-animate text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
-                What {city.name} Building Owners Say
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Named feedback from local property managers, facility directors, and business owners.
-              </p>
+              <ScrollRevealWrapper>
+                <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
+                  What {city.name} Building Owners Say
+                </h2>
+                <p className="text-muted-foreground mb-8">
+                  Named feedback from local property managers, facility directors, and business owners.
+                </p>
+              </ScrollRevealWrapper>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {city.testimonials.map((t, tIdx) => (
                   <ScrollRevealWrapper key={t.name} delay={rowDelay(tIdx, 2)}>
@@ -505,9 +513,11 @@ export default function CityPage({ city }: CityPageProps) {
           )}
 
           {/* Services */}
-          <h2 className="section-heading-animate text-3xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
-            Commercial Roofing Services in {city.name}
-          </h2>
+          <ScrollRevealWrapper>
+            <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
+              Commercial Roofing Services in {city.name}
+            </h2>
+          </ScrollRevealWrapper>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             {services.map((s, sIdx) => (
               <ScrollRevealWrapper key={s.name} delay={rowDelay(sIdx, 2)}>
@@ -524,7 +534,7 @@ export default function CityPage({ city }: CityPageProps) {
 
           {/* Service-city landing page links */}
           <div className="mb-16">
-            <div className="section-heading-animate">
+            <ScrollRevealWrapper>
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local Expertise</p>
               <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
                 {city.name} Service Pages
@@ -532,7 +542,7 @@ export default function CityPage({ city }: CityPageProps) {
               <p className="text-muted-foreground mb-8">
                 Detailed information about each of our most-requested services in {city.name} — local building context, weather factors, and {city.name}-specific answers.
               </p>
-            </div>
+            </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {(["repair", "replacement", "tpo-epdm-pvc", "emergency-leak-repair", "maintenance", "coatings-restoration", "flat-roofing", "metal-roofing"] as const).map((svcSlug, svcIdx) => (
                 <ScrollRevealWrapper key={svcSlug} delay={rowDelay(svcIdx, 2, 60)}>
@@ -559,8 +569,8 @@ export default function CityPage({ city }: CityPageProps) {
 
           {/* Contact CTA */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="section-heading-animate text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">
+            <ScrollRevealWrapper>
+              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">
                 Request a Free {city.name} Roof Inspection
               </h2>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
@@ -570,7 +580,7 @@ export default function CityPage({ city }: CityPageProps) {
                 <p className="flex items-center gap-3"><span className="font-bold">24/7 Emergency:</span> <a href="tel:972-555-0100" className="text-secondary font-bold">(972) 555-0100</a></p>
                 <p className="flex items-center gap-3"><span className="font-bold">County:</span> {city.county}</p>
               </div>
-            </div>
+            </ScrollRevealWrapper>
             <ContactForm />
           </div>
         </div>

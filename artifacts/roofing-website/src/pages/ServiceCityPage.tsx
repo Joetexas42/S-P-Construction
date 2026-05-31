@@ -311,89 +311,98 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
           </div>
 
           {/* Weather urgency */}
-          <div className="bg-secondary/5 border border-secondary/20 rounded-lg p-8 mb-16">
-            <div className="flex items-start gap-4">
-              <CloudLightning className="h-8 w-8 text-secondary shrink-0 mt-1" />
-              <div>
-                <h2 className="section-heading-animate text-2xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
-                  {city.name} Weather & {SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle}
-                </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed">{entry.weatherUrgency}</p>
+          <ScrollRevealWrapper className="mb-16">
+            <div className="bg-secondary/5 border border-secondary/20 rounded-lg p-8">
+              <div className="flex items-start gap-4">
+                <CloudLightning className="h-8 w-8 text-secondary shrink-0 mt-1" />
+                <div>
+                  <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
+                    {city.name} Weather & {SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle}
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed">{entry.weatherUrgency}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </ScrollRevealWrapper>
 
           {/* Service overview from the parent service */}
           <div className="mb-16">
-            <div className="section-heading-animate">
+            <ScrollRevealWrapper>
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Service Overview</p>
               <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">
                 {service.title}
               </h2>
-            </div>
+            </ScrollRevealWrapper>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
-                <div className="bg-muted border border-border rounded-xl p-6">
-                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
-                  <p className="text-foreground leading-relaxed">{service.why}</p>
+                <ScrollRevealWrapper delay={60}>
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
+                </ScrollRevealWrapper>
+                <ScrollRevealWrapper delay={120}>
+                  <div className="bg-muted border border-border rounded-xl p-6">
+                    <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
+                    <p className="text-foreground leading-relaxed">{service.why}</p>
+                  </div>
+                </ScrollRevealWrapper>
+              </div>
+              <ScrollRevealWrapper delay={80}>
+                <div className="bg-card border border-border rounded-xl p-7 shadow-sm">
+                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">What's Included</p>
+                  <ul className="space-y-3">
+                    {service.included.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-foreground">
+                        <span className="h-5 w-5 rounded-full bg-secondary/20 text-secondary flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                        <span className="leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-              <div className="bg-card border border-border rounded-xl p-7 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">What's Included</p>
-                <ul className="space-y-3">
-                  {service.included.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-foreground">
-                      <span className="h-5 w-5 rounded-full bg-secondary/20 text-secondary flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
-                      <span className="leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </ScrollRevealWrapper>
             </div>
           </div>
 
           {/* City-specific FAQs */}
           <div className="mb-16">
-            <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
+            <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local Questions Answered</p>
               <h2 className="text-3xl font-heading font-black uppercase tracking-tight text-foreground">
                 {serviceLabel} FAQs for {city.name}
               </h2>
-            </div>
+            </ScrollRevealWrapper>
             <div className="max-w-4xl mx-auto space-y-4">
               {entry.faqs.map((faq, i) => (
-                <details
-                  key={i}
-                  className="group bg-card border border-border rounded-xl p-6 shadow-sm open:border-secondary transition-colors"
-                >
-                  <summary className="flex items-start gap-4 cursor-pointer list-none">
-                    <div className="shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-open:bg-secondary/20 transition-colors">
-                      <HelpCircle className="h-5 w-5 text-secondary" />
+                <ScrollRevealWrapper key={i} delay={rowDelay(i, 1, 50)}>
+                  <details
+                    className="group bg-card border border-border rounded-xl p-6 shadow-sm open:border-secondary transition-colors"
+                  >
+                    <summary className="flex items-start gap-4 cursor-pointer list-none">
+                      <div className="shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-open:bg-secondary/20 transition-colors">
+                        <HelpCircle className="h-5 w-5 text-secondary" />
+                      </div>
+                      <h3 className="flex-1 text-lg font-heading font-bold text-foreground leading-snug">
+                        {faq.question}
+                      </h3>
+                      <span className="shrink-0 text-secondary font-heading font-black text-2xl leading-none mt-1 group-open:rotate-45 transition-transform">
+                        +
+                      </span>
+                    </summary>
+                    <div className="mt-4 pl-14">
+                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                     </div>
-                    <h3 className="flex-1 text-lg font-heading font-bold text-foreground leading-snug">
-                      {faq.question}
-                    </h3>
-                    <span className="shrink-0 text-secondary font-heading font-black text-2xl leading-none mt-1 group-open:rotate-45 transition-transform">
-                      +
-                    </span>
-                  </summary>
-                  <div className="mt-4 pl-14">
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </div>
-                </details>
+                  </details>
+                </ScrollRevealWrapper>
               ))}
             </div>
           </div>
 
           {/* Related pages grid */}
           <div className="mb-16">
-            <div className="section-heading-animate">
+            <ScrollRevealWrapper>
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Explore More</p>
               <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
                 Related Pages
               </h2>
-            </div>
+            </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Parent city page */}
               <ScrollRevealWrapper delay={0}>
@@ -456,12 +465,12 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
       {relatedServices.length > 0 && (
         <section className="py-16 bg-muted border-y border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="section-heading-animate text-center">
+            <ScrollRevealWrapper className="text-center">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Also Available in {city.name}</p>
               <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
                 Other Services for {city.name} Properties
               </h2>
-            </div>
+            </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {relatedServices.map((rel, relIdx) => {
                 const RelIcon = rel.icon;
@@ -496,14 +505,14 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: context copy */}
             <div>
-              <div className="section-heading-animate">
+              <ScrollRevealWrapper>
                 <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">
                   Get a Free Estimate
                 </p>
                 <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-foreground">
                   Request {serviceLabel} in {city.name}
                 </h2>
-              </div>
+              </ScrollRevealWrapper>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 Fill out the form and a senior inspector will follow up — usually within one business day. No pressure, no obligation.
               </p>
