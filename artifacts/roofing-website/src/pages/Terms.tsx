@@ -9,13 +9,17 @@ export default function Terms() {
         description="Terms of service for Scott Commercial Roofing. Read our terms before using our website or engaging our roofing services."
       />
 
-      <section className="pt-32 pb-20 bg-background">
+      <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-2">
+          <h1 className="text-4xl md:text-5xl font-heading font-black uppercase tracking-tight text-white mb-2">
             Terms of Service
           </h1>
-          <p className="text-muted-foreground text-sm mb-10">Effective Date: January 1, 2024</p>
+          <p className="text-primary-foreground/60 text-sm">Effective Date: January 1, 2024</p>
+        </div>
+      </section>
 
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 md:px-6 max-w-3xl">
           <div className="prose prose-neutral max-w-none space-y-8 text-foreground/80 leading-relaxed">
 
             <section>
