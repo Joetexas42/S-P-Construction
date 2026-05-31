@@ -196,10 +196,10 @@ export default function CityPage({ city }: CityPageProps) {
               <h1 className="section-heading-animate [animation-delay:120ms] text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
                 Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
               </h1>
-              <p className="text-xl text-primary-foreground/80 leading-relaxed mb-8">
+              <p className="section-heading-animate [animation-delay:240ms] text-xl text-primary-foreground/80 leading-relaxed mb-8">
                 {city.intro}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="section-heading-animate [animation-delay:360ms] flex flex-col sm:flex-row gap-4">
                 <Link href="/contact">
                   <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto">
                     Free {city.name} Roof Inspection

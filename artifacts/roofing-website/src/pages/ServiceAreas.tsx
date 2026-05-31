@@ -54,7 +54,7 @@ export default function ServiceAreas() {
               <span className="text-xs font-bold uppercase tracking-widest text-secondary">DFW Metroplex Coverage</span>
             </div>
             <h1 className="section-heading-animate [animation-delay:120ms] text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">Service Areas</h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed">
+            <p className="section-heading-animate [animation-delay:240ms] text-xl text-primary-foreground/80 leading-relaxed">
               Based in Dallas, we deploy our commercial roofing crews across the entire DFW Metroplex and surrounding North Texas communities.
             </p>
           </div>

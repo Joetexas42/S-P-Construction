@@ -105,10 +105,10 @@ export default function Home() {
             <h1 className="section-heading-animate [animation-delay:120ms] text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
               Scott Commercial <br className="hidden md:block"/><span className="text-secondary">Flat Roof Specialists.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white font-medium mb-10 max-w-2xl leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
+            <p className="section-heading-animate [animation-delay:240ms] text-xl md:text-2xl text-white font-medium mb-10 max-w-2xl leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
               TPO, PVC, and single-ply membrane systems engineered for the DFW Metroplex — installed and serviced by an authorized Firestone (Elevate), Mule-Hide, and Duro-Last contractor. Hail-tough, energy-efficient, warranty-backed.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="section-heading-animate [animation-delay:360ms] flex flex-col sm:flex-row gap-4">
               <Link href="/estimate">
                 <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto shadow-xl shadow-black/30" data-testid="hero-cta-estimate">
                   Get Instant Estimate

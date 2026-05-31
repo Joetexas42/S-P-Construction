@@ -233,10 +233,10 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
                 {serviceLabel} in{" "}
                 <span className="text-secondary">{city.name}, TX</span>
               </h1>
-              <p className="text-xl text-primary-foreground/80 leading-relaxed mb-8">
+              <p className="section-heading-animate [animation-delay:240ms] text-xl text-primary-foreground/80 leading-relaxed mb-8">
                 {entry.intro}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="section-heading-animate [animation-delay:360ms] flex flex-col sm:flex-row gap-4">
                 <Link href="/contact">
                   <Button
                     size="lg"

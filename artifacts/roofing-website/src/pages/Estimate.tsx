@@ -411,7 +411,7 @@ export default function EstimatePage() {
             <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-5 text-white [animation-delay:120ms]">
               Instant Roof Estimate
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 leading-relaxed">
+            <p className="section-heading-animate [animation-delay:240ms] text-lg md:text-xl text-primary-foreground/80 leading-relaxed">
               Type your commercial property address, see your roof from above, and get a ballpark
               price for the system you're considering — in under a minute. Submit the form and a
               senior roofer will follow up with a real proposal.

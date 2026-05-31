@@ -184,7 +184,7 @@ export default function Projects() {
             <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms]">
               Real DFW Commercial Roofing Projects
             </h1>
-            <p className="text-xl text-primary-foreground/80 leading-relaxed">
+            <p className="section-heading-animate [animation-delay:240ms] text-xl text-primary-foreground/80 leading-relaxed">
               Detailed scope, system, and outcome on recent TPO, PVC, and
               standing-seam metal replacements across the Dallas–Fort Worth
               metroplex.
