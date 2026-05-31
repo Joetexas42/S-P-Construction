@@ -34,6 +34,7 @@ import {
   buildImageSrcSet,
   SIZES_HALF_COLUMN_GRID,
 } from "@/lib/responsiveImage";
+import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS, FILTER_DEBOUNCE_MS } from "@/lib/animation";
 import { useListProjects } from "@workspace/api-client-react";
 import type { Project } from "@workspace/api-client-react";
 
@@ -96,8 +97,6 @@ function FilterChip({
     </button>
   );
 }
-
-import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
 
 function SkeletonCard() {
   return (
@@ -215,14 +214,20 @@ export default function Projects() {
       isFirstRender.current = false;
       return;
     }
+    // Cancel any in-flight debounce or exit timer so rapid taps don't stack.
     clearTimeout(timerRef.current);
-    const exitCount = renderedSetRef.current.length;
-    const exitDuration = CARD_EXIT_BASE_MS + exitCount * CARD_EXIT_STAGGER_MS;
-    setIsExiting(true);
+    // Debounce: wait for the user to stop tapping before starting the exit
+    // animation. If another filter change arrives within FILTER_DEBOUNCE_MS,
+    // this timeout is cancelled and reset, preventing duplicate skeleton flashes.
     timerRef.current = setTimeout(() => {
-      setIsExiting(false);
-      setRenderedSet(filteredRef.current);
-    }, exitDuration);
+      const exitCount = renderedSetRef.current.length;
+      const exitDuration = CARD_EXIT_BASE_MS + exitCount * CARD_EXIT_STAGGER_MS;
+      setIsExiting(true);
+      timerRef.current = setTimeout(() => {
+        setIsExiting(false);
+        setRenderedSet(filteredRef.current);
+      }, exitDuration);
+    }, FILTER_DEBOUNCE_MS);
     return () => clearTimeout(timerRef.current);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city, system]);
