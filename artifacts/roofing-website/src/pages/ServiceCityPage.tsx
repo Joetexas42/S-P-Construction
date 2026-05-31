@@ -87,7 +87,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
     const displayedKey = `${displayedCity.slug}--${displayedService.slug}`;
     if (pageKey === displayedKey) return;
     setExiting(true);
-    const cardCount = 4 + 3;
+    const cardCount = 4 + 3 + 1; // related-page cards + related-service cards + contact form section
     const exitDuration = CARD_EXIT_BASE_MS + cardCount * CARD_EXIT_STAGGER_MS;
     const t = setTimeout(() => {
       setDisplayedCity(city);
@@ -313,6 +313,11 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
       {/* Local context */}
       <section id="local-context" className="py-20 bg-background">
         <div className="container mx-auto px-4 md:px-6">
+          {/* Exit group 0: local-context cards + weather urgency */}
+          <div
+            className={cn(exiting && "filter-cards-exit")}
+            style={exiting ? { animationDelay: `${0 * CARD_EXIT_STAGGER_MS}ms` } : undefined}
+          >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             {/* Districts */}
             <ScrollRevealWrapper delay={0}>
@@ -358,9 +363,13 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               </div>
             </div>
           </ScrollRevealWrapper>
+          </div>{/* end exit group 0 */}
 
-          {/* Service overview from the parent service */}
-          <div className="mb-16">
+          {/* Service overview from the parent service — exit group 1 */}
+          <div
+            className={cn("mb-16", exiting && "filter-cards-exit")}
+            style={exiting ? { animationDelay: `${1 * CARD_EXIT_STAGGER_MS}ms` } : undefined}
+          >
             <ScrollRevealWrapper>
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Service Overview</p>
               <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">
@@ -395,8 +404,11 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
             </div>
           </div>
 
-          {/* City-specific FAQs */}
-          <div className="mb-16">
+          {/* City-specific FAQs — exit group 2 */}
+          <div
+            className={cn("mb-16", exiting && "filter-cards-exit")}
+            style={exiting ? { animationDelay: `${2 * CARD_EXIT_STAGGER_MS}ms` } : undefined}
+          >
             <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local Questions Answered</p>
               <h2 className="text-3xl font-heading font-black uppercase tracking-tight text-foreground">
@@ -549,8 +561,11 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         </section>
       )}
 
-      {/* Inline Contact Form */}
-      <section className="py-20 bg-muted border-t border-border">
+      {/* Inline Contact Form — exit group 7 (after related-page cards 0–3, related-service cards 4–6) */}
+      <section
+        className={cn("py-20 bg-muted border-t border-border", exiting && "filter-cards-exit")}
+        style={exiting ? { animationDelay: `${7 * CARD_EXIT_STAGGER_MS}ms` } : undefined}
+      >
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left: context copy */}
