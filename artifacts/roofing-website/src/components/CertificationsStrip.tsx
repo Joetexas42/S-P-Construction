@@ -1,3 +1,6 @@
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
+
 type Credential = {
   name: string;
   sub: string;
@@ -39,11 +42,13 @@ export function CertificationsStrip() {
       data-testid="certifications-strip"
     >
       <div className="container mx-auto px-4 md:px-6">
-        <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8">
-          Certifications &amp; Credentials — Vetted, Trained, Insured
-        </p>
+        <ScrollRevealWrapper>
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8">
+            Certifications &amp; Credentials — Vetted, Trained, Insured
+          </p>
+        </ScrollRevealWrapper>
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-          {credentials.map((c) => {
+          {credentials.map((c, i) => {
             const card = (
               <div
                 className="flex items-center justify-center border border-border rounded-lg px-6 py-4 min-w-[200px] h-[96px] bg-card hover:border-secondary transition-colors"
@@ -73,9 +78,8 @@ export function CertificationsStrip() {
                 />
               </div>
             );
-            return c.href ? (
+            const wrapped = c.href ? (
               <a
-                key={c.name}
                 href={c.href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -85,13 +89,20 @@ export function CertificationsStrip() {
                 {card}
               </a>
             ) : (
-              <div key={c.name}>{card}</div>
+              <div>{card}</div>
+            );
+            return (
+              <ScrollRevealWrapper key={c.name} delay={rowDelay(i, 4)}>
+                {wrapped}
+              </ScrollRevealWrapper>
             );
           })}
         </div>
-        <p className="text-center text-sm text-muted-foreground mt-8 max-w-2xl mx-auto">
-          Every crew is OSHA 30 trained, every project is backed by $2M in commercial general liability coverage, and every customer gets the protection of working with a BBB-accredited, RCAT-member contractor.
-        </p>
+        <ScrollRevealWrapper delay={60}>
+          <p className="text-center text-sm text-muted-foreground mt-8 max-w-2xl mx-auto">
+            Every crew is OSHA 30 trained, every project is backed by $2M in commercial general liability coverage, and every customer gets the protection of working with a BBB-accredited, RCAT-member contractor.
+          </p>
+        </ScrollRevealWrapper>
       </div>
     </section>
   );
