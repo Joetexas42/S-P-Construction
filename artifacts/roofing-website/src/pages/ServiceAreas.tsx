@@ -67,12 +67,16 @@ export default function ServiceAreas() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
             <div>
-              <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">Covering North Texas</h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                When a severe storm hits or an emergency leak threatens your inventory, response time is critical. We strategically position our crews to ensure rapid deployment across the entire Dallas-Fort Worth region.
-              </p>
+              <ScrollRevealWrapper>
+                <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">Covering North Texas</h2>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  When a severe storm hits or an emergency leak threatens your inventory, response time is critical. We strategically position our crews to ensure rapid deployment across the entire Dallas-Fort Worth region.
+                </p>
+              </ScrollRevealWrapper>
 
-              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Featured Cities</h3>
+              <ScrollRevealWrapper>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Featured Cities</h3>
+              </ScrollRevealWrapper>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
                 {cities.map((city, i) => (
                   <ScrollRevealWrapper key={city.slug} delay={rowDelay(i, 2)}>
@@ -90,23 +94,30 @@ export default function ServiceAreas() {
                 ))}
               </div>
 
-              <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Also Serving</h3>
+              <ScrollRevealWrapper>
+                <h3 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-3">Also Serving</h3>
+              </ScrollRevealWrapper>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {otherAreas.filter((a) => !featuredSlugs.has(a.toLowerCase().replace(/\s+/g, "-"))).map((area) => (
-                  <div key={area} className="flex items-center gap-2 text-foreground font-medium p-3 bg-muted rounded-md border border-border">
-                    <MapPin className="h-4 w-4 text-secondary shrink-0" />
-                    <span>{area}</span>
-                  </div>
+                {otherAreas.filter((a) => !featuredSlugs.has(a.toLowerCase().replace(/\s+/g, "-"))).map((area, i) => (
+                  <ScrollRevealWrapper key={area} delay={rowDelay(i, 3)}>
+                    <div className="flex items-center gap-2 text-foreground font-medium p-3 bg-muted rounded-md border border-border h-full">
+                      <MapPin className="h-4 w-4 text-secondary shrink-0" />
+                      <span>{area}</span>
+                    </div>
+                  </ScrollRevealWrapper>
                 ))}
               </div>
 
-              <div className="mt-8 p-6 bg-secondary/5 border border-secondary/20 rounded-lg">
-                <p className="text-sm text-foreground font-medium italic">
-                  * Don't see your city listed? If you have a commercial property in North Texas, chances are we cover it. Contact us to confirm.
-                </p>
-              </div>
+              <ScrollRevealWrapper className="mt-8">
+                <div className="p-6 bg-secondary/5 border border-secondary/20 rounded-lg">
+                  <p className="text-sm text-foreground font-medium italic">
+                    * Don't see your city listed? If you have a commercial property in North Texas, chances are we cover it. Contact us to confirm.
+                  </p>
+                </div>
+              </ScrollRevealWrapper>
             </div>
             
+            <ScrollRevealWrapper>
             <div className="bg-card border border-border p-8 rounded-lg shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-bl-full -mr-4 -mt-4" />
               <h3 className="text-2xl font-heading font-bold uppercase tracking-tight mb-6 text-foreground">Need Immediate Dispatch?</h3>
@@ -134,6 +145,7 @@ export default function ServiceAreas() {
                 </div>
               </div>
             </div>
+            </ScrollRevealWrapper>
             
           </div>
         </div>
