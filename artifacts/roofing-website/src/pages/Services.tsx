@@ -713,17 +713,19 @@ export default function Services() {
       {/* Final CTA */}
       <section className="py-20 bg-secondary text-secondary-foreground text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-white">
-            Not Sure What You Need?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Let our experts assess your roof. We provide comprehensive inspections and transparent, honest recommendations across the entire DFW Metroplex.
-          </p>
-          <Link href="/contact">
-            <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white text-secondary hover:bg-white/90 hover:text-secondary border-transparent" data-testid="button-schedule-inspection">
-              Schedule Free Inspection
-            </Button>
-          </Link>
+          <ScrollRevealWrapper className="max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+              Not Sure What You Need?
+            </h2>
+            <p className="text-xl mb-8 text-white/90">
+              Let our experts assess your roof. We provide comprehensive inspections and transparent, honest recommendations across the entire DFW Metroplex.
+            </p>
+            <Link href="/contact">
+              <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white text-secondary hover:bg-white/90 hover:text-secondary border-transparent" data-testid="button-schedule-inspection">
+                Schedule Free Inspection
+              </Button>
+            </Link>
+          </ScrollRevealWrapper>
         </div>
       </section>
     </>

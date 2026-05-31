@@ -337,7 +337,7 @@ export default function Projects() {
       {galleryProjects && galleryProjects.length > 0 && (
         <section className="py-14 md:py-20 bg-muted/30 border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="flex items-center gap-3 mb-8">
+            <ScrollRevealWrapper className="flex items-center gap-3 mb-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30">
                 <span className="text-xs font-bold uppercase tracking-widest text-secondary">Portfolio</span>
               </div>
@@ -347,7 +347,7 @@ export default function Projects() {
               <Badge variant="secondary" className="ml-auto">
                 {galleryProjects.length}
               </Badge>
-            </div>
+            </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {galleryProjects.map((project, i) => (
                 <ScrollRevealWrapper key={project.id} delay={i * 80}>
