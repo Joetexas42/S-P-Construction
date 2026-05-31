@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -8,12 +8,14 @@ import { Building2, Factory, ShieldCheck, Wrench, Search, Zap, Layers, Quote, St
 import { SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
 import { ContactForm } from "@/components/ContactForm";
 import { ProjectLightbox } from "@/components/ProjectLightbox";
-import { caseStudies } from "@/data/caseStudies";
+import { caseStudies, getSystemFamily, SYSTEM_FAMILY_LABELS, type CaseStudy } from "@/data/caseStudies";
+import { FilterChip } from "@/components/FilterChip";
 import {
   buildImageSrcSet as buildProjectImageSrcSet,
   SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
 } from "@/lib/responsiveImage";
 import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
+import { cn } from "@/lib/utils";
 
 export interface CityTestimonial {
   quote: string;
@@ -107,9 +109,77 @@ export default function CityPage({ city }: CityPageProps) {
     (cs) => cs.city.split(",")[0].trim().toLowerCase() === displayedCity.name.toLowerCase(),
   );
 
+  // Used to size skeleton placeholders during city-switch transition
   const incomingCityCaseStudies = caseStudies.filter(
     (cs) => cs.city.split(",")[0].trim().toLowerCase() === city.name.toLowerCase(),
   );
+
+  // System filter chip state
+  const [selectedSystem, setSelectedSystem] = useState<string>("all");
+  const [isCsExiting, setIsCsExiting] = useState(false);
+  const [visibleCaseStudies, setVisibleCaseStudies] = useState<CaseStudy[]>(cityCaseStudies);
+  const csTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const visibleCsRef = useRef<CaseStudy[]>(cityCaseStudies);
+  const filteredCsRef = useRef<CaseStudy[]>(cityCaseStudies);
+  const isFirstCsFilterRender = useRef(true);
+
+  const filteredCaseStudies = useMemo(() => {
+    if (selectedSystem === "all") return cityCaseStudies;
+    return cityCaseStudies.filter((cs) => getSystemFamily(cs.system) === selectedSystem);
+  }, [cityCaseStudies, selectedSystem]);
+
+  filteredCsRef.current = filteredCaseStudies;
+
+  useEffect(() => {
+    visibleCsRef.current = visibleCaseStudies;
+  }, [visibleCaseStudies]);
+
+  // Trigger card-exit animation when filter chip changes
+  useEffect(() => {
+    if (isFirstCsFilterRender.current) {
+      isFirstCsFilterRender.current = false;
+      return;
+    }
+    clearTimeout(csTimerRef.current);
+    const exitCount = visibleCsRef.current.length;
+    const exitDuration = CARD_EXIT_BASE_MS + exitCount * CARD_EXIT_STAGGER_MS;
+    setIsCsExiting(true);
+    csTimerRef.current = setTimeout(() => {
+      setIsCsExiting(false);
+      setVisibleCaseStudies(filteredCsRef.current);
+    }, exitDuration);
+    return () => clearTimeout(csTimerRef.current);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSystem]);
+
+  // Reset filter state when the displayed city swaps in
+  useEffect(() => {
+    clearTimeout(csTimerRef.current);
+    setIsCsExiting(false);
+    setSelectedSystem("all");
+    const reset = caseStudies.filter(
+      (cs) => cs.city.split(",")[0].trim().toLowerCase() === city.name.toLowerCase(),
+    );
+    setVisibleCaseStudies(reset);
+    visibleCsRef.current = reset;
+    isFirstCsFilterRender.current = true;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [displayedCity.slug]);
+
+  const systemOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const cs of cityCaseStudies) {
+      const fam = getSystemFamily(cs.system);
+      counts.set(fam, (counts.get(fam) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .map(([value, count]) => ({
+        value,
+        label: SYSTEM_FAMILY_LABELS[value] ?? value.toUpperCase(),
+        count,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [cityCaseStudies]);
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -346,10 +416,43 @@ export default function CityPage({ city }: CityPageProps) {
                 <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
                   Recent Projects in {displayedCity.name}
                 </h2>
-                <p className="text-muted-foreground mb-8">
+                <p className="text-muted-foreground mb-4">
                   In-depth case studies from commercial roofs we've completed in {displayedCity.name}.
                 </p>
               </ScrollRevealWrapper>
+
+              {/* System filter chips — hidden during city-switch skeleton phase */}
+              {!exiting && systemOptions.length > 0 && (
+                <ScrollRevealWrapper className="mb-8">
+                  <div
+                    className="flex flex-wrap gap-2"
+                    data-testid="city-system-filter-chips"
+                    role="group"
+                    aria-label="Filter projects by roof system"
+                  >
+                    <FilterChip
+                      active={selectedSystem === "all"}
+                      onClick={() => setSelectedSystem("all")}
+                      testId="city-filter-system-all"
+                    >
+                      All
+                      <span className="opacity-70">({cityCaseStudies.length})</span>
+                    </FilterChip>
+                    {systemOptions.map((opt) => (
+                      <FilterChip
+                        key={opt.value}
+                        active={selectedSystem === opt.value}
+                        onClick={() => setSelectedSystem(opt.value)}
+                        testId={`city-filter-system-${opt.value}`}
+                      >
+                        {opt.label}
+                        <span className="opacity-70">({opt.count})</span>
+                      </FilterChip>
+                    ))}
+                  </div>
+                </ScrollRevealWrapper>
+              )}
+
               {exiting ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {Array.from({ length: Math.max(incomingCityCaseStudies.length, 2) }).map((_, i) => (
@@ -358,12 +461,16 @@ export default function CityPage({ city }: CityPageProps) {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {cityCaseStudies.map((cs, csIdx) => (
-                    <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)} revealKey={displayedCity.slug}>
+                  {visibleCaseStudies.map((cs, csIdx) => (
+                    <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)} revealKey={`${displayedCity.slug}-${selectedSystem}`}>
                     <Link
                       href={`/projects/${cs.slug}`}
                       data-testid={`city-case-study-link-${cs.slug}`}
-                      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+                      className={cn(
+                        "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200",
+                        isCsExiting && "filter-cards-exit",
+                      )}
+                      style={isCsExiting ? { animationDelay: `${csIdx * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                     >
                       <div className="aspect-[16/10] overflow-hidden bg-muted relative">
                         <img
