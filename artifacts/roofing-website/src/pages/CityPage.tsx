@@ -201,63 +201,61 @@ export default function CityPage({ city }: CityPageProps) {
       />
 
       {/* Hero */}
-      <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7">
-              <nav className="mb-6 text-sm text-primary-foreground/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
-                <Link href="/" className="hover:text-white transition-colors hidden sm:inline shrink-0">Home</Link>
-                <span className="mx-2 hidden sm:inline shrink-0">/</span>
-                <Link href="/service-areas" className="hover:text-white transition-colors hidden sm:inline shrink-0">Service Areas</Link>
-                <span className="mx-2 hidden sm:inline shrink-0">/</span>
-                <span className="sm:hidden text-primary-foreground/70 shrink-0">…</span>
-                <span className="mx-2 sm:hidden shrink-0">/</span>
-                <span className="text-white truncate">{city.name}, TX</span>
-              </nav>
-              <p className="section-heading-animate text-xs font-bold uppercase tracking-widest text-secondary mb-3">
-                {city.county} · Commercial Roofing
-              </p>
-              <h1 className="section-heading-animate [animation-delay:120ms] text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white">
-                Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
-              </h1>
-              <p className="section-heading-animate [animation-delay:240ms] text-xl text-primary-foreground/80 leading-relaxed mb-8">
-                {city.intro}
-              </p>
-              <div className="section-heading-animate [animation-delay:360ms] flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto">
-                    Free {city.name} Roof Inspection
-                  </Button>
-                </Link>
-                <a href="tel:972-555-0100">
-                  <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/20 hover:bg-white/20 w-full sm:w-auto">
-                    Call (972) 555-0100
-                  </Button>
-                </a>
-              </div>
-            </div>
-            <div className="lg:col-span-5">
-              <div className="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl aspect-[4/3]">
-                <img
-                  src={`${city.heroImage.base}-800w.webp`}
-                  srcSet={`${city.heroImage.base}-480w.webp 480w, ${city.heroImage.base}-800w.webp 800w, ${city.heroImage.base}-1280w.webp 1280w`}
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  alt={city.heroImage.alt}
-                  width={1280}
-                  height={960}
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                  className="w-full h-full object-cover"
-                  data-testid={`city-hero-image-${city.slug}`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-transparent pointer-events-none" />
-              </div>
+      <section data-dark-hero className="relative min-h-[80vh] flex flex-col justify-center pt-24 pb-16 overflow-hidden text-white">
+        {/* Full-bleed background image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={`${city.heroImage.base}-800w.webp`}
+            srcSet={`${city.heroImage.base}-480w.webp 480w, ${city.heroImage.base}-800w.webp 800w, ${city.heroImage.base}-1280w.webp 1280w`}
+            sizes="100vw"
+            alt={city.heroImage.alt}
+            width={1280}
+            height={960}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            className="w-full h-full object-cover"
+            data-testid={`city-hero-image-${city.slug}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-background" />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-4 md:px-6">
+          <div className="max-w-3xl">
+            <nav className="mb-6 text-sm text-white/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-white transition-colors hidden sm:inline shrink-0">Home</Link>
+              <span className="mx-2 hidden sm:inline shrink-0">/</span>
+              <Link href="/service-areas" className="hover:text-white transition-colors hidden sm:inline shrink-0">Service Areas</Link>
+              <span className="mx-2 hidden sm:inline shrink-0">/</span>
+              <span className="sm:hidden text-white/70 shrink-0">…</span>
+              <span className="mx-2 sm:hidden shrink-0">/</span>
+              <span className="text-white truncate">{city.name}, TX</span>
+            </nav>
+            <p className="section-heading-animate text-xs font-bold uppercase tracking-widest text-secondary mb-3 [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
+              {city.county} · Commercial Roofing
+            </p>
+            <h1 className="section-heading-animate [animation-delay:120ms] text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
+              Commercial Roofing in <span className="text-secondary">{city.name}, TX</span>
+            </h1>
+            <p className="section-heading-animate [animation-delay:240ms] text-xl text-white/90 leading-relaxed mb-8 [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
+              {city.intro}
+            </p>
+            <div className="section-heading-animate [animation-delay:360ms] flex flex-col sm:flex-row gap-4">
+              <Link href="/contact">
+                <Button size="lg" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white w-full sm:w-auto">
+                  Free {city.name} Roof Inspection
+                </Button>
+              </Link>
+              <a href="tel:972-555-0100">
+                <Button size="lg" variant="outline" className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-black/30 text-white border-white/40 hover:bg-black/50 hover:text-white w-full sm:w-auto backdrop-blur-sm">
+                  Call (972) 555-0100
+                </Button>
+              </a>
             </div>
           </div>
           {/* Scroll hint */}
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-12">
             <button
               onClick={() => document.getElementById("city-content")?.scrollIntoView({ behavior: "smooth" })}
               aria-label="Scroll down to page content"

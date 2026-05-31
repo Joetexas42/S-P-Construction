@@ -146,16 +146,34 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       />
 
       {/* Header */}
-      <section data-dark-hero id="top" className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7">
-            <nav className="mb-6 text-sm text-primary-foreground/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
+      <section data-dark-hero id="top" className="relative min-h-[80vh] flex flex-col justify-center pt-24 pb-16 overflow-hidden text-white">
+        {/* Full-bleed background image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={`${service.heroImage.base}-800w.webp`}
+            srcSet={`${service.heroImage.base}-480w.webp 480w, ${service.heroImage.base}-800w.webp 800w, ${service.heroImage.base}-1280w.webp 1280w`}
+            sizes="100vw"
+            alt={service.heroImage.alt}
+            width={1280}
+            height={960}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+            className="w-full h-full object-cover"
+            data-testid={`service-hero-image-${service.slug}`}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-background" />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-4 md:px-6">
+          <div className="max-w-3xl">
+            <nav className="mb-6 text-sm text-white/70 flex flex-wrap items-center min-w-0" aria-label="Breadcrumb">
               <Link href="/" className="hover:text-white transition-colors hidden sm:inline shrink-0">Home</Link>
               <span className="mx-2 hidden sm:inline shrink-0">/</span>
               <Link href="/services" className="hover:text-white transition-colors hidden sm:inline shrink-0">Services</Link>
               <span className="mx-2 hidden sm:inline shrink-0">/</span>
-              <span className="sm:hidden text-primary-foreground/70 shrink-0">…</span>
+              <span className="sm:hidden text-white/70 shrink-0">…</span>
               <span className="mx-2 sm:hidden shrink-0">/</span>
               <span className="text-white truncate">{service.shortTitle}</span>
             </nav>
@@ -163,18 +181,18 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center shrink-0">
                 <Icon className="h-7 w-7 text-secondary-foreground" />
               </div>
-              <p className="text-xs font-bold uppercase tracking-widest text-secondary">
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
                 {service.category === "Core" ? "Core Commercial Service" : "Commercial Roofing System"}
               </p>
             </div>
-            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms]">
+            <h1 className="section-heading-animate text-4xl md:text-6xl font-heading font-black uppercase tracking-tight mb-6 text-white [animation-delay:120ms] [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
               {service.title}
             </h1>
-            <p className="section-heading-animate text-xl text-primary-foreground/80 leading-relaxed mb-6 [animation-delay:240ms]">
+            <p className="section-heading-animate text-xl text-white/90 leading-relaxed mb-6 [animation-delay:240ms] [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
               {service.tagline}
             </p>
             <div
-              className="section-heading-animate inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 mb-8 [animation-delay:480ms]"
+              className="section-heading-animate inline-flex items-center gap-2.5 bg-black/30 border border-white/30 rounded-lg px-4 py-2.5 mb-8 [animation-delay:480ms] backdrop-blur-sm"
               data-testid={`pricing-${service.slug}`}
             >
               <DollarSign className="h-4 w-4 text-secondary shrink-0" />
@@ -196,46 +214,15 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="font-bold uppercase tracking-wide gap-2 w-full sm:w-auto bg-white/10 text-white border-white/20 hover:bg-white/20"
+                  className="font-bold uppercase tracking-wide gap-2 w-full sm:w-auto bg-black/30 text-white border-white/40 hover:bg-black/50 hover:text-white backdrop-blur-sm"
                 >
                   <Phone className="h-4 w-4" /> (972) 555-0100
                 </Button>
               </a>
             </div>
-            </div>
-            <div className="section-heading-animate lg:col-span-5 [animation-delay:600ms]">
-              <button
-                type="button"
-                onClick={() =>
-                  setActiveImage({
-                    base: service.heroImage.base,
-                    alt: service.heroImage.alt,
-                  })
-                }
-                aria-label={`View full-size image: ${service.heroImage.alt}`}
-                className="group relative block w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
-                data-testid={`service-hero-image-button-${service.slug}`}
-              >
-                <img
-                  src={`${service.heroImage.base}-800w.webp`}
-                  srcSet={`${service.heroImage.base}-480w.webp 480w, ${service.heroImage.base}-800w.webp 800w, ${service.heroImage.base}-1280w.webp 1280w`}
-                  sizes="(min-width: 1024px) 40vw, 100vw"
-                  alt={service.heroImage.alt}
-                  width={1280}
-                  height={960}
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  data-testid={`service-hero-image-${service.slug}`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-transparent pointer-events-none" />
-              </button>
-            </div>
           </div>
           {/* Scroll hint */}
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-12">
             <button
               onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
               aria-label="Scroll down to page content"
