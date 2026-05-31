@@ -8,6 +8,7 @@ import {
   getListProjectsQueryKey,
 } from "@workspace/api-client-react";
 import type { Project, ProjectInput, ProjectUpdate } from "@workspace/api-client-react";
+import { useUpload } from "@workspace/object-storage-web";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -30,7 +31,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Pencil, Trash2, Plus, FolderOpen, Lock } from "lucide-react";
+import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon } from "lucide-react";
 
 const ADMIN_KEY_SESSION = "admin_key";
 const CATEGORIES = [
@@ -135,6 +136,94 @@ function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
   );
 }
 
+function ImageUploadField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (url: string) => void;
+}) {
+  const { uploadFile, isUploading, progress, error } = useUpload({
+    onSuccess: (response) => {
+      onChange(`/api/storage${response.objectPath}`);
+    },
+  });
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      uploadFile(file);
+    }
+    e.target.value = "";
+  }
+
+  function handleClear() {
+    onChange("");
+  }
+
+  return (
+    <div className="space-y-2">
+      {value ? (
+        <div className="relative">
+          <img
+            src={value}
+            alt="Project photo"
+            className="h-32 w-full rounded-lg object-cover bg-gray-100"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+          <button
+            type="button"
+            onClick={handleClear}
+            className="absolute top-2 right-2 h-6 w-6 rounded-full bg-gray-900/70 text-white flex items-center justify-center hover:bg-gray-900 transition-colors"
+            title="Remove photo"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      ) : (
+        <label
+          className={`flex flex-col items-center justify-center w-full h-32 rounded-lg border-2 border-dashed cursor-pointer transition-colors ${
+            isUploading
+              ? "border-primary/40 bg-primary/5"
+              : "border-gray-300 bg-gray-50 hover:bg-gray-100 hover:border-gray-400"
+          }`}
+        >
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileChange}
+            disabled={isUploading}
+          />
+          {isUploading ? (
+            <div className="flex flex-col items-center gap-2 text-primary">
+              <Upload className="h-6 w-6 animate-bounce" />
+              <span className="text-sm font-medium">Uploading… {progress}%</span>
+              <div className="w-32 h-1.5 bg-primary/20 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-primary rounded-full transition-all"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-1.5 text-gray-400">
+              <ImageIcon className="h-6 w-6" />
+              <span className="text-sm font-medium text-gray-600">Click to upload a photo</span>
+              <span className="text-xs text-gray-400">JPG, PNG, WebP up to 10MB</span>
+            </div>
+          )}
+        </label>
+      )}
+      {error && (
+        <p className="text-sm text-red-500">{error.message}</p>
+      )}
+    </div>
+  );
+}
+
 function ProjectForm({
   value,
   onChange,
@@ -176,22 +265,11 @@ function ProjectForm({
         </select>
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="pf-image">Image URL</Label>
-        <Input
-          id="pf-image"
-          placeholder="https://…"
-          {...field("imageUrl")}
+        <Label>Project Photo</Label>
+        <ImageUploadField
+          value={value.imageUrl}
+          onChange={(url) => onChange({ ...value, imageUrl: url })}
         />
-        {value.imageUrl && (
-          <img
-            src={value.imageUrl}
-            alt="Preview"
-            className="mt-2 h-24 w-full rounded-md object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
-        )}
       </div>
       <div className="space-y-1.5">
         <Label htmlFor="pf-description">Description</Label>
