@@ -157,6 +157,11 @@ html {
 }
 
 .section-heading-animate {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.section-heading-animate.is-visible {
   animation: service-card-in 0.35s ease both;
 }
 
@@ -210,8 +215,10 @@ html {
   }
 
   .service-card-animate,
-  .section-heading-animate {
+  .section-heading-animate.is-visible {
     animation: none;
+    opacity: 1;
+    transform: none;
   }
 
   /* Suppress scale/translate hover transforms while keeping border & shadow feedback */
