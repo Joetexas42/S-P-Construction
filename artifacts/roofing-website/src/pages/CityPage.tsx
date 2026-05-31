@@ -13,6 +13,7 @@ import {
   buildImageSrcSet as buildProjectImageSrcSet,
   SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
 } from "@/lib/responsiveImage";
+import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/pages/Projects";
 import { cn } from "@/lib/utils";
 
 export interface CityTestimonial {
@@ -77,11 +78,19 @@ export default function CityPage({ city }: CityPageProps) {
     if (city.slug === displayedCity.slug) return;
     setLightboxIndex(null);
     setExiting(true);
+    // Count the cards currently displayed (old city) so the timeout covers
+    // every card's staggered exit animation before swapping content.
+    const oldCityCaseStudies = caseStudies.filter(
+      (cs) => cs.city.split(",")[0].trim().toLowerCase() === displayedCity.name.toLowerCase(),
+    );
+    const cardCount = oldCityCaseStudies.length + displayedCity.recentProjects.length;
+    const exitDuration = CARD_EXIT_BASE_MS + cardCount * CARD_EXIT_STAGGER_MS;
     const t = setTimeout(() => {
       setDisplayedCity(city);
       setExiting(false);
-    }, 180);
+    }, exitDuration);
     return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city.slug]);
 
   const cityCaseStudies = caseStudies.filter(
@@ -327,13 +336,17 @@ export default function CityPage({ city }: CityPageProps) {
                   In-depth case studies from commercial roofs we've completed in {city.name}.
                 </p>
               </ScrollRevealWrapper>
-              <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", exiting && "filter-cards-exit")}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {cityCaseStudies.map((cs, csIdx) => (
                   <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)} revealKey={displayedCity.slug}>
                   <Link
                     href={`/projects/${cs.slug}`}
                     data-testid={`city-case-study-link-${cs.slug}`}
-                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+                    className={cn(
+                      "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200",
+                      exiting && "filter-cards-exit",
+                    )}
+                    style={exiting ? { animationDelay: `${csIdx * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                   >
                     <div className="aspect-[16/10] overflow-hidden bg-muted relative">
                       <img
@@ -406,11 +419,15 @@ export default function CityPage({ city }: CityPageProps) {
                   A look at flat roof systems we've recently completed for {city.name} building owners.
                 </p>
               </ScrollRevealWrapper>
-              <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6", exiting && "filter-cards-exit")}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {displayedCity.recentProjects.map((p, idx) => (
                   <ScrollRevealWrapper key={p.title} delay={rowDelay(idx, 2)} revealKey={displayedCity.slug}>
                   <article
-                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+                    className={cn(
+                      "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200",
+                      exiting && "filter-cards-exit",
+                    )}
+                    style={exiting ? { animationDelay: `${idx * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                   >
                     <button
                       type="button"
