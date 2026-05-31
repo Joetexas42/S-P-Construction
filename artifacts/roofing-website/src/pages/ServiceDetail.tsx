@@ -251,46 +251,52 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-6xl mx-auto">
             <div className="lg:col-span-7">
-              <div className="section-heading-animate">
+              <ScrollRevealWrapper>
                 <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">The Problem We Solve</p>
                 <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
                   Why this service matters
                 </h2>
-              </div>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
-              <div className="bg-muted border border-border rounded-xl p-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
-                <p className="text-foreground leading-relaxed">{service.why}</p>
-              </div>
+              </ScrollRevealWrapper>
+              <ScrollRevealWrapper delay={60}>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">{service.problem}</p>
+              </ScrollRevealWrapper>
+              <ScrollRevealWrapper delay={120}>
+                <div className="bg-muted border border-border rounded-xl p-6">
+                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
+                  <p className="text-foreground leading-relaxed">{service.why}</p>
+                </div>
+              </ScrollRevealWrapper>
             </div>
 
             <div className="lg:col-span-5">
-              <div className="bg-card border border-border rounded-xl p-7 shadow-sm">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">What's Included</p>
-                <ul className="space-y-3">
-                  {service.included.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-foreground">
-                      <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
-                      <span className="leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                {service.features.length > 0 && (
-                  <div className="mt-6 pt-6 border-t border-border">
-                    <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">At a glance</p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.features.map((f) => (
-                        <span
-                          key={f}
-                          className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-secondary/10 text-secondary"
-                        >
-                          {f}
-                        </span>
-                      ))}
+              <ScrollRevealWrapper delay={80}>
+                <div className="bg-card border border-border rounded-xl p-7 shadow-sm">
+                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">What's Included</p>
+                  <ul className="space-y-3">
+                    {service.included.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-secondary shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {service.features.length > 0 && (
+                    <div className="mt-6 pt-6 border-t border-border">
+                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">At a glance</p>
+                      <div className="flex flex-wrap gap-2">
+                        {service.features.map((f) => (
+                          <span
+                            key={f}
+                            className="text-xs font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-secondary/10 text-secondary"
+                          >
+                            {f}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              </ScrollRevealWrapper>
             </div>
           </div>
         </div>
@@ -383,32 +389,33 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {service.faqs.length > 0 && (
         <section id="faq" className="py-20 bg-background border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
+            <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Frequently Asked</p>
               <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
                 Questions about {service.shortTitle}
               </h2>
-            </div>
+            </ScrollRevealWrapper>
             <div className="max-w-4xl mx-auto space-y-4">
               {service.faqs.map((faq, i) => (
-                <details
-                  key={i}
-                  className="group bg-card border border-border rounded-xl p-6 shadow-sm open:border-secondary transition-colors"
-                  data-testid={`service-faq-${service.slug}-${i}`}
-                >
-                  <summary className="flex items-start gap-4 cursor-pointer list-none">
-                    <div className="shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-open:bg-secondary/20 transition-colors">
-                      <HelpCircle className="h-5 w-5 text-secondary" />
+                <ScrollRevealWrapper key={i} delay={rowDelay(i, 1, 50)}>
+                  <details
+                    className="group bg-card border border-border rounded-xl p-6 shadow-sm open:border-secondary transition-colors"
+                    data-testid={`service-faq-${service.slug}-${i}`}
+                  >
+                    <summary className="flex items-start gap-4 cursor-pointer list-none">
+                      <div className="shrink-0 w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center group-open:bg-secondary/20 transition-colors">
+                        <HelpCircle className="h-5 w-5 text-secondary" />
+                      </div>
+                      <h3 className="flex-1 text-lg font-heading font-bold text-foreground leading-snug">
+                        {faq.question}
+                      </h3>
+                      <span className="shrink-0 text-secondary font-heading font-black text-2xl leading-none mt-1 group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <div className="mt-4 pl-14">
+                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
                     </div>
-                    <h3 className="flex-1 text-lg font-heading font-bold text-foreground leading-snug">
-                      {faq.question}
-                    </h3>
-                    <span className="shrink-0 text-secondary font-heading font-black text-2xl leading-none mt-1 group-open:rotate-45 transition-transform">+</span>
-                  </summary>
-                  <div className="mt-4 pl-14">
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </div>
-                </details>
+                  </details>
+                </ScrollRevealWrapper>
               ))}
             </div>
           </div>
@@ -419,7 +426,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {SERVICE_CITY_SLUGS.includes(service.slug as (typeof SERVICE_CITY_SLUGS)[number]) && (
         <section id="service-areas" className="py-20 bg-background border-b border-border">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
+            <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
               <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Local SEO Pages</p>
               <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
                 DFW Cities We Serve
@@ -427,7 +434,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               <p className="text-muted-foreground mt-4">
                 We provide {SERVICE_CITY_SERVICE_SHORT[service.slug] ?? service.shortTitle} across the entire DFW Metroplex. Select your city for local building context, weather information, and city-specific answers.
               </p>
-            </div>
+            </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {cities.map((city, cityIdx) => (
                 <ScrollRevealWrapper key={city.slug} delay={rowDelay(cityIdx, 2, 60)}>
@@ -457,12 +464,12 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {/* Related services */}
       <section className="py-20 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Related Services</p>
             <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
               Other commercial roofing services
             </h2>
-          </div>
+          </ScrollRevealWrapper>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {related.map((rel, relIdx) => {
               const RelIcon = rel.icon;
@@ -502,32 +509,34 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       {/* Final CTA */}
       <section className="py-20 bg-secondary text-secondary-foreground text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-white">
-            Ready to talk through your roof?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Free inspections, transparent pricing, and an honest recommendation across the entire DFW Metroplex.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white text-secondary hover:bg-white/90 border-transparent"
-                data-testid={`button-${service.slug}-final-cta`}
-              >
-                {service.ctaPrimary}
-              </Button>
-            </Link>
-            <a href="tel:972-555-0100">
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/30 hover:bg-white/20 gap-2"
-              >
-                <Phone className="h-5 w-5" /> (972) 555-0100
-              </Button>
-            </a>
-          </div>
+          <ScrollRevealWrapper>
+            <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight mb-6 text-white">
+              Ready to talk through your roof?
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
+              Free inspections, transparent pricing, and an honest recommendation across the entire DFW Metroplex.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white text-secondary hover:bg-white/90 border-transparent"
+                  data-testid={`button-${service.slug}-final-cta`}
+                >
+                  {service.ctaPrimary}
+                </Button>
+              </Link>
+              <a href="tel:972-555-0100">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-white/10 text-white border-white/30 hover:bg-white/20 gap-2"
+                >
+                  <Phone className="h-5 w-5" /> (972) 555-0100
+                </Button>
+              </a>
+            </div>
+          </ScrollRevealWrapper>
         </div>
       </section>
 
