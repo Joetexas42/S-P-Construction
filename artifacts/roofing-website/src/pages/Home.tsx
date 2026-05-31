@@ -23,6 +23,10 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    if (window.scrollY > 0) {
+      setScrolled(true);
+      return;
+    }
     const onScroll = () => setScrolled(true);
     window.addEventListener("scroll", onScroll, { passive: true, once: true });
     return () => window.removeEventListener("scroll", onScroll);
