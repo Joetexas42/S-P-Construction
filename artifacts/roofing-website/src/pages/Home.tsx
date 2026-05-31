@@ -125,7 +125,7 @@ export default function Home() {
                 </Button>
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white font-semibold [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
+            <div className="section-heading-animate [animation-delay:480ms] mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white font-semibold [text-shadow:0_1px_4px_rgba(0,0,0,0.7)]">
               <Link href="/services#tpo-vs-pvc" className="hover:text-secondary transition-colors">TPO vs. PVC →</Link>
               <Link href="/services#tpo-benefits" className="hover:text-secondary transition-colors">10 Benefits of TPO →</Link>
               <Link href="/services#manufacturers" className="hover:text-secondary transition-colors">Firestone · Mule-Hide · Duro-Last →</Link>
