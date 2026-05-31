@@ -174,7 +174,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               {service.tagline}
             </p>
             <div
-              className="inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 mb-8"
+              className="section-heading-animate inline-flex items-center gap-2.5 bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 mb-8 [animation-delay:480ms]"
               data-testid={`pricing-${service.slug}`}
             >
               <DollarSign className="h-4 w-4 text-secondary shrink-0" />
@@ -203,7 +203,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               </a>
             </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className="section-heading-animate lg:col-span-5 [animation-delay:600ms]">
               <button
                 type="button"
                 onClick={() =>
