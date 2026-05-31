@@ -17,5 +17,7 @@ export * from './estimatorSubmission';
 export * from './getRoofAreaParams';
 export * from './healthStatus';
 export * from './project';
+export * from './projectInput';
+export * from './projectUpdate';
 export * from './roofAreaResult';
 export * from './roofAreaResultRoofSegmentsItem';

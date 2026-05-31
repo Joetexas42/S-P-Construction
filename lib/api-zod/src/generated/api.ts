@@ -142,3 +142,63 @@ export const ListProjectsResponseItem = zod.object({
 export const ListProjectsResponse = zod.array(ListProjectsResponseItem)
 
 
+/**
+ * @summary Create a new portfolio project
+ */
+
+
+
+
+
+
+
+export const CreateProjectBody = zod.object({
+  "title": zod.string().min(1),
+  "location": zod.string().min(1),
+  "description": zod.string().min(1),
+  "imageUrl": zod.string().min(1),
+  "category": zod.string().min(1)
+})
+
+
+/**
+ * @summary Update an existing portfolio project
+ */
+export const UpdateProjectParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+
+
+
+
+
+
+
+export const UpdateProjectBody = zod.object({
+  "title": zod.string().min(1).optional(),
+  "location": zod.string().min(1).optional(),
+  "description": zod.string().min(1).optional(),
+  "imageUrl": zod.string().min(1).optional(),
+  "category": zod.string().min(1).optional()
+})
+
+export const UpdateProjectResponse = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "location": zod.string(),
+  "description": zod.string(),
+  "imageUrl": zod.string(),
+  "category": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+
+
+/**
+ * @summary Delete a portfolio project
+ */
+export const DeleteProjectParams = zod.object({
+  "id": zod.coerce.number()
+})
+
+

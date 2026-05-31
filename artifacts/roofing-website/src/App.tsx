@@ -19,6 +19,7 @@ import Estimate from "@/pages/Estimate";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
 import NotFound from "@/pages/not-found";
+import AdminDashboard from "@/pages/AdminDashboard";
 
 function CityRoute({ params }: { params: { slug: string } }) {
   const city = cityBySlug[params.slug];
@@ -54,25 +55,30 @@ const queryClient = new QueryClient();
 
 function Router() {
   return (
-    <Layout>
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/services" component={Services} />
-        <Route path="/services/:slug" component={ServiceRoute} />
-        <Route path="/projects" component={Projects} />
-        <Route path="/projects/:slug" component={ProjectDetail} />
-        <Route path="/case-studies" component={Projects} />
-        <Route path="/case-studies/:slug" component={ProjectDetail} />
-        <Route path="/service-areas" component={ServiceAreas} />
-        <Route path="/service-areas/:slug" component={CityRoute} />
-        <Route path="/service-areas/:citySlug/:serviceSlug" component={ServiceCityRoute} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/estimate" component={Estimate} />
-        <Route path="/privacy-policy" component={PrivacyPolicy} />
-        <Route path="/terms" component={Terms} />
-        <Route component={NotFound} />
-      </Switch>
-    </Layout>
+    <Switch>
+      <Route path="/admin" component={AdminDashboard} />
+      <Route>
+        <Layout>
+          <Switch>
+            <Route path="/" component={Home} />
+            <Route path="/services" component={Services} />
+            <Route path="/services/:slug" component={ServiceRoute} />
+            <Route path="/projects" component={Projects} />
+            <Route path="/projects/:slug" component={ProjectDetail} />
+            <Route path="/case-studies" component={Projects} />
+            <Route path="/case-studies/:slug" component={ProjectDetail} />
+            <Route path="/service-areas" component={ServiceAreas} />
+            <Route path="/service-areas/:slug" component={CityRoute} />
+            <Route path="/service-areas/:citySlug/:serviceSlug" component={ServiceCityRoute} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/estimate" component={Estimate} />
+            <Route path="/privacy-policy" component={PrivacyPolicy} />
+            <Route path="/terms" component={Terms} />
+            <Route component={NotFound} />
+          </Switch>
+        </Layout>
+      </Route>
+    </Switch>
   );
 }
 

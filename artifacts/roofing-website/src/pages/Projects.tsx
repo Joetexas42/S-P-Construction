@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Testimonials } from "@/components/Testimonials";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { rowDelay } from "@/hooks/useRevealGrid";
@@ -33,6 +34,8 @@ import {
   buildImageSrcSet,
   SIZES_HALF_COLUMN_GRID,
 } from "@/lib/responsiveImage";
+import { useListProjects } from "@workspace/api-client-react";
+import type { Project } from "@workspace/api-client-react";
 
 type FilterOption = { value: string; label: string; count: number };
 
@@ -122,8 +125,38 @@ function SkeletonCard() {
   );
 }
 
+function GalleryProjectCard({ project }: { project: Project }) {
+  return (
+    <article className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200">
+      <div className="aspect-[16/10] overflow-hidden bg-muted relative">
+        <img
+          src={project.imageUrl}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+        <span className="absolute top-4 left-4 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-3 py-1.5 rounded shadow">
+          {project.category}
+        </span>
+      </div>
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-1 leading-tight">
+          {project.title}
+        </h3>
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
+          <MapPin className="h-3 w-3 text-secondary" />
+          <span>{project.location}</span>
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+      </div>
+    </article>
+  );
+}
+
 export default function Projects() {
   const { city, system, setFilter, clearFilters } = useFilterState();
+  const { data: galleryProjects } = useListProjects();
 
   const cityOptions = useMemo<FilterOption[]>(() => {
     const counts = new Map<string, { label: string; count: number }>();
@@ -295,6 +328,30 @@ export default function Projects() {
           </div>
         </div>
       </section>
+
+      {/* DB-backed gallery projects — shown when team has added projects via admin */}
+      {galleryProjects && galleryProjects.length > 0 && (
+        <section className="py-14 md:py-20 bg-muted/30 border-b border-border">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30">
+                <span className="text-xs font-bold uppercase tracking-widest text-secondary">Portfolio</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-heading font-black uppercase tracking-tight text-foreground">
+                Recent Projects
+              </h2>
+              <Badge variant="secondary" className="ml-auto">
+                {galleryProjects.length}
+              </Badge>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryProjects.map((project) => (
+                <GalleryProjectCard key={project.id} project={project} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Filters + Case studies grid */}
       <section className="py-16 md:py-24 bg-background">

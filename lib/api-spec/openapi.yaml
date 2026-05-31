@@ -150,6 +150,84 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Project"
+    post:
+      operationId: createProject
+      tags: [projects]
+      summary: Create a new portfolio project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "201":
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /projects/{id}:
+    patch:
+      operationId: updateProject
+      tags: [projects]
+      summary: Update an existing portfolio project
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdate"
+      responses:
+        "200":
+          description: Project updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteProject
+      tags: [projects]
+      summary: Delete a portfolio project
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Project deleted
+        "404":
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -385,6 +463,48 @@ components:
         createdAt:
           type: string
           format: date-time
+    ProjectInput:
+      type: object
+      required:
+        - title
+        - location
+        - description
+        - imageUrl
+        - category
+      properties:
+        title:
+          type: string
+          minLength: 1
+        location:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+        imageUrl:
+          type: string
+          minLength: 1
+        category:
+          type: string
+          minLength: 1
+    ProjectUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 1
+        location:
+          type: string
+          minLength: 1
+        description:
+          type: string
+          minLength: 1
+        imageUrl:
+          type: string
+          minLength: 1
+        category:
+          type: string
+          minLength: 1
     ErrorResponse:
       type: object
       properties:

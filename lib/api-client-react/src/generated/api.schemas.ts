@@ -158,6 +158,32 @@ export interface Project {
   createdAt: string;
 }
 
+export interface ProjectInput {
+  /** @minLength 1 */
+  title: string;
+  /** @minLength 1 */
+  location: string;
+  /** @minLength 1 */
+  description: string;
+  /** @minLength 1 */
+  imageUrl: string;
+  /** @minLength 1 */
+  category: string;
+}
+
+export interface ProjectUpdate {
+  /** @minLength 1 */
+  title?: string;
+  /** @minLength 1 */
+  location?: string;
+  /** @minLength 1 */
+  description?: string;
+  /** @minLength 1 */
+  imageUrl?: string;
+  /** @minLength 1 */
+  category?: string;
+}
+
 export interface ErrorResponse {
   error: string;
 }
