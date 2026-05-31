@@ -12,6 +12,8 @@ import {
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Testimonials } from "@/components/Testimonials";
+import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { rowDelay } from "@/hooks/useRevealGrid";
 import {
   testimonials,
   getTestimonialBySlug,
@@ -272,6 +274,12 @@ export default function Projects() {
       {/* Filters + Case studies grid */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
+          <ScrollRevealWrapper className="mb-10">
+            <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
+              Browse Projects
+            </h2>
+          </ScrollRevealWrapper>
+
           <div
             className="mb-10 rounded-lg border border-border bg-muted/40 p-5 md:p-6"
             data-testid="projects-filters"
@@ -383,13 +391,18 @@ export default function Projects() {
           {renderedSet.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {renderedSet.map((c, i) => (
-                <CaseStudyCard
+                <ScrollRevealWrapper
                   key={c.slug}
-                  study={c}
-                  index={i}
-                  isExiting={isExiting}
-                  exitIndex={i}
-                />
+                  delay={rowDelay(i, 2, 80, 160)}
+                  revealKey={`${city}-${system}`}
+                >
+                  <CaseStudyCard
+                    study={c}
+                    index={i}
+                    isExiting={isExiting}
+                    exitIndex={i}
+                  />
+                </ScrollRevealWrapper>
               ))}
             </div>
           ) : !isExiting ? (
@@ -462,41 +475,18 @@ function CaseStudyCard({
   isExiting?: boolean;
   exitIndex?: number;
 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    // Reset visibility so the entry animation replays when this card mounts
-    setIsVisible(false);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   const testimonial = getTestimonialBySlug(study.slug);
   return (
     <article
-      ref={cardRef}
       id={study.slug}
       className={cn(
-        "scroll-reveal group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24",
-        isVisible && "is-visible",
+        "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200 scroll-mt-24",
         isExiting && "filter-cards-exit",
       )}
       style={
         isExiting
           ? { animationDelay: `${exitIndex * CARD_EXIT_STAGGER_MS}ms` }
-          : { transitionDelay: `${index * 60}ms` }
+          : undefined
       }
     >
       <Link
