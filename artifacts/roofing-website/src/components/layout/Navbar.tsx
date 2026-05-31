@@ -176,7 +176,10 @@ export function Navbar() {
   };
 
   const darkHeroPages = ["/", "/contact"];
-  const isDarkHero = darkHeroPages.includes(location);
+  const darkHeroPrefixes = ["/services", "/service-areas"];
+  const isDarkHero =
+    darkHeroPages.includes(location) ||
+    darkHeroPrefixes.some((prefix) => location.startsWith(prefix));
   const isTransparent = isDarkHero && !isScrolled;
 
   const isServiceActive = location.startsWith("/services");
