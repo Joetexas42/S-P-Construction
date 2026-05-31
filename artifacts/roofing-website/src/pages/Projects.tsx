@@ -87,7 +87,7 @@ function FilterChip({
       data-active={active}
       aria-pressed={active}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors",
+        "inline-flex items-center gap-1.5 rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px] sm:min-h-0",
         active
           ? "bg-secondary text-white border-secondary shadow-sm"
           : "bg-card text-muted-foreground border-border hover:border-secondary hover:text-foreground",
@@ -380,7 +380,7 @@ export default function Projects() {
                     Filter by city
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   <FilterChip
                     active={city === "all"}
                     onClick={() => setFilter("city", "all")}
@@ -409,7 +409,7 @@ export default function Projects() {
                     Filter by roof system
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   <FilterChip
                     active={system === "all"}
                     onClick={() => setFilter("system", "all")}
