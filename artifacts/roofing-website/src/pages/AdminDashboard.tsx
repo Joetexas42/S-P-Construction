@@ -66,15 +66,33 @@ function adminKeyHeaders(key: string): RequestInit {
 
 function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
   const [keyInput, setKeyInput] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (keyInput.trim().length < 8) {
-      setError(true);
+    const key = keyInput.trim();
+    if (!key) {
+      setError("Please enter your admin key.");
       return;
     }
-    onLogin(keyInput.trim());
+    setIsPending(true);
+    setError(null);
+    try {
+      const res = await fetch(`${import.meta.env.BASE_URL}api/admin/verify`, {
+        method: "POST",
+        headers: { "x-admin-key": key },
+      });
+      if (res.ok) {
+        onLogin(key);
+      } else {
+        setError("Incorrect admin key. Please try again.");
+      }
+    } catch {
+      setError("Could not reach the server. Please try again.");
+    } finally {
+      setIsPending(false);
+    }
   }
 
   return (
@@ -99,16 +117,17 @@ function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
               value={keyInput}
               onChange={(e) => {
                 setKeyInput(e.target.value);
-                setError(false);
+                setError(null);
               }}
               autoFocus
+              disabled={isPending}
             />
             {error && (
-              <p className="text-sm text-red-500">Please enter a valid admin key.</p>
+              <p className="text-sm text-red-500">{error}</p>
             )}
           </div>
-          <Button type="submit" className="w-full">
-            Sign in
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? "Verifying…" : "Sign in"}
           </Button>
         </form>
       </div>

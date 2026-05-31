@@ -25,6 +25,10 @@ function requireAdminKey(req: Request, res: Response, next: NextFunction): void 
   next();
 }
 
+router.post("/admin/verify", requireAdminKey, (req, res): void => {
+  res.status(200).json({ ok: true });
+});
+
 router.get("/projects", async (req, res): Promise<void> => {
   const projects = await db
     .select()
