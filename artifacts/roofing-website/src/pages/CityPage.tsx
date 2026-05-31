@@ -14,7 +14,6 @@ import {
   SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
 } from "@/lib/responsiveImage";
 import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
-import { cn } from "@/lib/utils";
 
 export interface CityTestimonial {
   quote: string;
@@ -70,6 +69,23 @@ interface CityPageProps {
   city: CityData;
 }
 
+function CitySkeletonCard() {
+  return (
+    <div className="gallery-skeleton-card flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+      <div className="aspect-[16/10] skeleton-shimmer" />
+      <div className="p-5 flex flex-col flex-1 gap-3">
+        <div className="skeleton-shimmer h-5 w-3/4 rounded" />
+        <div className="grid grid-cols-2 gap-3 mt-1">
+          <div className="skeleton-shimmer h-10 rounded" />
+          <div className="skeleton-shimmer h-10 rounded" />
+        </div>
+        <div className="skeleton-shimmer h-10 w-full rounded" />
+        <div className="skeleton-shimmer h-4 w-1/3 rounded mt-2" />
+      </div>
+    </div>
+  );
+}
+
 export default function CityPage({ city }: CityPageProps) {
   const [displayedCity, setDisplayedCity] = useState(city);
   const [exiting, setExiting] = useState(false);
@@ -78,13 +94,7 @@ export default function CityPage({ city }: CityPageProps) {
     if (city.slug === displayedCity.slug) return;
     setLightboxIndex(null);
     setExiting(true);
-    // Count the cards currently displayed (old city) so the timeout covers
-    // every card's staggered exit animation before swapping content.
-    const oldCityCaseStudies = caseStudies.filter(
-      (cs) => cs.city.split(",")[0].trim().toLowerCase() === displayedCity.name.toLowerCase(),
-    );
-    const cardCount = oldCityCaseStudies.length + displayedCity.recentProjects.length;
-    const exitDuration = CARD_EXIT_BASE_MS + cardCount * CARD_EXIT_STAGGER_MS;
+    const exitDuration = CARD_EXIT_BASE_MS + 4 * CARD_EXIT_STAGGER_MS;
     const t = setTimeout(() => {
       setDisplayedCity(city);
       setExiting(false);
@@ -95,6 +105,10 @@ export default function CityPage({ city }: CityPageProps) {
 
   const cityCaseStudies = caseStudies.filter(
     (cs) => cs.city.split(",")[0].trim().toLowerCase() === displayedCity.name.toLowerCase(),
+  );
+
+  const incomingCityCaseStudies = caseStudies.filter(
+    (cs) => cs.city.split(",")[0].trim().toLowerCase() === city.name.toLowerCase(),
   );
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -326,108 +340,116 @@ export default function CityPage({ city }: CityPageProps) {
           </ScrollRevealWrapper>
 
           {/* Featured Case Studies for this city */}
-          {cityCaseStudies.length > 0 && (
+          {(exiting ? incomingCityCaseStudies.length > 0 : cityCaseStudies.length > 0) && (
             <div className="mb-16" data-testid={`city-case-studies-${city.slug}`}>
               <ScrollRevealWrapper>
                 <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
-                  Recent Projects in {city.name}
+                  Recent Projects in {displayedCity.name}
                 </h2>
                 <p className="text-muted-foreground mb-8">
-                  In-depth case studies from commercial roofs we've completed in {city.name}.
+                  In-depth case studies from commercial roofs we've completed in {displayedCity.name}.
                 </p>
               </ScrollRevealWrapper>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {cityCaseStudies.map((cs, csIdx) => (
-                  <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)} revealKey={displayedCity.slug}>
-                  <Link
-                    href={`/projects/${cs.slug}`}
-                    data-testid={`city-case-study-link-${cs.slug}`}
-                    className={cn(
-                      "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200",
-                      exiting && "filter-cards-exit",
-                    )}
-                    style={exiting ? { animationDelay: `${csIdx * CARD_EXIT_STAGGER_MS}ms` } : undefined}
-                  >
-                    <div className="aspect-[16/10] overflow-hidden bg-muted relative">
-                      <img
-                        src={cs.image}
-                        srcSet={buildProjectImageSrcSet(cs.image)}
-                        sizes={PROJECT_IMAGE_SIZES}
-                        alt={cs.title}
-                        width={800}
-                        height={500}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      />
-                      <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
-                        {cs.system}
-                      </span>
-                    </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-3 leading-tight group-hover:text-secondary transition-colors">
-                        {cs.title}
-                      </h3>
-                      <div className="grid grid-cols-2 gap-3 text-sm mt-auto">
-                        <div className="flex items-start gap-2">
-                          <Building2 className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
-                          <div>
-                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
-                              Building
-                            </div>
-                            <div className="text-foreground">{cs.buildingType}</div>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2">
-                          <Ruler className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
-                          <div>
-                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
-                              Size
-                            </div>
-                            <div className="text-foreground">{formatSqFt(cs.sizeSqFt)} sq ft</div>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2 col-span-2">
-                          <Calendar className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
-                          <div>
-                            <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
-                              Completed
-                            </div>
-                            <div className="text-foreground">{cs.completed}</div>
-                          </div>
-                        </div>
+              {exiting ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {Array.from({ length: Math.max(incomingCityCaseStudies.length, 2) }).map((_, i) => (
+                    <CitySkeletonCard key={i} />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {cityCaseStudies.map((cs, csIdx) => (
+                    <ScrollRevealWrapper key={cs.slug} delay={rowDelay(csIdx, 2)} revealKey={displayedCity.slug}>
+                    <Link
+                      href={`/projects/${cs.slug}`}
+                      data-testid={`city-case-study-link-${cs.slug}`}
+                      className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+                    >
+                      <div className="aspect-[16/10] overflow-hidden bg-muted relative">
+                        <img
+                          src={cs.image}
+                          srcSet={buildProjectImageSrcSet(cs.image)}
+                          sizes={PROJECT_IMAGE_SIZES}
+                          alt={cs.title}
+                          width={800}
+                          height={500}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        />
+                        <span className="absolute top-3 left-3 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-2.5 py-1 rounded shadow">
+                          {cs.system}
+                        </span>
                       </div>
-                      <span className="mt-4 text-sm font-bold uppercase tracking-wider text-secondary">
-                        Read Case Study →
-                      </span>
-                    </div>
-                  </Link>
-                  </ScrollRevealWrapper>
-                ))}
-              </div>
+                      <div className="p-5 flex flex-col flex-1">
+                        <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-3 leading-tight group-hover:text-secondary transition-colors">
+                          {cs.title}
+                        </h3>
+                        <div className="grid grid-cols-2 gap-3 text-sm mt-auto">
+                          <div className="flex items-start gap-2">
+                            <Building2 className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                            <div>
+                              <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                                Building
+                              </div>
+                              <div className="text-foreground">{cs.buildingType}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-2">
+                            <Ruler className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                            <div>
+                              <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                                Size
+                              </div>
+                              <div className="text-foreground">{formatSqFt(cs.sizeSqFt)} sq ft</div>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-2 col-span-2">
+                            <Calendar className="h-4 w-4 text-secondary mt-0.5 shrink-0" />
+                            <div>
+                              <div className="text-xs uppercase tracking-wide text-muted-foreground font-semibold">
+                                Completed
+                              </div>
+                              <div className="text-foreground">{cs.completed}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <span className="mt-4 text-sm font-bold uppercase tracking-wider text-secondary">
+                          Read Case Study →
+                        </span>
+                      </div>
+                    </Link>
+                    </ScrollRevealWrapper>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
           {/* Recent Projects */}
-          {displayedCity.recentProjects.length > 0 && (
+          {(exiting ? city.recentProjects.length > 0 : displayedCity.recentProjects.length > 0) && (
             <div className="mb-16" data-testid={`city-recent-projects-${city.slug}`}>
               <ScrollRevealWrapper>
                 <h2 className="text-3xl font-heading font-bold uppercase tracking-tight mb-2 text-foreground">
-                  Recent {city.name} Projects
+                  Recent {displayedCity.name} Projects
                 </h2>
                 <p className="text-muted-foreground mb-8">
-                  A look at flat roof systems we've recently completed for {city.name} building owners.
+                  A look at flat roof systems we've recently completed for {displayedCity.name} building owners.
                 </p>
               </ScrollRevealWrapper>
+              {exiting ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {Array.from({ length: Math.max(city.recentProjects.length, 2) }).map((_, i) => (
+                    <CitySkeletonCard key={i} />
+                  ))}
+                </div>
+              ) : (
+              <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {displayedCity.recentProjects.map((p, idx) => (
                   <ScrollRevealWrapper key={p.title} delay={rowDelay(idx, 2)} revealKey={displayedCity.slug}>
                   <article
-                    className={cn(
-                      "group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200",
-                      exiting && "filter-cards-exit",
-                    )}
-                    style={exiting ? { animationDelay: `${idx * CARD_EXIT_STAGGER_MS}ms` } : undefined}
+                    className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200"
                   >
                     <button
                       type="button"
@@ -499,6 +521,8 @@ export default function CityPage({ city }: CityPageProps) {
                 onClose={() => setLightboxIndex(null)}
                 onNavigate={(next) => setLightboxIndex(next)}
               />
+              </>
+              )}
             </div>
           )}
 
