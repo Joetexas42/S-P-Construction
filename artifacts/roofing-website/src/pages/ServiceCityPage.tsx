@@ -524,25 +524,31 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
                   Request {serviceLabel} in {city.name}
                 </h2>
               </ScrollRevealWrapper>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                Fill out the form and a senior inspector will follow up — usually within one business day. No pressure, no obligation.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Free roof inspection & written report",
-                  "Transparent, itemised pricing",
-                  "Manufacturer-backed material warranties",
-                  "24/7 emergency response available",
-                ].map((point) => (
-                  <li key={point} className="flex items-start gap-3 text-foreground">
-                    <span className="h-5 w-5 rounded-full bg-secondary/20 text-secondary flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-              <a href="tel:972-555-0100" className="inline-flex items-center gap-2 text-secondary font-bold text-lg hover:text-secondary/80 transition-colors">
-                <Phone className="h-5 w-5" /> (972) 555-0100
-              </a>
+              <ScrollRevealWrapper delay={80}>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                  Fill out the form and a senior inspector will follow up — usually within one business day. No pressure, no obligation.
+                </p>
+              </ScrollRevealWrapper>
+              <ScrollRevealWrapper delay={160}>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "Free roof inspection & written report",
+                    "Transparent, itemised pricing",
+                    "Manufacturer-backed material warranties",
+                    "24/7 emergency response available",
+                  ].map((point) => (
+                    <li key={point} className="flex items-start gap-3 text-foreground">
+                      <span className="h-5 w-5 rounded-full bg-secondary/20 text-secondary flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </ScrollRevealWrapper>
+              <ScrollRevealWrapper delay={240}>
+                <a href="tel:972-555-0100" className="inline-flex items-center gap-2 text-secondary font-bold text-lg hover:text-secondary/80 transition-colors">
+                  <Phone className="h-5 w-5" /> (972) 555-0100
+                </a>
+              </ScrollRevealWrapper>
             </div>
 
             {/* Right: form */}
