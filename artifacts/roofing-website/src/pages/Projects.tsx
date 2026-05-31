@@ -97,8 +97,7 @@ function FilterChip({
   );
 }
 
-export const CARD_EXIT_STAGGER_MS = 38;
-export const CARD_EXIT_BASE_MS = 200;
+import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
 
 function SkeletonCard() {
   return (
