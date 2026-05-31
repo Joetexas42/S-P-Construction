@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning, ChevronDown } from "lucide-react";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
@@ -10,6 +11,8 @@ import { type CityData } from "@/pages/CityPage";
 import { type ServiceCityEntry, SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
 import { cities } from "@/data/cities";
 import { services } from "@/data/services";
+import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/pages/Projects";
+import { cn } from "@/lib/utils";
 
 type ServiceTypeValue =
   | "roof-repair"
@@ -75,9 +78,29 @@ function getSiblingCombos(
 }
 
 export default function ServiceCityPage({ city, service, entry }: ServiceCityPageProps) {
+  const [displayedCity, setDisplayedCity] = useState(city);
+  const [displayedService, setDisplayedService] = useState(service);
+  const [exiting, setExiting] = useState(false);
+
+  useEffect(() => {
+    const pageKey = `${city.slug}--${service.slug}`;
+    const displayedKey = `${displayedCity.slug}--${displayedService.slug}`;
+    if (pageKey === displayedKey) return;
+    setExiting(true);
+    const cardCount = 4 + 3;
+    const exitDuration = CARD_EXIT_BASE_MS + cardCount * CARD_EXIT_STAGGER_MS;
+    const t = setTimeout(() => {
+      setDisplayedCity(city);
+      setDisplayedService(service);
+      setExiting(false);
+    }, exitDuration);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [city.slug, service.slug]);
+
   const canonical = `${SITE_ORIGIN}/service-areas/${city.slug}/${service.slug}`;
 
-  const serviceLabel = SERVICE_CITY_SERVICE_LABELS[service.slug] ?? service.shortTitle;
+  const serviceLabel = SERVICE_CITY_SERVICE_LABELS[displayedService.slug] ?? displayedService.shortTitle;
 
   const seoTitle = `${serviceLabel} in ${city.name}, TX | Scott Commercial Roofing`;
   const seoDescription = `Scott Commercial Roofing provides ${serviceLabel.toLowerCase()} in ${city.name}, TX. Local expertise, 24/7 emergency response, manufacturer-backed warranties. Serving ${city.county}.`;
@@ -193,10 +216,10 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
     },
   };
 
-  const siblings = getSiblingCombos(city.slug, service.slug);
+  const siblings = getSiblingCombos(displayedCity.slug, displayedService.slug);
 
   const relatedServices = services
-    .filter((s) => SERVICE_CITY_SLUGS.includes(s.slug as typeof SERVICE_CITY_SLUGS[number]) && s.slug !== service.slug)
+    .filter((s) => SERVICE_CITY_SLUGS.includes(s.slug as typeof SERVICE_CITY_SLUGS[number]) && s.slug !== displayedService.slug)
     .slice(0, 3);
 
   return (
@@ -416,16 +439,20 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
             </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Parent city page */}
-              <ScrollRevealWrapper delay={0}>
+              <ScrollRevealWrapper delay={0} revealKey={`${displayedCity.slug}--${displayedService.slug}`}>
                 <Link
-                  href={`/service-areas/${city.slug}`}
-                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  href={`/service-areas/${displayedCity.slug}`}
+                  className={cn(
+                    "group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col",
+                    exiting && "filter-cards-exit",
+                  )}
+                  style={exiting ? { animationDelay: `${0 * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                 >
                   <MapPin className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                   <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
-                    Commercial Roofing in {city.name}
+                    Commercial Roofing in {displayedCity.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-3">All services for {city.name} properties</p>
+                  <p className="text-sm text-muted-foreground mb-3">All services for {displayedCity.name} properties</p>
                   <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                     View City Page <ArrowRight className="h-4 w-4" />
                   </span>
@@ -433,14 +460,18 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
               </ScrollRevealWrapper>
 
               {/* Parent service page */}
-              <ScrollRevealWrapper delay={60}>
+              <ScrollRevealWrapper delay={60} revealKey={`${displayedCity.slug}--${displayedService.slug}`}>
                 <Link
-                  href={`/services/${service.slug}`}
-                  className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                  href={`/services/${displayedService.slug}`}
+                  className={cn(
+                    "group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col",
+                    exiting && "filter-cards-exit",
+                  )}
+                  style={exiting ? { animationDelay: `${1 * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                 >
                   <Zap className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                   <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
-                    {service.shortTitle}
+                    {displayedService.shortTitle}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-3">Full service overview for DFW</p>
                   <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
@@ -451,10 +482,14 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
               {/* Sibling service×city combos */}
               {siblings.slice(0, 2).map((s, sIdx) => (
-                <ScrollRevealWrapper key={`${s.citySlug}--${s.serviceSlug}`} delay={rowDelay(sIdx, 2)}>
+                <ScrollRevealWrapper key={`${s.citySlug}--${s.serviceSlug}`} delay={rowDelay(sIdx, 2)} revealKey={`${displayedCity.slug}--${displayedService.slug}`}>
                   <Link
                     href={`/service-areas/${s.citySlug}/${s.serviceSlug}`}
-                    className="group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                    className={cn(
+                      "group bg-card border border-border rounded-xl p-5 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col",
+                      exiting && "filter-cards-exit",
+                    )}
+                    style={exiting ? { animationDelay: `${(2 + sIdx) * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                   >
                     <ArrowRight className="h-6 w-6 text-secondary mb-3 group-hover:scale-110 transition-transform duration-200" />
                     <h3 className="font-heading font-bold text-base uppercase tracking-tight text-foreground mb-1 leading-snug group-hover:text-secondary transition-colors">
@@ -477,25 +512,29 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
         <section className="py-16 bg-muted border-y border-border">
           <div className="container mx-auto px-4 md:px-6">
             <ScrollRevealWrapper className="text-center">
-              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Also Available in {city.name}</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Also Available in {displayedCity.name}</p>
               <h2 className="text-2xl font-heading font-bold uppercase tracking-tight mb-8 text-foreground">
-                Other Services for {city.name} Properties
+                Other Services for {displayedCity.name} Properties
               </h2>
             </ScrollRevealWrapper>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {relatedServices.map((rel, relIdx) => {
                 const RelIcon = rel.icon;
                 return (
-                  <ScrollRevealWrapper key={rel.slug} delay={rowDelay(relIdx, 2)}>
+                  <ScrollRevealWrapper key={rel.slug} delay={rowDelay(relIdx, 2)} revealKey={`${displayedCity.slug}--${displayedService.slug}`}>
                     <Link
-                      href={`/service-areas/${city.slug}/${rel.slug}`}
-                      className="group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col"
+                      href={`/service-areas/${displayedCity.slug}/${rel.slug}`}
+                      className={cn(
+                        "group bg-card border border-border rounded-xl p-6 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200 flex flex-col",
+                        exiting && "filter-cards-exit",
+                      )}
+                      style={exiting ? { animationDelay: `${(4 + relIdx) * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                     >
                       <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-4">
                         <RelIcon className="h-6 w-6 text-secondary group-hover:scale-110 transition-transform duration-200" />
                       </div>
                       <h3 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground mb-2 leading-snug">
-                        {SERVICE_CITY_SERVICE_SHORT[rel.slug] ?? rel.shortTitle} in {city.name}
+                        {SERVICE_CITY_SERVICE_SHORT[rel.slug] ?? rel.shortTitle} in {displayedCity.name}
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed mb-4">{rel.tagline}</p>
                       <span className="mt-auto text-sm font-bold uppercase tracking-wide text-secondary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
