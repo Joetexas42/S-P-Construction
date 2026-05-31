@@ -252,7 +252,7 @@ export default function Services() {
       />
 
       {/* Page Header */}
-      <section className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
+      <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <nav className="mb-6 text-sm text-primary-foreground/70" aria-label="Breadcrumb">

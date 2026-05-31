@@ -101,7 +101,7 @@ export default function ProjectDetail({
       />
 
       {/* Header */}
-      <section className="bg-primary text-primary-foreground pt-24 pb-12 border-b border-primary-foreground/10">
+      <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-12 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <Link
             href="/projects"

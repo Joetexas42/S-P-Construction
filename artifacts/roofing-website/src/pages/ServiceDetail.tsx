@@ -146,7 +146,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       />
 
       {/* Header */}
-      <section id="top" className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
+      <section data-dark-hero id="top" className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7">

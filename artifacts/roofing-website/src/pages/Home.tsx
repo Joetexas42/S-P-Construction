@@ -93,7 +93,7 @@ export default function Home() {
       />
       
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-32 overflow-hidden">
+      <section data-dark-hero className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="/images/hero-bg.webp"

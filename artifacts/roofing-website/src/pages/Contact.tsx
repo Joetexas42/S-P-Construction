@@ -14,7 +14,7 @@ export default function Contact() {
       />
       
       {/* Page Header - Photo Hero */}
-      <section className="relative min-h-[50vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
+      <section data-dark-hero className="relative min-h-[50vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="/images/contact-hero.webp"

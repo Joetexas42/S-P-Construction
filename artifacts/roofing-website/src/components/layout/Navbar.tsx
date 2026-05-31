@@ -37,6 +37,7 @@ const allCityLinks = cityGroups.flatMap((g) => g.items);
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hasDarkHero, setHasDarkHero] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [citiesOpen, setCitiesOpen] = useState(false);
@@ -89,6 +90,13 @@ export function Navbar() {
     setCitiesOpen(false);
     setMobileServicesOpen(false);
     setMobileCitiesOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setHasDarkHero(!!document.querySelector("[data-dark-hero]"));
+    });
+    return () => cancelAnimationFrame(frame);
   }, [location]);
 
   useEffect(() => {
@@ -175,12 +183,7 @@ export function Navbar() {
     closeCitiesTimer.current = setTimeout(() => setCitiesOpen(false), 150);
   };
 
-  const darkHeroPages = ["/", "/contact"];
-  const darkHeroPrefixes = ["/services", "/service-areas"];
-  const isDarkHero =
-    darkHeroPages.includes(location) ||
-    darkHeroPrefixes.some((prefix) => location.startsWith(prefix));
-  const isTransparent = isDarkHero && !isScrolled;
+  const isTransparent = hasDarkHero && !isScrolled;
 
   const isServiceActive = location.startsWith("/services");
   const isCitiesActive = location.startsWith("/service-areas");
