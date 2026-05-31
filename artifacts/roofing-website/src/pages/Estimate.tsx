@@ -399,7 +399,7 @@ export default function EstimatePage() {
         description="Get an instant ballpark roofing estimate for your North Texas commercial property. Type your address, see your roof from satellite, and get a ballpark price in under a minute."
       />
 
-      <section className="bg-primary text-primary-foreground pt-24 pb-12 border-b border-primary-foreground/10">
+      <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-12 border-b border-primary-foreground/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl">
             <div className="section-heading-animate inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 border border-secondary/30 mb-5 backdrop-blur-sm">
