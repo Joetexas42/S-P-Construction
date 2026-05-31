@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -17,6 +18,14 @@ import {
 } from "@/lib/responsiveImage";
 
 export default function Home() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(true);
+    window.addEventListener("scroll", onScroll, { passive: true, once: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const countySet = new Set<string>();
   for (const c of cities) {
     for (const part of c.county.split(/\s*&\s*/)) {
@@ -137,7 +146,8 @@ export default function Home() {
         <button
           onClick={() => document.getElementById("content-start")?.scrollIntoView({ behavior: "smooth" })}
           aria-label="Scroll down to page content"
-          className="section-heading-animate [animation-delay:480ms] absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors duration-200 group"
+          className="section-heading-animate [animation-delay:480ms] absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 text-white/70 hover:text-white transition-all duration-500 group"
+          style={{ opacity: scrolled ? 0 : undefined, pointerEvents: scrolled ? "none" : undefined }}
         >
           <span className="text-xs font-semibold uppercase tracking-widest [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">Explore</span>
           <ChevronDown className="h-6 w-6 animate-bounce" />
