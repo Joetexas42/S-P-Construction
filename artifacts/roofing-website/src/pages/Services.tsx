@@ -672,12 +672,12 @@ export default function Services() {
       {/* FAQ */}
       <section id="faq" className="py-24 bg-background border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-14">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Frequently Asked Questions</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               Commercial Roofing Questions, Answered
             </h2>
-          </div>
+          </ScrollRevealWrapper>
 
           <div className="max-w-4xl mx-auto space-y-5">
             {faqs.map((faq, i) => (
