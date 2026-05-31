@@ -1,7 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Shield, Wrench, Search, Zap, Droplets, Droplet, Layers, Maximize, Activity, LayoutGrid } from "lucide-react";
+import { Shield, Wrench, Search, Zap, Droplets, Droplet, Layers, Maximize, Activity, LayoutGrid, ChevronDown } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { Testimonials } from "@/components/Testimonials";
@@ -132,10 +132,20 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Scroll-down hint */}
+        <button
+          onClick={() => document.getElementById("content-start")?.scrollIntoView({ behavior: "smooth" })}
+          aria-label="Scroll down to page content"
+          className="section-heading-animate [animation-delay:480ms] absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors duration-200 group"
+        >
+          <span className="text-xs font-semibold uppercase tracking-widest [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">Explore</span>
+          <ChevronDown className="h-6 w-6 animate-bounce" />
+        </button>
       </section>
 
       {/* Trust Signals Bar */}
-      <section className="bg-card border-y border-border py-8">
+      <section id="content-start" className="bg-card border-y border-border py-8">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 items-center text-center">
             <div className="space-y-1">
