@@ -16,6 +16,7 @@ import ServiceCityPage from "@/pages/ServiceCityPage";
 import { getServiceCityEntry, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
 import Contact from "@/pages/Contact";
 import Estimate from "@/pages/Estimate";
+import FAQ from "@/pages/FAQ";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
 import NotFound from "@/pages/not-found";
@@ -72,6 +73,7 @@ function Router() {
             <Route path="/service-areas/:citySlug/:serviceSlug" component={ServiceCityRoute} />
             <Route path="/contact" component={Contact} />
             <Route path="/estimate" component={Estimate} />
+            <Route path="/faq" component={FAQ} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/terms" component={Terms} />
             <Route component={NotFound} />
