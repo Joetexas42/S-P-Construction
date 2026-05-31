@@ -289,7 +289,7 @@ export default function Services() {
       {/* Core services */}
       <section id="core-services" className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="section-heading-animate max-w-3xl mx-auto text-center mb-14">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Core Commercial Services</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               Inspections, Repairs &amp; Installations
@@ -297,7 +297,7 @@ export default function Services() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               Three core services — one standard of work. Every job starts with an honest diagnosis and ends with a documented, warranty-backed result.
             </p>
-          </div>
+          </ScrollRevealWrapper>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {coreServices.map((svc, idx) => {
@@ -338,7 +338,7 @@ export default function Services() {
       {/* All services grid */}
       <section id="all-services" className="py-24 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="section-heading-animate max-w-3xl mx-auto text-center mb-12">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Full Service Capability</p>
             <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground">
               Every Commercial Roofing System We Support
@@ -346,7 +346,7 @@ export default function Services() {
             <p className="text-base text-muted-foreground leading-relaxed mt-5">
               Each service has its own dedicated page with deeper detail, FAQs, and how we approach it.
             </p>
-          </div>
+          </ScrollRevealWrapper>
 
           {/* Category highlight strip */}
           <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-4xl mx-auto">
@@ -355,16 +355,17 @@ export default function Services() {
               { label: "Coatings & Restoration", desc: "Extend membrane life without tear-off", slug: "coatings-restoration", Icon: Layers },
               { label: "Flat Roofing", desc: "Low-slope systems built for Texas weather", slug: "flat-roofing", Icon: Maximize },
               { label: "Metal Roofing", desc: "Standing-seam & retrofit solutions", slug: "metal-roofing", Icon: Shield },
-            ].map(({ label, desc, slug, Icon }) => (
-              <Link
-                key={label}
-                href={`/services/${slug}`}
-                className="group flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px] hover:border-secondary hover:shadow-md hover:scale-[1.04] transition-all cursor-pointer"
-              >
-                <Icon className="w-5 h-5 text-secondary mb-2 transition-transform duration-200 group-hover:scale-125 group-hover:text-secondary/80" />
-                <span className="text-sm font-heading font-bold uppercase tracking-tight text-foreground leading-snug">{label}</span>
-                <span className="text-xs text-muted-foreground mt-1 leading-snug">{desc}</span>
-              </Link>
+            ].map(({ label, desc, slug, Icon }, i) => (
+              <ScrollRevealWrapper key={label} delay={i * 80}>
+                <Link
+                  href={`/services/${slug}`}
+                  className="group flex flex-col items-center text-center bg-card border border-secondary/30 rounded-xl px-5 py-4 min-w-[160px] hover:border-secondary hover:shadow-md hover:scale-[1.04] transition-all cursor-pointer"
+                >
+                  <Icon className="w-5 h-5 text-secondary mb-2 transition-transform duration-200 group-hover:scale-125 group-hover:text-secondary/80" />
+                  <span className="text-sm font-heading font-bold uppercase tracking-tight text-foreground leading-snug">{label}</span>
+                  <span className="text-xs text-muted-foreground mt-1 leading-snug">{desc}</span>
+                </Link>
+              </ScrollRevealWrapper>
             ))}
           </div>
 
@@ -467,7 +468,7 @@ export default function Services() {
       {/* Single-Ply intro */}
       <section id="single-ply" className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Single-Ply Roofing Systems</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               TPO &amp; PVC — The Modern Standard for Commercial Flat Roofs
@@ -475,36 +476,40 @@ export default function Services() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               Single-ply membranes have become the dominant choice for low-slope and flat commercial roofing across North Texas — and for good reason. These systems deliver proven performance, manufacturer-backed warranties, and long-term value that older roofing methods simply cannot match.
             </p>
-          </div>
+          </ScrollRevealWrapper>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="group bg-card border border-border rounded-xl p-8 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 transition-transform duration-200 group-hover:scale-110">
-                <Thermometer className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
+            <ScrollRevealWrapper delay={0}>
+              <div className="group bg-card border border-border rounded-xl p-8 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 transition-transform duration-200 group-hover:scale-110">
+                  <Thermometer className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
+                </div>
+                <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">TPO Roofing</h3>
+                <p className="text-base font-semibold text-secondary mb-3">Affordable, energy-efficient, and durable.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Thermoplastic Polyolefin (TPO) is the most widely installed single-ply system in commercial roofing today. Its white reflective surface combats the North Texas heat by deflecting solar radiation, reducing cooling loads and energy costs.
+                </p>
+                <a href="#tpo-benefits" className="text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 hover:gap-3 transition-all">
+                  See 10 Benefits of TPO <span>&rarr;</span>
+                </a>
               </div>
-              <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">TPO Roofing</h3>
-              <p className="text-base font-semibold text-secondary mb-3">Affordable, energy-efficient, and durable.</p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Thermoplastic Polyolefin (TPO) is the most widely installed single-ply system in commercial roofing today. Its white reflective surface combats the North Texas heat by deflecting solar radiation, reducing cooling loads and energy costs.
-              </p>
-              <a href="#tpo-benefits" className="text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 hover:gap-3 transition-all">
-                See 10 Benefits of TPO <span>&rarr;</span>
-              </a>
-            </div>
+            </ScrollRevealWrapper>
 
-            <div className="group bg-card border border-border rounded-xl p-8 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 transition-transform duration-200 group-hover:scale-110">
-                <Shield className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
+            <ScrollRevealWrapper delay={80}>
+              <div className="group bg-card border border-border rounded-xl p-8 hover:border-secondary hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+                <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-6 transition-transform duration-200 group-hover:scale-110">
+                  <Shield className="h-7 w-7 text-secondary transition-transform duration-200 group-hover:scale-110" />
+                </div>
+                <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">PVC Roofing</h3>
+                <p className="text-base font-semibold text-secondary mb-3">Chemically resistant, fire-rated, premium performance.</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Polyvinyl Chloride (PVC) membranes are the premium choice when chemical resistance, fire performance, or grease exposure are factors — common in restaurant groups, food processing plants, hospitals, and industrial facilities across the Metroplex.
+                </p>
+                <a href="#tpo-vs-pvc" className="text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 hover:gap-3 transition-all">
+                  Compare TPO vs. PVC <span>&rarr;</span>
+                </a>
               </div>
-              <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-foreground mb-3">PVC Roofing</h3>
-              <p className="text-base font-semibold text-secondary mb-3">Chemically resistant, fire-rated, premium performance.</p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Polyvinyl Chloride (PVC) membranes are the premium choice when chemical resistance, fire performance, or grease exposure are factors — common in restaurant groups, food processing plants, hospitals, and industrial facilities across the Metroplex.
-              </p>
-              <a href="#tpo-vs-pvc" className="text-sm font-bold text-secondary uppercase tracking-wide inline-flex items-center gap-2 hover:gap-3 transition-all">
-                Compare TPO vs. PVC <span>&rarr;</span>
-              </a>
-            </div>
+            </ScrollRevealWrapper>
           </div>
         </div>
       </section>
@@ -512,12 +517,12 @@ export default function Services() {
       {/* TPO vs PVC comparison */}
       <section id="tpo-vs-pvc" className="py-24 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Side-by-Side Comparison</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               TPO vs. PVC — Which Single-Ply System Is Right for Your Building?
             </h2>
-          </div>
+          </ScrollRevealWrapper>
 
           <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-sm" data-testid="tpo-vs-pvc-table">
             <table className="w-full text-left">
@@ -564,7 +569,7 @@ export default function Services() {
       {/* Manufacturers */}
       <section id="manufacturers" className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Authorized Manufacturer Partners</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               Firestone (Elevate), Mule-Hide &amp; Duro-Last
@@ -572,7 +577,7 @@ export default function Services() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               We install the systems we trust. Each of these manufacturers brings something different to a commercial roof — and as authorized installers, we can match the system to your building, not the other way around.
             </p>
-          </div>
+          </ScrollRevealWrapper>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {manufacturers.map((mfr, i) => (
@@ -636,7 +641,7 @@ export default function Services() {
       {/* 10 Benefits of TPO */}
       <section id="tpo-benefits" className="py-24 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <ScrollRevealWrapper className="max-w-3xl mx-auto text-center mb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Educational Resource</p>
             <h2 className="text-3xl md:text-5xl font-heading font-black uppercase tracking-tight text-foreground mb-6">
               10 Benefits of TPO Roofing for DFW Commercial Buildings
@@ -644,7 +649,7 @@ export default function Services() {
             <p className="text-lg text-muted-foreground leading-relaxed">
               If your DFW commercial building has a flat or low-slope roof, TPO is likely the most cost-effective and climate-appropriate system available today.
             </p>
-          </div>
+          </ScrollRevealWrapper>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {tpoBenefits.map((benefit, i) => (

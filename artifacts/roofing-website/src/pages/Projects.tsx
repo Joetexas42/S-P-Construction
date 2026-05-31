@@ -295,7 +295,7 @@ export default function Projects() {
       <section className="bg-muted border-b border-border py-8">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
+            <ScrollRevealWrapper delay={0}>
               <div className="text-3xl md:text-4xl font-heading font-black text-secondary">
                 {formatSqFt(
                   caseStudies.reduce((sum, c) => sum + c.sizeSqFt, 0),
@@ -304,31 +304,31 @@ export default function Projects() {
               <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-1">
                 Sq Ft on This Page
               </div>
-            </div>
-            <div>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={80}>
               <div className="text-3xl md:text-4xl font-heading font-black text-secondary">
                 {caseStudies.length}
               </div>
               <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-1">
                 Featured DFW Projects
               </div>
-            </div>
-            <div>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={160}>
               <div className="text-3xl md:text-4xl font-heading font-black text-secondary">
                 6
               </div>
               <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-1">
                 DFW Cities Served
               </div>
-            </div>
-            <div>
+            </ScrollRevealWrapper>
+            <ScrollRevealWrapper delay={240}>
               <div className="text-3xl md:text-4xl font-heading font-black text-secondary">
                 20+
               </div>
               <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mt-1">
                 Year Warranties
               </div>
-            </div>
+            </ScrollRevealWrapper>
           </div>
         </div>
       </section>
@@ -349,8 +349,10 @@ export default function Projects() {
               </Badge>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryProjects.map((project) => (
-                <GalleryProjectCard key={project.id} project={project} />
+              {galleryProjects.map((project, i) => (
+                <ScrollRevealWrapper key={project.id} delay={i * 80}>
+                  <GalleryProjectCard project={project} />
+                </ScrollRevealWrapper>
               ))}
             </div>
           </div>
@@ -530,23 +532,25 @@ export default function Projects() {
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center bg-muted p-12 rounded-lg border border-border">
-            <h3 className="text-2xl md:text-3xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
-              Your facility could be our next case study
-            </h3>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Free on-site assessment, infrared moisture survey, and a written
-              scope-of-work — typically within 48 hours of your call.
-            </p>
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white"
-              >
-                Request Free Inspection
-              </Button>
-            </Link>
-          </div>
+          <ScrollRevealWrapper>
+            <div className="text-center bg-muted p-12 rounded-lg border border-border">
+              <h3 className="text-2xl md:text-3xl font-heading font-bold uppercase tracking-tight mb-4 text-foreground">
+                Your facility could be our next case study
+              </h3>
+              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Free on-site assessment, infrared moisture survey, and a written
+                scope-of-work — typically within 48 hours of your call.
+              </p>
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className="text-lg h-14 px-8 font-bold uppercase tracking-wide bg-secondary hover:bg-secondary/90 text-white"
+                >
+                  Request Free Inspection
+                </Button>
+              </Link>
+            </div>
+          </ScrollRevealWrapper>
         </div>
       </section>
     </>
