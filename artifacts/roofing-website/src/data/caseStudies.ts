@@ -50,7 +50,7 @@ export const caseStudies: CaseStudy[] = [
       "Zero tenant disruption during business hours",
       "Phased work across 8 occupied storefronts",
     ],
-    image: "/images/gallery-tpo.webp",
+    image: "/images/projects/frisco-tpo-retail.webp",
     seoTitle:
       "Frisco Commercial Roof Replacement — 40,000 Sq Ft TPO Case Study | Scott Commercial",
     seoDescription:
@@ -89,7 +89,7 @@ export const caseStudies: CaseStudy[] = [
       "25-year MBCI weathertight warranty",
       "24/7 warehouse operations never paused",
     ],
-    image: "/images/gallery-metal.webp",
+    image: "/images/projects/fortworth-metal-alliance.webp",
     seoTitle:
       "Fort Worth Standing Seam Metal Roof — 85,000 Sq Ft Warehouse Case Study | Scott Commercial",
     seoDescription:
@@ -128,7 +128,7 @@ export const caseStudies: CaseStudy[] = [
       "15-year GAF Diamond Pledge NDL warranty",
       "100% replacement-cost claim approval",
     ],
-    image: "/images/gallery-storm.webp",
+    image: "/images/projects/plano-storm-office.webp",
     seoTitle:
       "Plano Hail Damage Roof Restoration — Office Campus Case Study | Scott Commercial",
     seoDescription:
@@ -167,7 +167,7 @@ export const caseStudies: CaseStudy[] = [
       "Cold-chain integrity preserved during install",
       "25-year Sika Sarnafil system warranty",
     ],
-    image: "/images/hero-bg.webp",
+    image: "/images/projects/dallas-pvc-warehouse.webp",
     seoTitle:
       "Dallas PVC Roof Replacement — 120,000 Sq Ft Cold Storage Case Study | Scott Commercial",
     seoDescription:
@@ -206,7 +206,7 @@ export const caseStudies: CaseStudy[] = [
       "20-year GAF Golden Pledge warranty",
       "Energy Star reflective white membrane",
     ],
-    image: "/images/gallery-tpo.webp",
+    image: "/images/projects/mckinney-tpo-medical.webp",
     seoTitle:
       "McKinney Medical Office TPO Recover Roof — Case Study | Scott Commercial",
     seoDescription:
@@ -245,7 +245,7 @@ export const caseStudies: CaseStudy[] = [
       "Class A fire rating, code-compliant insulation",
       "20-year Johns Manville system warranty",
     ],
-    image: "/images/gallery-metal.webp",
+    image: "/images/projects/arlington-pvc-school.webp",
     seoTitle:
       "Arlington School District PVC Roof Replacement — Case Study | Scott Commercial",
     seoDescription:
