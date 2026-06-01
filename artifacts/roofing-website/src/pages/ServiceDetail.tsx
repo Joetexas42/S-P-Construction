@@ -17,6 +17,87 @@ interface ActiveImage {
   caption?: string;
 }
 
+const FAQ_QUESTIONS: { question: string; anchor: string }[] = [
+  { question: "How much does a commercial roof replacement cost?", anchor: "faq-question-0" },
+  { question: "How long does a commercial roof replacement take?", anchor: "faq-question-1" },
+  { question: "What roofing systems do you install?", anchor: "faq-question-2" },
+  { question: "What warranty do you provide on your work?", anchor: "faq-question-3" },
+  { question: "Does my property insurance cover commercial roof damage?", anchor: "faq-question-4" },
+  { question: "Do you handle roofing permits?", anchor: "faq-question-5" },
+  { question: "Can you repair my roof instead of replacing it?", anchor: "faq-question-6" },
+  { question: "How do you handle emergency leaks?", anchor: "faq-question-7" },
+  { question: "How much disruption will a replacement cause to my business?", anchor: "faq-question-8" },
+  { question: "Are you licensed and insured in Texas?", anchor: "faq-question-9" },
+];
+
+const SERVICE_FAQ_INDICES: Record<string, number[]> = {
+  inspection:             [0, 3, 9],
+  repair:                 [6, 7, 4],
+  installation:           [0, 1, 8],
+  replacement:            [0, 1, 3],
+  maintenance:            [3, 9, 5],
+  "storm-damage":         [4, 0, 7],
+  "emergency-leak-repair":[7, 6, 0],
+  "coatings-restoration": [6, 3, 0],
+  "flat-roofing":         [2, 0, 3],
+  "metal-roofing":        [2, 3, 0],
+  "tpo-epdm-pvc":         [2, 3, 0],
+};
+
+const DEFAULT_FAQ_INDICES = [0, 3, 6];
+
+function FaqTeaser({ serviceSlug }: { serviceSlug: string }) {
+  const indices = SERVICE_FAQ_INDICES[serviceSlug] ?? DEFAULT_FAQ_INDICES;
+  const highlighted = indices.map((i) => FAQ_QUESTIONS[i]).filter(Boolean);
+
+  return (
+    <section className="py-16 bg-background border-b border-border">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="max-w-3xl mx-auto">
+          <ScrollRevealWrapper>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
+                <HelpCircle className="h-5 w-5 text-secondary" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-secondary">Quick Answers</p>
+                <h2 className="text-xl font-heading font-black uppercase tracking-tight text-foreground leading-tight">
+                  Common questions about this service
+                </h2>
+              </div>
+            </div>
+          </ScrollRevealWrapper>
+          <div className="space-y-3 mb-6">
+            {highlighted.map((faq, i) => (
+              <ScrollRevealWrapper key={faq.anchor} delay={i * 60}>
+                <Link
+                  href={`/faq#${faq.anchor}`}
+                  className="group flex items-center gap-4 bg-card border border-border rounded-xl px-6 py-4 hover:border-secondary hover:shadow-sm transition-all duration-200"
+                  data-testid={`faq-teaser-link-${serviceSlug}-${i}`}
+                >
+                  <span className="flex-1 text-base font-semibold text-foreground leading-snug group-hover:text-secondary transition-colors">
+                    {faq.question}
+                  </span>
+                  <ArrowRight className="h-4 w-4 text-secondary shrink-0 group-hover:translate-x-1 transition-transform duration-200" />
+                </Link>
+              </ScrollRevealWrapper>
+            ))}
+          </div>
+          <ScrollRevealWrapper delay={180}>
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-secondary hover:underline underline-offset-4"
+              data-testid={`faq-teaser-all-link-${serviceSlug}`}
+            >
+              See all frequently asked questions <ArrowRight className="h-4 w-4" />
+            </Link>
+          </ScrollRevealWrapper>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 interface ServiceDetailProps {
   service: ServiceDetailType;
 }
@@ -449,6 +530,9 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
           </div>
         </section>
       )}
+
+      {/* FAQ Teaser */}
+      <FaqTeaser serviceSlug={service.slug} />
 
       {/* Related services */}
       <section className="py-20 bg-muted border-y border-border">
