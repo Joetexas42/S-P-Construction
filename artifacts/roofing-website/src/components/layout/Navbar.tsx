@@ -162,6 +162,7 @@ export function Navbar() {
     { name: "Projects", path: "/projects" },
     { name: "Service Areas", path: "/service-areas", children: allCityLinks },
     { name: "About", path: "/about" },
+    { name: "FAQ", path: "/faq" },
     { name: "Instant Estimate", path: "/estimate" },
     { name: "Contact", path: "/contact" },
   ];
