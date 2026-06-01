@@ -14,7 +14,8 @@ import {
   buildImageSrcSet as buildProjectImageSrcSet,
   SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
 } from "@/lib/responsiveImage";
-import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
+import { usePageExit } from "@/hooks/usePageExit";
+import { CARD_EXIT_BASE_MS, CARD_EXIT_STAGGER_MS } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 
 export interface CityTestimonial {
@@ -90,18 +91,14 @@ function CitySkeletonCard() {
 
 export default function CityPage({ city }: CityPageProps) {
   const [displayedCity, setDisplayedCity] = useState(city);
-  const [exiting, setExiting] = useState(false);
+  const { exiting, triggerExit } = usePageExit(4);
 
   useEffect(() => {
     if (city.slug === displayedCity.slug) return;
     setLightboxIndex(null);
-    setExiting(true);
-    const exitDuration = CARD_EXIT_BASE_MS + 4 * CARD_EXIT_STAGGER_MS;
-    const t = setTimeout(() => {
+    return triggerExit(() => {
       setDisplayedCity(city);
-      setExiting(false);
-    }, exitDuration);
-    return () => clearTimeout(t);
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city.slug]);
 

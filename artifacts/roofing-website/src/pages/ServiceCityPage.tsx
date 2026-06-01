@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { usePageExit } from "@/hooks/usePageExit";
 import { Link } from "wouter";
 import { MapPin, Building2, Zap, HelpCircle, ArrowRight, Phone, CloudLightning, ChevronDown } from "lucide-react";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
@@ -11,7 +12,7 @@ import { type CityData } from "@/pages/CityPage";
 import { type ServiceCityEntry, SERVICE_CITY_SERVICE_LABELS, SERVICE_CITY_SERVICE_SHORT, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
 import { cities } from "@/data/cities";
 import { services } from "@/data/services";
-import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS } from "@/lib/animation";
+import { CARD_EXIT_STAGGER_MS } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 
 type ServiceTypeValue =
@@ -80,21 +81,17 @@ function getSiblingCombos(
 export default function ServiceCityPage({ city, service, entry }: ServiceCityPageProps) {
   const [displayedCity, setDisplayedCity] = useState(city);
   const [displayedService, setDisplayedService] = useState(service);
-  const [exiting, setExiting] = useState(false);
+  // 4 related-page cards + 3 related-service cards + 1 contact form section
+  const { exiting, triggerExit } = usePageExit(4 + 3 + 1);
 
   useEffect(() => {
     const pageKey = `${city.slug}--${service.slug}`;
     const displayedKey = `${displayedCity.slug}--${displayedService.slug}`;
     if (pageKey === displayedKey) return;
-    setExiting(true);
-    const cardCount = 4 + 3 + 1; // related-page cards + related-service cards + contact form section
-    const exitDuration = CARD_EXIT_BASE_MS + cardCount * CARD_EXIT_STAGGER_MS;
-    const t = setTimeout(() => {
+    return triggerExit(() => {
       setDisplayedCity(city);
       setDisplayedService(service);
-      setExiting(false);
-    }, exitDuration);
-    return () => clearTimeout(t);
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city.slug, service.slug]);
 
