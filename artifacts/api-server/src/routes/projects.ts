@@ -76,6 +76,19 @@ router.patch("/projects/:id", requireAdminKey, async (req, res): Promise<void> =
     return;
   }
 
+  const existing = await db
+    .select({ imageUrl: projectsTable.imageUrl })
+    .from(projectsTable)
+    .where(eq(projectsTable.id, params.data.id))
+    .limit(1);
+
+  if (existing.length === 0) {
+    res.status(404).json({ error: "Project not found" });
+    return;
+  }
+
+  const oldImageUrl = existing[0].imageUrl;
+
   const [project] = await db
     .update(projectsTable)
     .set(body.data)
@@ -85,6 +98,15 @@ router.patch("/projects/:id", requireAdminKey, async (req, res): Promise<void> =
   if (!project) {
     res.status(404).json({ error: "Project not found" });
     return;
+  }
+
+  if (body.data.imageUrl !== undefined && body.data.imageUrl !== oldImageUrl && oldImageUrl) {
+    try {
+      await objectStorage.deleteObjectEntity(oldImageUrl);
+      req.log.info({ id: project.id }, "Replaced project photo deleted from object storage");
+    } catch (err) {
+      req.log.warn({ id: project.id, err }, "Failed to delete replaced project photo from object storage");
+    }
   }
 
   req.log.info({ id: project.id }, "Project updated");
