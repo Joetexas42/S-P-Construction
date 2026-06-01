@@ -7,6 +7,9 @@ import {
   UpdateProjectBody,
   DeleteProjectParams,
 } from "@workspace/api-zod";
+import { ObjectStorageService } from "../lib/objectStorage";
+
+const objectStorage = new ObjectStorageService();
 
 const router = Router();
 
@@ -103,6 +106,13 @@ router.delete("/projects/:id", requireAdminKey, async (req, res): Promise<void> 
   if (!project) {
     res.status(404).json({ error: "Project not found" });
     return;
+  }
+
+  try {
+    await objectStorage.deleteObjectEntity(project.imageUrl);
+    req.log.info({ id: params.data.id }, "Project photo deleted from object storage");
+  } catch (err) {
+    req.log.warn({ id: params.data.id, err }, "Failed to delete project photo from object storage");
   }
 
   req.log.info({ id: params.data.id }, "Project deleted");
