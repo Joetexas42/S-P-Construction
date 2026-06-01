@@ -1,4 +1,4 @@
-import { Router, type Request, type Response, type NextFunction } from "express";
+import { Router, type Request, type Response } from "express";
 import { db, projectsTable } from "@workspace/db";
 import { desc, eq } from "drizzle-orm";
 import {
@@ -8,25 +8,11 @@ import {
   DeleteProjectParams,
 } from "@workspace/api-zod";
 import { ObjectStorageService } from "../lib/objectStorage";
+import { requireAdminKey } from "../middleware/requireAdminKey";
 
 const objectStorage = new ObjectStorageService();
 
 const router = Router();
-
-function requireAdminKey(req: Request, res: Response, next: NextFunction): void {
-  const secret = process.env.ADMIN_SECRET;
-  if (!secret) {
-    req.log.error("ADMIN_SECRET env var is not configured");
-    res.status(500).json({ error: "Server misconfiguration" });
-    return;
-  }
-  const provided = req.headers["x-admin-key"];
-  if (!provided || provided !== secret) {
-    res.status(403).json({ error: "Forbidden" });
-    return;
-  }
-  next();
-}
 
 router.post("/admin/verify", requireAdminKey, (req, res): void => {
   res.status(200).json({ ok: true });
