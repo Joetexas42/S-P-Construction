@@ -121,7 +121,7 @@ const SERVICE_SLUG_TO_TYPE: Record<string, ServiceTypeValue> = {
   "inspection": "inspection",
 };
 
-const SITE_ORIGIN = "https://scottcommercialroofing.com";
+const SITE_ORIGIN = "https://spconstructiondfw.com";
 
 interface ServiceCityPageProps {
   city: CityData;
@@ -180,8 +180,8 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
   const serviceLabel = SERVICE_CITY_SERVICE_LABELS[displayedService.slug] ?? displayedService.shortTitle;
 
-  const seoTitle = `${serviceLabel} in ${city.name}, TX | Scott Commercial Roofing`;
-  const seoDescription = `Scott Commercial Roofing provides ${serviceLabel.toLowerCase()} in ${city.name}, TX. Local expertise, 24/7 emergency response, manufacturer-backed warranties. Serving ${city.county}.`;
+  const seoTitle = `${serviceLabel} in ${city.name}, TX | S&P Construction`;
+  const seoDescription = `S&P Construction provides ${serviceLabel.toLowerCase()} in ${city.name}, TX. Local expertise, 24/7 emergency response, manufacturer-backed warranties. Serving ${city.county}.`;
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -231,10 +231,10 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
     "@id": `${canonical}#contractor`,
-    name: `Scott Commercial Roofing — ${city.name}`,
-    url: "https://scottcommercialroofing.com",
+    name: `S&P Construction — ${city.name}`,
+    url: "https://spconstructiondfw.com",
     telephone: "(972) 555-0100",
-    email: "info@scottcommercialroofing.com",
+    email: "info@spconstructiondfw.com",
     image: `${SITE_ORIGIN}${service.heroImage.base}-800w.webp`,
     address: {
       "@type": "PostalAddress",
@@ -461,7 +461,7 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
                 </ScrollRevealWrapper>
                 <ScrollRevealWrapper delay={120}>
                   <div className="bg-muted border border-border rounded-xl p-6">
-                    <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why S&P Construction</p>
                     <p className="text-foreground leading-relaxed">{service.why}</p>
                   </div>
                 </ScrollRevealWrapper>

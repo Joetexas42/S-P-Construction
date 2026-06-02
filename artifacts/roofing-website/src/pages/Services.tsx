@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { cities } from "@/data/cities";
 import { services, coreSystemSlugs, specialtyServiceSlugs } from "@/data/services";
 
-const SITE_ORIGIN = "https://scottcommercialroofing.com";
+const SITE_ORIGIN = "https://spconstructiondfw.com";
 const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
 
 type ServiceFilter = "all" | "core" | "specialty";
@@ -206,11 +206,11 @@ export default function Services() {
       {
         "@type": "RoofingContractor",
         "@id": PROVIDER_ID,
-        "name": "Scott Commercial Roofing",
+        "name": "S&P Construction",
         "url": SITE_ORIGIN,
         "image": `${SITE_ORIGIN}/images/hero-bg.webp`,
         "telephone": "(972) 555-0100",
-        "email": "info@scottcommercialroofing.com",
+        "email": "info@spconstructiondfw.com",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Dallas",
@@ -267,7 +267,7 @@ export default function Services() {
               Commercial Roofing Services
             </h1>
             <p className="section-heading-animate [animation-delay:240ms] text-xl text-primary-foreground/80 leading-relaxed">
-              Scott Commercial Roofing — DFW's flat-roof specialists. We engineer, install, and maintain high-performance TPO, PVC, EPDM, and metal roofing systems built for the DFW climate. Authorized installer and service partner for Firestone (Elevate), Mule-Hide, and Duro-Last PVC.
+              S&P Construction — DFW's flat-roof specialists. We engineer, install, and maintain high-performance TPO, PVC, EPDM, and metal roofing systems built for the DFW climate. Authorized installer and service partner for Firestone (Elevate), Mule-Hide, and Duro-Last PVC.
             </p>
             <div className="section-heading-animate [animation-delay:360ms] mt-6">
               <Link href="/estimate">

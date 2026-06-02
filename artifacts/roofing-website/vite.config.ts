@@ -5,7 +5,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { sitemapPlugin } from "./vite-plugin-sitemap";
 
-const SITE_URL = process.env.SITE_URL ?? "https://scottcommercialroofing.com";
+const SITE_URL = process.env.SITE_URL ?? "https://spconstructiondfw.com";
 
 const rawPort = process.env.PORT ?? "3000";
 const port = Number(rawPort);

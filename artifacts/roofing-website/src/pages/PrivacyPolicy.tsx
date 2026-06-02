@@ -5,8 +5,8 @@ export default function PrivacyPolicy() {
   return (
     <>
       <SEO
-        title="Privacy Policy | Scott Commercial Roofing"
-        description="Privacy policy for Scott Commercial Roofing. Learn how we collect, use, and protect your information."
+        title="Privacy Policy | S&P Construction"
+        description="Privacy policy for S&P Construction. Learn how we collect, use, and protect your information."
       />
 
       <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
@@ -25,7 +25,7 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-xl font-heading font-bold uppercase tracking-wide text-foreground mb-3">1. Who We Are</h2>
               <p>
-                Scott Commercial Roofing ("we," "us," or "our") is a commercial roofing contractor based in Dallas, Texas, serving the DFW Metroplex. This Privacy Policy explains how we collect, use, disclose, and protect information when you visit our website or contact us for roofing services.
+                S&P Construction ("we," "us," or "our") is a commercial roofing contractor based in Dallas, Texas, serving the DFW Metroplex. This Privacy Policy explains how we collect, use, disclose, and protect information when you visit our website or contact us for roofing services.
               </p>
             </section>
 
@@ -118,10 +118,10 @@ export default function PrivacyPolicy() {
                 If you have questions about this Privacy Policy, please contact us:
               </p>
               <address className="not-italic mt-3 space-y-1">
-                <p className="font-semibold text-foreground">Scott Commercial Roofing</p>
+                <p className="font-semibold text-foreground">S&P Construction</p>
                 <p>Dallas, TX — Serving the DFW Metroplex</p>
                 <p>Phone: <a href="tel:972-555-0100" className="text-primary hover:underline">(972) 555-0100</a></p>
-                <p>Email: <a href="mailto:info@scottcommercialroofing.com" className="text-primary hover:underline">info@scottcommercialroofing.com</a></p>
+                <p>Email: <a href="mailto:info@spconstructiondfw.com" className="text-primary hover:underline">info@spconstructiondfw.com</a></p>
               </address>
             </section>
 

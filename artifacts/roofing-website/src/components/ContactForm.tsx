@@ -274,7 +274,7 @@ export function ContactForm({ defaultServiceType, defaultCity, defaultServiceCon
           )}
         </Button>
         <p className="text-xs text-center text-muted-foreground mt-4">
-          By submitting this form, you agree to be contacted by Scott Commercial Roofing regarding your project.
+          By submitting this form, you agree to be contacted by S&P Construction regarding your project.
         </p>
       </form>
     </Form>

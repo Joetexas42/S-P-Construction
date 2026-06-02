@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://scottcommercialroofing.com/sitemap-index.xml
-Sitemap: https://scottcommercialroofing.com/sitemap.xml
+Sitemap: https://spconstructiondfw.com/sitemap-index.xml
+Sitemap: https://spconstructiondfw.com/sitemap.xml

@@ -3,7 +3,7 @@ import { CONTENT_DATES } from "../content-dates.js";
 
 const router = Router();
 
-const SITE_ORIGIN = "https://scottcommercialroofing.com";
+const SITE_ORIGIN = "https://spconstructiondfw.com";
 
 const CITY_SLUGS = ["dallas", "fort-worth", "frisco", "plano", "mckinney", "arlington"];
 const SERVICE_SLUGS = [

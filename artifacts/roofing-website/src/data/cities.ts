@@ -45,13 +45,13 @@ export const cities: CityData[] = [
       },
       {
         quote:
-          "We run a refrigerated food distribution floor that can't be open to outside air for more than 90 minutes at a stretch. Scott Commercial re-engineered our drainage, eliminated 17 ponding spots, and installed 120,000 sq ft of Sika PVC in dry-in stages without ever breaking our cold chain.",
+          "We run a refrigerated food distribution floor that can't be open to outside air for more than 90 minutes at a stretch. S&P Construction re-engineered our drainage, eliminated 17 ponding spots, and installed 120,000 sq ft of Sika PVC in dry-in stages without ever breaking our cold chain.",
         name: "Antonio Reyes",
         businessType: "Cold Storage Facilities Director",
       },
       {
         quote:
-          "Our Design District warehouse had three roofers tell us we needed a full tear-off. Scott Commercial's infrared survey proved otherwise, recovered the dry sections, and saved us almost $200k. Two summers in, not a single leak callback.",
+          "Our Design District warehouse had three roofers tell us we needed a full tear-off. S&P Construction's infrared survey proved otherwise, recovered the dry sections, and saved us almost $200k. Two summers in, not a single leak callback.",
         name: "Priya Nair",
         businessType: "Industrial Property Manager",
       },
@@ -113,13 +113,13 @@ export const cities: CityData[] = [
     testimonials: [
       {
         quote:
-          "Three other roofers told us we'd have to shut down our 24/7 logistics floor for a metal roof replacement. Scott Commercial roll-formed 85,000 sq ft of standing seam on site and never paused a shift. The 25-year weathertight warranty was the easy part — the operational discipline was the impressive part.",
+          "Three other roofers told us we'd have to shut down our 24/7 logistics floor for a metal roof replacement. S&P Construction roll-formed 85,000 sq ft of standing seam on site and never paused a shift. The 25-year weathertight warranty was the easy part — the operational discipline was the impressive part.",
         name: "Sarah Jiménez",
         businessType: "Logistics Operations Director",
       },
       {
         quote:
-          "Our Stockyards-area restaurant has a 90-year-old parapet wall that every contractor was afraid to touch. Scott Commercial detailed the flashings, tied in a new TPO field, and made it watertight without changing the historic look. Outstanding craftsmanship.",
+          "Our Stockyards-area restaurant has a 90-year-old parapet wall that every contractor was afraid to touch. S&P Construction detailed the flashings, tied in a new TPO field, and made it watertight without changing the historic look. Outstanding craftsmanship.",
         name: "Bradley Houston",
         businessType: "Hospitality Owner",
       },
@@ -187,13 +187,13 @@ export const cities: CityData[] = [
     testimonials: [
       {
         quote:
-          "After the spring hail event in Frisco, Scott Commercial was on site within hours. They phased a full 40,000 sq ft TPO replacement across eight occupied storefronts without ever closing a tenant, and dealt directly with our insurance adjuster. Utterly professional.",
+          "After the spring hail event in Frisco, S&P Construction was on site within hours. They phased a full 40,000 sq ft TPO replacement across eight occupied storefronts without ever closing a tenant, and dealt directly with our insurance adjuster. Utterly professional.",
         name: "Marcus Thompson",
         businessType: "Retail Center Property Manager",
       },
       {
         quote:
-          "We brought Scott Commercial in for a second opinion on a leaking new-construction roof at one of our Fields-area pad sites. They isolated the issue to an improperly detailed scupper in under 30 minutes and had it permanently sealed the same week.",
+          "We brought S&P Construction in for a second opinion on a leaking new-construction roof at one of our Fields-area pad sites. They isolated the issue to an improperly detailed scupper in under 30 minutes and had it permanently sealed the same week.",
         name: "Anika Patel",
         businessType: "Mixed-Use Developer",
       },
@@ -261,19 +261,19 @@ export const cities: CityData[] = [
     testimonials: [
       {
         quote:
-          "Golf-ball hail in April put 400+ punctures through our built-up roof across three office buildings. Scott Commercial tarped within four hours, documented the entire scope for our carrier, and got us a 100% replacement-cost approval. We're back to watertight with a 15-year GAF warranty.",
+          "Golf-ball hail in April put 400+ punctures through our built-up roof across three office buildings. S&P Construction tarped within four hours, documented the entire scope for our carrier, and got us a 100% replacement-cost approval. We're back to watertight with a 15-year GAF warranty.",
         name: "Rachel Okafor",
         businessType: "Class-A Office Property Manager",
       },
       {
         quote:
-          "Our Legacy West tenants include three of the most demanding F500 names in the metroplex. Scott Commercial phased a 90,000 sq ft TPO reroof over six weekends, low-odor adhesives only, and we never got a single elevated indoor air-quality complaint.",
+          "Our Legacy West tenants include three of the most demanding F500 names in the metroplex. S&P Construction phased a 90,000 sq ft TPO reroof over six weekends, low-odor adhesives only, and we never got a single elevated indoor air-quality complaint.",
         name: "Christopher Dalton",
         businessType: "Corporate Campus Asset Manager",
       },
       {
         quote:
-          "I've used four roofers across our medical portfolio. Scott Commercial is the only one that consistently shows up on time, sends written daily updates, and bills exactly what they quoted. They handle our Plano and Frisco medical buildings now.",
+          "I've used four roofers across our medical portfolio. S&P Construction is the only one that consistently shows up on time, sends written daily updates, and bills exactly what they quoted. They handle our Plano and Frisco medical buildings now.",
         name: "Yolanda Briggs",
         businessType: "Medical Real Estate Director",
       },
@@ -341,7 +341,7 @@ export const cities: CityData[] = [
       },
       {
         quote:
-          "Our 1920s downtown building had been patched a dozen times. Scott Commercial pulled it back to deck, rebuilt the parapets properly, and detailed every penetration. Two storms later it's still bone dry — first time in fifteen years.",
+          "Our 1920s downtown building had been patched a dozen times. S&P Construction pulled it back to deck, rebuilt the parapets properly, and detailed every penetration. Two storms later it's still bone dry — first time in fifteen years.",
         name: "Walter Kemp",
         businessType: "Historic Building Owner",
       },
@@ -409,7 +409,7 @@ export const cities: CityData[] = [
     testimonials: [
       {
         quote:
-          "Nine weeks from last bell to teacher in-service, plus an asbestos abatement before we could even start. Scott Commercial finished four days early, on budget, and our gymnasium and cafeteria opened on time with a 20-year manufacturer warranty.",
+          "Nine weeks from last bell to teacher in-service, plus an asbestos abatement before we could even start. S&P Construction finished four days early, on budget, and our gymnasium and cafeteria opened on time with a 20-year manufacturer warranty.",
         name: "James Whitfield",
         businessType: "School District Operations Director",
       },
@@ -421,7 +421,7 @@ export const cities: CityData[] = [
       },
       {
         quote:
-          "We manage hospitality near the Entertainment District — game days mean we can't have crews on the roof. Scott Commercial built a phased schedule around the home calendar and finished a 55,000 sq ft PVC install without a single conflict.",
+          "We manage hospitality near the Entertainment District — game days mean we can't have crews on the roof. S&P Construction built a phased schedule around the home calendar and finished a 55,000 sq ft PVC install without a single conflict.",
         name: "Tatiana Brooks",
         businessType: "Hotel General Manager",
       },

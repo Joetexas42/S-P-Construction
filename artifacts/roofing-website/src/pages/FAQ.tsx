@@ -5,7 +5,7 @@ import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 
-const SITE_ORIGIN = "https://scottcommercialroofing.com";
+const SITE_ORIGIN = "https://spconstructiondfw.com";
 
 type Topic = "Cost" | "Timeline" | "Materials" | "Warranties" | "Insurance" | "Permits";
 
@@ -58,7 +58,7 @@ const faqs: FAQItem[] = [
   {
     question: "Do you handle roofing permits?",
     answer:
-      "Yes. Scott Commercial Roofing pulls all required city and county permits for every job. Permit requirements vary by municipality across the DFW Metroplex — we manage that process entirely so you don't have to. All work passes final inspection before we close out the project.",
+      "Yes. S&P Construction pulls all required city and county permits for every job. Permit requirements vary by municipality across the DFW Metroplex — we manage that process entirely so you don't have to. All work passes final inspection before we close out the project.",
     topics: ["Permits"],
   },
   {
@@ -82,7 +82,7 @@ const faqs: FAQItem[] = [
   {
     question: "Are you licensed and insured in Texas?",
     answer:
-      "Yes. Scott Commercial Roofing carries full general liability insurance and workers' compensation coverage. We are licensed in Texas and maintain all applicable certifications for the manufacturer systems we install. Certificate of insurance is provided upon request before any work begins.",
+      "Yes. S&P Construction carries full general liability insurance and workers' compensation coverage. We are licensed in Texas and maintain all applicable certifications for the manufacturer systems we install. Certificate of insurance is provided upon request before any work begins.",
     topics: ["Insurance"],
   },
 ];
@@ -188,7 +188,7 @@ export default function FAQ() {
   return (
     <>
       <SEO
-        title="Commercial Roofing FAQs | Scott Commercial Roofing"
+        title="Commercial Roofing FAQs | S&P Construction"
         description="Answers to the most common questions about commercial roofing cost, timeline, materials, warranties, insurance claims, and permits in North Texas."
         canonical={`${SITE_ORIGIN}/faq`}
         jsonLd={faqJsonLd}
@@ -204,7 +204,7 @@ export default function FAQ() {
             src="/images/contact-hero.webp"
             srcSet="/images/contact-hero-480w.webp 480w, /images/contact-hero-800w.webp 800w, /images/contact-hero-1280w.webp 1280w"
             sizes="100vw"
-            alt="Commercial rooftop in North Texas with Scott Commercial Roofing crew at work"
+            alt="Commercial rooftop in North Texas with S&P Construction crew at work"
             width={1280}
             height={720}
             fetchPriority="high"

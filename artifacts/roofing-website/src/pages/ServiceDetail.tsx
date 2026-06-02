@@ -102,7 +102,7 @@ interface ServiceDetailProps {
   service: ServiceDetailType;
 }
 
-const SITE_ORIGIN = "https://scottcommercialroofing.com";
+const SITE_ORIGIN = "https://spconstructiondfw.com";
 const PROVIDER_ID = `${SITE_ORIGIN}/#organization`;
 
 export default function ServiceDetail({ service }: ServiceDetailProps) {
@@ -332,7 +332,7 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
               </ScrollRevealWrapper>
               <ScrollRevealWrapper delay={160}>
                 <div className="bg-muted border border-border rounded-xl p-6">
-                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why Scott Commercial</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Why S&P Construction</p>
                   <p className="text-foreground leading-relaxed">{service.why}</p>
                 </div>
               </ScrollRevealWrapper>

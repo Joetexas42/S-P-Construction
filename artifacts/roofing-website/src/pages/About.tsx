@@ -74,7 +74,7 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About Scott Commercial Roofing | DFW's Trusted Flat Roof Specialists"
+        title="About S&P Construction | DFW's Trusted Flat Roof Specialists"
         description="Learn who we are — family-owned since 2003, OSHA 30 trained crews, manufacturer-certified, and serving North Texas commercial property owners with transparent pricing and long-term relationships."
       />
 
@@ -88,7 +88,7 @@ export default function About() {
             src="/images/hero-bg.webp"
             srcSet="/images/hero-bg-480w.webp 480w, /images/hero-bg-800w.webp 800w, /images/hero-bg-1280w.webp 1280w"
             sizes="100vw"
-            alt="Scott Commercial Roofing crew on a large commercial flat roof in North Texas"
+            alt="S&P Construction crew on a large commercial flat roof in North Texas"
             width={1280}
             height={720}
             fetchPriority="high"
@@ -131,7 +131,7 @@ export default function About() {
               </ScrollRevealWrapper>
               <ScrollRevealWrapper delay={80}>
                 <p className="text-muted-foreground leading-relaxed mb-5">
-                  Robert Scott spent twelve years as a commercial roofing foreman watching building owners get handed vague quotes, blown schedules, and callbacks that dragged on for months. In 2003 he founded Scott Commercial Roofing with a single conviction: property owners deserve the same straight talk they'd get from a trusted contractor friend.
+                  Robert Scott spent twelve years as a commercial roofing foreman watching building owners get handed vague quotes, blown schedules, and callbacks that dragged on for months. In 2003 he founded S&P Construction with a single conviction: property owners deserve the same straight talk they'd get from a trusted contractor friend.
                 </p>
               </ScrollRevealWrapper>
               <ScrollRevealWrapper delay={160}>

@@ -42,11 +42,11 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
-    "name": "Scott Commercial Roofing",
-    "url": "https://scottcommercialroofing.com",
-    "image": "https://scottcommercialroofing.com/images/hero-bg.webp",
+    "name": "S&P Construction",
+    "url": "https://spconstructiondfw.com",
+    "image": "https://spconstructiondfw.com/images/hero-bg.webp",
     "telephone": "(972) 555-0100",
-    "email": "info@scottcommercialroofing.com",
+    "email": "info@spconstructiondfw.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Dallas",
@@ -87,7 +87,7 @@ export default function Home() {
   return (
     <>
       <SEO 
-        title="Scott Commercial Roofing | TPO, PVC & Flat Roof Specialists | DFW"
+        title="S&P Construction | TPO, PVC & Flat Roof Specialists | DFW"
         description="Commercial flat roof specialists serving Dallas, Fort Worth, Frisco, Plano & all of North Texas. TPO, PVC, and single-ply membrane installation, repair, and 24/7 emergency leak response. Authorized Firestone (Elevate), Mule-Hide & Duro-Last installer since 2003. Call (972) 555-0100."
         jsonLd={jsonLd}
       />
@@ -117,7 +117,7 @@ export default function Home() {
               <span className="text-sm font-bold uppercase tracking-wider text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.6)]">Serving North Texas Since 2003</span>
             </div>
             <h1 className="section-heading-animate [animation-delay:120ms] text-5xl md:text-7xl font-heading font-black text-white leading-tight mb-6 uppercase tracking-tight [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]">
-              Scott Commercial <br className="hidden md:block"/><span className="text-secondary">Flat Roof Specialists.</span>
+              S&P Construction <br className="hidden md:block"/><span className="text-secondary">Flat Roof Specialists.</span>
             </h1>
             <p className="section-heading-animate [animation-delay:240ms] text-xl md:text-2xl text-white font-medium mb-10 max-w-2xl leading-relaxed [text-shadow:0_1px_6px_rgba(0,0,0,0.7)]">
               TPO, PVC, and single-ply membrane systems engineered for the DFW Metroplex — installed and serviced by an authorized Firestone (Elevate), Mule-Hide, and Duro-Last contractor. Hail-tough, energy-efficient, warranty-backed.

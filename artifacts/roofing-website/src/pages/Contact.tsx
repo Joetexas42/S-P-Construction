@@ -9,8 +9,8 @@ export default function Contact() {
   return (
     <>
       <SEO 
-        title="Contact Us | Request Free Inspection | Scott Commercial Roofing"
-        description="Contact Scott Commercial Roofing for a free inspection or emergency leak repair in North Texas. Call (972) 555-0100."
+        title="Contact Us | Request Free Inspection | S&P Construction"
+        description="Contact S&P Construction for a free inspection or emergency leak repair in North Texas. Call (972) 555-0100."
       />
       
       {/* Page Header - Photo Hero */}
@@ -20,7 +20,7 @@ export default function Contact() {
             src="/images/contact-hero.webp"
             srcSet="/images/contact-hero-480w.webp 480w, /images/contact-hero-800w.webp 800w, /images/contact-hero-1280w.webp 1280w"
             sizes="100vw"
-            alt="Scott Commercial Roofing foreman reviewing a roof inspection report with a North Texas property manager on a commercial rooftop"
+            alt="S&P Construction foreman reviewing a roof inspection report with a North Texas property manager on a commercial rooftop"
             width={1280}
             height={720}
             fetchPriority="high"
@@ -76,7 +76,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-1">Email</p>
-                        <a href="mailto:info@scottcommercialroofing.com" className="text-xl font-bold text-foreground hover:text-secondary transition-colors">info@scottcommercialroofing.com</a>
+                        <a href="mailto:info@spconstructiondfw.com" className="text-xl font-bold text-foreground hover:text-secondary transition-colors">info@spconstructiondfw.com</a>
                       </div>
                     </div>
                   </ScrollRevealWrapper>

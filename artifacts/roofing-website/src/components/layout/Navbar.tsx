@@ -218,8 +218,8 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2 z-50">
               <HardHat className="h-8 w-8 text-secondary" />
               <div className="flex flex-col">
-                <span className={`font-heading font-bold text-xl leading-none uppercase tracking-tight transition-colors duration-300 ${isTransparent ? "text-white" : "text-foreground"}`}>Scott</span>
-                <span className={`text-xs uppercase font-semibold tracking-wider transition-colors duration-300 ${isTransparent ? "text-white/70" : "text-muted-foreground"}`}>Commercial Roofing</span>
+                <span className={`font-heading font-bold text-xl leading-none uppercase tracking-tight transition-colors duration-300 ${isTransparent ? "text-white" : "text-foreground"}`}>S&P</span>
+                <span className={`text-xs uppercase font-semibold tracking-wider transition-colors duration-300 ${isTransparent ? "text-white/70" : "text-muted-foreground"}`}>Construction</span>
               </div>
             </Link>
 

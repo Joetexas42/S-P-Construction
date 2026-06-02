@@ -181,7 +181,7 @@ export default function CityPage({ city }: CityPageProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
 
-  const siteUrl = "https://scottcommercialroofing.com";
+  const siteUrl = "https://spconstructiondfw.com";
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -211,10 +211,10 @@ export default function CityPage({ city }: CityPageProps) {
   const contractorLd = {
     "@context": "https://schema.org",
     "@type": "RoofingContractor",
-    "name": `Scott Commercial Roofing — ${city.name}`,
-    "url": "https://scottcommercialroofing.com",
+    "name": `S&P Construction — ${city.name}`,
+    "url": "https://spconstructiondfw.com",
     "telephone": "(972) 555-0100",
-    "email": "info@scottcommercialroofing.com",
+    "email": "info@spconstructiondfw.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": city.name,
