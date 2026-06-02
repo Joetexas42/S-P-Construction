@@ -7,9 +7,21 @@ import { Link } from "wouter";
 
 const SITE_ORIGIN = "https://scottcommercialroofing.com";
 
+type Topic = "Cost" | "Timeline" | "Materials" | "Warranties" | "Insurance" | "Permits";
+
+const TOPICS: Topic[] = [
+  "Cost",
+  "Timeline",
+  "Materials",
+  "Warranties",
+  "Insurance",
+  "Permits",
+];
+
 interface FAQItem {
   question: string;
   answer: string;
+  topics: Topic[];
 }
 
 const faqs: FAQItem[] = [
@@ -17,74 +29,85 @@ const faqs: FAQItem[] = [
     question: "How much does a commercial roof replacement cost?",
     answer:
       "Commercial roofing costs vary based on roof size, system type, existing conditions, and access. In North Texas, most flat or low-slope commercial replacements run $6–$14 per square foot installed. A 10,000 sq ft warehouse roof might range from $60,000 to $140,000 depending on the membrane system chosen. We provide firm, itemized quotes after a free on-site inspection — no estimates over the phone, because every roof is different.",
+    topics: ["Cost"],
   },
   {
     question: "How long does a commercial roof replacement take?",
     answer:
       "Most commercial replacements are completed in 3–10 business days for roofs under 20,000 sq ft. Larger facilities or complex phased work (where business operations must continue below) can take 2–4 weeks. We coordinate around your operating hours and can work nights or weekends when needed to minimize disruption.",
+    topics: ["Timeline"],
   },
   {
     question: "What roofing systems do you install?",
     answer:
       "We install TPO, EPDM, PVC, modified bitumen, and built-up roofing (BUR) systems, as well as standing-seam and exposed-fastener metal roofing for applicable structures. For most North Texas flat-roof applications we recommend TPO or EPDM for the best combination of energy performance, durability, and cost. During your inspection we'll recommend the system that fits your building, budget, and usage.",
+    topics: ["Materials"],
   },
   {
     question: "What warranty do you provide on your work?",
     answer:
       "We offer a 2-year workmanship warranty on every installation, and manufacturer warranties of 15–30 years depending on the system and membrane thickness. Many TPO and PVC systems qualify for NDL (No-Dollar-Limit) manufacturer warranties when installed by a certified contractor — which we are. We'll outline all warranty terms in your written proposal.",
+    topics: ["Warranties"],
   },
   {
     question: "Does my property insurance cover commercial roof damage?",
     answer:
       "Most commercial property policies cover storm damage — hail, wind, and lightning — but not wear or maintenance-related failures. After a major hail or wind event, schedule a free inspection right away. We document damage with photos and measurements, prepare a scope of loss, and can work directly with your insurance adjuster throughout the claims process. You are never required to use the contractor your insurer recommends.",
+    topics: ["Insurance"],
   },
   {
     question: "Do you handle roofing permits?",
     answer:
       "Yes. Scott Commercial Roofing pulls all required city and county permits for every job. Permit requirements vary by municipality across the DFW Metroplex — we manage that process entirely so you don't have to. All work passes final inspection before we close out the project.",
+    topics: ["Permits"],
   },
   {
     question: "Can you repair my roof instead of replacing it?",
     answer:
       "Absolutely. Repair is often the right call when the membrane is structurally sound and the damage is isolated. We perform a thorough inspection and give you an honest assessment: if repair extends your roof's useful life cost-effectively, we'll recommend repair. If the membrane is aged, saturated, or failing broadly, we'll explain why replacement is the better long-term value. We don't push replacements to inflate revenue.",
+    topics: ["Cost", "Timeline"],
   },
   {
     question: "How do you handle emergency leaks?",
     answer:
       "We offer emergency leak response for active commercial leaks, including after-hours and weekend calls. When you call, a senior technician is dispatched to stabilize the leak with temporary waterproofing measures to protect your interior and inventory. A full diagnostic inspection and permanent repair proposal follows within 24–48 hours. Call us directly at (214) 600-0188.",
+    topics: ["Timeline"],
   },
   {
     question: "How much disruption will a replacement cause to my business?",
     answer:
       "Less than most property managers expect. Commercial roofing is performed from the exterior — your tenants or employees typically continue working normally below. We use dust barriers at roof penetrations, schedule noisy equipment for off-peak hours when requested, and remove debris daily. For sensitive operations (hospitals, data centers, food manufacturing), we develop a specific disruption-mitigation plan before work begins.",
+    topics: ["Timeline"],
   },
   {
     question: "Are you licensed and insured in Texas?",
     answer:
       "Yes. Scott Commercial Roofing carries full general liability insurance and workers' compensation coverage. We are licensed in Texas and maintain all applicable certifications for the manufacturer systems we install. Certificate of insurance is provided upon request before any work begins.",
+    topics: ["Insurance"],
   },
 ];
 
 function FAQAccordion({
   item,
   index,
-  initialOpen = false,
+  linkedByHash = false,
 }: {
   item: FAQItem;
   index: number;
-  initialOpen?: boolean;
+  linkedByHash?: boolean;
 }) {
-  const [open, setOpen] = useState(initialOpen);
+  const [open, setOpen] = useState(linkedByHash);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!initialOpen || !ref.current) return;
+    if (!linkedByHash || !ref.current) return;
+    setOpen(true);
     const el = ref.current;
     const timer = setTimeout(() => {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 150);
     return () => clearTimeout(timer);
-  }, [initialOpen]);
+  }, [linkedByHash]);
 
   return (
     <div ref={ref} className="border border-border rounded-lg overflow-hidden">
@@ -136,7 +159,32 @@ function getHashIndex(): number {
 }
 
 export default function FAQ() {
-  const [openIndex] = useState<number>(getHashIndex);
+  const [hashIndex, setHashIndex] = useState<number>(getHashIndex);
+  const [activeTopic, setActiveTopic] = useState<Topic | "All">("All");
+
+  useEffect(() => {
+    function onHashChange() {
+      const idx = getHashIndex();
+      if (idx >= 0) {
+        setHashIndex(idx);
+        setActiveTopic("All");
+      }
+    }
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const filteredFaqs =
+    activeTopic === "All"
+      ? faqs.map((faq, i) => ({ faq, originalIndex: i }))
+      : faqs
+          .map((faq, i) => ({ faq, originalIndex: i }))
+          .filter(({ faq }) => faq.topics.includes(activeTopic));
+
+  function handleTopicClick(topic: Topic | "All") {
+    setActiveTopic(topic);
+  }
+
   return (
     <>
       <SEO
@@ -195,19 +243,60 @@ export default function FAQ() {
             <h2 className="text-2xl md:text-3xl font-heading font-bold uppercase tracking-tight mb-3 text-foreground">
               Your Questions, Answered
             </h2>
-            <p className="text-muted-foreground mb-12 text-lg">
+            <p className="text-muted-foreground mb-8 text-lg">
               Click any question to expand the answer. If you don't see what you
               need, reach out directly — no scripts, no runaround.
             </p>
           </ScrollRevealWrapper>
 
+          {/* Filter chips */}
+          <ScrollRevealWrapper>
+            <div className="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter questions by topic">
+              <button
+                onClick={() => handleTopicClick("All")}
+                className={`px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary ${
+                  activeTopic === "All"
+                    ? "bg-secondary text-secondary-foreground border-secondary"
+                    : "bg-card text-muted-foreground border-border hover:border-secondary/60 hover:text-foreground"
+                }`}
+                aria-pressed={activeTopic === "All"}
+              >
+                All
+              </button>
+              {TOPICS.map((topic) => (
+                <button
+                  key={topic}
+                  onClick={() => handleTopicClick(topic)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary ${
+                    activeTopic === topic
+                      ? "bg-secondary text-secondary-foreground border-secondary"
+                      : "bg-card text-muted-foreground border-border hover:border-secondary/60 hover:text-foreground"
+                  }`}
+                  aria-pressed={activeTopic === topic}
+                >
+                  {topic}
+                </button>
+              ))}
+            </div>
+          </ScrollRevealWrapper>
+
           <div className="space-y-3">
-            {faqs.map((faq, i) => (
-              <ScrollRevealWrapper key={i} delay={i * 40}>
-                <FAQAccordion item={faq} index={i} initialOpen={i === openIndex} />
+            {filteredFaqs.map(({ faq, originalIndex }, displayIndex) => (
+              <ScrollRevealWrapper key={originalIndex} delay={displayIndex * 40}>
+                <FAQAccordion
+                  item={faq}
+                  index={originalIndex}
+                  linkedByHash={originalIndex === hashIndex}
+                />
               </ScrollRevealWrapper>
             ))}
           </div>
+
+          {filteredFaqs.length === 0 && (
+            <div className="text-center py-16 text-muted-foreground text-lg">
+              No questions match this topic.
+            </div>
+          )}
 
           {/* CTA */}
           <ScrollRevealWrapper>
