@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
@@ -65,11 +65,29 @@ const faqs: FAQItem[] = [
   },
 ];
 
-function FAQAccordion({ item, index }: { item: FAQItem; index: number }) {
-  const [open, setOpen] = useState(false);
+function FAQAccordion({
+  item,
+  index,
+  initialOpen = false,
+}: {
+  item: FAQItem;
+  index: number;
+  initialOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(initialOpen);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!initialOpen || !ref.current) return;
+    const el = ref.current;
+    const timer = setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [initialOpen]);
 
   return (
-    <div className="border border-border rounded-lg overflow-hidden">
+    <div ref={ref} className="border border-border rounded-lg overflow-hidden">
       <button
         className="w-full text-left flex items-center justify-between gap-4 px-6 py-5 bg-card hover:bg-muted/50 transition-colors"
         onClick={() => setOpen((prev) => !prev)}
@@ -111,7 +129,14 @@ const faqJsonLd = {
   })),
 };
 
+function getHashIndex(): number {
+  if (typeof window === "undefined") return -1;
+  const match = window.location.hash.match(/^#faq-question-(\d+)$/);
+  return match ? parseInt(match[1], 10) : -1;
+}
+
 export default function FAQ() {
+  const [openIndex] = useState<number>(getHashIndex);
   return (
     <>
       <SEO
@@ -179,7 +204,7 @@ export default function FAQ() {
           <div className="space-y-3">
             {faqs.map((faq, i) => (
               <ScrollRevealWrapper key={i} delay={i * 40}>
-                <FAQAccordion item={faq} index={i} />
+                <FAQAccordion item={faq} index={i} initialOpen={i === openIndex} />
               </ScrollRevealWrapper>
             ))}
           </div>
