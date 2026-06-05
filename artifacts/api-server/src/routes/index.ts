@@ -5,6 +5,7 @@ import estimatorRouter from "./estimator";
 import sitemapRouter from "./sitemap";
 import projectsRouter from "./projects";
 import storageRouter from "./storage";
+import builtByContactRouter from "./builtByContact";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use(estimatorRouter);
 router.use(sitemapRouter);
 router.use(projectsRouter);
 router.use(storageRouter);
+router.use(builtByContactRouter);
 
 export default router;
