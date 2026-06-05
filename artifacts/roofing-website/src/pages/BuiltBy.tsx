@@ -80,12 +80,39 @@ const capabilities = [
   { icon: Wrench, label: "Ongoing maintenance & performance" },
 ];
 
+const builtBySchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Paper Street Software Co.",
+    url: "https://www.paperstreet.online",
+    email: "paperstreetsoftware@gmail.com",
+    description:
+      "Paper Street Software Co. designs, builds, and maintains custom websites, AI tools, and digital solutions — purpose-built for local businesses.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: "Scott Commercial Roofing Website",
+    url: "https://www.scottcommercialroofing.com",
+    description:
+      "A full-featured commercial roofing website built by Paper Street Software Co. for Scott Commercial Roofing — including a satellite roof estimator, geo-targeted service × city SEO pages, a before/after project gallery, inline quote forms, and Google rich-result structured data.",
+    creator: {
+      "@type": "ProfessionalService",
+      name: "Paper Street Software Co.",
+      url: "https://www.paperstreet.online",
+      email: "paperstreetsoftware@gmail.com",
+    },
+  },
+];
+
 export default function BuiltBy() {
   return (
     <>
       <SEO
         title="Built by Paper Street Software Co."
         description="Paper Street Software Co. built the Scott Commercial Roofing website — custom sites, AI tools, and digital solutions for local businesses."
+        jsonLd={builtBySchema}
       />
 
       {/* Hero */}
