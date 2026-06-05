@@ -60,6 +60,19 @@ export const ListContactSubmissionsResponse = zod.array(ListContactSubmissionsRe
 
 
 /**
+ * @summary List all Paper Street contact form submissions
+ */
+export const ListBuiltByContactSubmissionsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "message": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+export const ListBuiltByContactSubmissionsResponse = zod.array(ListBuiltByContactSubmissionsResponseItem)
+
+
+/**
  * @summary Look up roof area from Google Solar API
  */
 export const GetRoofAreaQueryParams = zod.object({

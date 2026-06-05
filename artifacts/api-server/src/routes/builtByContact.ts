@@ -1,6 +1,9 @@
 import { Router } from "express";
 import { z } from "zod";
 import { sendEmail } from "../lib/email";
+import { db } from "@workspace/db";
+import { builtByContactSubmissionsTable } from "@workspace/db";
+import { requireAdminKey } from "../middleware/requireAdminKey";
 
 const router = Router();
 
@@ -23,6 +26,13 @@ router.post("/built-by-contact", async (req, res): Promise<void> => {
   const { name, email, message } = parsed.data;
 
   req.log.info({ name, email }, "Paper Street contact form submission received");
+
+  const [submission] = await db
+    .insert(builtByContactSubmissionsTable)
+    .values({ name, email, message })
+    .returning();
+
+  req.log.info({ id: submission.id }, "Built-by contact submission saved");
 
   await sendEmail({
     to: PAPER_STREET_EMAIL,
@@ -53,6 +63,15 @@ router.post("/built-by-contact", async (req, res): Promise<void> => {
   });
 
   res.status(200).json({ ok: true });
+});
+
+router.get("/built-by-contact/submissions", requireAdminKey, async (req, res): Promise<void> => {
+  const submissions = await db
+    .select()
+    .from(builtByContactSubmissionsTable)
+    .orderBy(builtByContactSubmissionsTable.createdAt);
+
+  res.json(submissions);
 });
 
 function escapeHtml(str: string): string {

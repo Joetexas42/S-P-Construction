@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './builtByContactSubmission';
 export * from './contactInput';
 export * from './contactInputPreferredContact';
 export * from './contactInputServiceType';

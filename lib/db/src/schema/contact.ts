@@ -20,3 +20,15 @@ export const contactSubmissionsTable = pgTable("contact_submissions", {
 export const insertContactSubmissionSchema = createInsertSchema(contactSubmissionsTable).omit({ id: true, createdAt: true });
 export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
 export type ContactSubmission = typeof contactSubmissionsTable.$inferSelect;
+
+export const builtByContactSubmissionsTable = pgTable("built_by_contact_submissions", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertBuiltByContactSubmissionSchema = createInsertSchema(builtByContactSubmissionsTable).omit({ id: true, createdAt: true });
+export type InsertBuiltByContactSubmission = z.infer<typeof insertBuiltByContactSubmissionSchema>;
+export type BuiltByContactSubmission = typeof builtByContactSubmissionsTable.$inferSelect;
