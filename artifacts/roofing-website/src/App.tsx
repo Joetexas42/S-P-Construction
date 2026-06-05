@@ -20,6 +20,7 @@ import Estimate from "@/pages/Estimate";
 import FAQ from "@/pages/FAQ";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
+import BuiltBy from "@/pages/BuiltBy";
 import NotFound from "@/pages/not-found";
 import AdminDashboard from "@/pages/AdminDashboard";
 
@@ -78,6 +79,7 @@ function Router() {
             <Route path="/faq" component={FAQ} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/terms" component={Terms} />
+            <Route path="/built-by" component={BuiltBy} />
             <Route component={NotFound} />
           </Switch>
         </Layout>
