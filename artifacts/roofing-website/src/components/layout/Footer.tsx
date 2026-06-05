@@ -100,22 +100,13 @@ export function Footer() {
                 <span className="flex items-center gap-1"><HardHat className="h-3 w-3" /> Licensed & Insured in Texas</span>
               </div>
             </div>
+            <div className="mt-4 text-center text-xs text-primary-foreground/40">
+              <Link href="/built-by" className="hover:text-primary-foreground/70 transition-colors">
+                Built by Paper Street Software Co.
+              </Link>
+            </div>
           </div>
         </ScrollRevealWrapper>
-      </div>
-
-      <div className="bg-primary-foreground/5 border-t border-primary-foreground/10">
-        <div className="container mx-auto px-4 md:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-primary-foreground/70 font-medium">
-            Need a website or app for your business?
-          </p>
-          <Link
-            href="/built-by"
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary-foreground/30 text-sm font-bold text-primary-foreground/90 uppercase tracking-wide hover:bg-primary-foreground/10 hover:border-primary-foreground/60 transition-all duration-200 shrink-0"
-          >
-            Built by Paper Street Software Co. &rarr;
-          </Link>
-        </div>
       </div>
     </footer>
   );
