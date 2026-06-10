@@ -13,8 +13,6 @@ import {
   Smartphone,
   Globe,
   Bot,
-  CalendarCheck,
-  ThumbsUp,
   Languages,
   Wrench,
   Mail,
@@ -77,8 +75,6 @@ const builtFeatures = [
 const capabilities = [
   { icon: Globe, label: "Custom websites & landing pages" },
   { icon: Bot, label: "AI-powered tools & automations" },
-  { icon: CalendarCheck, label: "Online booking & scheduling" },
-  { icon: ThumbsUp, label: "Reputation & review management" },
   { icon: Languages, label: "Multilingual & localization support" },
   { icon: Wrench, label: "Ongoing maintenance & performance" },
 ];
