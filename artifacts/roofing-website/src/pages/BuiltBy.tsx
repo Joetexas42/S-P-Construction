@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
-import { Button } from "@/components/ui/button";
 import {
   Satellite,
   MapPin,
@@ -17,8 +15,6 @@ import {
   Wrench,
   Mail,
   ExternalLink,
-  CheckCircle,
-  AlertCircle,
 } from "lucide-react";
 
 const builtFeatures = [
@@ -105,49 +101,7 @@ const builtBySchema = [
   },
 ];
 
-type FormState = "idle" | "submitting" | "success" | "error";
-
 export default function BuiltBy() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [formState, setFormState] = useState<FormState>("idle");
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-
-  function validate() {
-    const errors: Record<string, string> = {};
-    if (!name.trim()) errors.name = "Name is required.";
-    if (!email.trim()) errors.email = "Email is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Enter a valid email address.";
-    if (!message.trim()) errors.message = "Message is required.";
-    return errors;
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const errors = validate();
-    if (Object.keys(errors).length > 0) {
-      setFieldErrors(errors);
-      return;
-    }
-    setFieldErrors({});
-    setFormState("submitting");
-    try {
-      const res = await fetch("/api/built-by-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-      if (!res.ok) throw new Error("Request failed");
-      setFormState("success");
-      setName("");
-      setEmail("");
-      setMessage("");
-    } catch {
-      setFormState("error");
-    }
-  }
-
   return (
     <>
       <SEO
@@ -262,7 +216,7 @@ export default function BuiltBy() {
                   Let's Talk About Your Project
                 </h3>
 
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-4">
                   <li className="flex items-center gap-3 text-sm text-muted-foreground">
                     <Globe className="h-4 w-4 text-secondary shrink-0" />
                     <a
@@ -285,107 +239,6 @@ export default function BuiltBy() {
                     </a>
                   </li>
                 </ul>
-
-                {formState === "success" ? (
-                  <div className="flex flex-col items-center gap-4 py-8 text-center">
-                    <CheckCircle className="h-12 w-12 text-secondary" />
-                    <h4 className="text-lg font-heading font-bold uppercase tracking-tight text-foreground">
-                      Message Sent!
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      Thanks for reaching out. We'll be in touch shortly.
-                    </p>
-                    <Button
-                      variant="outline"
-                      className="mt-2"
-                      onClick={() => setFormState("idle")}
-                    >
-                      Send Another Message
-                    </Button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                    {formState === "error" && (
-                      <div className="flex items-center gap-2 rounded-md bg-destructive/10 border border-destructive/20 px-3 py-2 text-sm text-destructive">
-                        <AlertCircle className="h-4 w-4 shrink-0" />
-                        <span>Something went wrong. Please try again.</span>
-                      </div>
-                    )}
-                    <div>
-                      <label
-                        htmlFor="ps-name"
-                        className="block text-xs font-bold uppercase tracking-wide text-foreground mb-1.5"
-                      >
-                        Name
-                      </label>
-                      <input
-                        id="ps-name"
-                        type="text"
-                        placeholder="Your name"
-                        value={name}
-                        onChange={(e) => {
-                          setName(e.target.value);
-                          if (fieldErrors.name) setFieldErrors((prev) => ({ ...prev, name: "" }));
-                        }}
-                        className={`w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 transition ${fieldErrors.name ? "border-destructive" : "border-input"}`}
-                      />
-                      {fieldErrors.name && (
-                        <p className="mt-1 text-xs text-destructive">{fieldErrors.name}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="ps-email"
-                        className="block text-xs font-bold uppercase tracking-wide text-foreground mb-1.5"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="ps-email"
-                        type="email"
-                        placeholder="you@company.com"
-                        value={email}
-                        onChange={(e) => {
-                          setEmail(e.target.value);
-                          if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: "" }));
-                        }}
-                        className={`w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 transition ${fieldErrors.email ? "border-destructive" : "border-input"}`}
-                      />
-                      {fieldErrors.email && (
-                        <p className="mt-1 text-xs text-destructive">{fieldErrors.email}</p>
-                      )}
-                    </div>
-                    <div>
-                      <label
-                        htmlFor="ps-message"
-                        className="block text-xs font-bold uppercase tracking-wide text-foreground mb-1.5"
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        id="ps-message"
-                        rows={4}
-                        placeholder="Tell us about your project…"
-                        value={message}
-                        onChange={(e) => {
-                          setMessage(e.target.value);
-                          if (fieldErrors.message) setFieldErrors((prev) => ({ ...prev, message: "" }));
-                        }}
-                        className={`w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-secondary/50 transition resize-none ${fieldErrors.message ? "border-destructive" : "border-input"}`}
-                      />
-                      {fieldErrors.message && (
-                        <p className="mt-1 text-xs text-destructive">{fieldErrors.message}</p>
-                      )}
-                    </div>
-                    <Button
-                      type="submit"
-                      disabled={formState === "submitting"}
-                      className="w-full font-bold uppercase tracking-wide"
-                    >
-                      {formState === "submitting" ? "Sending…" : "Send Message"}
-                    </Button>
-                  </form>
-                )}
               </div>
             </ScrollRevealWrapper>
           </div>
