@@ -7,8 +7,10 @@ import {
   useDeleteProject,
   getListProjectsQueryKey,
   useListBuiltByContactSubmissions,
+  useListContactSubmissions,
+  useListEstimatorSubmissions,
 } from "@workspace/api-client-react";
-import type { Project, ProjectInput, ProjectUpdate, BuiltByContactSubmission } from "@workspace/api-client-react";
+import type { Project, ProjectInput, ProjectUpdate, BuiltByContactSubmission, ContactSubmission, EstimatorSubmission } from "@workspace/api-client-react";
 import { useUpload } from "@workspace/object-storage-web";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +34,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail } from "lucide-react";
+import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail, PhoneCall, Calculator } from "lucide-react";
 
 const ADMIN_KEY_SESSION = "admin_key";
 const CATEGORIES = [
@@ -611,6 +613,148 @@ function BuiltByContactSubmissionsPanel({ adminKey }: { adminKey: string }) {
   );
 }
 
+function RoofingLeadsPanel({ adminKey }: { adminKey: string }) {
+  const { data: submissions, isLoading, isError } = useListContactSubmissions({
+    request: adminKeyHeaders(adminKey),
+  });
+
+  return (
+    <section className="bg-white rounded-xl shadow-sm border border-gray-200">
+      <div className="flex items-center gap-2 px-6 py-4 border-b border-gray-200">
+        <PhoneCall className="h-5 w-5 text-primary" />
+        <h2 className="text-lg font-semibold text-gray-900">Roofing Leads</h2>
+        {submissions && (
+          <Badge variant="secondary" className="ml-1">
+            {submissions.length}
+          </Badge>
+        )}
+      </div>
+
+      {isLoading && (
+        <div className="px-6 py-12 text-center text-gray-400">Loading leads…</div>
+      )}
+      {isError && (
+        <div className="px-6 py-12 text-center text-red-500">
+          Failed to load leads. Please try refreshing the page.
+        </div>
+      )}
+      {submissions && submissions.length === 0 && (
+        <div className="px-6 py-12 text-center text-gray-400">
+          No roofing leads yet.
+        </div>
+      )}
+
+      {submissions && submissions.length > 0 && (
+        <ul className="divide-y divide-gray-100">
+          {submissions.map((s: ContactSubmission) => (
+            <li key={s.id} className="px-6 py-4 space-y-1.5">
+              <div className="flex items-start justify-between flex-wrap gap-2">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-medium text-gray-900">{s.name}</span>
+                    <Badge variant="outline" className="text-xs">{s.serviceType}</Badge>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-gray-500 flex-wrap">
+                    <a href={`mailto:${s.email}`} className="text-primary hover:underline">
+                      {s.email}
+                    </a>
+                    {s.phone && (
+                      <a href={`tel:${s.phone}`} className="hover:underline">
+                        {s.phone}
+                      </a>
+                    )}
+                    {s.city && <span>{s.city}</span>}
+                  </div>
+                </div>
+                <span className="text-xs text-gray-400 shrink-0">{formatDate(s.createdAt)}</span>
+              </div>
+              {s.message && (
+                <p className="text-sm text-gray-600 whitespace-pre-wrap">{s.message}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
+function EstimatorSubmissionsPanel({ adminKey }: { adminKey: string }) {
+  const { data: submissions, isLoading, isError } = useListEstimatorSubmissions({
+    request: adminKeyHeaders(adminKey),
+  });
+
+  function formatCost(usd: number): string {
+    return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(usd);
+  }
+
+  return (
+    <section className="bg-white rounded-xl shadow-sm border border-gray-200">
+      <div className="flex items-center gap-2 px-6 py-4 border-b border-gray-200">
+        <Calculator className="h-5 w-5 text-primary" />
+        <h2 className="text-lg font-semibold text-gray-900">Estimator Submissions</h2>
+        {submissions && (
+          <Badge variant="secondary" className="ml-1">
+            {submissions.length}
+          </Badge>
+        )}
+      </div>
+
+      {isLoading && (
+        <div className="px-6 py-12 text-center text-gray-400">Loading submissions…</div>
+      )}
+      {isError && (
+        <div className="px-6 py-12 text-center text-red-500">
+          Failed to load submissions. Please try refreshing the page.
+        </div>
+      )}
+      {submissions && submissions.length === 0 && (
+        <div className="px-6 py-12 text-center text-gray-400">
+          No estimator submissions yet.
+        </div>
+      )}
+
+      {submissions && submissions.length > 0 && (
+        <ul className="divide-y divide-gray-100">
+          {submissions.map((s: EstimatorSubmission) => (
+            <li key={s.id} className="px-6 py-4 space-y-1.5">
+              <div className="flex items-start justify-between flex-wrap gap-2">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-medium text-gray-900">{s.name}</span>
+                    <Badge variant="outline" className="text-xs">{s.serviceType}</Badge>
+                    <Badge className="text-xs bg-green-50 text-green-700 border-green-200 hover:bg-green-50">
+                      {formatCost(s.estimatedCostUsd)}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-gray-500 flex-wrap">
+                    <a href={`mailto:${s.email}`} className="text-primary hover:underline">
+                      {s.email}
+                    </a>
+                    {s.phone && (
+                      <a href={`tel:${s.phone}`} className="hover:underline">
+                        {s.phone}
+                      </a>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-500">{s.address}</p>
+                  <p className="text-xs text-gray-400">
+                    {s.roofSqft.toLocaleString()} sq ft · ${s.pricePerSqft}/sqft
+                  </p>
+                </div>
+                <span className="text-xs text-gray-400 shrink-0">{formatDate(s.createdAt)}</span>
+              </div>
+              {s.message && (
+                <p className="text-sm text-gray-600 whitespace-pre-wrap">{s.message}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
 export default function AdminDashboard() {
   const storedKey = sessionStorage.getItem(ADMIN_KEY_SESSION) ?? "";
   const [adminKey, setAdminKey] = useState(storedKey);
@@ -650,6 +794,8 @@ export default function AdminDashboard() {
         </div>
 
         <div className="space-y-8">
+          <RoofingLeadsPanel adminKey={adminKey} />
+          <EstimatorSubmissionsPanel adminKey={adminKey} />
           <ProjectsPanel adminKey={adminKey} onAuthError={handleAuthError} />
           <BuiltByContactSubmissionsPanel adminKey={adminKey} />
         </div>
