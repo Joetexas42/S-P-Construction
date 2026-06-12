@@ -102,8 +102,16 @@ export function Footer() {
             </div>
             <div className="mt-4 text-center text-xs text-primary-foreground/40">
               <Link href="/built-by" className="hover:text-primary-foreground/70 transition-colors">
-                Built by Paper Street Software Co.
-              </Link>
+                Built by
+              </Link>{" "}
+              <a
+                href="https://www.paperstreet.online"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary-foreground/70 transition-colors"
+              >
+                Paper Street Software Co.
+              </a>
             </div>
           </div>
         </ScrollRevealWrapper>
