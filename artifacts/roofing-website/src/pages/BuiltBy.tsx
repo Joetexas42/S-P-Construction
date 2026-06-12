@@ -118,7 +118,14 @@ export default function BuiltBy() {
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
           <ScrollRevealWrapper>
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-4">
-              Paper Street Software Co.
+              <a
+                href="https://www.paperstreet.online"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Paper Street Software Co.
+              </a>
             </p>
             <h1 className="text-4xl md:text-6xl font-heading font-black uppercase tracking-tight text-white mb-6 leading-tight">
               We Build the Web<br className="hidden md:block" />{" "}
