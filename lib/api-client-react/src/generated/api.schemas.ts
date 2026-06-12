@@ -184,14 +184,6 @@ export interface ProjectUpdate {
   category?: string;
 }
 
-export interface BuiltByContactSubmission {
-  id: number;
-  name: string;
-  email: string;
-  message: string;
-  createdAt: string;
-}
-
 export interface ErrorResponse {
   error: string;
 }

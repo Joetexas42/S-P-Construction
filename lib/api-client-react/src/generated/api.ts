@@ -20,7 +20,6 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  BuiltByContactSubmission,
   ContactInput,
   ContactSubmission,
   ErrorEnvelope,
@@ -264,83 +263,6 @@ export function useListContactSubmissions<TData = Awaited<ReturnType<typeof list
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getListContactSubmissionsQueryOptions(options)
-
-  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  return { ...query, queryKey: queryOptions.queryKey };
-}
-
-
-
-
-
-
-
-export const getListBuiltByContactSubmissionsUrl = () => {
-
-
-
-
-  return `/api/built-by-contact/submissions`
-}
-
-/**
- * @summary List all Paper Street contact form submissions
- */
-export const listBuiltByContactSubmissions = async ( options?: RequestInit): Promise<BuiltByContactSubmission[]> => {
-
-  return customFetch<BuiltByContactSubmission[]>(getListBuiltByContactSubmissionsUrl(),
-  {
-    ...options,
-    method: 'GET'
-
-
-  }
-);}
-
-
-
-
-
-export const getListBuiltByContactSubmissionsQueryKey = () => {
-    return [
-    `/api/built-by-contact/submissions`
-    ] as const;
-    }
-
-
-export const getListBuiltByContactSubmissionsQueryOptions = <TData = Awaited<ReturnType<typeof listBuiltByContactSubmissions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listBuiltByContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getListBuiltByContactSubmissionsQueryKey();
-
-
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof listBuiltByContactSubmissions>>> = ({ signal }) => listBuiltByContactSubmissions({ signal, ...requestOptions });
-
-
-
-
-
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listBuiltByContactSubmissions>>, TError, TData> & { queryKey: QueryKey }
-}
-
-export type ListBuiltByContactSubmissionsQueryResult = NonNullable<Awaited<ReturnType<typeof listBuiltByContactSubmissions>>>
-export type ListBuiltByContactSubmissionsQueryError = ErrorType<unknown>
-
-
-/**
- * @summary List all Paper Street contact form submissions
- */
-
-export function useListBuiltByContactSubmissions<TData = Awaited<ReturnType<typeof listBuiltByContactSubmissions>>, TError = ErrorType<unknown>>(
-  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listBuiltByContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
-
- ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-
-  const queryOptions = getListBuiltByContactSubmissionsQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

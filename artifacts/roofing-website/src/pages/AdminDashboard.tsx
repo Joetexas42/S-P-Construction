@@ -6,11 +6,10 @@ import {
   useUpdateProject,
   useDeleteProject,
   getListProjectsQueryKey,
-  useListBuiltByContactSubmissions,
   useListContactSubmissions,
   useListEstimatorSubmissions,
 } from "@workspace/api-client-react";
-import type { Project, ProjectInput, ProjectUpdate, BuiltByContactSubmission, ContactSubmission, EstimatorSubmission } from "@workspace/api-client-react";
+import type { Project, ProjectInput, ProjectUpdate, ContactSubmission, EstimatorSubmission } from "@workspace/api-client-react";
 import { useUpload } from "@workspace/object-storage-web";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -557,61 +556,6 @@ function formatDate(iso: string): string {
   });
 }
 
-function BuiltByContactSubmissionsPanel({ adminKey }: { adminKey: string }) {
-  const { data: submissions, isLoading, isError } = useListBuiltByContactSubmissions({
-    request: adminKeyHeaders(adminKey),
-  });
-
-  return (
-    <section className="bg-white rounded-xl shadow-sm border border-gray-200">
-      <div className="flex items-center gap-2 px-6 py-4 border-b border-gray-200">
-        <Mail className="h-5 w-5 text-primary" />
-        <h2 className="text-lg font-semibold text-gray-900">Paper Street Inquiries</h2>
-        {submissions && (
-          <Badge variant="secondary" className="ml-1">
-            {submissions.length}
-          </Badge>
-        )}
-      </div>
-
-      {isLoading && (
-        <div className="px-6 py-12 text-center text-gray-400">Loading submissions…</div>
-      )}
-      {isError && (
-        <div className="px-6 py-12 text-center text-red-500">
-          Failed to load submissions. Please try refreshing the page.
-        </div>
-      )}
-      {submissions && submissions.length === 0 && (
-        <div className="px-6 py-12 text-center text-gray-400">
-          No Paper Street inquiries yet.
-        </div>
-      )}
-
-      {submissions && submissions.length > 0 && (
-        <ul className="divide-y divide-gray-100">
-          {submissions.map((s: BuiltByContactSubmission) => (
-            <li key={s.id} className="px-6 py-4 space-y-1">
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-900">{s.name}</span>
-                  <a
-                    href={`mailto:${s.email}`}
-                    className="text-sm text-primary hover:underline"
-                  >
-                    {s.email}
-                  </a>
-                </div>
-                <span className="text-xs text-gray-400 shrink-0">{formatDate(s.createdAt)}</span>
-              </div>
-              <p className="text-sm text-gray-600 whitespace-pre-wrap">{s.message}</p>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  );
-}
 
 function RoofingLeadsPanel({ adminKey }: { adminKey: string }) {
   const { data: submissions, isLoading, isError } = useListContactSubmissions({
@@ -797,7 +741,6 @@ export default function AdminDashboard() {
           <RoofingLeadsPanel adminKey={adminKey} />
           <EstimatorSubmissionsPanel adminKey={adminKey} />
           <ProjectsPanel adminKey={adminKey} onAuthError={handleAuthError} />
-          <BuiltByContactSubmissionsPanel adminKey={adminKey} />
         </div>
       </div>
     </div>

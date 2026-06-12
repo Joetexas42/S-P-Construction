@@ -71,20 +71,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ContactSubmission"
-  /built-by-contact/submissions:
-    get:
-      operationId: listBuiltByContactSubmissions
-      tags: [contact]
-      summary: List all Paper Street contact form submissions
-      responses:
-        "200":
-          description: List of submissions
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/BuiltByContactSubmission"
   /estimator/roof-area:
     get:
       operationId: getRoofArea
@@ -616,26 +602,6 @@ components:
         category:
           type: string
           minLength: 1
-    BuiltByContactSubmission:
-      type: object
-      required:
-        - id
-        - name
-        - email
-        - message
-        - createdAt
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        email:
-          type: string
-        message:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
     ErrorResponse:
       type: object
       properties:
