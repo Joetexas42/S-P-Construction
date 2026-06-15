@@ -105,7 +105,7 @@ export function Footer() {
                 Built by
               </Link>{" "}
               <a
-                href="https://www.paperstreet.online"
+                href="https://paperstreet.online/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary-foreground/70 transition-colors"

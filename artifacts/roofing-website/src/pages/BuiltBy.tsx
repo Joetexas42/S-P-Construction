@@ -80,7 +80,7 @@ const builtBySchema = [
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: "Paper Street Software Co.",
-    url: "https://www.paperstreet.online",
+    url: "https://paperstreet.online/",
     email: "paperstreetsoftware@gmail.com",
     description:
       "Paper Street Software Co. designs, builds, and maintains custom websites, AI tools, and digital solutions — purpose-built for local businesses.",
@@ -95,7 +95,7 @@ const builtBySchema = [
     creator: {
       "@type": "ProfessionalService",
       name: "Paper Street Software Co.",
-      url: "https://www.paperstreet.online",
+      url: "https://paperstreet.online/",
       email: "paperstreetsoftware@gmail.com",
     },
   },
@@ -119,7 +119,7 @@ export default function BuiltBy() {
           <ScrollRevealWrapper>
             <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-4">
               <a
-                href="https://www.paperstreet.online"
+                href="https://paperstreet.online/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -133,7 +133,7 @@ export default function BuiltBy() {
             </h1>
             <p className="text-lg text-primary-foreground/80 leading-relaxed max-w-2xl mb-8">
               <a
-                href="https://www.paperstreet.online"
+                href="https://paperstreet.online/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -143,7 +143,7 @@ export default function BuiltBy() {
               designs, builds, and maintains custom websites, AI tools, and digital solutions — purpose-built for the local businesses that keep communities running.
             </p>
             <a
-              href="https://www.paperstreet.online"
+              href="https://paperstreet.online/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground font-heading font-bold uppercase tracking-wide text-sm px-6 py-3 rounded hover:bg-secondary/90 transition-colors"
@@ -244,7 +244,7 @@ export default function BuiltBy() {
                   <li className="flex items-center gap-3 text-sm text-muted-foreground">
                     <Globe className="h-4 w-4 text-secondary shrink-0" />
                     <a
-                      href="https://www.paperstreet.online"
+                      href="https://paperstreet.online/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-foreground transition-colors flex items-center gap-1"
