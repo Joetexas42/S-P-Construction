@@ -132,7 +132,15 @@ export default function BuiltBy() {
               <span className="text-secondary">for Local Business.</span>
             </h1>
             <p className="text-lg text-primary-foreground/80 leading-relaxed max-w-2xl mb-8">
-              Paper Street Software Co. designs, builds, and maintains custom websites, AI tools, and digital solutions — purpose-built for the local businesses that keep communities running.
+              <a
+                href="https://www.paperstreet.online"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Paper Street Software Co.
+              </a>{" "}
+              designs, builds, and maintains custom websites, AI tools, and digital solutions — purpose-built for the local businesses that keep communities running.
             </p>
             <a
               href="https://www.paperstreet.online"
