@@ -13,8 +13,8 @@ export function Footer() {
               <Link href="/" className="flex items-center gap-2">
                 <HardHat className="h-8 w-8 text-secondary" />
                 <div className="flex flex-col">
-                  <span className="font-heading font-bold text-xl leading-none text-white uppercase tracking-tight">Scott Commercial</span>
-                  <span className="text-xs text-primary-foreground/70 uppercase font-semibold tracking-wider">Roofing</span>
+                  <span className="font-heading font-bold text-xl leading-none text-white uppercase tracking-tight">S&amp;P</span>
+                  <span className="text-xs text-primary-foreground/70 uppercase font-semibold tracking-wider">Construction</span>
                 </div>
               </Link>
               <p className="text-primary-foreground/80 leading-relaxed text-sm">
@@ -37,7 +37,7 @@ export function Footer() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-secondary shrink-0" />
-                  <a href="mailto:info@scottcommercialroofing.com" className="hover:text-white transition-colors">info@scottcommercialroofing.com</a>
+                  <a href="mailto:info@spconstruction.com" className="hover:text-white transition-colors">info@spconstruction.com</a>
                 </li>
               </ul>
             </div>
@@ -91,7 +91,7 @@ export function Footer() {
               ))}
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/60">
-              <p>&copy; {new Date().getFullYear()} Scott Commercial Roofing. All rights reserved.</p>
+              <p>&copy; {new Date().getFullYear()} S&amp;P Construction. All rights reserved.</p>
               <div className="flex items-center gap-4">
                 <Link href="/about" className="hover:text-primary-foreground/90 transition-colors">About</Link>
                 <Link href="/faq" className="hover:text-primary-foreground/90 transition-colors">FAQ</Link>
@@ -102,16 +102,8 @@ export function Footer() {
             </div>
             <div className="mt-4 text-center text-xs text-primary-foreground/40">
               <Link href="/built-by" className="hover:text-primary-foreground/70 transition-colors">
-                Built by
-              </Link>{" "}
-              <a
-                href="https://paperstreet.online/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary-foreground/70 transition-colors"
-              >
-                Paper Street Software Co.
-              </a>
+                Built by Paper Street Software Co.
+              </Link>
             </div>
           </div>
         </ScrollRevealWrapper>

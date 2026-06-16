@@ -1,6 +1,6 @@
-# [Project name]
+# S&P Construction
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Lead-generation website for S&P Construction, a commercial roofing contractor serving the DFW metroplex — featuring geo-targeted SEO pages, a satellite roof estimator, before/after project gallery, and inline quote forms.
 
 ## Run & Operate
 

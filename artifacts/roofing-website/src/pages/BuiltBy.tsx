@@ -89,34 +89,16 @@ type FilterTab = "All" | "Web" | "App" | "AI";
 
 const otherProjects = [
   {
-    id: "scott-commercial",
-    name: "Scott Commercial Roofing",
+    id: "sp-construction",
+    name: "S&P Construction",
     description:
       "Full-featured commercial roofing website with a satellite roof estimator, geo-targeted SEO pages, before/after gallery, and inline quote forms — built to rank and convert across the DFW metroplex.",
     gradient: "from-slate-700 via-slate-800 to-slate-900",
     accentColor: "#f59e0b",
-    tags: ["Web", "AI", "SEO"],
+    tags: ["Web", "AI"],
     featured: true,
-  },
-  {
-    id: "passport-birria",
-    name: "Passport Birria Guide",
-    description:
-      "Online menu, location finder, and bilingual ordering flow for a fast-growing Mexican restaurant brand. Spanish and English, zero friction.",
-    gradient: "from-red-700 via-orange-700 to-yellow-600",
-    accentColor: "#fbbf24",
-    tags: ["Web", "Bilingual"],
-    featured: false,
-  },
-  {
-    id: "lone-star-lawn",
-    name: "Lone Star Lawn & Landscaping",
-    description:
-      "Lead-gen site with seasonal service scheduling, a photo portfolio, and instant quote requests — built for a local Texas landscaping crew.",
-    gradient: "from-green-700 via-emerald-700 to-teal-700",
-    accentColor: "#34d399",
-    tags: ["Web"],
-    featured: false,
+    href: "/",
+    external: false,
   },
   {
     id: "vv-auto",
@@ -127,6 +109,44 @@ const otherProjects = [
     accentColor: "#a3e635",
     tags: ["Web", "App"],
     featured: false,
+    href: null,
+    external: false,
+  },
+  {
+    id: "paper-street-software",
+    name: "Paper Street Software Co.",
+    description:
+      "Our own home on the web — a portfolio and studio site showcasing what we build and why we build it, with a straight-talk approach to working with local businesses.",
+    gradient: "from-indigo-800 via-violet-800 to-purple-900",
+    accentColor: "#818cf8",
+    tags: ["Web"],
+    featured: false,
+    href: "https://paperstreet.online/",
+    external: true,
+  },
+  {
+    id: "prompt-the-matrix",
+    name: "Prompt the Matrix",
+    description:
+      "An AI prompt-engineering platform that helps creators and businesses get more out of language models — curated prompts, templates, and guides built for real-world use.",
+    gradient: "from-emerald-800 via-teal-800 to-cyan-900",
+    accentColor: "#34d399",
+    tags: ["Web", "AI"],
+    featured: false,
+    href: null,
+    external: false,
+  },
+  {
+    id: "passport-bros-guide",
+    name: "Passport Bros Guide",
+    description:
+      "A travel and lifestyle resource for the modern adventurer — destination guides, visa tips, and community content for men who travel internationally.",
+    gradient: "from-orange-700 via-amber-700 to-yellow-600",
+    accentColor: "#fbbf24",
+    tags: ["Web"],
+    featured: false,
+    href: null,
+    external: false,
   },
 ];
 
@@ -145,10 +165,9 @@ const builtBySchema = [
   {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    name: "Scott Commercial Roofing Website",
-    url: "https://www.scottcommercialroofing.com",
+    name: "S&P Construction Website",
     description:
-      "A full-featured commercial roofing website built by Paper Street Software Co. for Scott Commercial Roofing — including a satellite roof estimator, geo-targeted service × city SEO pages, a before/after project gallery, inline quote forms, and Google rich-result structured data.",
+      "A full-featured commercial roofing website built by Paper Street Software Co. for S&P Construction — including a satellite roof estimator, geo-targeted service × city SEO pages, a before/after project gallery, inline quote forms, and Google rich-result structured data.",
     creator: {
       "@type": "ProfessionalService",
       name: "Paper Street Software Co.",
@@ -289,7 +308,7 @@ export default function BuiltBy() {
     <>
       <SEO
         title="Built by Paper Street Software Co."
-        description="Paper Street Software Co. built the Scott Commercial Roofing website — custom sites, AI tools, and digital solutions for local businesses."
+        description="Paper Street Software Co. built the S&P Construction website — custom sites, AI tools, and digital solutions for local businesses."
         jsonLd={builtBySchema}
       />
 
@@ -349,7 +368,7 @@ export default function BuiltBy() {
               We Built This for a Friend
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4 max-w-2xl">
-              Scott Commercial Roofing had the crew, the reputation, and twenty years of DFW roofing work behind them. What they didn't have was a website that showed any of it. We reached out because we believed a business that good deserved a digital presence to match — not just a brochure, but a real lead-generation engine.
+              S&P Construction had the crew, the reputation, and twenty years of DFW roofing work behind them. What they didn't have was a website that showed any of it. We reached out because we believed a business that good deserved a digital presence to match — not just a brochure, but a real lead-generation engine.
             </p>
             <p className="text-muted-foreground leading-relaxed max-w-2xl">
               We scoped the project honestly, built every feature that would move the needle, and delivered it without surprises on the invoice. That's the Paper Street way.
@@ -377,7 +396,7 @@ export default function BuiltBy() {
         </div>
       </section>
 
-      {/* What We Built for Scott Commercial Roofing */}
+      {/* What We Built for S&P Construction */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <ScrollRevealWrapper>
@@ -386,10 +405,10 @@ export default function BuiltBy() {
                 Case Study
               </p>
               <h2 className="text-3xl md:text-4xl font-heading font-black uppercase tracking-tight text-foreground mb-4">
-                What We Built for Scott Commercial Roofing
+                What We Built for S&amp;P Construction
               </h2>
               <p className="text-muted-foreground leading-relaxed">
-                Scott Commercial Roofing needed more than a brochure site — they needed a digital presence that generates leads, ranks in every city they serve, and earns the trust of commercial property managers before the first call. Here's what we built.
+                S&P Construction needed more than a brochure site — they needed a digital presence that generates leads, ranks in every city they serve, and earns the trust of commercial property managers before the first call. Here's what we built.
               </p>
             </div>
           </ScrollRevealWrapper>
@@ -536,9 +555,30 @@ export default function BuiltBy() {
                     <h3 className="text-lg font-heading font-black uppercase tracking-tight text-foreground">
                       {project.name}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-muted-foreground leading-relaxed flex-1">
                       {project.description}
                     </p>
+                    {project.href && (
+                      <div className="pt-2">
+                        {project.external ? (
+                          <a
+                            href={project.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-secondary hover:text-secondary/80 transition-colors"
+                          >
+                            Visit site <ExternalLink className="h-3 w-3" />
+                          </a>
+                        ) : (
+                          <a
+                            href={project.href}
+                            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-secondary hover:text-secondary/80 transition-colors"
+                          >
+                            View this site <ArrowRight className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </ScrollRevealWrapper>
