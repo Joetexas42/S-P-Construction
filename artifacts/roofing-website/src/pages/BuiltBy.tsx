@@ -99,6 +99,7 @@ const otherProjects = [
     featured: true,
     href: "/",
     external: false,
+    thumbnail: null,
   },
   {
     id: "vv-auto",
@@ -109,8 +110,9 @@ const otherProjects = [
     accentColor: "#a3e635",
     tags: ["Web", "App"],
     featured: false,
-    href: null,
-    external: false,
+    href: "https://www.yelp.com/biz/v-v-auto-repair-dallas",
+    external: true,
+    thumbnail: "/images/portfolio/vv-auto-repair.png",
   },
   {
     id: "paper-street-software",
@@ -123,6 +125,7 @@ const otherProjects = [
     featured: false,
     href: "https://paperstreet.online/",
     external: true,
+    thumbnail: "/images/portfolio/paper-street-software.png",
   },
   {
     id: "prompt-the-matrix",
@@ -133,8 +136,9 @@ const otherProjects = [
     accentColor: "#34d399",
     tags: ["Web", "AI"],
     featured: false,
-    href: null,
-    external: false,
+    href: "https://promptthematrix.com/",
+    external: true,
+    thumbnail: "/images/portfolio/prompt-the-matrix.png",
   },
   {
     id: "passport-bros-guide",
@@ -145,8 +149,9 @@ const otherProjects = [
     accentColor: "#fbbf24",
     tags: ["Web"],
     featured: false,
-    href: null,
-    external: false,
+    href: "https://www.passportbrosguide.com/",
+    external: true,
+    thumbnail: "/images/portfolio/passport-bros-guide.png",
   },
 ];
 
@@ -517,17 +522,27 @@ export default function BuiltBy() {
                     project.featured ? "md:col-span-2" : ""
                   }`}
                 >
-                  {/* Gradient thumbnail */}
+                  {/* Thumbnail or gradient placeholder */}
                   <div
-                    className={`bg-gradient-to-br ${project.gradient} ${
+                    className={`${
                       project.featured ? "h-52 md:h-64" : "h-40"
-                    } flex items-center justify-center relative`}
+                    } relative overflow-hidden`}
                   >
-                    <span
-                      className="font-heading font-black text-4xl md:text-5xl uppercase tracking-tighter opacity-20 text-white select-none"
-                    >
-                      {project.name.split(" ").map((w) => w[0]).join("").slice(0, 3)}
-                    </span>
+                    {project.thumbnail ? (
+                      <img
+                        src={project.thumbnail}
+                        alt={`${project.name} website screenshot`}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <div
+                        className={`bg-gradient-to-br ${project.gradient} w-full h-full flex items-center justify-center`}
+                      >
+                        <span className="font-heading font-black text-4xl md:text-5xl uppercase tracking-tighter opacity-20 text-white select-none">
+                          {project.name.split(" ").map((w) => w[0]).join("").slice(0, 3)}
+                        </span>
+                      </div>
+                    )}
                     {project.featured && (
                       <span className="absolute top-4 left-4 bg-secondary text-secondary-foreground text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                         Featured
