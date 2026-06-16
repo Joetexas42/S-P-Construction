@@ -112,7 +112,7 @@ const otherProjects = [
     featured: false,
     href: "https://www.yelp.com/biz/v-v-auto-repair-dallas",
     external: true,
-    thumbnail: "/images/portfolio/vv-auto-repair.png",
+    thumbnail: "/images/portfolio/vv-auto.png",
   },
   {
     id: "paper-street-software",
