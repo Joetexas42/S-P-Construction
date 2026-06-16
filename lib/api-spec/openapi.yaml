@@ -16,6 +16,8 @@ tags:
     description: Instant satellite roof estimator
   - name: projects
     description: Portfolio project gallery
+  - name: paper-street-contact
+    description: Paper Street Software built-by page contact submissions
   - name: Storage
     description: Object storage upload and serving endpoints.
 paths:
@@ -226,6 +228,33 @@ paths:
           description: Project deleted
         "404":
           description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /paper-street-contact/submissions:
+    get:
+      operationId: listPaperStreetContactSubmissions
+      tags: [paper-street-contact]
+      summary: List all Paper Street contact submissions
+      parameters:
+        - in: header
+          name: x-admin-key
+          required: true
+          schema:
+            type: string
+          description: Admin key for protected access
+      responses:
+        "200":
+          description: List of submissions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PaperStreetContact"
+        "403":
+          description: Invalid or missing admin key
           content:
             application/json:
               schema:
@@ -602,6 +631,28 @@ components:
         category:
           type: string
           minLength: 1
+    PaperStreetContact:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - message
+        - createdAt
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
     ErrorResponse:
       type: object
       properties:

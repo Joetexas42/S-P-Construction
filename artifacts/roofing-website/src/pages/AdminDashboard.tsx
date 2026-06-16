@@ -8,8 +8,9 @@ import {
   getListProjectsQueryKey,
   useListContactSubmissions,
   useListEstimatorSubmissions,
+  useListPaperStreetContactSubmissions,
 } from "@workspace/api-client-react";
-import type { Project, ProjectInput, ProjectUpdate, ContactSubmission, EstimatorSubmission } from "@workspace/api-client-react";
+import type { Project, ProjectInput, ProjectUpdate, ContactSubmission, EstimatorSubmission, PaperStreetContact } from "@workspace/api-client-react";
 import { useUpload } from "@workspace/object-storage-web";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,7 +34,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail, PhoneCall, Calculator } from "lucide-react";
+import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail, PhoneCall, Calculator, MessageSquare } from "lucide-react";
 
 const ADMIN_KEY_SESSION = "admin_key";
 const CATEGORIES = [
@@ -699,6 +700,66 @@ function EstimatorSubmissionsPanel({ adminKey }: { adminKey: string }) {
   );
 }
 
+function PaperStreetInquiriesPanel({ adminKey }: { adminKey: string }) {
+  const { data: submissions, isLoading, isError } = useListPaperStreetContactSubmissions({
+    request: adminKeyHeaders(adminKey),
+  });
+
+  return (
+    <section className="bg-white rounded-xl shadow-sm border border-gray-200">
+      <div className="flex items-center gap-2 px-6 py-4 border-b border-gray-200">
+        <MessageSquare className="h-5 w-5 text-primary" />
+        <h2 className="text-lg font-semibold text-gray-900">Paper Street Inquiries</h2>
+        {submissions && (
+          <Badge variant="secondary" className="ml-1">
+            {submissions.length}
+          </Badge>
+        )}
+      </div>
+
+      {isLoading && (
+        <div className="px-6 py-12 text-center text-gray-400">Loading inquiries…</div>
+      )}
+      {isError && (
+        <div className="px-6 py-12 text-center text-red-500">
+          Failed to load inquiries. Please try refreshing the page.
+        </div>
+      )}
+      {submissions && submissions.length === 0 && (
+        <div className="px-6 py-12 text-center text-gray-400">
+          No Paper Street inquiries yet.
+        </div>
+      )}
+
+      {submissions && submissions.length > 0 && (
+        <ul className="divide-y divide-gray-100">
+          {submissions.map((s: PaperStreetContact) => (
+            <li key={s.id} className="px-6 py-4 space-y-1.5">
+              <div className="flex items-start justify-between flex-wrap gap-2">
+                <div className="space-y-0.5">
+                  <span className="font-medium text-gray-900">{s.name}</span>
+                  <div className="flex items-center gap-3 text-sm text-gray-500 flex-wrap">
+                    <a href={`mailto:${s.email}`} className="text-primary hover:underline">
+                      {s.email}
+                    </a>
+                    {s.phone && (
+                      <a href={`tel:${s.phone}`} className="hover:underline">
+                        {s.phone}
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <span className="text-xs text-gray-400 shrink-0">{formatDate(s.createdAt)}</span>
+              </div>
+              <p className="text-sm text-gray-600 whitespace-pre-wrap">{s.message}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
 export default function AdminDashboard() {
   const storedKey = sessionStorage.getItem(ADMIN_KEY_SESSION) ?? "";
   const [adminKey, setAdminKey] = useState(storedKey);
@@ -740,6 +801,7 @@ export default function AdminDashboard() {
         <div className="space-y-8">
           <RoofingLeadsPanel adminKey={adminKey} />
           <EstimatorSubmissionsPanel adminKey={adminKey} />
+          <PaperStreetInquiriesPanel adminKey={adminKey} />
           <ProjectsPanel adminKey={adminKey} onAuthError={handleAuthError} />
         </div>
       </div>

@@ -203,6 +203,20 @@ export const DeleteProjectParams = zod.object({
 
 
 /**
+ * @summary List all Paper Street contact submissions
+ */
+export const ListPaperStreetContactSubmissionsResponseItem = zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string(),
+  "phone": zod.string().nullish(),
+  "message": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+export const ListPaperStreetContactSubmissionsResponse = zod.array(ListPaperStreetContactSubmissionsResponseItem)
+
+
+/**
  * Returns a presigned GCS URL for direct upload. The client sends JSON
 metadata here, then uploads the file directly to the returned URL.
 

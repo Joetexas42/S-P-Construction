@@ -3,6 +3,7 @@ import { db } from "@workspace/db";
 import { paperStreetContactsTable } from "@workspace/db";
 import { z } from "zod";
 import { sendEmail } from "../lib/email";
+import { requireAdminKey } from "../middleware/requireAdminKey";
 
 const router = Router();
 
@@ -23,6 +24,15 @@ function escapeHtml(str: string): string {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
+
+router.get("/paper-street-contact/submissions", requireAdminKey, async (req, res) => {
+  const submissions = await db
+    .select()
+    .from(paperStreetContactsTable)
+    .orderBy(paperStreetContactsTable.createdAt);
+
+  res.json(submissions);
+});
 
 router.post("/paper-street-contact", async (req, res) => {
   const parsed = paperStreetContactSchema.safeParse(req.body);

@@ -184,6 +184,16 @@ export interface ProjectUpdate {
   category?: string;
 }
 
+export interface PaperStreetContact {
+  id: number;
+  name: string;
+  email: string;
+  /** @nullable */
+  phone?: string | null;
+  message: string;
+  createdAt: string;
+}
+
 export interface ErrorResponse {
   error: string;
 }

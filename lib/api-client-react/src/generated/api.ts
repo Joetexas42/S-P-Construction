@@ -28,6 +28,7 @@ import type {
   EstimatorSubmission,
   GetRoofAreaParams,
   HealthStatus,
+  PaperStreetContact,
   Project,
   ProjectInput,
   ProjectUpdate,
@@ -796,6 +797,83 @@ export const useDeleteProject = <TError = ErrorType<ErrorResponse>,
       > => {
       return useMutation(getDeleteProjectMutationOptions(options));
     }
+
+export const getListPaperStreetContactSubmissionsUrl = () => {
+
+
+
+
+  return `/api/paper-street-contact/submissions`
+}
+
+/**
+ * @summary List all Paper Street contact submissions
+ */
+export const listPaperStreetContactSubmissions = async ( options?: RequestInit): Promise<PaperStreetContact[]> => {
+
+  return customFetch<PaperStreetContact[]>(getListPaperStreetContactSubmissionsUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListPaperStreetContactSubmissionsQueryKey = () => {
+    return [
+    `/api/paper-street-contact/submissions`
+    ] as const;
+    }
+
+
+export const getListPaperStreetContactSubmissionsQueryOptions = <TData = Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListPaperStreetContactSubmissionsQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>> = ({ signal }) => listPaperStreetContactSubmissions({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListPaperStreetContactSubmissionsQueryResult = NonNullable<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>>
+export type ListPaperStreetContactSubmissionsQueryError = ErrorType<unknown>
+
+
+/**
+ * @summary List all Paper Street contact submissions
+ */
+
+export function useListPaperStreetContactSubmissions<TData = Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError = ErrorType<unknown>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListPaperStreetContactSubmissionsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
 
 export const getRequestUploadUrlUrl = () => {
 

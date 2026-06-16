@@ -17,6 +17,7 @@ export * from './estimatorInputSqftSource';
 export * from './estimatorSubmission';
 export * from './getRoofAreaParams';
 export * from './healthStatus';
+export * from './paperStreetContact';
 export * from './project';
 export * from './projectInput';
 export * from './projectUpdate';
