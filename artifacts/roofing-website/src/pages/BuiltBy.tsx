@@ -99,7 +99,7 @@ const otherProjects = [
     featured: true,
     href: "/",
     external: false,
-    thumbnail: null,
+    thumbnail: "/images/portfolio/sp-construction.png",
   },
   {
     id: "vv-auto",
