@@ -311,7 +311,6 @@ export default function BuiltBy() {
         description="Paper Street Software Co. built the S&P Construction website — custom sites, AI tools, and digital solutions for local businesses."
         jsonLd={builtBySchema}
       />
-
       {/* Hero */}
       <section
         data-dark-hero
@@ -356,7 +355,6 @@ export default function BuiltBy() {
           </ScrollRevealWrapper>
         </div>
       </section>
-
       {/* We Built This for a Friend */}
       <section className="py-24 bg-background border-b border-border">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl">
@@ -388,14 +386,13 @@ export default function BuiltBy() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-foreground">Scott C.</p>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Owner, Scott Commercial Roofing</p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wide">Owner, Scott S&P Construction</p>
                 </div>
               </div>
             </div>
           </ScrollRevealWrapper>
         </div>
       </section>
-
       {/* What We Built for S&P Construction */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
@@ -437,7 +434,6 @@ export default function BuiltBy() {
           </div>
         </div>
       </section>
-
       {/* Digital Solutions — dark section */}
       <section className="py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6">
@@ -481,7 +477,6 @@ export default function BuiltBy() {
           </div>
         </div>
       </section>
-
       {/* Other Work */}
       <section className="py-24 bg-muted border-y border-border">
         <div className="container mx-auto px-4 md:px-6">
@@ -592,7 +587,6 @@ export default function BuiltBy() {
           </ScrollRevealWrapper>
         </div>
       </section>
-
       {/* Contact form section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
