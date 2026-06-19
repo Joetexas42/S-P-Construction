@@ -831,7 +831,7 @@ export const getListPaperStreetContactSubmissionsQueryKey = () => {
     }
 
 
-export const getListPaperStreetContactSubmissionsQueryOptions = <TData = Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError = ErrorType<unknown>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+export const getListPaperStreetContactSubmissionsQueryOptions = <TData = Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError = ErrorType<ErrorResponse>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -850,14 +850,14 @@ const {query: queryOptions, request: requestOptions} = options ?? {};
 }
 
 export type ListPaperStreetContactSubmissionsQueryResult = NonNullable<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>>
-export type ListPaperStreetContactSubmissionsQueryError = ErrorType<unknown>
+export type ListPaperStreetContactSubmissionsQueryError = ErrorType<ErrorResponse>
 
 
 /**
  * @summary List all Paper Street contact submissions
  */
 
-export function useListPaperStreetContactSubmissions<TData = Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError = ErrorType<unknown>>(
+export function useListPaperStreetContactSubmissions<TData = Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError = ErrorType<ErrorResponse>>(
   options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listPaperStreetContactSubmissions>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
 
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {

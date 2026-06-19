@@ -23,10 +23,18 @@ The frontend (static, prerendered SPA) deploys to **Cloudflare Pages**; the API 
 - **Root directory:** repo root (the build filter targets the workspace package)
 - **Environment variables (build-time):**
   - `VITE_API_BASE_URL` — the Railway API origin, e.g. `https://api.spconstructiondfw.com` (read in `vite.config.ts`, applied via `setBaseUrl()` in `src/main.tsx`)
+  - A **Deploy Hook** must exist on the Cloudflare Pages project so the API can auto-rebuild the static site when projects change (see "Auto-refresh on project changes" below)
   - `GOOGLE_MAPS_BROWSER_API_KEY` — browser-safe Google Maps key (HTTP-referrer-restricted)
   - The build also runs Puppeteer prerender; the Pages build image must have Chromium available (set `CHROMIUM_PATH` if needed).
 - **SPA routing:** `artifacts/roofing-website/public/_redirects` provides the `/* /index.html 200` fallback so non-prerendered routes (e.g. `/admin`, dynamic paths, trailing-slash variants) resolve. Prerendered static files are still served directly (Pages serves matching files before applying the catch-all).
 - **Asset caching:** `artifacts/roofing-website/public/_headers` sets long-lived immutable cache on the hashed `/assets/*` bundles.
+
+### Auto-refresh on project changes
+
+When a project is created, updated, or deleted in the admin dashboard, the API server (`artifacts/api-server/src/lib/deployHook.ts`) POSTs to a Cloudflare Pages **deploy hook** to kick off a fresh Pages build (which re-runs the prerender) and republish — so the live portfolio pages (`/projects`, `/case-studies`) refresh automatically with no manual `prerender:projects` step. Set these env vars on the **API server** (Railway):
+
+- `DEPLOY_HOOK_URL` — the Cloudflare Pages deploy-hook URL (Pages project → Settings → Builds & deployments → Deploy hooks). When unset (e.g. local dev), the trigger is skipped with a logged warning and mutations still succeed.
+- `DEPLOY_HOOK_DEBOUNCE_MS` *(optional)* — coalesce bursts of mutations into one rebuild after this quiet period (default `10000`; set `0` to fire on every mutation). Trigger failures are logged (`error`), never swallowed.
 
 ## Stack
 

@@ -205,6 +205,10 @@ export const DeleteProjectParams = zod.object({
 /**
  * @summary List all Paper Street contact submissions
  */
+export const ListPaperStreetContactSubmissionsHeader = zod.object({
+  "x-admin-key": zod.string().describe('Admin key for protected access')
+})
+
 export const ListPaperStreetContactSubmissionsResponseItem = zod.object({
   "id": zod.number(),
   "name": zod.string(),

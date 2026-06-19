@@ -9,6 +9,7 @@ import {
 } from "@workspace/api-zod";
 import { ObjectStorageService } from "../lib/objectStorage";
 import { requireAdminKey } from "../middleware/requireAdminKey";
+import { triggerSiteRebuild } from "../lib/deployHook";
 
 const objectStorage = new ObjectStorageService();
 
@@ -41,6 +42,7 @@ router.post("/projects", requireAdminKey, async (req, res): Promise<void> => {
     .returning();
 
   req.log.info({ id: project.id }, "Project created");
+  triggerSiteRebuild(`project:create:${project.id}`);
   res.status(201).json(project);
 });
 
@@ -96,6 +98,7 @@ router.patch("/projects/:id", requireAdminKey, async (req, res): Promise<void> =
   }
 
   req.log.info({ id: project.id }, "Project updated");
+  triggerSiteRebuild(`project:update:${project.id}`);
   res.json(project);
 });
 
@@ -124,6 +127,7 @@ router.delete("/projects/:id", requireAdminKey, async (req, res): Promise<void> 
   }
 
   req.log.info({ id: params.data.id }, "Project deleted");
+  triggerSiteRebuild(`project:delete:${params.data.id}`);
   res.sendStatus(204);
 });
 
