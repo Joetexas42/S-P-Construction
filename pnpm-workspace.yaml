@@ -44,6 +44,7 @@ onlyBuiltDependencies:
 
 overrides:
   qs: '>=6.15.2'
+  zod: 3.25.76
   '@esbuild-kit/esm-loader': npm:tsx@^4.21.0
   '@expo/ngrok-bin>@expo/ngrok-bin-darwin-arm64': '-'
   '@expo/ngrok-bin>@expo/ngrok-bin-darwin-x64': '-'
