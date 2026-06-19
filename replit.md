@@ -14,6 +14,14 @@ Lead-generation website for S&P Construction, a commercial roofing contractor se
 - `pnpm --filter @workspace/api-server run bump-date <key|all>` — update a content-date key in `content-dates.ts` to today; run after publishing content changes so sitemap `<lastmod>` stays accurate. Keys: `staticPages`, `servicePages`, `cityPages`, `serviceCityPages`, `all`. **This runs automatically via the pre-commit hook** when the relevant data files are staged — no need to run it manually.
 - Required env: `DATABASE_URL` — Postgres connection string
 
+## CI (GitHub Actions)
+
+`.github/workflows/ci.yml` runs on every push and pull request: `pnpm install --frozen-lockfile`, then `pnpm run typecheck`, then `pnpm run build`. A failing typecheck or build fails the run, so type/compile problems are caught before merge — the same gate the `.githooks/pre-commit` hook enforces locally, now enforced server-side even when local hooks aren't installed.
+
+- The build step sets `SKIP_PRERENDER=1` so the roofing-website build verifies compilation (`vite build`) without running the Puppeteer prerender, which needs Chromium + a running API and is a deploy-time concern. Production deploys leave `SKIP_PRERENDER` unset, so Cloudflare Pages still prerenders.
+- It also sets placeholder `PORT`/`BASE_PATH` because the Vite configs require them at build time.
+- **To gate deploys on green CI:** enable branch protection on the deploy branch in GitHub (Settings → Branches) and mark the `Typecheck & build` check as required. Cloudflare Pages / Railway then only deploy commits that passed CI.
+
 ## Deployment (Railway API + Cloudflare Pages frontend)
 
 The frontend (static, prerendered SPA) deploys to **Cloudflare Pages**; the API deploys to **Railway**. Cloudflare Pages settings:

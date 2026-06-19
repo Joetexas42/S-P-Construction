@@ -28,6 +28,16 @@ function findChromium(): string {
   );
 }
 
+// Allow CI builds to verify compilation (vite build) without running the
+// Puppeteer prerender, which needs Chromium + a running API server. The real
+// deploy build (Cloudflare Pages) leaves this unset so prerendering still runs.
+if (process.env.SKIP_PRERENDER === "1" || process.env.SKIP_PRERENDER === "true") {
+  console.log(
+    "[prerender] SKIP_PRERENDER is set — skipping prerender step (compile-only build).",
+  );
+  process.exit(0);
+}
+
 const CHROMIUM = findChromium();
 
 const DIST_DIR = resolve(import.meta.dirname, "..", "dist", "public");
