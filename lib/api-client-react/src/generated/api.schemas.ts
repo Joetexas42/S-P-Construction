@@ -184,6 +184,65 @@ export interface ProjectUpdate {
   category?: string;
 }
 
+/**
+ * Status of the automatic live-site (prerendered SEO pages) refresh that is triggered when a project changes. Lets the admin UI confirm the rebuild was kicked off, or warn when auto-refresh is not configured.
+ */
+export interface SiteRefreshStatus {
+  /** Whether the Cloudflare Pages deploy hook is configured (DEPLOY_HOOK_URL set). When false, the live SEO pages will not auto-refresh and a manual publish is required. */
+  configured: boolean;
+  /** Whether a live-site rebuild was scheduled as a result of this change. */
+  scheduled: boolean;
+}
+
+/**
+ * Delivery state of the most recent attempt — `pending` while scheduled/in-flight, `success` once the hook returned OK, `failed` if the call errored or returned a non-OK status.
+ */
+export type SiteRefreshStateState = typeof SiteRefreshStateState[keyof typeof SiteRefreshStateState];
+
+
+export const SiteRefreshStateState = {
+  idle: 'idle',
+  pending: 'pending',
+  success: 'success',
+  failed: 'failed',
+} as const;
+
+/**
+ * Observed status of the auto-refresh pipeline. Polled by the admin UI after a project change to surface a truthful confirmation (or failure warning) once the asynchronous, debounced deploy-hook call resolves.
+ */
+export interface SiteRefreshState {
+  /** Whether the Cloudflare Pages deploy hook is configured. */
+  configured: boolean;
+  /** Delivery state of the most recent attempt — `pending` while scheduled/in-flight, `success` once the hook returned OK, `failed` if the call errored or returned a non-OK status. */
+  state: SiteRefreshStateState;
+  /**
+     * When the most recent rebuild was scheduled, if any.
+     * @nullable
+     */
+  lastTriggeredAt?: string | null;
+  /**
+     * When the most recent attempt finished (ok or failed).
+     * @nullable
+     */
+  lastCompletedAt?: string | null;
+  /**
+     * Human-readable failure reason when `state` is `failed`.
+     * @nullable
+     */
+  error?: string | null;
+}
+
+/**
+ * A project plus the status of the triggered live-site refresh.
+ */
+export type ProjectMutationResult = Project & {
+  siteRefresh: SiteRefreshStatus;
+};
+
+export interface DeleteProjectResult {
+  siteRefresh: SiteRefreshStatus;
+}
+
 export interface PaperStreetContact {
   id: number;
   name: string;

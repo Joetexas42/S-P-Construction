@@ -9,7 +9,7 @@ import {
 } from "@workspace/api-zod";
 import { ObjectStorageService } from "../lib/objectStorage";
 import { requireAdminKey } from "../middleware/requireAdminKey";
-import { triggerSiteRebuild } from "../lib/deployHook";
+import { triggerSiteRebuild, getSiteRefreshState } from "../lib/deployHook";
 import { touchPortfolioDate } from "../lib/portfolioDate";
 
 const objectStorage = new ObjectStorageService();
@@ -30,6 +30,10 @@ router.get("/projects", async (req, res): Promise<void> => {
   res.json(projects);
 });
 
+router.get("/projects/site-refresh-status", requireAdminKey, (req, res): void => {
+  res.json(getSiteRefreshState());
+});
+
 router.post("/projects", requireAdminKey, async (req, res): Promise<void> => {
   const parsed = CreateProjectBody.safeParse(req.body);
   if (!parsed.success) {
@@ -44,8 +48,8 @@ router.post("/projects", requireAdminKey, async (req, res): Promise<void> => {
 
   req.log.info({ id: project.id }, "Project created");
   await markPortfolioChanged(req);
-  triggerSiteRebuild(`project:create:${project.id}`);
-  res.status(201).json(project);
+  const siteRefresh = triggerSiteRebuild(`project:create:${project.id}`);
+  res.status(201).json({ ...project, siteRefresh });
 });
 
 router.patch("/projects/:id", requireAdminKey, async (req, res): Promise<void> => {
@@ -101,8 +105,8 @@ router.patch("/projects/:id", requireAdminKey, async (req, res): Promise<void> =
 
   req.log.info({ id: project.id }, "Project updated");
   await markPortfolioChanged(req);
-  triggerSiteRebuild(`project:update:${project.id}`);
-  res.json(project);
+  const siteRefresh = triggerSiteRebuild(`project:update:${project.id}`);
+  res.json({ ...project, siteRefresh });
 });
 
 router.delete("/projects/:id", requireAdminKey, async (req, res): Promise<void> => {
@@ -131,8 +135,8 @@ router.delete("/projects/:id", requireAdminKey, async (req, res): Promise<void> 
 
   req.log.info({ id: params.data.id }, "Project deleted");
   await markPortfolioChanged(req);
-  triggerSiteRebuild(`project:delete:${params.data.id}`);
-  res.sendStatus(204);
+  const siteRefresh = triggerSiteRebuild(`project:delete:${params.data.id}`);
+  res.status(200).json({ siteRefresh });
 });
 
 /**

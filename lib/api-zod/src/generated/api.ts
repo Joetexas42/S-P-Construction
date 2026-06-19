@@ -162,6 +162,23 @@ export const CreateProjectBody = zod.object({
 
 
 /**
+ * Reports whether the deploy hook is configured and the observed delivery state of the most recent rebuild trigger. The admin UI polls this after a project change to confirm the live site actually started rebuilding (or to warn that the trigger failed).
+ * @summary Current status of the automatic live-site refresh
+ */
+export const GetSiteRefreshStatusHeader = zod.object({
+  "x-admin-key": zod.string().describe('Admin key for protected access')
+})
+
+export const GetSiteRefreshStatusResponse = zod.object({
+  "configured": zod.boolean().describe('Whether the Cloudflare Pages deploy hook is configured.'),
+  "state": zod.enum(['idle', 'pending', 'success', 'failed']).describe('Delivery state of the most recent attempt — `pending` while scheduled\/in-flight, `success` once the hook returned OK, `failed` if the call errored or returned a non-OK status.'),
+  "lastTriggeredAt": zod.coerce.date().nullish().describe('When the most recent rebuild was scheduled, if any.'),
+  "lastCompletedAt": zod.coerce.date().nullish().describe('When the most recent attempt finished (ok or failed).'),
+  "error": zod.string().nullish().describe('Human-readable failure reason when `state` is `failed`.')
+}).describe('Observed status of the auto-refresh pipeline. Polled by the admin UI after a project change to surface a truthful confirmation (or failure warning) once the asynchronous, debounced deploy-hook call resolves.')
+
+
+/**
  * @summary Update an existing portfolio project
  */
 export const UpdateProjectParams = zod.object({
@@ -191,7 +208,12 @@ export const UpdateProjectResponse = zod.object({
   "imageUrl": zod.string(),
   "category": zod.string(),
   "createdAt": zod.coerce.date()
-})
+}).and(zod.object({
+  "siteRefresh": zod.object({
+  "configured": zod.boolean().describe('Whether the Cloudflare Pages deploy hook is configured (DEPLOY_HOOK_URL set). When false, the live SEO pages will not auto-refresh and a manual publish is required.'),
+  "scheduled": zod.boolean().describe('Whether a live-site rebuild was scheduled as a result of this change.')
+}).describe('Status of the automatic live-site (prerendered SEO pages) refresh that is triggered when a project changes. Lets the admin UI confirm the rebuild was kicked off, or warn when auto-refresh is not configured.')
+})).describe('A project plus the status of the triggered live-site refresh.')
 
 
 /**
@@ -199,6 +221,13 @@ export const UpdateProjectResponse = zod.object({
  */
 export const DeleteProjectParams = zod.object({
   "id": zod.coerce.number()
+})
+
+export const DeleteProjectResponse = zod.object({
+  "siteRefresh": zod.object({
+  "configured": zod.boolean().describe('Whether the Cloudflare Pages deploy hook is configured (DEPLOY_HOOK_URL set). When false, the live SEO pages will not auto-refresh and a manual publish is required.'),
+  "scheduled": zod.boolean().describe('Whether a live-site rebuild was scheduled as a result of this change.')
+}).describe('Status of the automatic live-site (prerendered SEO pages) refresh that is triggered when a project changes. Lets the admin UI confirm the rebuild was kicked off, or warn when auto-refresh is not configured.')
 })
 
 

@@ -9,9 +9,11 @@ import {
   useListContactSubmissions,
   useListEstimatorSubmissions,
   useListPaperStreetContactSubmissions,
+  getSiteRefreshStatus,
 } from "@workspace/api-client-react";
-import type { Project, ProjectInput, ProjectUpdate, ContactSubmission, EstimatorSubmission, PaperStreetContact } from "@workspace/api-client-react";
+import type { Project, ProjectInput, ProjectUpdate, ContactSubmission, EstimatorSubmission, PaperStreetContact, SiteRefreshStatus } from "@workspace/api-client-react";
 import { useUpload } from "@workspace/object-storage-web";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -354,16 +356,77 @@ function isFormValid(f: FormData) {
 
 function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthError: () => void }) {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const { data: projects, isLoading, isError } = useListProjects();
   const adminReq = adminKeyHeaders(adminKey);
+
+  async function notifySiteRefresh(siteRefresh: SiteRefreshStatus, action: string) {
+    if (!siteRefresh.configured || !siteRefresh.scheduled) {
+      toast({
+        variant: "destructive",
+        title: `Project ${action} — live site not refreshed`,
+        description:
+          "Automatic site refresh isn't configured, so the public Projects page won't update on its own. Publish the site manually to push the change live.",
+      });
+      return;
+    }
+
+    // The rebuild is only *scheduled* here — the deploy hook fires
+    // asynchronously (and is debounced) on the server. Poll the status endpoint
+    // for the real outcome so admins are never shown a misleading success.
+    const pending = toast({
+      title: `Project ${action}`,
+      description: "Refreshing the live site…",
+    });
+
+    const deadline = Date.now() + 45_000;
+    while (Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, 2_000));
+      let status;
+      try {
+        status = await getSiteRefreshStatus(adminReq);
+      } catch {
+        continue;
+      }
+      if (status.state === "success") {
+        pending.update({
+          id: pending.id,
+          title: `Project ${action}`,
+          description:
+            "Live site refresh complete — the public Projects page is up to date.",
+        });
+        return;
+      }
+      if (status.state === "failed") {
+        pending.update({
+          id: pending.id,
+          variant: "destructive",
+          title: `Project ${action} — live site refresh failed`,
+          description:
+            status.error
+              ? `The refresh couldn't be started (${status.error}). Try again or publish the site manually.`
+              : "The refresh couldn't be started. Try again or publish the site manually.",
+        });
+        return;
+      }
+    }
+
+    pending.update({
+      id: pending.id,
+      title: `Project ${action}`,
+      description:
+        "Live site refresh is taking longer than usual — it should finish shortly.",
+    });
+  }
 
   const createProject = useCreateProject({
     request: adminReq,
     mutation: {
-      onSuccess: () => {
+      onSuccess: (result) => {
         queryClient.invalidateQueries({ queryKey: getListProjectsQueryKey() });
         setAddOpen(false);
         setForm(emptyForm);
+        void notifySiteRefresh(result.siteRefresh, "added");
       },
       onError: (err) => {
         if ("status" in err && err.status === 403) onAuthError();
@@ -374,10 +437,11 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
   const updateProject = useUpdateProject({
     request: adminReq,
     mutation: {
-      onSuccess: () => {
+      onSuccess: (result) => {
         queryClient.invalidateQueries({ queryKey: getListProjectsQueryKey() });
         setEditProject(null);
         setForm(emptyForm);
+        void notifySiteRefresh(result.siteRefresh, "saved");
       },
       onError: (err) => {
         if ("status" in err && err.status === 403) onAuthError();
@@ -388,9 +452,10 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
   const deleteProject = useDeleteProject({
     request: adminReq,
     mutation: {
-      onSuccess: () => {
+      onSuccess: (result) => {
         queryClient.invalidateQueries({ queryKey: getListProjectsQueryKey() });
         setDeleteId(null);
+        void notifySiteRefresh(result.siteRefresh, "deleted");
       },
       onError: (err) => {
         if ("status" in err && err.status === 403) onAuthError();
@@ -503,9 +568,10 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
           </Button>
         </div>
         <p className="px-6 pt-3 text-xs text-gray-500">
-          Saved projects appear on the live gallery right away. The
-          search-engine snapshot of the Projects page refreshes the next time
-          the site is published.
+          Saved projects appear on the live gallery right away. Each change also
+          kicks off an automatic refresh of the public Projects page so its
+          search-engine snapshot stays up to date — you'll see a confirmation
+          after each save.
         </p>
 
         {brokenCount > 0 && (

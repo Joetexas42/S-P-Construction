@@ -22,6 +22,7 @@ import type {
 import type {
   ContactInput,
   ContactSubmission,
+  DeleteProjectResult,
   ErrorEnvelope,
   ErrorResponse,
   EstimatorInput,
@@ -31,8 +32,10 @@ import type {
   PaperStreetContact,
   Project,
   ProjectInput,
+  ProjectMutationResult,
   ProjectUpdate,
   RoofAreaResult,
+  SiteRefreshState,
   UploadUrlRequest,
   UploadUrlResponse
 } from './api.schemas';
@@ -596,9 +599,9 @@ export const getCreateProjectUrl = () => {
 /**
  * @summary Create a new portfolio project
  */
-export const createProject = async (projectInput: ProjectInput, options?: RequestInit): Promise<Project> => {
+export const createProject = async (projectInput: ProjectInput, options?: RequestInit): Promise<ProjectMutationResult> => {
 
-  return customFetch<Project>(getCreateProjectUrl(),
+  return customFetch<ProjectMutationResult>(getCreateProjectUrl(),
   {
     ...options,
     method: 'POST',
@@ -656,6 +659,84 @@ export const useCreateProject = <TError = ErrorType<ErrorResponse>,
       return useMutation(getCreateProjectMutationOptions(options));
     }
 
+export const getGetSiteRefreshStatusUrl = () => {
+
+
+
+
+  return `/api/projects/site-refresh-status`
+}
+
+/**
+ * Reports whether the deploy hook is configured and the observed delivery state of the most recent rebuild trigger. The admin UI polls this after a project change to confirm the live site actually started rebuilding (or to warn that the trigger failed).
+ * @summary Current status of the automatic live-site refresh
+ */
+export const getSiteRefreshStatus = async ( options?: RequestInit): Promise<SiteRefreshState> => {
+
+  return customFetch<SiteRefreshState>(getGetSiteRefreshStatusUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetSiteRefreshStatusQueryKey = () => {
+    return [
+    `/api/projects/site-refresh-status`
+    ] as const;
+    }
+
+
+export const getGetSiteRefreshStatusQueryOptions = <TData = Awaited<ReturnType<typeof getSiteRefreshStatus>>, TError = ErrorType<ErrorResponse>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getSiteRefreshStatus>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetSiteRefreshStatusQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getSiteRefreshStatus>>> = ({ signal }) => getSiteRefreshStatus({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getSiteRefreshStatus>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetSiteRefreshStatusQueryResult = NonNullable<Awaited<ReturnType<typeof getSiteRefreshStatus>>>
+export type GetSiteRefreshStatusQueryError = ErrorType<ErrorResponse>
+
+
+/**
+ * @summary Current status of the automatic live-site refresh
+ */
+
+export function useGetSiteRefreshStatus<TData = Awaited<ReturnType<typeof getSiteRefreshStatus>>, TError = ErrorType<ErrorResponse>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getSiteRefreshStatus>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetSiteRefreshStatusQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
 export const getUpdateProjectUrl = (id: number,) => {
 
 
@@ -668,9 +749,9 @@ export const getUpdateProjectUrl = (id: number,) => {
  * @summary Update an existing portfolio project
  */
 export const updateProject = async (id: number,
-    projectUpdate: ProjectUpdate, options?: RequestInit): Promise<Project> => {
+    projectUpdate: ProjectUpdate, options?: RequestInit): Promise<ProjectMutationResult> => {
 
-  return customFetch<Project>(getUpdateProjectUrl(id),
+  return customFetch<ProjectMutationResult>(getUpdateProjectUrl(id),
   {
     ...options,
     method: 'PATCH',
@@ -739,9 +820,9 @@ export const getDeleteProjectUrl = (id: number,) => {
 /**
  * @summary Delete a portfolio project
  */
-export const deleteProject = async (id: number, options?: RequestInit): Promise<void> => {
+export const deleteProject = async (id: number, options?: RequestInit): Promise<DeleteProjectResult> => {
 
-  return customFetch<void>(getDeleteProjectUrl(id),
+  return customFetch<DeleteProjectResult>(getDeleteProjectUrl(id),
   {
     ...options,
     method: 'DELETE'

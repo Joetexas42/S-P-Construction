@@ -170,9 +170,39 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Project"
+                $ref: "#/components/schemas/ProjectMutationResult"
         "400":
           description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /projects/site-refresh-status:
+    get:
+      operationId: getSiteRefreshStatus
+      tags: [projects]
+      summary: Current status of the automatic live-site refresh
+      description: >-
+        Reports whether the deploy hook is configured and the observed delivery
+        state of the most recent rebuild trigger. The admin UI polls this after
+        a project change to confirm the live site actually started rebuilding
+        (or to warn that the trigger failed).
+      parameters:
+        - in: header
+          name: x-admin-key
+          required: true
+          schema:
+            type: string
+          description: Admin key for protected access
+      responses:
+        "200":
+          description: Current site-refresh status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteRefreshState"
+        "403":
+          description: Invalid or missing admin key
           content:
             application/json:
               schema:
@@ -200,7 +230,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Project"
+                $ref: "#/components/schemas/ProjectMutationResult"
         "400":
           description: Invalid input
           content:
@@ -224,8 +254,12 @@ paths:
           schema:
             type: integer
       responses:
-        "204":
+        "200":
           description: Project deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteProjectResult"
         "404":
           description: Project not found
           content:
@@ -631,6 +665,75 @@ components:
         category:
           type: string
           minLength: 1
+    SiteRefreshStatus:
+      type: object
+      description: >-
+        Status of the automatic live-site (prerendered SEO pages) refresh that
+        is triggered when a project changes. Lets the admin UI confirm the
+        rebuild was kicked off, or warn when auto-refresh is not configured.
+      required:
+        - configured
+        - scheduled
+      properties:
+        configured:
+          type: boolean
+          description: >-
+            Whether the Cloudflare Pages deploy hook is configured
+            (DEPLOY_HOOK_URL set). When false, the live SEO pages will not
+            auto-refresh and a manual publish is required.
+        scheduled:
+          type: boolean
+          description: >-
+            Whether a live-site rebuild was scheduled as a result of this
+            change.
+    SiteRefreshState:
+      type: object
+      description: >-
+        Observed status of the auto-refresh pipeline. Polled by the admin UI
+        after a project change to surface a truthful confirmation (or failure
+        warning) once the asynchronous, debounced deploy-hook call resolves.
+      required:
+        - configured
+        - state
+      properties:
+        configured:
+          type: boolean
+          description: Whether the Cloudflare Pages deploy hook is configured.
+        state:
+          type: string
+          enum: [idle, pending, success, failed]
+          description: >-
+            Delivery state of the most recent attempt — `pending` while
+            scheduled/in-flight, `success` once the hook returned OK, `failed`
+            if the call errored or returned a non-OK status.
+        lastTriggeredAt:
+          type: ["string", "null"]
+          format: date-time
+          description: When the most recent rebuild was scheduled, if any.
+        lastCompletedAt:
+          type: ["string", "null"]
+          format: date-time
+          description: When the most recent attempt finished (ok or failed).
+        error:
+          type: ["string", "null"]
+          description: Human-readable failure reason when `state` is `failed`.
+    ProjectMutationResult:
+      description: A project plus the status of the triggered live-site refresh.
+      allOf:
+        - $ref: "#/components/schemas/Project"
+        - type: object
+          required:
+            - siteRefresh
+          properties:
+            siteRefresh:
+              $ref: "#/components/schemas/SiteRefreshStatus"
+    DeleteProjectResult:
+      type: object
+      required:
+        - siteRefresh
+      properties:
+        siteRefresh:
+          $ref: "#/components/schemas/SiteRefreshStatus"
     PaperStreetContact:
       type: object
       required:
