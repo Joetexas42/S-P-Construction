@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer-core";
-import { createServer } from "http";
+import { createServer, request as httpRequest } from "http";
 import { readFileSync } from "fs";
 import { resolve, dirname, join, extname } from "path";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
@@ -112,7 +112,37 @@ function startStaticServer(): Promise<{ server: ReturnType<typeof createServer>;
   return new Promise((resolve, reject) => {
     const server = createServer((req, res) => {
       try {
-        const urlPath = new URL(req.url ?? "/", `http://localhost:${PORT}`).pathname;
+        const reqUrl = new URL(req.url ?? "/", `http://localhost:${PORT}`);
+        const urlPath = reqUrl.pathname;
+
+        // Proxy API calls to the running API server (via the shared proxy on
+        // :80) so prerendered pages can render real data. Never serve the SPA
+        // index.html for /api/* — that would hand HTML to fetch() and crash
+        // pages that expect JSON. On any upstream error, return a 502 with an
+        // empty body so react-query degrades gracefully instead of receiving
+        // HTML, and the dynamic content simply hydrates on the client.
+        if (urlPath.startsWith("/api/")) {
+          const proxyReq = httpRequest(
+            {
+              host: "127.0.0.1",
+              port: 80,
+              method: req.method,
+              path: req.url,
+              headers: { ...req.headers, host: "127.0.0.1" },
+            },
+            (proxyRes) => {
+              res.writeHead(proxyRes.statusCode ?? 502, proxyRes.headers);
+              proxyRes.pipe(res);
+            },
+          );
+          proxyReq.on("error", () => {
+            res.writeHead(502, { "Content-Type": "application/json" });
+            res.end("");
+          });
+          req.pipe(proxyReq);
+          return;
+        }
+
         let filePath = join(DIST_DIR, urlPath);
 
         if (existsSync(filePath) && !extname(filePath)) {
@@ -169,7 +199,30 @@ function writePrerendered(route: string, html: string) {
 }
 
 async function main() {
-  const routes = allRoutes();
+  let routes = allRoutes();
+
+  // Optional comma-separated substring filter (PRERENDER_ROUTES) for
+  // re-prerendering or debugging a subset of routes without a full run.
+  const filter = process.env.PRERENDER_ROUTES?.trim();
+  if (filter) {
+    const needles = filter.split(",").map((s) => s.trim()).filter(Boolean);
+    routes = routes.filter((r) => needles.some((n) => r === n || r.includes(n)));
+  }
+
+  // Optional sharding (PRERENDER_SHARD="<index>/<total>", 1-based) to split a
+  // full run into smaller deterministic chunks that can be run in parallel.
+  const shard = process.env.PRERENDER_SHARD?.trim();
+  if (shard) {
+    const [idxRaw, totalRaw] = shard.split("/");
+    const idx = Number(idxRaw);
+    const total = Number(totalRaw);
+    if (Number.isInteger(idx) && Number.isInteger(total) && total > 0 && idx >= 1 && idx <= total) {
+      routes = routes.filter((_, i) => i % total === idx - 1);
+    } else {
+      throw new Error(`Invalid PRERENDER_SHARD="${shard}" (expected "<index>/<total>", 1-based)`);
+    }
+  }
+
   console.log(`Prerendering ${routes.length} routes...`);
 
   const { server, url } = await startStaticServer();
@@ -180,24 +233,65 @@ async function main() {
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
   });
 
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1280, height: 800 });
+  let failed = 0;
 
-  for (const route of routes) {
+  async function renderRoute(route: string): Promise<void> {
     const pageUrl = `${url}${route}`;
-    try {
-      await page.goto(pageUrl, { waitUntil: "networkidle2", timeout: 30000 });
+    let lastErr: unknown;
 
-      const html = await page.content();
-      writePrerendered(route, html);
-    } catch (err) {
-      console.error(`  FAILED ${route}: ${err}`);
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      const page = await browser.newPage();
+      try {
+        await page.setViewport({ width: 1280, height: 800 });
+        await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 30000 });
+
+        // Wait for the React app to mount. Content is rendered from local
+        // static data, so this settles quickly without relying on network idle
+        // (which never settles on the map-enabled estimate page).
+        await page.waitForFunction(
+          () => {
+            const root = document.getElementById("root");
+            return !!root && root.childElementCount > 0;
+          },
+          { timeout: 30000 },
+        );
+
+        // Give the SEO component's useEffect a moment to inject title, meta
+        // description, canonical, and JSON-LD into <head> after mount.
+        await new Promise((r) => setTimeout(r, 400));
+
+        const html = await page.content();
+        writePrerendered(route, html);
+        return;
+      } catch (err) {
+        lastErr = err;
+      } finally {
+        await page.close().catch(() => {});
+      }
     }
+
+    failed++;
+    console.error(`  FAILED ${route}: ${lastErr}`);
   }
+
+  const CONCURRENCY = Number(process.env.PRERENDER_CONCURRENCY ?? 4);
+  const queue = [...routes];
+  const workers = Array.from({ length: Math.min(CONCURRENCY, queue.length) }, async () => {
+    while (queue.length > 0) {
+      const route = queue.shift();
+      if (route === undefined) break;
+      await renderRoute(route);
+    }
+  });
+  await Promise.all(workers);
 
   await browser.close();
   server.close();
-  console.log("\nDone.");
+
+  console.log(`\nDone. ${routes.length - failed}/${routes.length} routes prerendered.`);
+  if (failed > 0) {
+    throw new Error(`${failed} route(s) failed to prerender.`);
+  }
 }
 
 main().catch((err) => {

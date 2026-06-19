@@ -1,0 +1,1 @@
+- [SPA prerendering for SEO](prerender-spa-seo.md) — Puppeteer prerender gotchas: fresh page per route, proxy /api (never serve index.html to fetch), wait on #root children, shard to observe long runs.
