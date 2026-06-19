@@ -1,1 +1,2 @@
 - [SPA prerendering for SEO](prerender-spa-seo.md) — Puppeteer prerender gotchas: fresh page per route, proxy /api (never serve index.html to fetch), wait on #root children, shard to observe long runs.
+- [zod version skew](zod-version-skew.md) — keep one zod version workspace-wide (pnpm override); a 2nd transitive zod copy breaks every zodResolver typecheck.
