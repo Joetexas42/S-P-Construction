@@ -140,6 +140,28 @@ function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
   );
 }
 
+function ProjectThumbnail({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="h-16 w-24 flex-shrink-0 rounded-lg bg-gray-100 flex flex-col items-center justify-center gap-1 text-gray-400">
+        <ImageIcon className="h-5 w-5" />
+        <span className="text-[9px] font-medium uppercase tracking-wide">No photo</span>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={resolveStorageUrl(src)}
+      alt={alt}
+      className="h-16 w-24 flex-shrink-0 rounded-lg object-cover bg-gray-100"
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 function ImageUploadField({
   value,
   onChange,
@@ -162,6 +184,8 @@ function ImageUploadField({
     },
   });
 
+  const [previewFailed, setPreviewFailed] = useState(false);
+
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
@@ -172,20 +196,26 @@ function ImageUploadField({
 
   function handleClear() {
     onChange("");
+    setPreviewFailed(false);
   }
 
   return (
     <div className="space-y-2">
       {value ? (
         <div className="relative">
-          <img
-            src={resolveStorageUrl(value)}
-            alt="Project photo"
-            className="h-32 w-full rounded-lg object-cover bg-gray-100"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
+          {previewFailed ? (
+            <div className="h-32 w-full rounded-lg bg-gray-100 flex flex-col items-center justify-center gap-1.5 text-gray-400">
+              <ImageIcon className="h-7 w-7" />
+              <span className="text-xs font-medium uppercase tracking-wide">Photo unavailable</span>
+            </div>
+          ) : (
+            <img
+              src={resolveStorageUrl(value)}
+              alt="Project photo"
+              className="h-32 w-full rounded-lg object-cover bg-gray-100"
+              onError={() => setPreviewFailed(true)}
+            />
+          )}
           <button
             type="button"
             onClick={handleClear}
@@ -447,15 +477,7 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
           <ul className="divide-y divide-gray-100">
             {projects.map((project) => (
               <li key={project.id} className="flex items-start gap-4 px-6 py-4">
-                <img
-                  src={resolveStorageUrl(project.imageUrl)}
-                  alt={project.title}
-                  className="h-16 w-24 flex-shrink-0 rounded-lg object-cover bg-gray-100"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='64' fill='%23e5e7eb'%3E%3Crect width='96' height='64'/%3E%3C/svg%3E";
-                  }}
-                />
+                <ProjectThumbnail src={project.imageUrl} alt={project.title} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="font-medium text-gray-900 truncate">{project.title}</span>
