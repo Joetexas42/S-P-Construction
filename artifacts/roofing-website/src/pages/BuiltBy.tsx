@@ -314,7 +314,7 @@ export default function BuiltBy() {
     <>
       <SEO
         title="Built by Paper Street Software Co."
-        description="Paper Street Software Co. built the S&P Construction website — custom sites, AI tools, and digital solutions for local businesses."
+        description="Paper Street Software Co. built the Scott Commercial Roofing website — custom sites, AI tools, and digital solutions for local businesses."
         jsonLd={builtBySchema}
       />
       {/* Hero */}

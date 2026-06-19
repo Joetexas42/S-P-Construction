@@ -74,7 +74,7 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About S&P Construction | DFW's Trusted Flat Roof Specialists"
+        title="About Scott Commercial Roofing | DFW's Trusted Flat Roof Specialists"
         description="Learn who we are — family-owned since 2003, OSHA 30 trained crews, manufacturer-certified, and serving North Texas commercial property owners with transparent pricing and long-term relationships."
       />
 

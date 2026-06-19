@@ -36,7 +36,7 @@ export default function ServiceAreas() {
   return (
     <>
       <SEO 
-        title="DFW Service Areas | S&P Construction Contractor"
+        title="DFW Service Areas | Scott Commercial Roofing Contractor"
         description="Commercial flat roof, TPO, and PVC roofing services across the entire Dallas-Fort Worth Metroplex: Dallas, Fort Worth, Frisco, Plano, McKinney, Allen, Arlington, Denton, Lewisville, and all of North Texas."
         jsonLd={breadcrumbLd}
       />

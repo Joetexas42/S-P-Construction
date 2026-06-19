@@ -5,8 +5,8 @@ export default function PrivacyPolicy() {
   return (
     <>
       <SEO
-        title="Privacy Policy | S&P Construction"
-        description="Privacy policy for S&P Construction. Learn how we collect, use, and protect your information."
+        title="Privacy Policy | Scott Commercial Roofing"
+        description="Privacy policy for Scott Commercial Roofing. Learn how we collect, use, and protect your information."
       />
 
       <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">

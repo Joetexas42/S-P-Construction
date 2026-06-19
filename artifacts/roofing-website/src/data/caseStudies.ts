@@ -52,9 +52,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: "/images/projects/frisco-tpo-retail.webp",
     seoTitle:
-      "Frisco Commercial Roof Replacement — 40,000 Sq Ft TPO Case Study | S&P Construction",
+      "Frisco Commercial Roof Replacement — 40,000 Sq Ft TPO Case Study | Scott Commercial Roofing",
     seoDescription:
-      "How S&P Construction replaced 40,000 sq ft of failing EPDM with 60-mil Carlisle TPO on a Frisco retail center — phased, zero tenant disruption, 20-year NDL warranty.",
+      "How Scott Commercial Roofing replaced 40,000 sq ft of failing EPDM with 60-mil Carlisle TPO on a Frisco retail center — phased, zero tenant disruption, 20-year NDL warranty.",
     beforeAfter: {
       caption:
         "Same Frisco retail center roof before and after tear-off — failing ballasted EPDM with split seams and ponding on the left; new 60-mil Carlisle TPO in clean parallel rows with re-flashed HVAC curbs on the right.",
@@ -91,9 +91,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: "/images/projects/fortworth-metal-alliance.webp",
     seoTitle:
-      "Fort Worth Standing Seam Metal Roof — 85,000 Sq Ft Warehouse Case Study | S&P Construction",
+      "Fort Worth Standing Seam Metal Roof — 85,000 Sq Ft Warehouse Case Study | Scott Commercial Roofing",
     seoDescription:
-      "S&P Construction roll-formed and installed 85,000 sq ft of 24-gauge MBCI standing seam metal on a Fort Worth distribution warehouse with zero operational downtime.",
+      "Scott Commercial Roofing roll-formed and installed 85,000 sq ft of 24-gauge MBCI standing seam metal on a Fort Worth distribution warehouse with zero operational downtime.",
     beforeAfter: {
       caption:
         "Same Fort Worth distribution warehouse roof before and after — 30-year-old rusted R-panel with backed-out fasteners and oil-canning on the left; new 24-gauge MBCI Galvalume standing seam panels in long mechanically-seamed runs on the right.",
@@ -130,9 +130,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: "/images/projects/plano-storm-office.webp",
     seoTitle:
-      "Plano Hail Damage Roof Restoration — Office Campus Case Study | S&P Construction",
+      "Plano Hail Damage Roof Restoration — Office Campus Case Study | Scott Commercial Roofing",
     seoDescription:
-      "How S&P Construction documented and restored 62,000 sq ft of hail-damaged modified bitumen across a Plano office campus — full insurance approval, 15-year warranty.",
+      "How Scott Commercial Roofing documented and restored 62,000 sq ft of hail-damaged modified bitumen across a Plano office campus — full insurance approval, 15-year warranty.",
     beforeAfter: {
       caption:
         "Same Plano office campus roof before and after the April 2025 hail claim — hundreds of fresh impact craters and granule loss on the left; new SBS modified bitumen cap sheet and fresh pipe boots on the right.",
@@ -169,9 +169,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: "/images/projects/dallas-pvc-warehouse.webp",
     seoTitle:
-      "Dallas PVC Roof Replacement — 120,000 Sq Ft Cold Storage Case Study | S&P Construction",
+      "Dallas PVC Roof Replacement — 120,000 Sq Ft Cold Storage Case Study | Scott Commercial Roofing",
     seoDescription:
-      "S&P Construction installed 120,000 sq ft of Sika Sarnafil PVC on a Dallas cold-storage warehouse — tapered drainage, zero cold-chain loss, 25-year warranty.",
+      "Scott Commercial Roofing installed 120,000 sq ft of Sika Sarnafil PVC on a Dallas cold-storage warehouse — tapered drainage, zero cold-chain loss, 25-year warranty.",
     beforeAfter: {
       caption:
         "Same Dallas cold-storage warehouse roof before and after — saturated 4-ply BUR with 17 chronic ponding spots on the left; new 60-mil Sika Sarnafil PVC over tapered polyiso with positive drainage on the right.",
@@ -208,9 +208,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: "/images/projects/mckinney-tpo-medical.webp",
     seoTitle:
-      "McKinney Medical Office TPO Recover Roof — Case Study | S&P Construction",
+      "McKinney Medical Office TPO Recover Roof — Case Study | Scott Commercial Roofing",
     seoDescription:
-      "S&P Construction installed a 28,000 sq ft GAF EverGuard TPO recover system on a McKinney medical office — night phasing, no OR disruption, 20-year warranty.",
+      "Scott Commercial Roofing installed a 28,000 sq ft GAF EverGuard TPO recover system on a McKinney medical office — night phasing, no OR disruption, 20-year warranty.",
     beforeAfter: {
       caption:
         "Same McKinney medical office roof before and after the recover — aging BUR with failing pipe boots and trapped moisture on the left; bright new 60-mil GAF EverGuard TPO with cleanly heat-welded pipe boots on the right.",
@@ -247,9 +247,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     image: "/images/projects/arlington-pvc-school.webp",
     seoTitle:
-      "Arlington School District PVC Roof Replacement — Case Study | S&P Construction",
+      "Arlington School District PVC Roof Replacement — Case Study | Scott Commercial Roofing",
     seoDescription:
-      "S&P Construction replaced 55,000 sq ft of gravel BUR with Johns Manville PVC across an Arlington school campus — abated, finished early, 20-year warranty.",
+      "Scott Commercial Roofing replaced 55,000 sq ft of gravel BUR with Johns Manville PVC across an Arlington school campus — abated, finished early, 20-year warranty.",
     beforeAfter: {
       caption:
         "Same Arlington school campus rooftop before and after the summer-break replacement — 30-year-old gravel BUR with weathered asbestos flashings on the left; new 50-mil Johns Manville white PVC over the gymnasium and classroom wings on the right.",

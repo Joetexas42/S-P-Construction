@@ -188,7 +188,7 @@ export default function FAQ() {
   return (
     <>
       <SEO
-        title="Commercial Roofing FAQs | S&P Construction"
+        title="Commercial Roofing FAQs | Scott Commercial Roofing"
         description="Answers to the most common questions about commercial roofing cost, timeline, materials, warranties, insurance claims, and permits in North Texas."
         canonical={`${SITE_ORIGIN}/faq`}
         jsonLd={faqJsonLd}

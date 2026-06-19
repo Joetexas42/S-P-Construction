@@ -9,8 +9,8 @@ export default function Contact() {
   return (
     <>
       <SEO 
-        title="Contact Us | Request Free Inspection | S&P Construction"
-        description="Contact S&P Construction for a free inspection or emergency leak repair in North Texas. Call (972) 555-0100."
+        title="Contact Us | Request Free Inspection | Scott Commercial Roofing"
+        description="Contact Scott Commercial Roofing for a free inspection or emergency leak repair in North Texas. Call (972) 555-0100."
       />
       
       {/* Page Header - Photo Hero */}

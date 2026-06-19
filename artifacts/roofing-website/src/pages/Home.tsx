@@ -87,7 +87,7 @@ export default function Home() {
   return (
     <>
       <SEO 
-        title="S&P Construction | TPO, PVC & Flat Roof Specialists | DFW"
+        title="Scott Commercial Roofing | TPO, PVC & Flat Roof Specialists | DFW"
         description="Commercial flat roof specialists serving Dallas, Fort Worth, Frisco, Plano & all of North Texas. TPO, PVC, and single-ply membrane installation, repair, and 24/7 emergency leak response. Authorized Firestone (Elevate), Mule-Hide & Duro-Last installer since 2003. Call (972) 555-0100."
         jsonLd={jsonLd}
       />

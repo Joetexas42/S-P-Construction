@@ -180,8 +180,8 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
 
   const serviceLabel = SERVICE_CITY_SERVICE_LABELS[displayedService.slug] ?? displayedService.shortTitle;
 
-  const seoTitle = `${serviceLabel} in ${city.name}, TX | S&P Construction`;
-  const seoDescription = `S&P Construction provides ${serviceLabel.toLowerCase()} in ${city.name}, TX. Local expertise, 24/7 emergency response, manufacturer-backed warranties. Serving ${city.county}.`;
+  const seoTitle = `${serviceLabel} in ${city.name}, TX | Scott Commercial Roofing`;
+  const seoDescription = `Scott Commercial Roofing provides ${serviceLabel.toLowerCase()} in ${city.name}, TX. Local expertise, 24/7 emergency response, manufacturer-backed warranties. Serving ${city.county}.`;
 
   const breadcrumbLd = {
     "@context": "https://schema.org",

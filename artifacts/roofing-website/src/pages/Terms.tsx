@@ -5,8 +5,8 @@ export default function Terms() {
   return (
     <>
       <SEO
-        title="Terms of Service | S&P Construction"
-        description="Terms of service for S&P Construction. Read our terms before using our website or engaging our roofing services."
+        title="Terms of Service | Scott Commercial Roofing"
+        description="Terms of service for Scott Commercial Roofing. Read our terms before using our website or engaging our roofing services."
       />
 
       <section data-dark-hero className="bg-primary text-primary-foreground pt-24 pb-16 border-b border-primary-foreground/10">
