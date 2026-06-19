@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "build": "vite build --config vite.config.ts",
+    "build": "vite build --config vite.config.ts && tsx scripts/prerender.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
-    "typecheck": "tsc --build ../../lib/api-client-react ../../lib/object-storage-web && tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc --build ../../lib/api-client-react ../../lib/object-storage-web && tsc -p tsconfig.json --noEmit",
+    "prerender": "tsx scripts/prerender.ts"
   },
   "devDependencies": {
     "@googlemaps/js-api-loader": "^2.0.2",
@@ -62,6 +63,7 @@
     "input-otp": "^1.4.2",
     "lucide-react": "catalog:",
     "next-themes": "^0.4.6",
+    "puppeteer-core": "^23.11.1",
     "react": "catalog:",
     "react-day-picker": "^9.11.1",
     "react-dom": "catalog:",
