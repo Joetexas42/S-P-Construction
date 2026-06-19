@@ -1,2 +1,4 @@
 - [SPA prerendering for SEO](prerender-spa-seo.md) — Puppeteer prerender gotchas: fresh page per route, proxy /api (never serve index.html to fetch), wait on #root children, shard to observe long runs.
 - [zod version skew](zod-version-skew.md) — keep one zod version workspace-wide (pnpm override); a 2nd transitive zod copy breaks every zodResolver typecheck.
+- [Storage path 3-layer contract](storage-path-contract.md) — migration mapping ⇄ resolveStorageUrl ⇄ server routes must agree on prefixes; round-trip test guards drift. Change all three together.
+- [Vitest setup & pre-existing typecheck red](vitest-setup.md) — how tests run; and a pre-existing zod/@hookform typecheck failure in roofing-website that is NOT yours to fix.

@@ -1,3 +1,5 @@
+import { resolveStorageUrl as resolveStorageUrlCore } from "@workspace/storage-url";
+
 const API_BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
 
 /**
@@ -25,12 +27,5 @@ export function getApiUrl(path: string): string {
  * Any other URL (external https://, static assets, etc.) is returned as-is.
  */
 export function resolveStorageUrl(url: string): string {
-  if (!url) return url;
-  if (url.startsWith("/objects/")) {
-    return getApiUrl(`/api/storage${url}`);
-  }
-  if (url.startsWith("/api/storage/")) {
-    return getApiUrl(url);
-  }
-  return url;
+  return resolveStorageUrlCore(url, API_BASE);
 }

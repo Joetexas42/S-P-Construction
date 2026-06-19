@@ -39,15 +39,17 @@ import {
   HeadObjectCommand,
   PutObjectCommand,
 } from "@aws-sdk/client-s3";
+import {
+  SOURCE_PRIVATE_PREFIX,
+  SOURCE_PUBLIC_PREFIX,
+  createStorageKeyMapper,
+} from "./storage-key-mapping.mjs";
 
 const { Pool } = pg;
 
 // ── Constants ────────────────────────────────────────────────────────────────
 const SIDECAR_ENDPOINT = "http://127.0.0.1:1106";
 const GCS_API = "https://storage.googleapis.com";
-// Fixed Replit Object Storage key conventions.
-const SOURCE_PRIVATE_PREFIX = ".private/";
-const SOURCE_PUBLIC_PREFIX = "public/";
 
 // ── CLI flags ────────────────────────────────────────────────────────────────
 const args = new Set(process.argv.slice(2));
@@ -72,14 +74,6 @@ function parseObjectPath(path) {
   const parts = p.split("/").filter(Boolean);
   if (parts.length < 1) fail(`Invalid path: ${path}`);
   return { bucket: parts[0], keyPrefix: parts.slice(1).join("/") };
-}
-
-function joinKey(...segs) {
-  return segs
-    .filter((s) => s != null && s !== "")
-    .map((s) => s.replace(/^\/+|\/+$/g, ""))
-    .filter(Boolean)
-    .join("/");
 }
 
 /** Fetch a short-lived GCS access token from the Replit sidecar. */
@@ -163,33 +157,10 @@ async function main() {
     ? parseObjectPath(publicPaths.split(",")[0].trim()).keyPrefix
     : "public";
 
-  /** Map a source GCS key to its destination R2 key. */
-  function mapKey(srcKey) {
-    if (srcKey.startsWith(SOURCE_PRIVATE_PREFIX)) {
-      return joinKey(destPrivatePrefix, srcKey.slice(SOURCE_PRIVATE_PREFIX.length));
-    }
-    if (srcKey.startsWith(SOURCE_PUBLIC_PREFIX)) {
-      return joinKey(destPublicPrefix, srcKey.slice(SOURCE_PUBLIC_PREFIX.length));
-    }
-    // Unknown prefix — keep the key as-is so nothing is silently dropped.
-    return srcKey;
-  }
-
-  /**
-   * Canonical stored path for a destination key, matching the frontend's
-   * resolveStorageUrl() expectations:
-   *   private uploads → "/objects/<key>"
-   *   public assets   → "/api/storage/public-objects/<rel>"
-   */
-  function canonicalPath(srcKey, destKey) {
-    if (srcKey.startsWith(SOURCE_PUBLIC_PREFIX)) {
-      const rel = destKey.startsWith(`${destPublicPrefix}/`)
-        ? destKey.slice(destPublicPrefix.length + 1)
-        : destKey;
-      return `/api/storage/public-objects/${rel}`;
-    }
-    return `/objects/${destKey}`;
-  }
+  const { mapKey, canonicalPath } = createStorageKeyMapper(
+    destPrivatePrefix,
+    destPublicPrefix,
+  );
 
   console.log(`  source bucket : ${sourceBucket}`);
   console.log(`  target bucket : ${r2Bucket}`);

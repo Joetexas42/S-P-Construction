@@ -7,7 +7,7 @@
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
     "build": "vite build --config vite.config.ts && tsx scripts/prerender.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
-    "typecheck": "tsc --build ../../lib/api-client-react ../../lib/object-storage-web && tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc --build ../../lib/api-client-react ../../lib/object-storage-web ../../lib/storage-url && tsc -p tsconfig.json --noEmit",
     "prerender": "tsx scripts/prerender.ts",
     "prerender:projects": "PRERENDER_GROUP=projects tsx scripts/prerender.ts"
   },
@@ -55,6 +55,7 @@
     "@workspace/api-client-react": "workspace:*",
     "@workspace/estimator-config": "workspace:*",
     "@workspace/object-storage-web": "workspace:*",
+    "@workspace/storage-url": "workspace:*",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "cmdk": "^1.1.1",
