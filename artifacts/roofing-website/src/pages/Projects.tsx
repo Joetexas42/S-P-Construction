@@ -96,16 +96,28 @@ function SkeletonCard() {
 }
 
 function GalleryProjectCard({ project }: { project: Project }) {
+  const [imageFailed, setImageFailed] = useState(false);
+
   return (
     <article className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200">
       <div className="aspect-[16/10] overflow-hidden bg-muted relative">
-        <img
-          src={resolveStorageUrl(project.imageUrl)}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-          decoding="async"
-        />
+        {imageFailed ? (
+          <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-muted text-muted-foreground">
+            <Building2 className="h-10 w-10 text-secondary" />
+            <span className="text-xs font-semibold uppercase tracking-wider">
+              Scott Commercial Roofing
+            </span>
+          </div>
+        ) : (
+          <img
+            src={resolveStorageUrl(project.imageUrl)}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+            onError={() => setImageFailed(true)}
+          />
+        )}
         <span className="absolute top-4 left-4 text-xs font-bold uppercase tracking-wider text-white bg-secondary px-3 py-1.5 rounded shadow">
           {project.category}
         </span>
