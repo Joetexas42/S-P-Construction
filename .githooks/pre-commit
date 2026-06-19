@@ -16,6 +16,15 @@ if [ -z "$STAGED" ]; then
   exit 0
 fi
 
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+# Block commits that fail the workspace typecheck.
+echo "[pre-commit] running typecheck..."
+if ! (cd "$REPO_ROOT" && pnpm run typecheck); then
+  echo "[pre-commit] typecheck failed — aborting commit. Fix the type errors and try again." >&2
+  exit 1
+fi
+
 BUMP_CITY_PAGES=0
 BUMP_SERVICE_PAGES=0
 BUMP_SERVICE_CITY_PAGES=0
@@ -44,8 +53,6 @@ TOTAL=$((BUMP_CITY_PAGES + BUMP_SERVICE_PAGES + BUMP_SERVICE_CITY_PAGES + BUMP_S
 if [ "$TOTAL" -eq 0 ]; then
   exit 0
 fi
-
-REPO_ROOT="$(git rev-parse --show-toplevel)"
 
 run_bump() {
   local key="$1"
