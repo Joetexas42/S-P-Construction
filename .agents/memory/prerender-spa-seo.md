@@ -34,6 +34,19 @@ route's HTML after the SEO `useEffect` injects head tags.
   (About, Contact, Estimate, Privacy, Terms) have no JSON-LD, and admin/404
   have no SEO at all.
 
+## Targeted re-prerender after admin content edits
+
+- Only the `/projects` and `/case-studies` listing routes render DB-backed
+  project data (both mount the `Projects` component; the `:slug` detail pages
+  use static case-study data). So a portfolio edit in the admin dashboard only
+  staleness-affects those two routes — no need for a full ~90-route rebuild.
+- The script exposes a `PRERENDER_GROUP=<name>` registry (`ROUTE_GROUPS`) for
+  named, exact-match route sets; `projects` is the group for the above. npm
+  script `prerender:projects` wraps it. A targeted refresh still needs an
+  existing `dist/public` build + the API server reachable on `:80`.
+- **Why:** production is split-origin (static site + separate API), so there is
+  no in-prod auto-trigger; the documented on-demand command is the refresh path.
+
 ## Environment quirk: can't observe a >120s run
 
 A full 91-route run exceeds the bash-tool 120s cap, and backgrounded/`setsid`

@@ -423,6 +423,11 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
             Add Project
           </Button>
         </div>
+        <p className="px-6 pt-3 text-xs text-gray-500">
+          Saved projects appear on the live gallery right away. The
+          search-engine snapshot of the Projects page refreshes the next time
+          the site is published.
+        </p>
 
         {isLoading && (
           <div className="px-6 py-12 text-center text-gray-400">Loading projects…</div>

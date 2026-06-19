@@ -86,6 +86,17 @@ const PROJECT_SLUGS = [
   "arlington-school-pvc-replacement",
 ];
 
+// Named route groups for targeted re-prerendering. When the team edits the
+// portfolio through the admin dashboard, only the DB-backed listing pages go
+// stale — re-prerender just those instead of the full ~90-route build.
+const ROUTE_GROUPS: Record<string, string[]> = {
+  // Pages that render live project data from /api/projects (the "Recent
+  // Projects" gallery section). The /projects/:slug and /case-studies/:slug
+  // detail pages render static case-study data, so they don't need a refresh
+  // when portfolio projects change.
+  projects: ["/projects", "/case-studies"],
+};
+
 function allRoutes(): string[] {
   const routes: string[] = [...STATIC_ROUTES];
 
@@ -200,6 +211,21 @@ function writePrerendered(route: string, html: string) {
 
 async function main() {
   let routes = allRoutes();
+
+  // Optional named group (PRERENDER_GROUP) to re-prerender a known set of
+  // content-dependent routes — e.g. "projects" after editing the portfolio in
+  // the admin dashboard. Matches routes exactly (not by substring) so detail
+  // pages aren't pulled in unnecessarily.
+  const group = process.env.PRERENDER_GROUP?.trim();
+  if (group) {
+    const groupRoutes = ROUTE_GROUPS[group];
+    if (!groupRoutes) {
+      throw new Error(
+        `Unknown PRERENDER_GROUP="${group}" (known: ${Object.keys(ROUTE_GROUPS).join(", ")})`,
+      );
+    }
+    routes = routes.filter((r) => groupRoutes.includes(r));
+  }
 
   // Optional comma-separated substring filter (PRERENDER_ROUTES) for
   // re-prerendering or debugging a subset of routes without a full run.
