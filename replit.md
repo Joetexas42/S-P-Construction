@@ -14,6 +14,20 @@ Lead-generation website for S&P Construction, a commercial roofing contractor se
 - `pnpm --filter @workspace/api-server run bump-date <key|all>` — update a content-date key in `content-dates.ts` to today; run after publishing content changes so sitemap `<lastmod>` stays accurate. Keys: `staticPages`, `servicePages`, `cityPages`, `serviceCityPages`, `all`. **This runs automatically via the pre-commit hook** when the relevant data files are staged — no need to run it manually.
 - Required env: `DATABASE_URL` — Postgres connection string
 
+## Deployment (Railway API + Cloudflare Pages frontend)
+
+The frontend (static, prerendered SPA) deploys to **Cloudflare Pages**; the API deploys to **Railway**. Cloudflare Pages settings:
+
+- **Build command:** `pnpm --filter @workspace/roofing-website run build`
+- **Build output directory:** `artifacts/roofing-website/dist/public`
+- **Root directory:** repo root (the build filter targets the workspace package)
+- **Environment variables (build-time):**
+  - `VITE_API_BASE_URL` — the Railway API origin, e.g. `https://api.spconstructiondfw.com` (read in `vite.config.ts`, applied via `setBaseUrl()` in `src/main.tsx`)
+  - `GOOGLE_MAPS_BROWSER_API_KEY` — browser-safe Google Maps key (HTTP-referrer-restricted)
+  - The build also runs Puppeteer prerender; the Pages build image must have Chromium available (set `CHROMIUM_PATH` if needed).
+- **SPA routing:** `artifacts/roofing-website/public/_redirects` provides the `/* /index.html 200` fallback so non-prerendered routes (e.g. `/admin`, dynamic paths, trailing-slash variants) resolve. Prerendered static files are still served directly (Pages serves matching files before applying the catch-all).
+- **Asset caching:** `artifacts/roofing-website/public/_headers` sets long-lived immutable cache on the hashed `/assets/*` bundles.
+
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
