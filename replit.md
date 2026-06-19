@@ -9,6 +9,7 @@ Lead-generation website for S&P Construction, a commercial roofing contractor se
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
+- `pnpm --filter @workspace/api-server run migrate-storage [--dry-run] [--force]` — one-time migration of existing media from Replit Object Storage (GCS) to Cloudflare R2, plus rewriting absolute GCS photo URLs in the `projects` table to canonical `/objects/...` paths. Run inside the Replit environment that owns the source bucket; `--dry-run` needs no R2 creds, a real run needs the `R2_*` and object-path env vars.
 - `pnpm --filter @workspace/api-server run bump-date <key|all>` — update a content-date key in `content-dates.ts` to today; run after publishing content changes so sitemap `<lastmod>` stays accurate. Keys: `staticPages`, `servicePages`, `cityPages`, `serviceCityPages`, `all`. **This runs automatically via the pre-commit hook** when the relevant data files are staged — no need to run it manually.
 - Required env: `DATABASE_URL` — Postgres connection string
 
