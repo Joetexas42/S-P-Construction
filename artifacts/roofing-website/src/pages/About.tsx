@@ -3,6 +3,7 @@ import { SEO } from "@/components/SEO";
 import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { Button } from "@/components/ui/button";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { Award, ShieldCheck, Users, Wrench, Clock, HardHat } from "lucide-react";
 
 const values = [
@@ -84,9 +85,9 @@ export default function About() {
         className="relative min-h-[55vh] flex items-center justify-center pt-20 pb-20 overflow-hidden"
       >
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bg.webp"
-            srcSet="/images/hero-bg-480w.webp 480w, /images/hero-bg-800w.webp 800w, /images/hero-bg-1280w.webp 1280w"
+          <ResponsiveImage
+            base="/images/hero-bg"
+            fallbackWidth={1280}
             sizes="100vw"
             alt="S&P Construction crew on a large commercial flat roof in North Texas"
             width={1280}

@@ -32,10 +32,8 @@ import {
 } from "@/data/caseStudies";
 import { cn } from "@/lib/utils";
 import { resolveStorageUrl } from "@/lib/api-url";
-import {
-  buildImageSrcSet,
-  SIZES_HALF_COLUMN_GRID,
-} from "@/lib/responsiveImage";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { SIZES_HALF_COLUMN_GRID } from "@/lib/responsiveImage";
 import { CARD_EXIT_STAGGER_MS, CARD_EXIT_BASE_MS, FILTER_DEBOUNCE_MS } from "@/lib/animation";
 import { useListProjects } from "@workspace/api-client-react";
 import type { Project } from "@workspace/api-client-react";
@@ -558,9 +556,8 @@ function CaseStudyCard({
         href={`/projects/${study.slug}`}
         className="aspect-[16/10] overflow-hidden bg-muted relative block"
       >
-        <img
-          src={study.image}
-          srcSet={buildImageSrcSet(study.image)}
+        <ResponsiveImage
+          base={study.image}
           sizes={SIZES_HALF_COLUMN_GRID}
           alt={study.title}
           width={800}

@@ -10,10 +10,8 @@ import { ContactForm } from "@/components/ContactForm";
 import { ProjectLightbox } from "@/components/ProjectLightbox";
 import { caseStudies, getSystemFamily, SYSTEM_FAMILY_LABELS, type CaseStudy } from "@/data/caseStudies";
 import { FilterChip } from "@/components/FilterChip";
-import {
-  buildImageSrcSet as buildProjectImageSrcSet,
-  SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
-} from "@/lib/responsiveImage";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES } from "@/lib/responsiveImage";
 import { usePageExit } from "@/hooks/usePageExit";
 import { CARD_EXIT_BASE_MS, CARD_EXIT_STAGGER_MS } from "@/lib/animation";
 import { cn } from "@/lib/utils";
@@ -285,9 +283,9 @@ export default function CityPage({ city }: CityPageProps) {
       <section data-dark-hero className="relative min-h-[80vh] flex flex-col justify-center pt-24 pb-16 overflow-hidden text-white">
         {/* Full-bleed background image */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={`${city.heroImage.base}-800w.webp`}
-            srcSet={`${city.heroImage.base}-480w.webp 480w, ${city.heroImage.base}-800w.webp 800w, ${city.heroImage.base}-1280w.webp 1280w`}
+          <ResponsiveImage
+            base={city.heroImage.base}
+            fallbackWidth={1280}
             sizes="100vw"
             alt={city.heroImage.alt}
             width={1280}
@@ -470,9 +468,8 @@ export default function CityPage({ city }: CityPageProps) {
                       style={isCsExiting ? { animationDelay: `${csIdx * CARD_EXIT_STAGGER_MS}ms` } : undefined}
                     >
                       <div className="aspect-[16/10] overflow-hidden bg-muted relative">
-                        <img
-                          src={cs.image}
-                          srcSet={buildProjectImageSrcSet(cs.image)}
+                        <ResponsiveImage
+                          base={cs.image}
                           sizes={PROJECT_IMAGE_SIZES}
                           alt={cs.title}
                           width={800}
@@ -562,9 +559,8 @@ export default function CityPage({ city }: CityPageProps) {
                       data-testid={`recent-project-trigger-${idx}`}
                       className="group aspect-[16/10] overflow-hidden bg-muted relative block w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 cursor-zoom-in"
                     >
-                      <img
-                        src={p.image}
-                        srcSet={buildProjectImageSrcSet(p.image)}
+                      <ResponsiveImage
+                        base={p.image}
                         sizes={PROJECT_IMAGE_SIZES}
                         alt={p.title}
                         width={800}

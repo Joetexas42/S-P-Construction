@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 interface BeforeAfterImage {
   base: string;
@@ -94,9 +95,6 @@ export function BeforeAfterSlider({
     };
   }, []);
 
-  const srcSet = (base: string) =>
-    `${base}-480w.webp 480w, ${base}-800w.webp 800w, ${base}-1280w.webp 1280w`;
-
   const positionStr = `${position}%`;
 
   return (
@@ -118,9 +116,8 @@ export function BeforeAfterSlider({
       data-testid={testIdPrefix ? `${testIdPrefix}-slider` : undefined}
     >
       {/* After image (base layer, fully visible) */}
-      <img
-        src={`${after.base}-800w.webp`}
-        srcSet={srcSet(after.base)}
+      <ResponsiveImage
+        base={after.base}
         sizes={sizes}
         alt={after.alt}
         width={1280}
@@ -133,9 +130,8 @@ export function BeforeAfterSlider({
       />
 
       {/* Before image (clipped via inset clip-path so it never distorts) */}
-      <img
-        src={`${before.base}-800w.webp`}
-        srcSet={srcSet(before.base)}
+      <ResponsiveImage
+        base={before.base}
         sizes={sizes}
         alt={before.alt}
         width={1280}

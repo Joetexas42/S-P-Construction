@@ -2,10 +2,8 @@ import { useCallback, useEffect } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Building2, Calendar, ChevronLeft, ChevronRight, Layers, Ruler, X } from "lucide-react";
 import type { CityRecentProject } from "@/pages/CityPage";
-import {
-  buildImageSrcSet as buildProjectImageSrcSet,
-  SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES,
-} from "@/lib/responsiveImage";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { SIZES_HALF_COLUMN_GRID as PROJECT_IMAGE_SIZES } from "@/lib/responsiveImage";
 
 function formatSqFt(n: number) {
   return n.toLocaleString("en-US");
@@ -77,9 +75,8 @@ export function ProjectLightbox({
               </DialogPrimitive.Title>
 
               <div className="relative flex-1 min-h-0 bg-black flex items-center justify-center">
-                <img
-                  src={project.image}
-                  srcSet={buildProjectImageSrcSet(project.image)}
+                <ResponsiveImage
+                  base={project.image}
                   sizes={PROJECT_IMAGE_SIZES}
                   alt={project.title}
                   className="max-h-full max-w-full object-contain"

@@ -4,6 +4,7 @@ import { CertificationsStrip } from "@/components/CertificationsStrip";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { GoogleReviewsSummary } from "@/components/Testimonials";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 export default function Contact() {
   return (
@@ -16,9 +17,9 @@ export default function Contact() {
       {/* Page Header - Photo Hero */}
       <section data-dark-hero className="relative min-h-[50vh] flex items-center justify-center pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/contact-hero.webp"
-            srcSet="/images/contact-hero-480w.webp 480w, /images/contact-hero-800w.webp 800w, /images/contact-hero-1280w.webp 1280w"
+          <ResponsiveImage
+            base="/images/contact-hero"
+            fallbackWidth={1280}
             sizes="100vw"
             alt="S&P Construction foreman reviewing a roof inspection report with a North Texas property manager on a commercial rooftop"
             width={1280}

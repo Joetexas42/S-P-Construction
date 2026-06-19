@@ -7,6 +7,7 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import { services, type ServiceDetail as ServiceDetailType } from "@/data/services";
 import { cities } from "@/data/cities";
 import { SERVICE_CITY_SLUGS, SERVICE_CITY_SERVICE_SHORT } from "@/data/serviceCityData";
@@ -230,9 +231,9 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
       <section data-dark-hero id="top" className="relative min-h-[80vh] flex flex-col justify-center pt-24 pb-16 overflow-hidden text-white">
         {/* Full-bleed background image */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={`${service.heroImage.base}-800w.webp`}
-            srcSet={`${service.heroImage.base}-480w.webp 480w, ${service.heroImage.base}-800w.webp 800w, ${service.heroImage.base}-1280w.webp 1280w`}
+          <ResponsiveImage
+            base={service.heroImage.base}
+            fallbackWidth={1280}
             sizes="100vw"
             alt={service.heroImage.alt}
             width={1280}
@@ -409,9 +410,8 @@ export default function ServiceDetail({ service }: ServiceDetailProps) {
                           className="group relative block w-full rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3] cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
                           data-testid={`service-supporting-image-button-${service.slug}`}
                         >
-                          <img
-                            src={`${supporting.base}-800w.webp`}
-                            srcSet={`${supporting.base}-480w.webp 480w, ${supporting.base}-800w.webp 800w, ${supporting.base}-1280w.webp 1280w`}
+                          <ResponsiveImage
+                            base={supporting.base}
                             sizes="(min-width: 1024px) 768px, 100vw"
                             alt={supporting.alt}
                             width={1280}

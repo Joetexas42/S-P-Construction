@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { ScrollRevealWrapper } from "@/components/ScrollRevealWrapper";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 const SITE_ORIGIN = "https://spconstructiondfw.com";
 
@@ -200,9 +201,9 @@ export default function FAQ() {
         className="relative min-h-[50vh] flex items-center justify-center pt-20 pb-16 overflow-hidden"
       >
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/contact-hero.webp"
-            srcSet="/images/contact-hero-480w.webp 480w, /images/contact-hero-800w.webp 800w, /images/contact-hero-1280w.webp 1280w"
+          <ResponsiveImage
+            base="/images/contact-hero"
+            fallbackWidth={1280}
             sizes="100vw"
             alt="Commercial rooftop in North Texas with S&P Construction crew at work"
             width={1280}

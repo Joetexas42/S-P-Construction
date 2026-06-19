@@ -14,10 +14,8 @@ import {
   testimonialAggregateRatingJsonLd,
 } from "@/data/testimonials";
 import { cities } from "@/data/cities";
-import {
-  buildImageSrcSet,
-  SIZES_FULL_VIEWPORT,
-} from "@/lib/responsiveImage";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
+import { SIZES_FULL_VIEWPORT } from "@/lib/responsiveImage";
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -95,10 +93,10 @@ export default function Home() {
       {/* Hero Section */}
       <section data-dark-hero className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img
-            src="/images/hero-bg.webp"
-            srcSet={buildImageSrcSet("/images/hero-bg.webp")}
+          <ResponsiveImage
+            base="/images/hero-bg.webp"
             sizes={SIZES_FULL_VIEWPORT}
+            fallbackWidth={1280}
             alt="Aerial drone view of a vast commercial flat roof in North Texas at golden hour, with the Dallas skyline silhouetted on the horizon"
             width={1920}
             height={1080}

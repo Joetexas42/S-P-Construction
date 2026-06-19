@@ -14,6 +14,7 @@ import { cities } from "@/data/cities";
 import { services } from "@/data/services";
 import { CARD_EXIT_STAGGER_MS } from "@/lib/animation";
 import { cn } from "@/lib/utils";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 type ServiceTypeValue =
   | "roof-repair"
@@ -313,9 +314,9 @@ export default function ServiceCityPage({ city, service, entry }: ServiceCityPag
       <section data-dark-hero className="relative min-h-[80vh] flex flex-col justify-center pt-24 pb-16 overflow-hidden text-white">
         {/* Full-bleed background image */}
         <div className="absolute inset-0 z-0">
-          <img
-            src={`${service.heroImage.base}-800w.webp`}
-            srcSet={`${service.heroImage.base}-480w.webp 480w, ${service.heroImage.base}-800w.webp 800w, ${service.heroImage.base}-1280w.webp 1280w`}
+          <ResponsiveImage
+            base={service.heroImage.base}
+            fallbackWidth={1280}
             sizes="100vw"
             alt={service.heroImage.alt}
             width={1280}

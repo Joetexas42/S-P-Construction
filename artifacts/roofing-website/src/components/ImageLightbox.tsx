@@ -1,5 +1,6 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 
 interface ImageLightboxProps {
   open: boolean;
@@ -48,8 +49,11 @@ export function ImageLightbox({
               </DialogPrimitive.Close>
 
               <div className="flex-1 min-h-0 flex items-center justify-center p-4 sm:p-8">
-                <img
-                  src={`${imageBase}-1280w.webp`}
+                <ResponsiveImage
+                  base={imageBase}
+                  widths={[1280]}
+                  fallbackWidth={1280}
+                  sizes="100vw"
                   alt={alt}
                   className="max-h-full max-w-full object-contain"
                   data-testid="image-lightbox-image"

@@ -22,8 +22,8 @@ import {
 } from "@/data/caseStudies";
 import { getTestimonialBySlug } from "@/data/testimonials";
 import NotFound from "@/pages/not-found";
+import { ResponsiveImage } from "@/components/ResponsiveImage";
 import {
-  buildImageSrcSet,
   SIZES_CONTENT_MAX_1280,
   SIZES_HALF_COLUMN_GRID,
 } from "@/lib/responsiveImage";
@@ -134,10 +134,10 @@ export default function ProjectDetail({
       <section className="bg-background">
         <div className="container mx-auto px-4 md:px-6 -mt-8">
           <div className="aspect-[16/9] overflow-hidden bg-muted rounded-lg border border-border shadow-lg">
-            <img
-              src={study.image}
-              srcSet={buildImageSrcSet(study.image)}
+            <ResponsiveImage
+              base={study.image}
               sizes={SIZES_CONTENT_MAX_1280}
+              fallbackWidth={1280}
               alt={study.title}
               width={1600}
               height={900}
@@ -195,9 +195,8 @@ export default function ProjectDetail({
                           className="relative block w-full rounded-xl overflow-hidden border border-border bg-muted aspect-[4/3]"
                           data-testid={`project-before-after-${kind}-${study.slug}`}
                         >
-                          <img
-                            src={`${img.base}-800w.webp`}
-                            srcSet={`${img.base}-480w.webp 480w, ${img.base}-800w.webp 800w, ${img.base}-1280w.webp 1280w`}
+                          <ResponsiveImage
+                            base={img.base}
                             sizes="(min-width: 1024px) 380px, (min-width: 640px) 45vw, 100vw"
                             alt={img.alt}
                             width={1280}
@@ -383,9 +382,8 @@ function RelatedCard({ study }: { study: CaseStudy }) {
       className="group block bg-card border border-border rounded-lg overflow-hidden hover:border-secondary hover:shadow-lg transition-all"
     >
       <div className="aspect-[16/10] overflow-hidden bg-muted">
-        <img
-          src={study.image}
-          srcSet={buildImageSrcSet(study.image)}
+        <ResponsiveImage
+          base={study.image}
           sizes={SIZES_HALF_COLUMN_GRID}
           alt={study.title}
           width={800}
