@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -22,7 +23,8 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
 import BuiltBy from "@/pages/BuiltBy";
 import NotFound from "@/pages/not-found";
-import AdminDashboard from "@/pages/AdminDashboard";
+
+const AdminDashboard = lazy(() => import("@/pages/AdminDashboard"));
 
 function CityRoute({ params }: { params: { slug: string } }) {
   const city = cityBySlug[params.slug];
@@ -59,7 +61,11 @@ const queryClient = new QueryClient();
 function Router() {
   return (
     <Switch>
-      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin">
+        <Suspense fallback={null}>
+          <AdminDashboard />
+        </Suspense>
+      </Route>
       <Route>
         <Layout>
           <Switch>

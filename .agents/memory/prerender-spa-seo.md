@@ -34,6 +34,19 @@ route's HTML after the SEO `useEffect` injects head tags.
   (About, Contact, Estimate, Privacy, Terms) have no JSON-LD, and admin/404
   have no SEO at all.
 
+## Code-splitting is SEO-safe IF the lazy route uses `fallback={null}`
+
+- The bundle is split via `manualChunks` (vendor groups) plus a `React.lazy`
+  admin route. `manualChunks` is always safe — chunks stay statically imported,
+  so the prerender renders complete pages.
+- For `React.lazy`, wrap in `<Suspense fallback={null}>`, NOT a loader/spinner.
+  The prerender's `waitForFunction(root.childElementCount>0)` would otherwise
+  latch onto the spinner and snapshot it instead of real content. With
+  `fallback={null}`, `#root` stays empty until the lazy chunk loads (fast on the
+  local static server), so the wait resolves on real content.
+- **Why:** only lazy-load routes that are not SEO-critical anyway (admin is
+  password-gated). Verified `/admin` still prerenders its full login form.
+
 ## Targeted re-prerender after admin content edits
 
 - Only the `/projects` and `/case-studies` listing routes render DB-backed

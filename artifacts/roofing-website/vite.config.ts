@@ -51,6 +51,29 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        // Split vendor code into logical, long-term-cacheable chunks. Everything
+        // stays statically imported (no dynamic import()), so the prerender
+        // still renders complete pages — this only changes how the bundle is
+        // physically split across files, keeping each chunk under the 500 kB
+        // warning threshold and improving first-paint via parallel/modulepreload.
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+
+          if (/[\\/]node_modules[\\/](react|react-dom|scheduler|react-is)[\\/]/.test(id)) {
+            return "react-vendor";
+          }
+          if (id.includes("@radix-ui")) return "radix-vendor";
+          if (/@googlemaps|google\.maps/.test(id)) return "maps-vendor";
+          if (id.includes("@tanstack")) return "query-vendor";
+          if (/lucide-react|embla-carousel|recharts|framer-motion/.test(id)) {
+            return "ui-vendor";
+          }
+          return "vendor";
+        },
+      },
+    },
   },
   server: {
     port,
