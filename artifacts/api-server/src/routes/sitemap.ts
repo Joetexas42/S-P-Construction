@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { CONTENT_DATES } from "../content-dates.js";
+import { getPortfolioLastmod } from "../lib/portfolioDate.js";
 
 const router = Router();
 
@@ -52,13 +53,40 @@ function sitemapXml(entries: string[]): string {
   ].join("\n");
 }
 
-function buildStaticEntries(): string[] {
+// YYYY-MM-DD strings sort lexicographically, so plain string comparison gives
+// the chronologically later date.
+function maxDate(a: string, b: string | null): string {
+  return b && b > a ? b : a;
+}
+
+/**
+ * Last-modified date for the portfolio pages (`/projects`). The page combines
+ * static layout (dated by `staticPages`) with the live, admin-managed portfolio,
+ * so its <lastmod> is the later of the two. The portfolio date is persisted on
+ * every project mutation (see `lib/portfolioDate.ts`); when unavailable we fall
+ * back to `staticPages`.
+ */
+async function resolvePortfolioLastmod(): Promise<string> {
+  let portfolio: string | null = null;
+  try {
+    portfolio = await getPortfolioLastmod();
+  } catch {
+    portfolio = null;
+  }
+  return maxDate(CONTENT_DATES.staticPages, portfolio);
+}
+
+function buildStaticEntries(portfolioLastmod: string): string[] {
   const lastmod = CONTENT_DATES.staticPages;
   return [
     urlEntry(`${SITE_ORIGIN}/`, { priority: "1.0", changefreq: "weekly", lastmod }),
     urlEntry(`${SITE_ORIGIN}/services`, { priority: "0.9", changefreq: "monthly", lastmod }),
     urlEntry(`${SITE_ORIGIN}/service-areas`, { priority: "0.9", changefreq: "monthly", lastmod }),
-    urlEntry(`${SITE_ORIGIN}/projects`, { priority: "0.8", changefreq: "monthly", lastmod }),
+    urlEntry(`${SITE_ORIGIN}/projects`, {
+      priority: "0.8",
+      changefreq: "monthly",
+      lastmod: portfolioLastmod,
+    }),
     urlEntry(`${SITE_ORIGIN}/gallery`, { priority: "0.7", changefreq: "monthly", lastmod }),
     urlEntry(`${SITE_ORIGIN}/contact`, { priority: "0.8", changefreq: "yearly", lastmod }),
     urlEntry(`${SITE_ORIGIN}/estimate`, { priority: "0.8", changefreq: "yearly", lastmod }),
@@ -104,13 +132,14 @@ function buildServiceCityEntries(): string[] {
   return entries;
 }
 
-router.get("/sitemap-index.xml", (_req, res) => {
+router.get("/sitemap-index.xml", async (_req, res) => {
+  const portfolioLastmod = await resolvePortfolioLastmod();
   const xml = [
     `<?xml version="1.0" encoding="UTF-8"?>`,
     `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
     `  <sitemap>`,
     `    <loc>${SITE_ORIGIN}/sitemap-static.xml</loc>`,
-    `    <lastmod>${CONTENT_DATES.staticPages}</lastmod>`,
+    `    <lastmod>${portfolioLastmod}</lastmod>`,
     `  </sitemap>`,
     `  <sitemap>`,
     `    <loc>${SITE_ORIGIN}/sitemap-services.xml</loc>`,
@@ -131,9 +160,10 @@ router.get("/sitemap-index.xml", (_req, res) => {
   res.send(xml);
 });
 
-router.get("/sitemap-static.xml", (_req, res) => {
+router.get("/sitemap-static.xml", async (_req, res) => {
+  const portfolioLastmod = await resolvePortfolioLastmod();
   res.setHeader("Content-Type", "application/xml");
-  res.send(sitemapXml(buildStaticEntries()));
+  res.send(sitemapXml(buildStaticEntries(portfolioLastmod)));
 });
 
 router.get("/sitemap-services.xml", (_req, res) => {
@@ -151,9 +181,10 @@ router.get("/sitemap-service-cities.xml", (_req, res) => {
   res.send(sitemapXml(buildServiceCityEntries()));
 });
 
-router.get("/sitemap.xml", (_req, res) => {
+router.get("/sitemap.xml", async (_req, res) => {
+  const portfolioLastmod = await resolvePortfolioLastmod();
   const xml = sitemapXml([
-    ...buildStaticEntries(),
+    ...buildStaticEntries(portfolioLastmod),
     ...buildServiceEntries(),
     ...buildCityEntries(),
     ...buildServiceCityEntries(),

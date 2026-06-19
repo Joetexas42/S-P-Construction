@@ -59,7 +59,7 @@ _Populate as you build — short repo map plus pointers to the source-of-truth f
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- **Portfolio sitemap `<lastmod>` is DB-driven, not bump-script-driven.** Most sitemap dates come from `content-dates.ts` (bumped via the pre-commit hook / `bump-date`). But the `/projects` page also renders the live, admin-managed portfolio, whose edits never run that script. So every project create/update/delete persists `now()` into the `site_meta` table (key `portfolio`) via `lib/portfolioDate.ts`, and the dynamically-served sitemap uses the later of that timestamp and `staticPages` for the `/projects` entry (and the static sub-sitemap's index `<lastmod>`). A dedicated persisted row is used rather than `MAX(created_at)` so deletions are reflected too.
 
 ## Product
 
