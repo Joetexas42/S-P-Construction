@@ -30,10 +30,12 @@ The frontend (static, prerendered SPA) deploys to **Cloudflare Pages**; the API 
 - **Build output directory:** `artifacts/roofing-website/dist/public`
 - **Root directory:** repo root (the build filter targets the workspace package)
 - **Environment variables (build-time):**
-  - `VITE_API_BASE_URL` — the Railway API origin, e.g. `https://api.spconstructiondfw.com` (read in `vite.config.ts`, applied via `setBaseUrl()` in `src/main.tsx`)
+  - `VITE_API_BASE_URL` — the Railway API origin, e.g. `https://api.spconstructiondfw.com` (read in `vite.config.ts`, applied via `setBaseUrl()` in `src/main.tsx`). The prerender also proxies its `/api/*` calls here by default (see below), so prerendered SEO pages embed live project data from the Railway API.
   - A **Deploy Hook** must exist on the Cloudflare Pages project so the API can auto-rebuild the static site when projects change (see "Auto-refresh on project changes" below)
   - `GOOGLE_MAPS_BROWSER_API_KEY` — browser-safe Google Maps key (HTTP-referrer-restricted)
-  - The build also runs Puppeteer prerender; the Pages build image must have Chromium available (set `CHROMIUM_PATH` if needed).
+  - `PRERENDER_API_ORIGIN` *(optional)* — explicit upstream origin the prerender proxies `/api/*` to. When unset, the prerender falls back to `VITE_API_BASE_URL`, and finally to `http://127.0.0.1:80` (the local Replit shared proxy). Set this only if the prerender must hit a different API origin than the client bundle. The existing 502 → client-hydration fallback still applies if the upstream is unreachable.
+  - `CHROMIUM_PATH` *(optional)* — path to a Chrome/Chromium binary. **Not required on Cloudflare:** the build is self-contained — when no system Chromium is on `PATH`, the prerender automatically downloads a pinned Chrome build (via `@puppeteer/browsers`) into `artifacts/roofing-website/.cache/puppeteer` and launches `puppeteer-core` against it. Set `CHROMIUM_PATH` only to force a specific binary (locally on Replit the Nix-provided `chromium` on `PATH` is used automatically). `CHROMIUM_CHANNEL` (default `stable`) and `PUPPETEER_CACHE_DIR` further tune the download.
+  - **Build dependencies:** `tsx` (the prerender runner) is a devDependency of `@workspace/roofing-website`, so `pnpm install` puts it on the package's `node_modules/.bin` — no global `tsx` needed. The downloaded Chrome (Ubuntu/glibc build) launches on Cloudflare's standard build image; if a future minimal image lacks the shared libs Chrome needs, provide `CHROMIUM_PATH` instead.
 - **SPA routing:** `artifacts/roofing-website/public/_redirects` provides the `/* /index.html 200` fallback so non-prerendered routes (e.g. `/admin`, dynamic paths, trailing-slash variants) resolve. Prerendered static files are still served directly (Pages serves matching files before applying the catch-all).
 - **Asset caching:** `artifacts/roofing-website/public/_headers` sets long-lived immutable cache on the hashed `/assets/*` bundles.
 

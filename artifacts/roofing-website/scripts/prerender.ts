@@ -1,13 +1,28 @@
 import puppeteer from "puppeteer-core";
 import Beasties from "beasties";
 import { createServer, request as httpRequest } from "http";
+import { request as httpsRequest } from "https";
 import { readFileSync } from "fs";
 import { resolve, dirname, join, extname } from "path";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 
 import { execSync } from "child_process";
+import {
+  install,
+  Browser,
+  resolveBuildId,
+  detectBrowserPlatform,
+  computeExecutablePath,
+} from "@puppeteer/browsers";
 
-function findChromium(): string {
+// Locate a Chrome/Chromium binary for puppeteer-core (which ships no browser).
+// Resolution order:
+//   1. CHROMIUM_PATH env var (explicit override — e.g. a CI-provided binary)
+//   2. A system browser on PATH (the Replit/Nix environment provides chromium)
+//   3. Download a known-good Chrome build into a local cache via
+//      @puppeteer/browsers — makes the Cloudflare Pages build self-contained
+//      even when the build image ships no browser.
+async function findChromium(): Promise<string> {
   if (process.env.CHROMIUM_PATH) return process.env.CHROMIUM_PATH;
 
   const candidates = [
@@ -24,9 +39,50 @@ function findChromium(): string {
     } catch { /* ignore */ }
   }
 
-  throw new Error(
-    "Chromium not found. Set CHROMIUM_PATH to the Chrome/Chromium binary, or install chromium via your package manager.",
+  return await installChromium();
+}
+
+// Download a pinned-channel Chrome build into a cache dir so the prerender can
+// run on build images that have no system browser (e.g. Cloudflare Pages).
+// Reuses an already-downloaded build on subsequent runs.
+async function installChromium(): Promise<string> {
+  const platform = detectBrowserPlatform();
+  if (!platform) {
+    throw new Error(
+      "Could not detect a browser platform for Chromium download. " +
+        "Set CHROMIUM_PATH to a Chrome/Chromium binary instead.",
+    );
+  }
+
+  const cacheDir =
+    process.env.PUPPETEER_CACHE_DIR ??
+    resolve(import.meta.dirname, "..", ".cache", "puppeteer");
+  const channel = process.env.CHROMIUM_CHANNEL ?? "stable";
+  const buildId = await resolveBuildId(Browser.CHROME, platform, channel);
+
+  // Reuse a previously downloaded build if it already exists in the cache.
+  const existingPath = computeExecutablePath({
+    browser: Browser.CHROME,
+    platform,
+    buildId,
+    cacheDir,
+  });
+  if (existsSync(existingPath)) {
+    console.log(`[prerender] Using cached Chrome ${buildId} at ${existingPath}`);
+    return existingPath;
+  }
+
+  console.log(
+    `[prerender] No system Chromium found — downloading Chrome ${buildId} (${channel}) for ${platform} into ${cacheDir}...`,
   );
+  const installed = await install({
+    browser: Browser.CHROME,
+    platform,
+    buildId,
+    cacheDir,
+  });
+  console.log(`[prerender] Chrome ready at ${installed.executablePath}`);
+  return installed.executablePath;
 }
 
 // Allow CI builds to verify compilation (vite build) without running the
@@ -39,10 +95,29 @@ if (process.env.SKIP_PRERENDER === "1" || process.env.SKIP_PRERENDER === "true")
   process.exit(0);
 }
 
-const CHROMIUM = findChromium();
-
 const DIST_DIR = resolve(import.meta.dirname, "..", "dist", "public");
 const PORT = Number(process.env.PRERENDER_PORT ?? 3456);
+
+// Upstream API origin that the prerender proxies `/api/*` requests to so pages
+// can embed real data. Resolution order:
+//   1. PRERENDER_API_ORIGIN (explicit override for the prerender)
+//   2. VITE_API_BASE_URL (the same origin the built client talks to — the
+//      Railway API in the Cloudflare build)
+//   3. http://127.0.0.1:80 (the shared proxy, for local Replit prerender runs)
+const API_ORIGIN =
+  process.env.PRERENDER_API_ORIGIN?.trim() ||
+  process.env.VITE_API_BASE_URL?.trim() ||
+  "http://127.0.0.1:80";
+
+const API_TARGET = (() => {
+  const u = new URL(API_ORIGIN);
+  const isHttps = u.protocol === "https:";
+  return {
+    isHttps,
+    host: u.hostname,
+    port: u.port ? Number(u.port) : isHttps ? 443 : 80,
+  };
+})();
 
 // Base path the site is served from (matches Vite's `base`). Used so Beasties
 // can resolve the hashed `/assets/*.css` hrefs in the prerendered HTML back to
@@ -206,13 +281,14 @@ function startStaticServer(
         // empty body so react-query degrades gracefully instead of receiving
         // HTML, and the dynamic content simply hydrates on the client.
         if (urlPath.startsWith("/api/")) {
-          const proxyReq = httpRequest(
+          const requestFn = API_TARGET.isHttps ? httpsRequest : httpRequest;
+          const proxyReq = requestFn(
             {
-              host: "127.0.0.1",
-              port: 80,
+              host: API_TARGET.host,
+              port: API_TARGET.port,
               method: req.method,
               path: req.url,
-              headers: { ...req.headers, host: "127.0.0.1" },
+              headers: { ...req.headers, host: API_TARGET.host },
             },
             (proxyRes) => {
               res.writeHead(proxyRes.statusCode ?? 502, proxyRes.headers);
@@ -327,8 +403,9 @@ async function main() {
   const shellHtml = loadPristineShell(routes);
   const { server, url } = await startStaticServer(shellHtml);
 
+  const chromium = await findChromium();
   const browser = await puppeteer.launch({
-    executablePath: CHROMIUM,
+    executablePath: chromium,
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
   });
