@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useListProjects,
@@ -34,7 +34,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail, PhoneCall, Calculator, MessageSquare } from "lucide-react";
+import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail, PhoneCall, Calculator, MessageSquare, AlertTriangle } from "lucide-react";
 import { getApiUrl, resolveStorageUrl } from "@/lib/api-url";
 
 const ADMIN_KEY_SESSION = "admin_key";
@@ -140,12 +140,20 @@ function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
   );
 }
 
-function ProjectThumbnail({ src, alt }: { src: string; alt: string }) {
+function ProjectThumbnail({
+  src,
+  alt,
+  onStatusChange,
+}: {
+  src: string;
+  alt: string;
+  onStatusChange?: (isBroken: boolean) => void;
+}) {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
     return (
-      <div className="h-16 w-24 flex-shrink-0 rounded-lg bg-gray-100 flex flex-col items-center justify-center gap-1 text-gray-400">
+      <div className="h-16 w-24 flex-shrink-0 rounded-lg bg-amber-50 ring-1 ring-amber-200 flex flex-col items-center justify-center gap-1 text-amber-500">
         <ImageIcon className="h-5 w-5" />
         <span className="text-[9px] font-medium uppercase tracking-wide">No photo</span>
       </div>
@@ -157,7 +165,11 @@ function ProjectThumbnail({ src, alt }: { src: string; alt: string }) {
       src={resolveStorageUrl(src)}
       alt={alt}
       className="h-16 w-24 flex-shrink-0 rounded-lg object-cover bg-gray-100"
-      onError={() => setFailed(true)}
+      onError={() => {
+        setFailed(true);
+        onStatusChange?.(true);
+      }}
+      onLoad={() => onStatusChange?.(false)}
     />
   );
 }
@@ -390,6 +402,43 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
   const [editProject, setEditProject] = useState<Project | null>(null);
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [form, setForm] = useState<FormData>(emptyForm);
+  const [brokenIds, setBrokenIds] = useState<Set<number>>(new Set());
+  const [showBrokenOnly, setShowBrokenOnly] = useState(false);
+
+  const handlePhotoStatus = useCallback((id: number, isBroken: boolean) => {
+    setBrokenIds((prev) => {
+      const has = prev.has(id);
+      if (isBroken === has) return prev;
+      const next = new Set(prev);
+      if (isBroken) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }, []);
+
+  // Drop ids for projects that no longer exist (e.g. after delete) so the
+  // banner count stays accurate.
+  useEffect(() => {
+    if (!projects) return;
+    setBrokenIds((prev) => {
+      if (prev.size === 0) return prev;
+      const existing = new Set(projects.map((p) => p.id));
+      let changed = false;
+      const next = new Set<number>();
+      for (const id of prev) {
+        if (existing.has(id)) next.add(id);
+        else changed = true;
+      }
+      return changed ? next : prev;
+    });
+  }, [projects]);
+
+  const brokenCount = brokenIds.size;
+  const filterActive = showBrokenOnly && brokenCount > 0;
+  const visibleProjects =
+    projects && filterActive
+      ? projects.filter((p) => brokenIds.has(p.id))
+      : projects;
 
   function openAdd() {
     setForm(emptyForm);
@@ -459,6 +508,28 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
           the site is published.
         </p>
 
+        {brokenCount > 0 && (
+          <div className="mx-6 mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
+            <div className="flex items-center gap-2 text-sm text-amber-800">
+              <AlertTriangle className="h-4 w-4 shrink-0 text-amber-500" />
+              <span>
+                <span className="font-semibold">
+                  {brokenCount} {brokenCount === 1 ? "project" : "projects"}
+                </span>{" "}
+                {brokenCount === 1 ? "has" : "have"} a missing photo.
+              </span>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-amber-300 bg-white text-amber-800 hover:bg-amber-100 hover:text-amber-900"
+              onClick={() => setShowBrokenOnly((v) => !v)}
+            >
+              {filterActive ? "Show all projects" : "Show only these"}
+            </Button>
+          </div>
+        )}
+
         {isLoading && (
           <div className="px-6 py-12 text-center text-gray-400">Loading projects…</div>
         )}
@@ -473,11 +544,15 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
           </div>
         )}
 
-        {projects && projects.length > 0 && (
+        {visibleProjects && visibleProjects.length > 0 && (
           <ul className="divide-y divide-gray-100">
-            {projects.map((project) => (
+            {visibleProjects.map((project) => (
               <li key={project.id} className="flex items-start gap-4 px-6 py-4">
-                <ProjectThumbnail src={project.imageUrl} alt={project.title} />
+                <ProjectThumbnail
+                  src={project.imageUrl}
+                  alt={project.title}
+                  onStatusChange={(isBroken) => handlePhotoStatus(project.id, isBroken)}
+                />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="font-medium text-gray-900 truncate">{project.title}</span>
