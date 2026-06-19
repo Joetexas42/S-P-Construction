@@ -156,8 +156,11 @@ export class ObjectStorageService {
     const privateObjectDir = this.getPrivateObjectDir();
     const objectId = randomUUID();
 
-    // fullPath = /<bucket>/<prefix>/uploads/<uuid>
-    const fullPath = `${privateObjectDir}/uploads/${objectId}`;
+    // fullPath = /<bucket>/<prefix>/<uuid>
+    // The configured PRIVATE_OBJECT_DIR already provides the upload prefix
+    // (e.g. ".../uploads"), so we must NOT append another "/uploads" segment —
+    // doing so produced doubled keys like "uploads/uploads/<uuid>".
+    const fullPath = `${privateObjectDir}/${objectId}`;
     const { bucketName, objectName } = parseObjectPath(fullPath);
 
     const client = getR2Client();
