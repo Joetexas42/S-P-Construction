@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Pencil, Trash2, Plus, FolderOpen, Lock, Upload, X, ImageIcon, Mail, PhoneCall, Calculator, MessageSquare } from "lucide-react";
+import { getApiUrl, resolveStorageUrl } from "@/lib/api-url";
 
 const ADMIN_KEY_SESSION = "admin_key";
 const CATEGORIES = [
@@ -83,7 +84,7 @@ function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
     setIsPending(true);
     setError(null);
     try {
-      const res = await fetch(`${import.meta.env.BASE_URL}api/admin/verify`, {
+      const res = await fetch(getApiUrl("/api/admin/verify"), {
         method: "POST",
         headers: { "x-admin-key": key },
       });
@@ -142,13 +143,22 @@ function LoginGate({ onLogin }: { onLogin: (key: string) => void }) {
 function ImageUploadField({
   value,
   onChange,
+  adminKey,
 }: {
   value: string;
   onChange: (url: string) => void;
+  adminKey: string;
 }) {
   const { uploadFile, isUploading, progress, error } = useUpload({
+    // In split-origin (Cloudflare Pages + Railway), the presign request must
+    // go to the Railway API origin, not the Pages origin.
+    basePath: getApiUrl("/api/storage"),
+    // Forward the admin key so the protected presign endpoint returns 200.
+    requestHeaders: { "x-admin-key": adminKey },
     onSuccess: (response) => {
-      onChange(`/api/storage${response.objectPath}`);
+      // Store the canonical "/objects/..." path so it resolves correctly in
+      // both same-origin (dev) and split-origin (Cloudflare Pages + Railway).
+      onChange(response.objectPath);
     },
   });
 
@@ -169,7 +179,7 @@ function ImageUploadField({
       {value ? (
         <div className="relative">
           <img
-            src={value}
+            src={resolveStorageUrl(value)}
             alt="Project photo"
             className="h-32 w-full rounded-lg object-cover bg-gray-100"
             onError={(e) => {
@@ -230,9 +240,11 @@ function ImageUploadField({
 function ProjectForm({
   value,
   onChange,
+  adminKey,
 }: {
   value: FormData;
   onChange: (v: FormData) => void;
+  adminKey: string;
 }) {
   const field = (key: keyof FormData) => ({
     value: value[key],
@@ -272,6 +284,7 @@ function ProjectForm({
         <ImageUploadField
           value={value.imageUrl}
           onChange={(url) => onChange({ ...value, imageUrl: url })}
+          adminKey={adminKey}
         />
       </div>
       <div className="space-y-1.5">
@@ -430,7 +443,7 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
             {projects.map((project) => (
               <li key={project.id} className="flex items-start gap-4 px-6 py-4">
                 <img
-                  src={project.imageUrl}
+                  src={resolveStorageUrl(project.imageUrl)}
                   alt={project.title}
                   className="h-16 w-24 flex-shrink-0 rounded-lg object-cover bg-gray-100"
                   onError={(e) => {
@@ -479,7 +492,7 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
           <DialogHeader>
             <DialogTitle>Add New Project</DialogTitle>
           </DialogHeader>
-          <ProjectForm value={form} onChange={setForm} />
+          <ProjectForm value={form} onChange={setForm} adminKey={adminKey} />
           <DialogFooter className="mt-2">
             <Button variant="outline" onClick={() => setAddOpen(false)}>
               Cancel
@@ -503,7 +516,7 @@ function ProjectsPanel({ adminKey, onAuthError }: { adminKey: string; onAuthErro
           <DialogHeader>
             <DialogTitle>Edit Project</DialogTitle>
           </DialogHeader>
-          <ProjectForm value={form} onChange={setForm} />
+          <ProjectForm value={form} onChange={setForm} adminKey={adminKey} />
           <DialogFooter className="mt-2">
             <Button variant="outline" onClick={() => setEditProject(null)}>
               Cancel

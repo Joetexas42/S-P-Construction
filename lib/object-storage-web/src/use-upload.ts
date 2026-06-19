@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import type { UppyFile } from "@uppy/core";
 
 interface UploadMetadata {
@@ -16,6 +16,8 @@ interface UploadResponse {
 interface UseUploadOptions {
   /** Base path where object storage routes are mounted (default: "/api/storage") */
   basePath?: string;
+  /** Extra headers sent with the presign request (e.g. admin auth tokens) */
+  requestHeaders?: Record<string, string>;
   onSuccess?: (response: UploadResponse) => void;
   onError?: (error: Error) => void;
 }
@@ -55,6 +57,11 @@ interface UseUploadOptions {
  */
 export function useUpload(options: UseUploadOptions = {}) {
   const basePath = options.basePath ?? "/api/storage";
+  // Use a ref so the callback is stable across renders even when the headers
+  // object identity changes (e.g. inline `{ "x-admin-key": key }` literals).
+  const requestHeadersRef = useRef<Record<string, string>>(options.requestHeaders ?? {});
+  requestHeadersRef.current = options.requestHeaders ?? {};
+
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [progress, setProgress] = useState(0);
@@ -65,6 +72,7 @@ export function useUpload(options: UseUploadOptions = {}) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          ...requestHeadersRef.current,
         },
         body: JSON.stringify({
           name: file.name,
@@ -80,7 +88,7 @@ export function useUpload(options: UseUploadOptions = {}) {
 
       return response.json();
     },
-    []
+    [basePath]
   );
 
   const uploadToPresignedUrl = useCallback(

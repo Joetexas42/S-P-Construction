@@ -13,11 +13,13 @@ const port = Number(rawPort);
 const basePath = process.env.BASE_PATH ?? "/";
 
 const browserMapsKey = process.env.GOOGLE_MAPS_BROWSER_API_KEY ?? "";
+const apiBaseUrl = process.env.VITE_API_BASE_URL ?? "";
 
 export default defineConfig({
   base: basePath,
   define: {
     "import.meta.env.VITE_GOOGLE_MAPS_BROWSER_API_KEY": JSON.stringify(browserMapsKey),
+    "import.meta.env.VITE_API_BASE_URL": JSON.stringify(apiBaseUrl),
   },
   plugins: [
     react(),

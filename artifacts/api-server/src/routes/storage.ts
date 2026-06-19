@@ -28,8 +28,7 @@ router.post("/storage/uploads/request-url", requireAdminKey, async (req: Request
   try {
     const { name, size, contentType } = parsed.data;
 
-    const uploadURL = await objectStorageService.getObjectEntityUploadURL();
-    const objectPath = objectStorageService.normalizeObjectEntityPath(uploadURL);
+    const { uploadURL, objectPath } = await objectStorageService.getObjectEntityUploadURL();
 
     res.json(
       RequestUploadUrlResponse.parse({
@@ -55,13 +54,13 @@ router.get("/storage/public-objects/*filePath", async (req: Request, res: Respon
   try {
     const raw = req.params.filePath;
     const filePath = Array.isArray(raw) ? raw.join("/") : raw;
-    const file = await objectStorageService.searchPublicObject(filePath);
-    if (!file) {
+    const objectRef = await objectStorageService.searchPublicObject(filePath);
+    if (!objectRef) {
       res.status(404).json({ error: "File not found" });
       return;
     }
 
-    const response = await objectStorageService.downloadObject(file);
+    const response = await objectStorageService.downloadObject(objectRef);
 
     res.status(response.status);
     response.headers.forEach((value, key) => res.setHeader(key, value));
@@ -90,7 +89,7 @@ router.get("/storage/objects/*path", async (req: Request, res: Response) => {
     const raw = req.params.path;
     const wildcardPath = Array.isArray(raw) ? raw.join("/") : raw;
     const objectPath = `/objects/${wildcardPath}`;
-    const objectFile = await objectStorageService.getObjectEntityFile(objectPath);
+    const objectRef = await objectStorageService.getObjectEntityFile(objectPath);
 
     // --- Protected route example (uncomment when using replit-auth) ---
     // if (!req.isAuthenticated()) {
@@ -99,7 +98,7 @@ router.get("/storage/objects/*path", async (req: Request, res: Response) => {
     // }
     // const canAccess = await objectStorageService.canAccessObjectEntity({
     //   userId: req.user.id,
-    //   objectFile,
+    //   objectRef,
     //   requestedPermission: ObjectPermission.READ,
     // });
     // if (!canAccess) {
@@ -107,7 +106,7 @@ router.get("/storage/objects/*path", async (req: Request, res: Response) => {
     //   return;
     // }
 
-    const response = await objectStorageService.downloadObject(objectFile);
+    const response = await objectStorageService.downloadObject(objectRef);
 
     res.status(response.status);
     response.headers.forEach((value, key) => res.setHeader(key, value));

@@ -21,6 +21,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useState } from "react";
+import { getApiUrl } from "@/lib/api-url";
 
 const builtFeatures = [
   {
@@ -192,7 +193,7 @@ function ContactForm() {
     setStatus("loading");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/paper-street-contact", {
+      const res = await fetch(getApiUrl("/api/paper-street-contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

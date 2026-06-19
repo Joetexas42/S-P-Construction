@@ -31,6 +31,7 @@ import {
   type CaseStudy,
 } from "@/data/caseStudies";
 import { cn } from "@/lib/utils";
+import { resolveStorageUrl } from "@/lib/api-url";
 import {
   buildImageSrcSet,
   SIZES_HALF_COLUMN_GRID,
@@ -99,7 +100,7 @@ function GalleryProjectCard({ project }: { project: Project }) {
     <article className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-sm hover:border-secondary hover:shadow-lg hover:scale-[1.02] transition-all duration-200">
       <div className="aspect-[16/10] overflow-hidden bg-muted relative">
         <img
-          src={project.imageUrl}
+          src={resolveStorageUrl(project.imageUrl)}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
