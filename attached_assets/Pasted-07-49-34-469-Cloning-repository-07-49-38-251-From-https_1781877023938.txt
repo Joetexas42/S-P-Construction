@@ -1,0 +1,78 @@
+07:49:34.469	Cloning repository...
+07:49:38.251	From https://github.com/Joetexas42/S-P-Construction
+07:49:38.252	 * branch            4b5529c105fb4389e6a0d7118fcaa902dc724ac1 -> FETCH_HEAD
+07:49:38.252	
+07:49:38.911	HEAD is now at 4b5529c Remove workflows to allow push
+07:49:38.912	
+07:49:39.056	
+07:49:39.057	Using v2 root directory strategy
+07:49:39.072	Success: Finished cloning repository files
+07:49:40.892	Checking for configuration in a Wrangler configuration file (BETA)
+07:49:40.892	
+07:49:41.078	No Wrangler configuration file found. Continuing.
+07:49:41.456	Detected the following tools from environment: pnpm@10.11.1, nodejs@22.16.0
+07:49:42.528	Installing project dependencies: pnpm install
+07:49:43.018	Scope: all 12 workspace projects
+07:49:43.107	Lockfile is up to date, resolution step is skipped
+07:49:43.173	Progress: resolved 1, reused 0, downloaded 0, added 0
+07:49:43.249	Packages: +681
+07:49:43.249	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+07:49:44.171	Progress: resolved 681, reused 0, downloaded 122, added 55
+07:49:45.175	Progress: resolved 681, reused 0, downloaded 308, added 212
+07:49:46.192	Progress: resolved 681, reused 0, downloaded 365, added 248
+07:49:47.198	Progress: resolved 681, reused 0, downloaded 541, added 363
+07:49:48.200	Progress: resolved 681, reused 0, downloaded 680, added 474
+07:49:48.452	Progress: resolved 681, reused 0, downloaded 681, added 681, done
+07:49:48.802	.../esbuild@0.27.7/node_modules/esbuild postinstall$ node install.js
+07:49:48.803	.../esbuild@0.18.20/node_modules/esbuild postinstall$ node install.js
+07:49:48.852	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+07:49:48.872	.../esbuild@0.25.12/node_modules/esbuild postinstall$ node install.js
+07:49:48.918	.../esbuild@0.27.7/node_modules/esbuild postinstall: Done
+07:49:49.093	.../esbuild@0.18.20/node_modules/esbuild postinstall: Done
+07:49:49.098	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+07:49:49.102	.../esbuild@0.25.12/node_modules/esbuild postinstall: Done
+07:49:49.534	
+07:49:49.534	devDependencies:
+07:49:49.535	+ prettier 3.8.3
+07:49:49.535	+ typescript 5.9.3
+07:49:49.535	+ vitest 4.1.9
+07:49:49.535	
+07:49:49.608	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+07:49:49.640	. preinstall: Done
+07:49:49.641	. prepare$ git config core.hooksPath .githooks && chmod +x .githooks/pre-commit
+07:49:49.659	. prepare: Done
+07:49:49.824	Done in 7.1s using pnpm v10.11.1
+07:49:49.887	Executing user command: pnpm --filter @workspace/roofing-website run build
+07:49:50.581	
+07:49:50.581	> @workspace/roofing-website@0.0.0 build /opt/buildhome/repo/artifacts/roofing-website
+07:49:50.581	> vite build --config vite.config.ts && tsx scripts/prerender.ts
+07:49:50.581	
+07:49:51.188	vite v7.3.3 building client environment for production...
+07:49:51.290	transforming...
+07:49:52.055	src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+07:49:52.493	src/components/ui/label.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+07:49:53.912	src/components/ui/select.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+07:49:56.536	✓ 2490 modules transformed.
+07:49:57.043	rendering chunks...
+07:49:57.204	computing gzip size...
+07:49:57.224	dist/public/index.html                           2.97 kB │ gzip:   0.92 kB
+07:49:57.225	dist/public/sitemap.xml                         10.26 kB │ gzip:   0.68 kB
+07:49:57.225	dist/public/assets/vendor-D9e3sqm0.css          65.60 kB │ gzip:  10.45 kB
+07:49:57.225	dist/public/assets/index-CFKSxxDw.css          151.53 kB │ gzip:  22.98 kB
+07:49:57.225	dist/public/assets/maps-vendor-DaoVeR9E.js       1.41 kB │ gzip:   0.80 kB
+07:49:57.225	dist/public/assets/Estimate-5OP6HzIJ.js         15.63 kB │ gzip:   5.48 kB
+07:49:57.225	dist/public/assets/AdminDashboard-DMiBWZeK.js   25.99 kB │ gzip:   6.66 kB
+07:49:57.225	dist/public/assets/query-vendor-DlaheoSR.js     35.72 kB │ gzip:  10.57 kB
+07:49:57.225	dist/public/assets/ui-vendor-wSuhJOHM.js        47.39 kB │ gzip:  16.86 kB
+07:49:57.225	dist/public/assets/radix-vendor-C6_tKk7c.js     65.33 kB │ gzip:  20.30 kB
+07:49:57.225	dist/public/assets/react-vendor-72drlfOL.js    185.74 kB │ gzip:  58.57 kB
+07:49:57.225	dist/public/assets/vendor-BAmH6WO0.js          247.03 kB │ gzip:  78.11 kB
+07:49:57.226	dist/public/assets/index-B6lwA_MH.js           473.59 kB │ gzip: 119.55 kB
+07:49:57.226	✓ built in 5.99s
+07:49:57.318	sh: 1: tsx: not found
+07:49:57.335	/opt/buildhome/repo/artifacts/roofing-website:
+07:49:57.335	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/roofing-website@0.0.0 build: `vite build --config vite.config.ts && tsx scripts/prerender.ts`
+07:49:57.335	spawn ENOENT
+07:49:57.388	Failed: Error while executing user command. Exited with error code: 1
+07:49:57.396	Failed: build command exited with code: 1
+07:49:58.079	Failed: error occurred while running build command
