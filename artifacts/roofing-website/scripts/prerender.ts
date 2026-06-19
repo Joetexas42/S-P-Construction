@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer-core";
+import Beasties from "beasties";
 import { createServer, request as httpRequest } from "http";
 import { readFileSync } from "fs";
 import { resolve, dirname, join, extname } from "path";
@@ -42,6 +43,37 @@ const CHROMIUM = findChromium();
 
 const DIST_DIR = resolve(import.meta.dirname, "..", "dist", "public");
 const PORT = Number(process.env.PRERENDER_PORT ?? 3456);
+
+// Base path the site is served from (matches Vite's `base`). Used so Beasties
+// can resolve the hashed `/assets/*.css` hrefs in the prerendered HTML back to
+// files on disk under DIST_DIR.
+const BASE_PATH = process.env.BASE_PATH ?? "/";
+
+// Inline the CSS each prerendered page actually uses into a <style> in <head>
+// and load the full stylesheets asynchronously (preload + swap). This removes
+// the ~217 kB of render-blocking CSS from first paint while still shipping the
+// complete stylesheet for content that mounts client-side (dialogs, the map,
+// toasts, etc.). `pruneSource: false` keeps the original CSS files intact.
+const beasties = new Beasties({
+  path: DIST_DIR,
+  publicPath: BASE_PATH,
+  preload: "swap",
+  pruneSource: false,
+  inlineFonts: false,
+  preloadFonts: false,
+  logLevel: "error",
+});
+
+async function inlineCriticalCss(route: string, html: string): Promise<string> {
+  try {
+    return await beasties.process(html);
+  } catch (err) {
+    // Never fail a prerender over critical-CSS inlining — fall back to the
+    // original HTML (which still loads the full stylesheets render-blocking).
+    console.warn(`  [beasties] skipped CSS inlining for ${route}: ${err}`);
+    return html;
+  }
+}
 
 const STATIC_ROUTES = [
   "/",
@@ -129,7 +161,38 @@ function allRoutes(): string[] {
   return routes;
 }
 
-function startStaticServer(): Promise<{ server: ReturnType<typeof createServer>; url: string }> {
+// Persisted pristine SPA shell (the vite-built index.html before any prerender
+// rewrites). Lives outside DIST_DIR (= dist/public) so it is never deployed.
+// A full build refreshes it; incremental runs (e.g. PRERENDER_GROUP=projects)
+// reuse it so they never serve an already-prerendered, CSS-inlined page back as
+// the shell — which would make Beasties re-process and duplicate <link> tags.
+const SHELL_SIDECAR = resolve(DIST_DIR, "..", "__prerender-shell.html");
+
+function loadPristineShell(routes: string[]): string {
+  const indexPath = join(DIST_DIR, "index.html");
+  // A run that includes "/" is a full build: vite just emitted a pristine
+  // index.html. Capture it and refresh the sidecar for later incremental runs.
+  if (routes.includes("/") && existsSync(indexPath)) {
+    const shell = readFileSync(indexPath, "utf8");
+    try {
+      writeFileSync(SHELL_SIDECAR, shell);
+    } catch { /* sidecar is best-effort */ }
+    return shell;
+  }
+  // Incremental run: prefer the pristine sidecar saved by the last full build.
+  if (existsSync(SHELL_SIDECAR)) {
+    return readFileSync(SHELL_SIDECAR, "utf8");
+  }
+  console.warn(
+    "[prerender] No pristine shell sidecar found — falling back to dist/public/index.html. " +
+      "If it was already prerendered, run a full build first to avoid re-inlining CSS.",
+  );
+  return readFileSync(indexPath, "utf8");
+}
+
+function startStaticServer(
+  shellHtml: string,
+): Promise<{ server: ReturnType<typeof createServer>; url: string }> {
   return new Promise((resolve, reject) => {
     const server = createServer((req, res) => {
       try {
@@ -164,20 +227,20 @@ function startStaticServer(): Promise<{ server: ReturnType<typeof createServer>;
           return;
         }
 
-        let filePath = join(DIST_DIR, urlPath);
-
-        if (existsSync(filePath) && !extname(filePath)) {
-          filePath = join(filePath, "index.html");
-        }
-        if (!extname(filePath)) {
-          filePath = join(filePath, "index.html");
-        }
-        if (!existsSync(filePath)) {
-          filePath = join(DIST_DIR, "index.html");
+        // Serve real on-disk assets (hashed JS/CSS, images, fonts) directly.
+        // For everything else — every page navigation — always serve the
+        // pristine in-memory shell, never a previously prerendered file. This
+        // guarantees each route renders from clean, un-inlined HTML so Beasties
+        // processes its CSS exactly once.
+        const filePath = join(DIST_DIR, urlPath);
+        const ext = extname(filePath).toLowerCase();
+        if (!ext || !existsSync(filePath)) {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(shellHtml);
+          return;
         }
 
         const content = readFileSync(filePath);
-        const ext = extname(filePath).toLowerCase();
         let ct = "application/octet-stream";
         if (ext === ".html") ct = "text/html";
         else if (ext === ".js") ct = "application/javascript";
@@ -261,7 +324,8 @@ async function main() {
 
   console.log(`Prerendering ${routes.length} routes...`);
 
-  const { server, url } = await startStaticServer();
+  const shellHtml = loadPristineShell(routes);
+  const { server, url } = await startStaticServer(shellHtml);
 
   const browser = await puppeteer.launch({
     executablePath: CHROMIUM,
@@ -281,13 +345,18 @@ async function main() {
         await page.setViewport({ width: 1280, height: 800 });
         await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 30000 });
 
-        // Wait for the React app to mount. Content is rendered from local
-        // static data, so this settles quickly without relying on network idle
-        // (which never settles on the map-enabled estimate page).
+        // Wait for the React app to mount. We require an <h1> (every page —
+        // including the lazy-loaded /estimate and /admin routes — renders a
+        // hero heading), not just any root children: the Layout chrome and the
+        // Suspense fallback would otherwise satisfy a bare childElementCount
+        // check before a lazy page component has finished loading, producing
+        // incomplete HTML. Content comes from local static data, so this
+        // settles quickly without relying on network idle (which never settles
+        // on the map-enabled estimate page).
         await page.waitForFunction(
           () => {
             const root = document.getElementById("root");
-            return !!root && root.childElementCount > 0;
+            return !!root && root.childElementCount > 0 && !!root.querySelector("h1");
           },
           { timeout: 30000 },
         );
@@ -296,7 +365,8 @@ async function main() {
         // description, canonical, and JSON-LD into <head> after mount.
         await new Promise((r) => setTimeout(r, 400));
 
-        const html = await page.content();
+        const rawHtml = await page.content();
+        const html = await inlineCriticalCss(route, rawHtml);
         writePrerendered(route, html);
         return;
       } catch (err) {

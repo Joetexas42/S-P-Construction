@@ -27,25 +27,53 @@ route's HTML after the SEO `useEffect` injects head tags.
   **Why:** the page guard checks `.length > 0`, which a poisoned HTML string
   passes, so the crash is silent until you capture `pageerror`.
 
-- **Wait on `#root` having children, not `networkidle2`.** The Maps-backed
-  estimate page never reaches network idle. Use `domcontentloaded` +
-  `waitForFunction(root.childElementCount>0)` + a short settle for the SEO
-  useEffect. Do NOT gate the wait on JSON-LD presence — several pages
-  (About, Contact, Estimate, Privacy, Terms) have no JSON-LD, and admin/404
-  have no SEO at all.
+- **Wait on `#root` containing an `<h1>`, not just any children.** The
+  Maps-backed estimate page never reaches network idle, so don't use
+  `networkidle2`. A bare `root.childElementCount>0` is too weak once a route is
+  `React.lazy`: the Layout chrome (Navbar) satisfies it while the lazy page
+  chunk + Suspense fallback are still resolving, snapshotting incomplete HTML.
+  Gate on `root.querySelector("h1")` — every page (all 17 page components +
+  admin login/dashboard) renders a hero `<h1>`. Then a short settle for the SEO
+  useEffect. Do NOT gate on JSON-LD/canonical presence — several pages (About,
+  Contact, Estimate, Privacy, Terms) have neither.
+
+## Critical-CSS inlining (Beasties) requires a pristine prerender shell
+
+- Critical CSS is inlined per route with **Beasties** in `prerender.ts`
+  (`preload: "swap"`, `pruneSource: false`): each snapshot gets a `<style>` of
+  the CSS it uses, and the full hashed stylesheets load async (preload→swap +
+  `<noscript>` fallback). `pruneSource:false` keeps the original CSS files whole
+  for content that mounts client-side (dialogs, the map, toasts).
+- **The prerender static server must serve a PRISTINE shell for every page
+  navigation — never a previously-prerendered file.** Beasties' swap links flip
+  `rel="preload"`→`rel="stylesheet"` in the browser via `onload`; if that
+  already-inlined HTML is fed back in as the shell, `page.content()` captures the
+  flipped links and Beasties re-processes them, duplicating `<link>` tags every
+  pass (and reintroducing a blocking sheet). Fix: capture the vite-built
+  `index.html` once and serve it (in memory) for all HTML routes; serve only
+  real on-disk assets from `dist/public`.
+- **Incremental runs** (`PRERENDER_GROUP=projects`) don't re-render `/`, so the
+  on-disk `index.html` is already Beasties-processed. A full build (route list
+  includes `/`) writes a pristine `dist/__prerender-shell.html` sidecar (outside
+  `dist/public`, so not deployed); incremental runs read that sidecar as the
+  shell. Run a full build before any incremental prerender.
 
 ## Code-splitting is SEO-safe IF the lazy route uses `fallback={null}`
 
-- The bundle is split via `manualChunks` (vendor groups) plus a `React.lazy`
-  admin route. `manualChunks` is always safe — chunks stay statically imported,
-  so the prerender renders complete pages.
-- For `React.lazy`, wrap in `<Suspense fallback={null}>`, NOT a loader/spinner.
-  The prerender's `waitForFunction(root.childElementCount>0)` would otherwise
-  latch onto the spinner and snapshot it instead of real content. With
-  `fallback={null}`, `#root` stays empty until the lazy chunk loads (fast on the
-  local static server), so the wait resolves on real content.
-- **Why:** only lazy-load routes that are not SEO-critical anyway (admin is
-  password-gated). Verified `/admin` still prerenders its full login form.
+- The bundle is split via `manualChunks` (vendor groups) plus `React.lazy`
+  routes for `/admin` AND `/estimate`. `manualChunks` is always safe — chunks
+  stay statically imported, so the prerender renders complete pages.
+- `/estimate` is lazy specifically so the Google Maps loader
+  (`@googlemaps/js-api-loader` → its own `maps-vendor` chunk) and the estimator
+  code only ship when a visitor opens `/estimate`, not modulepreloaded on every
+  page. The actual Maps JS already loaded lazily via `importLibrary` on mount;
+  this also keeps the wrapper chunk off other pages.
+- For `React.lazy`, wrap in `<Suspense fallback={null}>`, NOT a loader/spinner —
+  otherwise the prerender wait latches onto the spinner. With `fallback={null}`,
+  `#root` has no `<h1>` until the lazy chunk loads (fast on the local static
+  server), so the h1-gated wait resolves on real content.
+- **Why:** verified `/admin` (login form) and `/estimate` (hero h1 + Step-1
+  address UI + SEO title/description) still prerender complete HTML.
 
 ## Targeted re-prerender after admin content edits
 

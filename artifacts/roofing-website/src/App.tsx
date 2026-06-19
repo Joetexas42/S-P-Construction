@@ -17,13 +17,16 @@ import ServiceCityPage from "@/pages/ServiceCityPage";
 import { getServiceCityEntry, SERVICE_CITY_SLUGS } from "@/data/serviceCityData";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
-import Estimate from "@/pages/Estimate";
 import FAQ from "@/pages/FAQ";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Terms from "@/pages/Terms";
 import BuiltBy from "@/pages/BuiltBy";
 import NotFound from "@/pages/not-found";
 
+// Lazy-loaded so the Google Maps loader (`@googlemaps/js-api-loader`) and the
+// estimator's map code only ship when a visitor actually opens /estimate —
+// keeping every other page's first load lighter.
+const Estimate = lazy(() => import("@/pages/Estimate"));
 const AdminDashboard = lazy(() => import("@/pages/AdminDashboard"));
 
 function CityRoute({ params }: { params: { slug: string } }) {
@@ -81,7 +84,11 @@ function Router() {
             <Route path="/service-areas/:citySlug/:serviceSlug" component={ServiceCityRoute} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
-            <Route path="/estimate" component={Estimate} />
+            <Route path="/estimate">
+              <Suspense fallback={null}>
+                <Estimate />
+              </Suspense>
+            </Route>
             <Route path="/faq" component={FAQ} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/terms" component={Terms} />
