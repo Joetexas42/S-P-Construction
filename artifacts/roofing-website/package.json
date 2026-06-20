@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "build": "vite build --config vite.config.ts && tsx scripts/prerender.ts",
+    "build": "vite build --config vite.config.ts && node -e \"if(!process.env.SKIP_PRERENDER){require('child_process').execFileSync('./node_modules/.bin/tsx',['scripts/prerender.ts'],{stdio:'inherit',env:process.env})}\"",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc --build ../../lib/api-client-react ../../lib/object-storage-web ../../lib/storage-url && tsc -p tsconfig.json --noEmit",
-    "prerender": "tsx scripts/prerender.ts",
-    "prerender:projects": "PRERENDER_GROUP=projects tsx scripts/prerender.ts"
+    "prerender": "./node_modules/.bin/tsx scripts/prerender.ts",
+    "prerender:projects": "PRERENDER_GROUP=projects ./node_modules/.bin/tsx scripts/prerender.ts"
   },
   "devDependencies": {
     "@googlemaps/js-api-loader": "^2.0.2",

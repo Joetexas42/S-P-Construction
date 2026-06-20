@@ -1,0 +1,79 @@
+2026-06-20T02:25:45.107821Z	Cloning repository...
+2026-06-20T02:25:52.549101Z	From https://github.com/Joetexas42/S-P-Construction
+2026-06-20T02:25:52.549715Z	 * branch            4b5529c105fb4389e6a0d7118fcaa902dc724ac1 -> FETCH_HEAD
+2026-06-20T02:25:52.550023Z	
+2026-06-20T02:25:53.036271Z	HEAD is now at 4b5529c Remove workflows to allow push
+2026-06-20T02:25:53.036954Z	
+2026-06-20T02:25:53.102323Z	
+2026-06-20T02:25:53.103013Z	Using v2 root directory strategy
+2026-06-20T02:25:53.124176Z	Success: Finished cloning repository files
+2026-06-20T02:25:55.655808Z	Checking for configuration in a Wrangler configuration file (BETA)
+2026-06-20T02:25:55.656374Z	
+2026-06-20T02:25:55.862354Z	No Wrangler configuration file found. Continuing.
+2026-06-20T02:25:56.179985Z	Detected the following tools from environment: pnpm@10.11.1, nodejs@22.16.0
+2026-06-20T02:25:58.062072Z	Installing project dependencies: pnpm install
+2026-06-20T02:25:58.713833Z	Scope: all 12 workspace projects
+2026-06-20T02:25:58.819085Z	Lockfile is up to date, resolution step is skipped
+2026-06-20T02:25:58.897447Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-06-20T02:25:58.972228Z	Packages: +681
+2026-06-20T02:25:58.972878Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-06-20T02:25:59.896931Z	Progress: resolved 681, reused 0, downloaded 86, added 35
+2026-06-20T02:26:00.897475Z	Progress: resolved 681, reused 0, downloaded 205, added 111
+2026-06-20T02:26:01.901056Z	Progress: resolved 681, reused 0, downloaded 393, added 305
+2026-06-20T02:26:02.898898Z	Progress: resolved 681, reused 0, downloaded 486, added 355
+2026-06-20T02:26:03.899816Z	Progress: resolved 681, reused 0, downloaded 623, added 451
+2026-06-20T02:26:04.905974Z	Progress: resolved 681, reused 0, downloaded 680, added 680
+2026-06-20T02:26:05.218948Z	Progress: resolved 681, reused 0, downloaded 681, added 681, done
+2026-06-20T02:26:05.511086Z	.../esbuild@0.25.12/node_modules/esbuild postinstall$ node install.js
+2026-06-20T02:26:05.512249Z	.../esbuild@0.27.7/node_modules/esbuild postinstall$ node install.js
+2026-06-20T02:26:05.514092Z	.../esbuild@0.18.20/node_modules/esbuild postinstall$ node install.js
+2026-06-20T02:26:05.572948Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-06-20T02:26:05.644267Z	.../esbuild@0.25.12/node_modules/esbuild postinstall: Done
+2026-06-20T02:26:05.65654Z	.../esbuild@0.27.7/node_modules/esbuild postinstall: Done
+2026-06-20T02:26:05.671107Z	.../esbuild@0.18.20/node_modules/esbuild postinstall: Done
+2026-06-20T02:26:05.677088Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-06-20T02:26:07.816475Z	
+2026-06-20T02:26:07.818095Z	devDependencies:
+2026-06-20T02:26:07.818707Z	+ prettier 3.8.3
+2026-06-20T02:26:07.81894Z	+ typescript 5.9.3
+2026-06-20T02:26:07.819045Z	+ vitest 4.1.9
+2026-06-20T02:26:07.8191Z	
+2026-06-20T02:26:07.879475Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-06-20T02:26:07.903467Z	. preinstall: Done
+2026-06-20T02:26:07.903921Z	. prepare$ git config core.hooksPath .githooks && chmod +x .githooks/pre-commit
+2026-06-20T02:26:07.92745Z	. prepare: Done
+2026-06-20T02:26:08.094365Z	Done in 9.7s using pnpm v10.11.1
+2026-06-20T02:26:08.162729Z	Executing user command: pnpm --filter @workspace/roofing-website run build
+2026-06-20T02:26:08.842077Z	
+2026-06-20T02:26:08.842494Z	> @workspace/roofing-website@0.0.0 build /opt/buildhome/repo/artifacts/roofing-website
+2026-06-20T02:26:08.84257Z	> vite build --config vite.config.ts && tsx scripts/prerender.ts
+2026-06-20T02:26:08.842611Z	
+2026-06-20T02:26:09.471864Z	[36mvite v7.3.3 [32mbuilding client environment for production...[36m[39m
+2026-06-20T02:26:09.598812Z	transforming...
+2026-06-20T02:26:10.407418Z	[33msrc/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.[39m
+2026-06-20T02:26:12.301262Z	[33msrc/components/ui/label.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.[39m
+2026-06-20T02:26:12.307112Z	[33msrc/components/ui/select.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.[39m
+2026-06-20T02:26:16.003079Z	[32m✓[39m 2490 modules transformed.
+2026-06-20T02:26:16.743563Z	rendering chunks...
+2026-06-20T02:26:16.929979Z	computing gzip size...
+2026-06-20T02:26:16.952358Z	[2mdist/public/[22m[32mindex.html                         [39m[1m[2m  2.97 kB[22m[1m[22m[2m │ gzip:   0.92 kB[22m
+2026-06-20T02:26:16.953075Z	[2mdist/public/[22m[32msitemap.xml                        [39m[1m[2m 10.26 kB[22m[1m[22m[2m │ gzip:   0.68 kB[22m
+2026-06-20T02:26:16.953358Z	[2mdist/public/[22m[2massets/[22m[35mvendor-D9e3sqm0.css         [39m[1m[2m 65.60 kB[22m[1m[22m[2m │ gzip:  10.45 kB[22m
+2026-06-20T02:26:16.953537Z	[2mdist/public/[22m[2massets/[22m[35mindex-CFKSxxDw.css          [39m[1m[2m151.53 kB[22m[1m[22m[2m │ gzip:  22.98 kB[22m
+2026-06-20T02:26:16.953749Z	[2mdist/public/[22m[2massets/[22m[36mmaps-vendor-DaoVeR9E.js     [39m[1m[2m  1.41 kB[22m[1m[22m[2m │ gzip:   0.80 kB[22m
+2026-06-20T02:26:16.953889Z	[2mdist/public/[22m[2massets/[22m[36mEstimate-DcIrS5ey.js        [39m[1m[2m 15.63 kB[22m[1m[22m[2m │ gzip:   5.48 kB[22m
+2026-06-20T02:26:16.954163Z	[2mdist/public/[22m[2massets/[22m[36mAdminDashboard-BhQ52bC_.js  [39m[1m[2m 25.99 kB[22m[1m[22m[2m │ gzip:   6.66 kB[22m
+2026-06-20T02:26:16.954222Z	[2mdist/public/[22m[2massets/[22m[36mquery-vendor-DlaheoSR.js    [39m[1m[2m 35.72 kB[22m[1m[22m[2m │ gzip:  10.57 kB[22m
+2026-06-20T02:26:16.954268Z	[2mdist/public/[22m[2massets/[22m[36mui-vendor-wSuhJOHM.js       [39m[1m[2m 47.39 kB[22m[1m[22m[2m │ gzip:  16.86 kB[22m
+2026-06-20T02:26:16.954306Z	[2mdist/public/[22m[2massets/[22m[36mradix-vendor-C6_tKk7c.js    [39m[1m[2m 65.33 kB[22m[1m[22m[2m │ gzip:  20.30 kB[22m
+2026-06-20T02:26:16.954364Z	[2mdist/public/[22m[2massets/[22m[36mreact-vendor-72drlfOL.js    [39m[1m[2m185.74 kB[22m[1m[22m[2m │ gzip:  58.57 kB[22m
+2026-06-20T02:26:16.954401Z	[2mdist/public/[22m[2massets/[22m[36mvendor-BAmH6WO0.js          [39m[1m[2m247.03 kB[22m[1m[22m[2m │ gzip:  78.11 kB[22m
+2026-06-20T02:26:16.954457Z	[2mdist/public/[22m[2massets/[22m[36mindex-Bt9gwN_R.js           [39m[1m[2m473.91 kB[22m[1m[22m[2m │ gzip: 119.72 kB[22m
+2026-06-20T02:26:16.954519Z	[32m✓ built in 7.43s[39m
+2026-06-20T02:26:19.744422Z	sh: 1: tsx: not found
+2026-06-20T02:26:19.767064Z	/opt/buildhome/repo/artifacts/roofing-website:
+2026-06-20T02:26:19.767768Z	 ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/roofing-website@0.0.0 build: `vite build --config vite.config.ts && tsx scripts/prerender.ts`
+2026-06-20T02:26:19.768191Z	spawn ENOENT
+2026-06-20T02:26:19.952375Z	Failed: Error while executing user command. Exited with error code: 1
+2026-06-20T02:26:19.965185Z	Failed: build command exited with code: 1
+2026-06-20T02:26:20.752465Z	Failed: error occurred while running build command
